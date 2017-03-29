@@ -4,12 +4,12 @@
 #include <stdbool.h>
 
 #include "ascii.h"
-#include "wheels.h"
+#include "enigma.h"
 
 char command [] = "start";
 char *pCommand = command;
 
-char argument [] = "";
+char argument [] = "none";
 char *pArgument = argument;
 
 int main (void)
@@ -28,10 +28,13 @@ int main (void)
             scanf("%s", pArgument);
             printf("MSG: %s\n", pArgument);
             printf("CMSG: ");
-            for (int n = 0; n < strlen(argument); ++n) {
+            for (unsigned short n = 0; n < strlen(argument); ++n) {
                 printf("%c", process_char(argument[n]));
             }
             printf("\n");
+        }
+        else if (strcmp(command, "help") == 0) {
+            printf("Commands: help, msg/message, exit/quit\n");
         }
         else if (strcmp(command, "exit") == 0) {
             break;

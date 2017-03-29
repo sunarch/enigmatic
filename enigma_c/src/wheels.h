@@ -2,19 +2,19 @@
 #ifndef _WHEELS_H_
 #define _WHEELS_H_
 
-int wheel_offsets[10];
-int wheel_count;
+unsigned short wheel_offsets[10];
+unsigned short wheel_count;
 char wheel_wirings[10][27];
 char wheel_wiring_ukw[27];
 #define  UKW_INDEX  0
 
-char get_wheel_output(int wheel_number, char input_char);
-void turn_wheel(int wheelNumber);
-int get_wheel_offset(int wheelNumber);
-void set_wheel_offset(int wheelNumber, int new_offset);
+char get_wheel_output(unsigned short wheel_number, char input_char);
+void turn_wheel(unsigned short wheelNumber);
+unsigned short get_wheel_offset(unsigned short wheelNumber);
+void set_wheel_offset(unsigned short wheelNumber, unsigned short new_offset);
 void advance_wheels(void);
 void reset_wheel_offsets(void);
-void set_used_wheel_count(int count);
+void set_used_wheel_count(unsigned short count);
 char process_char(char input_char);
 
 #define  ABC_UPP  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"  // ordered Alphabet
