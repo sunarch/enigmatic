@@ -45,7 +45,8 @@ GEN_OBJS := $(patsubst $(SOURCE_DIR)/%.c,$(OBJECT_DIR)/%.o,$(SOURCES))
 
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
 >   mkdir -p $(OBJECT_DIR)
->   $(C_COMPILER) $< -o $@ \
+>   $(C_COMPILER) -o $@ \
+        $< \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
         $(C_FLAGS_DEBUG) \
@@ -55,7 +56,8 @@ $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
 
 $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
 >   mkdir -p $(EXEC_DIR)
->   $(C_COMPILER) $^ -o $@ \
+>   $(C_COMPILER) -o $@ \
+        $^ \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
         $(C_FLAGS_DEBUG) \
