@@ -51,6 +51,8 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
     index = (index + wheel_offset) % 26;
     if(DEBUG) {
         print_debug_indent();
+        printf("wheel offset for wheel %u is %u\n", wheel_number, wheel_offset);
+        print_debug_indent();
         printf("index with offset (index of letter with the wiring rule to be used) // %u\n", index);
     }
 
@@ -83,7 +85,7 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
 
     if(DEBUG) {
         print_debug_indent();
-        printf("return output_char; // %c\n", output_char);
+        printf("RETURN // output_char = %c\n", output_char);
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
     }
@@ -92,6 +94,12 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
 }
 
 void turn_wheel(unsigned short wheel_number) {
+    if(DEBUG) {
+        inc_debug_indent();  // to function call level
+        print_debug_indent();
+        printf("FUNC: void turn_wheel(...) // unsigned short wheel_number = %u\n", wheel_number);
+    }
+
     // validate wheel_number
     validate_wheel_number_any(wheel_number, get_used_wheel_count());
 
@@ -99,13 +107,9 @@ void turn_wheel(unsigned short wheel_number) {
     set_wheel_offset(wheel_number, ((get_wheel_offset(wheel_number) + 1) % 26));
 
     if(DEBUG) {
-        inc_debug_indent();  // to function call level
-        print_debug_indent();
-        printf("FUNC: void turn_wheel(...) // unsigned short wheel_number = %u\n", wheel_number);
         inc_debug_indent();  // to function result level
-        unsigned short check_value_wheel_offset = get_wheel_offset(wheel_number);
         print_debug_indent();
-        printf("CHECK: get_wheel_offset(%u) returns %u\n", wheel_number, check_value_wheel_offset);
+        printf("CHECK: get_wheel_offset(%u) returns %u\n", wheel_number, get_wheel_offset(wheel_number));
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
     }
@@ -113,15 +117,23 @@ void turn_wheel(unsigned short wheel_number) {
 
 
 void advance_wheels(void) {
+    if(DEBUG) {
+        inc_debug_indent();  // to function call level
+        print_debug_indent();
+        printf("FUNC: void advance_wheels(void)\n");
+    }
 
     unsigned short wheel_count = get_used_wheel_count();
+    unsigned short current_wheel_offset = 0;
 
     for (unsigned short n = 1; n <= wheel_count; ++n) {
-        if (get_wheel_offset(n) < 25) {
+        current_wheel_offset = get_wheel_offset(n);
+
+        if (current_wheel_offset < 25) {
             turn_wheel(n);
             break;
         }
-        else if (get_wheel_offset(n) == 25) {
+        else if (current_wheel_offset == 25) {
             turn_wheel(n);
             continue;
         }
@@ -131,17 +143,14 @@ void advance_wheels(void) {
     }
 
     if(DEBUG) {
-        inc_debug_indent();  // to function call level
-        print_debug_indent();
-        printf("FUNC: void advance_wheels(void)\n");
         inc_debug_indent();  // to function result level
-        unsigned short check_value_wheel_offset = get_wheel_offset(0);
+        current_wheel_offset = get_wheel_offset(0); // use var current_wheel_offset from this function
         print_debug_indent();
-        printf("CHECK: get_wheel_offset(wheel_number) // UKW (0): %u\n", check_value_wheel_offset);
+        printf("CHECK: get_wheel_offset(wheel_number) // UKW (0): %u\n", current_wheel_offset);
         for (unsigned short n = 1; n <= wheel_count; ++n) {
-            check_value_wheel_offset =  get_wheel_offset(n);
+            current_wheel_offset =  get_wheel_offset(n); // use var current_wheel_offset from this function
             print_debug_indent();
-            printf("CHECK: get_wheel_offset(wheel_number) // w%u: %u\n", n, check_value_wheel_offset);
+            printf("CHECK: get_wheel_offset(wheel_number) // w%u: %u\n", n, current_wheel_offset);
         }
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
@@ -181,11 +190,8 @@ char *process_message(char *p_input_string) {
     if(DEBUG) {
         inc_debug_indent(); // to function outer level
         print_debug_indent();
-        printf("Entered function: process_message\n");
+        printf("FUNC: char *process_message(...) // char *p_input_string = %s\n", p_input_string);
         inc_debug_indent(); // to function inner level
-
-        print_debug_indent();
-        printf("Parameter (char *) \"p_input_string\": %s\n", p_input_string);
     }
 
     unsigned short wheel_count = get_used_wheel_count();
@@ -198,9 +204,6 @@ char *process_message(char *p_input_string) {
     char current_char;
 
     for (unsigned short n = 0; n < msg_len; ++n) {
-        if(DEBUG) {
-            inc_debug_indent(); // to for inner level
-        }
 
         current_char = p_input_string[n];
 
@@ -255,25 +258,19 @@ char *process_message(char *p_input_string) {
         if(DEBUG) {
             print_debug_indent();
             printf("Processed character: %c\n", current_char);
-            dec_debug_indent(); // to for inner level
+            dec_debug_indent(); // to function inner level
         }
 
         p_output_string[n] = current_char;
 
         advance_wheels();
 
-        if(DEBUG) {
-            dec_debug_indent(); // to function inner level
-        }
     }
 
     if(DEBUG) {
         print_debug_indent();
-        printf("Return value(char *) \"p_output_string\": %s\n", p_output_string);
-
+        printf("RETURN // p_output_string = %s\n", p_output_string);
         dec_debug_indent(); // to function outer level
-        print_debug_indent();
-        printf("Leaving function: process_message\n");
         dec_debug_indent(); // to caller level
     }
 

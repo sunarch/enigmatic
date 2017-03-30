@@ -467,26 +467,21 @@ unsigned short wheel_offsets[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 // OTHER FUNCTIONS
 
 unsigned short get_wheel_offset(unsigned short wheel_number) {
+    // no debug messages in getter functions, include them as checks in calls
+
     // validate wheel_number
     validate_wheel_number_any(wheel_number, get_used_wheel_count());
 
-    unsigned short wheel_offset = wheel_offsets[wheel_number];
-
-    if(DEBUG) {
-        inc_debug_indent();  // to function call level
-        print_debug_indent();
-        printf("FUNC: unsigned short get_wheel_offset(...) // unsigned short wheel_number = %u\n", wheel_number);
-        inc_debug_indent();  // to function result level
-        print_debug_indent();
-        printf("RETURN %u (unsigned short)\n", wheel_offset);
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
-    }
-
-    return wheel_offset;
+    return wheel_offsets[wheel_number];
 }
 
 void set_wheel_offset(unsigned short wheel_number, unsigned short new_offset) {
+    if(DEBUG) {
+        inc_debug_indent();  // to function call level
+        print_debug_indent();
+        printf("FUNC: void set_wheel_offset(...) // unsigned short wheel_number = %u // unsigned short new_offset = %u\n", wheel_number, new_offset);
+    }
+
     // validate wheel_number
     validate_wheel_number_any(wheel_number, get_used_wheel_count());
 
@@ -494,13 +489,9 @@ void set_wheel_offset(unsigned short wheel_number, unsigned short new_offset) {
     wheel_offsets[wheel_number] = new_offset % 26;
 
     if(DEBUG) {
-        inc_debug_indent();  // to function call level
-        print_debug_indent();
-        printf("FUNC: void set_wheel_offset(...) // unsigned short wheel_number = %u // unsigned short new_offset = %u\n", wheel_number, new_offset);
         inc_debug_indent();  // to function result level
-        unsigned short check_value_wheel_offset = get_wheel_offset(wheel_number);
         print_debug_indent();
-        printf("CHECK: get_wheel_offset(%u) returns %u\n", wheel_number, check_value_wheel_offset);
+        printf("CHECK: get_wheel_offset(%u) returns %u\n", wheel_number, get_wheel_offset(wheel_number));
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
     }
@@ -508,23 +499,34 @@ void set_wheel_offset(unsigned short wheel_number, unsigned short new_offset) {
 }
 
 void reset_wheel_offsets(void) {
+    if(DEBUG) {
+        inc_debug_indent();  // to function call level
+        print_debug_indent();
+        printf("FUNC: void reset_wheel_offsets(void)\n");
+    }
 
     for (unsigned short n = 0; n < 11; ++n) {
         wheel_offsets[n] = 0;
     }
 
     if(DEBUG) {
-        inc_debug_indent();  // to function call level
+        inc_debug_indent();  // to function result level
+        unsigned short check_value_wheel_offset = get_wheel_offset(0);
         print_debug_indent();
-        printf("FUNC: void reset_wheel_offsets(void)\n");
-        //inc_debug_indent();  // to function result level
-        //printf("CHECK: get_wheel_offset(%u) returns %u\n", wheel_number, get_wheel_offset(wheel_number));
-        //dec_debug_indent();  // to function call level
+        printf("CHECK: get_wheel_offset(wheel_number) // UKW (0): %u\n", check_value_wheel_offset);
+        for (unsigned short n = 1; n <= get_used_wheel_count(); ++n) {
+            check_value_wheel_offset =  get_wheel_offset(n);
+            print_debug_indent();
+            printf("CHECK: get_wheel_offset(wheel_number) // w%u: %u\n", n, check_value_wheel_offset);
+        }
+        dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
     }
 }
 
 signed short *get_wheel_wiring_rules_front(unsigned short wheel_number) {
+    // no debug messages in getter functions, include them as checks in calls
+
     // validate wheel number
     validate_wheel_number_any(wheel_number, get_used_wheel_count());
 
@@ -532,6 +534,8 @@ signed short *get_wheel_wiring_rules_front(unsigned short wheel_number) {
 }
 
 signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number) {
+    // no debug messages in getter functions, include them as checks in calls
+
     // validate wheel number
     validate_wheel_number_any(wheel_number, get_used_wheel_count());
 
@@ -552,21 +556,17 @@ void set_wheel_wiring_rules(unsigned short wheel_number, char *wiring_alphabet) 
 }
 
 unsigned short get_used_wheel_count(void) {
-    if(DEBUG) {
-        inc_debug_indent();  // to function call level
-        print_debug_indent();
-        printf("FUNC: unsigned short get_used_wheel_count(void)\n");
-        inc_debug_indent();  // to function result level
-        print_debug_indent();
-        printf("RETURN %u (unsigned short)\n", used_wheel_count);
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
-    }
+    // no debug messages in getter functions, include them as checks in calls
 
     return used_wheel_count;
 }
 
 void set_used_wheel_count(unsigned short new_wheel_count) {
+    if(DEBUG) {
+        inc_debug_indent();  // to function call level
+        print_debug_indent();
+        printf("FUNC: void set_used_wheel_count(...) // unsigned short new_wheel_count = %u\n", new_wheel_count);
+    }
 
     if (new_wheel_count > MAX_WHEEL_COUNT) {
         printf("Failed check with (new_wheel_count > %i): (%u > %i)\n", MAX_WHEEL_COUNT, new_wheel_count, MAX_WHEEL_COUNT);
@@ -580,13 +580,9 @@ void set_used_wheel_count(unsigned short new_wheel_count) {
     reset_wheel_offsets();
 
     if(DEBUG) {
-        inc_debug_indent();  // to function call level
-        print_debug_indent();
-        printf("FUNC: void set_used_wheel_count(...) // unsigned short new_wheel_count = %u\n", new_wheel_count);
         inc_debug_indent();  // to function result level
-        unsigned short check_value_used_wheel_count = get_used_wheel_count();
         print_debug_indent();
-        printf("CHECK: get_used_wheel_count() returns %u\n", check_value_used_wheel_count);
+        printf("CHECK: get_used_wheel_count() returns %u\n", get_used_wheel_count());
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
     }

@@ -16,7 +16,7 @@ char *pArgument = argument;
 int main (void) {
     if(DEBUG) {
         print_debug_indent();
-        printf("Entered function: main\n");
+        printf("Program starting...\n");
     }
 
     printf("Welcome to Enigma!\n"); // welcome message
@@ -93,8 +93,9 @@ int main (void) {
     }
 
     if(DEBUG) {
-    print_debug_indent();
-    printf("Leaving function: main\n");
+        print_debug_indent();
+        printf("Program finished without errors.\n");
+        printf("Shutting down...\n");
     }
 
     return 0;
