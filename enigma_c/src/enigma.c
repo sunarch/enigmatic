@@ -14,10 +14,10 @@ char argument [] = "none";
 char *pArgument = argument;
 
 int main (void) {
-    if(DEBUG) {
+    #ifdef DEBUG
         print_debug_indent();
         printf("Program starting...\n");
-    }
+    #endif
 
     printf("Welcome to Enigma!\n"); // welcome message
 
@@ -50,7 +50,7 @@ int main (void) {
                 printf("Exiting...\n");
                 exit(1);
             };
-            printf("%s", pArgument);
+
             /* Remove trailing newline, if there. */
             if ((strlen(pArgument) > 0) && (pArgument[strlen(pArgument) - 1] == '\n')) {
                 pArgument[strlen (pArgument) - 1] = '\0';
@@ -91,12 +91,12 @@ int main (void) {
         }
     }
 
-    if(DEBUG) {
+    #ifdef DEBUG
         print_debug_indent();
         printf("Program finished without errors.\n");
         print_debug_indent();
         printf("Shutting down...\n");
-    }
+    #endif
 
     return 0;
 }

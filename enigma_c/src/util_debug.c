@@ -3,7 +3,7 @@
 
 #include "util_debug.h"
 
-const unsigned short DEBUG = 1; // 1 for ON, 0 for OFF
+#ifdef DEBUG
 
 signed short debug_indent_level = 0;
 
@@ -24,3 +24,5 @@ void dec_debug_indent() {
         debug_indent_level -= 1;
     }
 }
+
+#endif
