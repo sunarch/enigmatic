@@ -1,10 +1,11 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
-#include "ascii.h"
 #include "enigma.h"
+#include "util_debug.h"
 
 char command [] = "start";
 char *pCommand = command;
@@ -12,26 +13,69 @@ char *pCommand = command;
 char argument [] = "none";
 char *pArgument = argument;
 
-int main (void)
-{
+int main (void) {
+    if(DEBUG) {
+        print_debug_indent();
+        printf("Entered function: main\n");
+    }
+
     printf("Welcome to Enigma!\n"); // welcome message
+
+    // apply default settings
+    apply_settings_default();
 
     while (true) {
 
         printf("Engima $ "); // command prompt
 
-        scanf("%s", pCommand);
+        //scanf("%[^\n]%*c", pCommand);
+        if (fgets(pCommand, 100, stdin) == NULL) {
+            printf("Failed check with (fgets(pCommand, 100, stdin) == NULL)\n");
+            printf("Exiting...\n");
+            exit(1);
+        };
+        /* Remove trailing newline, if there. */
+        if ((strlen(pCommand)>0) && (pCommand[strlen (pCommand) - 1] == '\n')) {
+            pCommand[strlen (pCommand) - 1] = '\0';
+        }
+
         printf("COMMAND ENTERED: %s\n", pCommand);
 
         if (strcmp(command, "msg") == 0 || strcmp(command, "message") == 0) {
             printf("Enter message: "); // argument prompt
-            scanf("%s", pArgument);
-            printf("MSG: %s\n", pArgument);
-            printf("CMSG: ");
-            for (unsigned short n = 0; n < strlen(argument); ++n) {
-                printf("%c", process_char(argument[n]));
+
+            //scanf("%[^\n]%*c", pArgument);
+            if (fgets(pArgument, 100, stdin) == NULL) {
+                printf("Failed check with (fgets(pArgument, 100, stdin) == NULL)\n");
+                printf("Exiting...\n");
+                exit(1);
+            };
+            /* Remove trailing newline, if there. */
+            if ((strlen(pArgument)>0) && (pArgument[strlen (pArgument) - 1] == '\n')) {
+                pArgument[strlen (pArgument) - 1] = '\0';
             }
-            printf("\n");
+
+            printf("MSG: %s\n", pArgument);
+            printf("CMSG: %s\n", process_message(pArgument));
+        }
+        else if (strcmp(command, "config") == 0) {
+            printf("View config? (y/n): "); // argument prompt
+
+            //scanf("%[^\n]%*c", pArgument);
+            if (fgets(pArgument, 100, stdin) == NULL) {
+                printf("Failed check with (fgets(pArgument, 100, stdin) == NULL)\n");
+                printf("Exiting...\n");
+                exit(1);
+            };
+            /* Remove trailing newline, if there. */
+            if ((strlen(pArgument)>0) && (pArgument[strlen (pArgument) - 1] == '\n')) {
+                pArgument[strlen (pArgument) - 1] = '\0';
+            }
+
+            if (strcmp(pArgument, "y") == 0 || strcmp(pArgument, "Y") == 0) {
+                print_config();
+            }
+            break;
         }
         else if (strcmp(command, "help") == 0) {
             printf("Commands: help, msg/message, exit/quit\n");
@@ -46,6 +90,11 @@ int main (void)
             printf("Command not recognized.\n");
         }
 
+    }
+
+    if(DEBUG) {
+    print_debug_indent();
+    printf("Leaving function: main\n");
     }
 
     return 0;

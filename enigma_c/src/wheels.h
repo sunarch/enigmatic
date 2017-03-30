@@ -137,11 +137,33 @@ char WALZE_3G3 [27];  //  'uwxaefhkmnr', '11 notches (G-312)', '3G3')
 
 void apply_settings_bletchley(void);
 
+void apply_settings_default(void);
+
 // PROGRAM VARIABLES
 
-unsigned short wheel_offsets[10];
-unsigned short wheel_count;
+#define  MAX_WHEEL_COUNT  10
+#define  UKW_INDEX  0
+
+unsigned short used_wheel_count;
+unsigned short wheel_offsets[11];
+signed short wheel_wiring_rules_front[11][26];
+signed short wheel_wiring_rules_reverse[11][26];
+
 char *wheel_wirings[10];
 char *wheel_wiring_ukw;
+
+// OTHER FUNCTIONS
+
+unsigned short get_wheel_offset(unsigned short wheelNumber);
+void set_wheel_offset(unsigned short wheelNumber, unsigned short new_offset);
+void reset_wheel_offsets(void);
+
+signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);
+signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number);
+
+void set_wheel_wiring_rules(unsigned short wheel_number, char *wiring_alphabet);
+
+unsigned short get_used_wheel_count(void);
+void set_used_wheel_count(unsigned short count);
 
 #endif
