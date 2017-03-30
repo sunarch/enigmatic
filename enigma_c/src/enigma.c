@@ -1,8 +1,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "enigma.h"
 #include "util_debug.h"
@@ -35,8 +35,8 @@ int main (void) {
             exit(1);
         };
         /* Remove trailing newline, if there. */
-        if ((strlen(pCommand)>0) && (pCommand[strlen (pCommand) - 1] == '\n')) {
-            pCommand[strlen (pCommand) - 1] = '\0';
+        if ((strlen(pCommand) > 0) && (pCommand[strlen(pCommand) - 1] == '\n')) {
+            pCommand[strlen(pCommand) - 1] = '\0';
         }
 
         printf("COMMAND ENTERED: %s\n", pCommand);
@@ -50,8 +50,9 @@ int main (void) {
                 printf("Exiting...\n");
                 exit(1);
             };
+            printf("%s", pArgument);
             /* Remove trailing newline, if there. */
-            if ((strlen(pArgument)>0) && (pArgument[strlen (pArgument) - 1] == '\n')) {
+            if ((strlen(pArgument) > 0) && (pArgument[strlen(pArgument) - 1] == '\n')) {
                 pArgument[strlen (pArgument) - 1] = '\0';
             }
 
@@ -68,33 +69,32 @@ int main (void) {
                 exit(1);
             };
             /* Remove trailing newline, if there. */
-            if ((strlen(pArgument)>0) && (pArgument[strlen (pArgument) - 1] == '\n')) {
-                pArgument[strlen (pArgument) - 1] = '\0';
+            if ((strlen(pArgument) > 0) && (pArgument[strlen(pArgument) - 1] == '\n')) {
+                pArgument[strlen(pArgument) - 1] = '\0';
             }
 
             if (strcmp(pArgument, "y") == 0 || strcmp(pArgument, "Y") == 0) {
                 print_config();
             }
-            break;
         }
         else if (strcmp(command, "help") == 0) {
             printf("Commands: help, msg/message, exit/quit\n");
         }
         else if (strcmp(command, "exit") == 0) {
-            break;
+            break; // exit program loop
         }
         else if (strcmp(command, "quit") == 0) {
-            break;
+            break; // exit program loop
         }
         else {
             printf("Command not recognized.\n");
         }
-
     }
 
     if(DEBUG) {
         print_debug_indent();
         printf("Program finished without errors.\n");
+        print_debug_indent();
         printf("Shutting down...\n");
     }
 

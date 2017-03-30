@@ -513,11 +513,11 @@ void reset_wheel_offsets(void) {
         inc_debug_indent();  // to function result level
         unsigned short check_value_wheel_offset = get_wheel_offset(0);
         print_debug_indent();
-        printf("CHECK: get_wheel_offset(wheel_number) // UKW (0): %u\n", check_value_wheel_offset);
+        printf("CHECK: get_wheel_offset(...) // wheel_number = 0 // %u // should always be 0 (UKW)\n", check_value_wheel_offset);
         for (unsigned short n = 1; n <= get_used_wheel_count(); ++n) {
             check_value_wheel_offset =  get_wheel_offset(n);
             print_debug_indent();
-            printf("CHECK: get_wheel_offset(wheel_number) // w%u: %u\n", n, check_value_wheel_offset);
+            printf("CHECK: get_wheel_offset(...) // wheel_number = %u // %u\n", n, check_value_wheel_offset);
         }
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
@@ -551,7 +551,7 @@ void set_wheel_wiring_rules(unsigned short wheel_number, char *wiring_alphabet) 
     for (unsigned short n = 0; n < 26; ++n) {
         wiring_rule = (signed short) ((wiring_alphabet[n] - ABC_LOW[n]) % 26);
         wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
-        wheel_wiring_rules_reverse[wheel_number][n + wiring_rule] = (-1) * wiring_rule;
+        wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % 26] = (-1) * wiring_rule;
     }
 }
 
