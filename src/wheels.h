@@ -149,9 +149,6 @@ unsigned short wheel_offsets[11];
 signed short wheel_wiring_rules_front[11][26];
 signed short wheel_wiring_rules_reverse[11][26];
 
-char *wheel_wirings[10];
-char *wheel_wiring_ukw;
-
 // OTHER FUNCTIONS
 
 unsigned short get_wheel_offset(unsigned short wheelNumber);
