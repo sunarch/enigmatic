@@ -28,13 +28,13 @@ C_FLAGS_WARNING = -Wpedantic \
 C_FLAGS_DEBUG = -g
 C_FLAGS_OPTIMIZE = -Og
 
-# flags for only object targets
+# flags only for object targets
 C_FLAGS_OBJS_ONLY = -c
 
-# flags for only executable targets
+# flags only for executable target
 C_FLAGS_EXEC_ONLY = -no-pie
 
-# linker flags
+# linker flags (only for executable target)
 LD_FLAGS =
 
 # determine the list of object files for the executable
@@ -52,7 +52,6 @@ $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
         $(C_FLAGS_DEBUG) \
         $(C_FLAGS_OPTIMIZE) \
         $(C_FLAGS_OBJS_ONLY) \
-        $(LD_FLAGS)
 
 $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
 >   mkdir -p $(EXEC_DIR)
@@ -63,7 +62,7 @@ $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
         $(C_FLAGS_DEBUG) \
         $(C_FLAGS_OPTIMIZE) \
         $(C_FLAGS_EXEC_ONLY) \
-        $(LD_FLAGS)
+        $(LD_FLAGS) \
 
 .PHONY: clean
 clean:
