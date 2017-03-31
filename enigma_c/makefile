@@ -64,9 +64,17 @@ $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
         $(C_FLAGS_EXEC_ONLY) \
         $(LD_FLAGS) \
 
-.PHONY: clean
+.PHONY: clean, asm, asm-clean
+
 clean:
 >   rm $(OBJECT_DIR)/*.o
 >   rmdir $(OBJECT_DIR)
 >   rm $(EXEC_DIR)/$(EXEC_NAME)
 >   rmdir $(EXEC_DIR)
+
+asm:
+>   scripts/gen-asm-ref.sh
+
+asm-clean:
+>   rm gen-asm-ref/*.s
+>   rmdir gen-asm-ref
