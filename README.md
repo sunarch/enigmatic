@@ -1,3 +1,3 @@
-# cryptography
+# crypto-enigma
 
-A collection of different cryptographic applications.
+An Enigma emulator implemented in C.
