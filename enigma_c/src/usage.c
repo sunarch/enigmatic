@@ -270,7 +270,7 @@ char *process_message(char *p_input_string) {
         // start of character processing
         #ifdef DEBUG
             print_debug_indent();
-            printf("%lu./%lu  CHAR to be processed: %c\n", (n + 1), (msg_len), current_char);
+            printf("%lu./%lu  CHAR to be processed: '%c'\n", (n + 1), (msg_len), current_char);
             inc_debug_indent(); // to character processing inner level
         #endif
 
@@ -284,7 +284,6 @@ char *process_message(char *p_input_string) {
             p_occurence = strchr(ABC_UPP, current_char);
             if(p_occurence == NULL) { // character not in uppercase alphabet
                 // put character through unchanged
-                p_output_string[n] = current_char;
                 letter_is_alphabetic = false;
             }
             else { // uppercase character: convert to lowercase
@@ -323,18 +322,21 @@ char *process_message(char *p_input_string) {
             for (unsigned short n = wheel_count; n >= 1; --n) {
                 current_char = get_wheel_output(n, WHEEL_MODE_REVERSE, current_char);
             }
+
+            // advance wheels only after processed chars
+            advance_wheels();
         }
 
         // end of character processing
         #ifdef DEBUG
             dec_debug_indent(); // to function inner level
             print_debug_indent();
-            printf("%lu./%lu  CHAR after processing: %c\n", (n + 1), (msg_len), current_char);
+            printf("%lu./%lu  CHAR after processing: '%c'\n", (n + 1), (msg_len), current_char);
         #endif
 
+        // move current char into output string
+        // for both processed and unprocessed chars
         p_output_string[n] = current_char;
-
-        advance_wheels();
 
     }
 
