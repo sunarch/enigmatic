@@ -283,7 +283,13 @@ char *process_message(char *p_input_string) {
 
             p_occurence = strchr(ABC_UPP, current_char);
             if(p_occurence == NULL) { // character not in uppercase alphabet
-                // put character through unchanged
+
+                // only allow a period of the non-alphabetic characters
+                // change all other characters to underscores
+                if (current_char != '.') {
+                    current_char = '_';
+                }
+                // put character through without processing
                 letter_is_alphabetic = false;
             }
             else { // uppercase character: convert to lowercase
