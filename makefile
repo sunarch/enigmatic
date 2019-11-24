@@ -1,23 +1,23 @@
 
-# change recipe prefix from TAB to ">"
+# change recipe prefix from TAB to ">" #
 .RECIPEPREFIX = >
 
-# directories and executable file name
+# directories and executable file name #
 SOURCE_DIR = src
 OBJECT_DIR = gen-obj
 EXEC_DIR = gen-bin
 EXEC_NAME = enigma
 
-# compiler for C sources
+# compiler for C sources #
 C_COMPILER = gcc
 
-# flags for both object and executable targets (C standard)
+# flags for both object and executable targets (C standard) #
 #C_FLAG_STD = -std=c90 -Wc90-c99-compat
 #C_FLAG_STD = -std=iso9899:199409 -Wc90-c99-compat
 C_FLAGS_STD = -std=c99 -Wc99-c11-compat
 #C_FLAG_STD = -std=c11
 
-# flags for both object and executable targets
+# flags for both object and executable targets #
 C_FLAGS_WARNING = -Wpedantic \
                 -Wall \
                 -Wextra \
@@ -28,20 +28,20 @@ C_FLAGS_WARNING = -Wpedantic \
 C_FLAGS_DEBUG = -g
 C_FLAGS_OPTIMIZE = -Og
 
-# flags only for object targets
+# flags only for object targets #
 C_FLAGS_OBJS_ONLY = -c
 
-# flags only for executable target
+# flags only for executable target #
 C_FLAGS_EXEC_ONLY = -no-pie
 
-# linker flags (only for executable target)
+# linker flags (only for executable target) #
 LD_FLAGS =
 
-# determine the list of object files for the executable
+# determine the list of object files for the executable #
 SOURCES := $(wildcard $(SOURCE_DIR)/*.c)
 GEN_OBJS := $(patsubst $(SOURCE_DIR)/%.c,$(OBJECT_DIR)/%.o,$(SOURCES))
 
-# RULES
+# RULES ########################################################################
 
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
 >   mkdir -p $(OBJECT_DIR)
@@ -78,3 +78,5 @@ asm:
 asm-clean:
 >   rm gen-asm-ref/*.s
 >   rmdir gen-asm-ref
+
+# END ##########################################################################

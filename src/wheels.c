@@ -3,14 +3,14 @@
 #include <stdlib.h>
 
 #include "wheels.h"
-#include "util_debug.h"
-#include "util_validate.h"
+#include "util-debug.h"
+#include "util-validate.h"
 
 const char ABC_UPP [27] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  // ordered Alphabet
 const char ABC_LOW [27] = "abcdefghijklmnopqrstuvwxyz";  // ordered Alphabet
 
-// Rotor wheels (wiring, turnover points, c-o info, name)
-// Reflectors (UKW)
+// Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
+// Reflectors (UKW) ////////////////////////////////////////////////////////////
 
 // W. I-VIII (I,M3,M4)
 // I "Services" (Army, GAF)
@@ -457,14 +457,14 @@ void apply_settings_default(void) {
     #endif
 }
 
-// PROGRAM VARIABLES
+// PROGRAM VARIABLES ///////////////////////////////////////////////////////////
 
 // unsigned short used_wheel_count;
 unsigned short wheel_offsets[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 // signed short wheel_wiring_rules_front[11][26];
 // signed short wheel_wiring_rules_reverse[11][26];
 
-// OTHER FUNCTIONS
+// OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
 unsigned short get_wheel_offset(unsigned short wheel_number) {
     // no debug messages in getter functions, include them as checks in calls

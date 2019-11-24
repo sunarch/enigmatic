@@ -5,8 +5,8 @@
 const char ABC_UPP [27];  // ordered Alphabet
 const char ABC_LOW [27];  // ordered Alphabet
 
-// Rotor wheels (wiring, turnover points, c-o info, name)
-// Reflectors (UKW)
+// Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
+// Reflectors (UKW) ////////////////////////////////////////////////////////////
 
 // W. I-VIII (I,M3,M4)
 // I "Services" (Army, GAF)
@@ -139,7 +139,7 @@ void apply_settings_bletchley(void);
 
 void apply_settings_default(void);
 
-// PROGRAM VARIABLES
+// PROGRAM VARIABLES ///////////////////////////////////////////////////////////
 
 #define  MAX_WHEEL_COUNT  10
 #define  UKW_INDEX  0
@@ -149,7 +149,7 @@ unsigned short wheel_offsets[11];
 signed short wheel_wiring_rules_front[11][26];
 signed short wheel_wiring_rules_reverse[11][26];
 
-// OTHER FUNCTIONS
+// OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
 unsigned short get_wheel_offset(unsigned short wheelNumber);
 void set_wheel_offset(unsigned short wheelNumber, unsigned short new_offset);

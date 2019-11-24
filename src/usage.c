@@ -6,8 +6,8 @@
 
 #include "usage.h"
 #include "wheels.h"
-#include "util_debug.h"
-#include "util_validate.h"
+#include "util-debug.h"
+#include "util-validate.h"
 
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before, signed short wiring_rule) {
 

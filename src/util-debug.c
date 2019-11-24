@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 
-#include "util_debug.h"
+#include "util-debug.h"
 
 #ifdef DEBUG
 

@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "enigma.h"
-#include "util_debug.h"
+#include "util-debug.h"
 
 char command [BUFFER_LENGTH_COMMAND] = "start";
 char *pCommand = command;
