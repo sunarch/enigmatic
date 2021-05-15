@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -7,14 +7,14 @@
 
 mkdir -p gen-asm-ref
 
-gcc -g -S -o gen-asm-ref/util_debug.s \
-    src/util_debug.c \
+gcc -g -S -o gen-asm-ref/util-debug.s \
+    src/util-debug.c \
     -std=c99 -Wc99-c11-compat \
     -Wpedantic -Wall -Wextra \
     -Wcast-align -Wredundant-decls -Wbad-function-cast -Wstrict-prototypes \
 
-gcc -g -S -o gen-asm-ref/util_validate.s \
-    src/util_validate.c \
+gcc -g -S -o gen-asm-ref/util-validate.s \
+    src/util-validate.c \
     -std=c99 -Wc99-c11-compat \
     -Wpedantic -Wall -Wextra \
     -Wcast-align -Wredundant-decls -Wbad-function-cast -Wstrict-prototypes \
