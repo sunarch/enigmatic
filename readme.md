@@ -1,4 +1,4 @@
-# crypto-enigma-c
+# enigmatic
 
 An Enigma emulator implemented in C.
 
