@@ -33,14 +33,14 @@ int main (void) {
         printf("Program starting...\n");
     #endif
 
-    printf("Welcome to Enigma!\n"); // welcome message
+    printf("Welcome to Enigmatic - an Enigma emulator!\n"); // welcome message
 
     // apply default settings
     apply_settings_default();
 
     while (true) {
 
-        printf("Engima $ "); // command prompt
+        printf("Enigmatic $ "); // command prompt
 
         // get input
         if (fgets(pCommand, BUFFER_LENGTH_COMMAND, stdin) == NULL) {
@@ -126,6 +126,8 @@ int main (void) {
         print_debug_indent();
         printf("Shutting down...\n");
     #endif
+
+    printf("Thank you for using Enigmatic\n");
 
     return 0;
 }
