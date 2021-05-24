@@ -13,7 +13,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 signed short debug_indent_level = 0;
 
-void print_debug_indent() {
+void debug_print_indent() {
     if (debug_indent_level > 0) {
         for (unsigned short n = 1; n <= debug_indent_level; ++n) {
             printf("|   ");

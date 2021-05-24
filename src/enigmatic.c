@@ -29,7 +29,7 @@ char *pCrypto = crypto;
 
 int main (void) {
     #ifdef DEBUG
-        print_debug_indent();
+        debug_print_indent();
         printf("Program starting...\n");
     #endif
 
@@ -121,9 +121,9 @@ int main (void) {
     }
 
     #ifdef DEBUG
-        print_debug_indent();
+        debug_print_indent();
         printf("Program finished without errors.\n");
-        print_debug_indent();
+        debug_print_indent();
         printf("Shutting down...\n");
     #endif
 

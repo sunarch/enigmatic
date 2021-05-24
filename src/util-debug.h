@@ -10,7 +10,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #ifdef DEBUG
 
-void print_debug_indent(void);
+void debug_print_indent(void);
 void inc_debug_indent(void);
 void dec_debug_indent(void);
 
