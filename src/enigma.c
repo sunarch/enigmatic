@@ -27,10 +27,6 @@ char *pMessage = message;
 char crypto[BUFFER_LENGTH_MESSAGE];
 char *pCrypto = crypto;
 
-#ifdef DEBUG
-int i;
-#endif
-
 int main (void) {
     #ifdef DEBUG
         print_debug_indent();
@@ -77,11 +73,7 @@ int main (void) {
             printf("MSG: \"%s\"\n", pMessage);
 
             #ifdef DEBUG
-            i=0;
-            while(message[i]!='\0'){
-                printf("ASCII Value of '%c' = '%d'\n", message[i], message[i]);
-                i++;
-            }
+            print_as_ascii(pCrypto);
             #endif
 
             process_message(pMessage, pCrypto);
@@ -89,11 +81,7 @@ int main (void) {
             printf("CMSG: \"%s\"\n", pCrypto);
 
             #ifdef DEBUG
-            i=0;
-            while(crypto[i]!='\0'){
-                printf("ASCII Value of '%c' = '%d'\n", crypto[i], crypto[i]);
-                i++;
-            }
+            print_as_ascii(pCrypto);
             #endif
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {

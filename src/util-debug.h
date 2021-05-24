@@ -19,6 +19,8 @@ void print_debug_indent(void);
 void inc_debug_indent(void);
 void dec_debug_indent(void);
 
+void print_as_ascii(char *p_text);
+
 #endif
 
 #endif
