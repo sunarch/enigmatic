@@ -12,6 +12,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "util-debug.h"
 #include "util-validate.h"
 
+void set_wheel_wiring_rules(unsigned short wheel_number, const char *const wiring_alphabet);
+void set_used_wheel_count(unsigned short count);
+
 const char ABC_UPP [27] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  // ordered Alphabet
 const char ABC_LOW [27] = "abcdefghijklmnopqrstuvwxyz";  // ordered Alphabet
 

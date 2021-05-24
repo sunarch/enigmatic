@@ -11,6 +11,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <string.h>
 
 #include "enigma.h"
+#include "usage.h"
+#include "wheels.h"
 #include "util-debug.h"
 
 char command [BUFFER_LENGTH_COMMAND] = "start";

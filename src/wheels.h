@@ -164,9 +164,6 @@ void reset_wheel_offsets(void);
 signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);
 signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number);
 
-void set_wheel_wiring_rules(unsigned short wheel_number, const char *const wiring_alphabet);
-
 unsigned short get_used_wheel_count(void);
-void set_used_wheel_count(unsigned short count);
 
 #endif
