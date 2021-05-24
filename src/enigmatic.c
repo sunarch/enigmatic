@@ -10,7 +10,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdbool.h>
 #include <string.h>
 
-#include "enigma.h"
+#include "enigmatic.h"
 #include "usage.h"
 #include "wheels.h"
 #include "util-debug.h"
@@ -33,7 +33,7 @@ int main (void) {
         printf("Program starting...\n");
     #endif
 
-    printf("Welcome to Enigmatic - an Enigma emulator!\n"); // welcome message
+    printf("Welcome to Enigmatic - an Enigma emulator\n"); // welcome message
 
     // apply default settings
     apply_settings_default();
@@ -127,7 +127,7 @@ int main (void) {
         printf("Shutting down...\n");
     #endif
 
-    printf("Thank you for using Enigmatic\n");
+    printf("Thank you for using Enigmatic!\n");
 
     return 0;
 }

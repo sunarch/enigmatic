@@ -5,8 +5,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
 
-#ifndef _ENIGMA_H_
-#define _ENIGMA_H_
+#ifndef _ENIGMATIC_H_
+#define _ENIGMATIC_H_
 
 # define  BUFFER_LENGTH_COMMAND  32
 # define  BUFFER_LENGTH_ARGUMENT  96
