@@ -40,7 +40,7 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         print_debug_indent();
-        printf("FUNC: char get_wheel_output(...) // unsigned short wheel_number = %u // unsigned short mode = %u // char input_char = %c\n", wheel_number, mode, input_char);
+        printf("FUNC: char get_wheel_output(...) // unsigned short wheel_number = '%u' // unsigned short mode = '%u' // char input_char = '%c'\n", wheel_number, mode, input_char);
         inc_debug_indent();  // to function result level
     #endif
 
@@ -69,7 +69,7 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
     }
     #ifdef DEBUG
         print_debug_indent();
-        printf("index of input char in alphabet // %u // <= input_char\n", index);
+        printf("index of input char in alphabet // '%u' // <= input_char\n", index);
     #endif
 
     // wiring rule from offset index
@@ -91,9 +91,9 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
     }
     #ifdef DEBUG
         print_debug_indent();
-        printf("wheel offset for wheel %u // %u\n", wheel_number, wheel_offset);
+        printf("wheel offset for wheel '%u' // '%u'\n", wheel_number, wheel_offset);
         print_debug_indent();
-        printf("wiring rule from offset index // %d\n", wiring_rule);
+        printf("wiring rule from offset index // '%d'\n", wiring_rule);
     #endif
 
     // index after wiring rule applied
@@ -101,7 +101,7 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
     index = calculate_index_after_wiring_rule(index, wiring_rule);
     #ifdef DEBUG
         print_debug_indent();
-        printf("index after wiring rule applied // %u // => output_char\n", index);
+        printf("index after wiring rule applied // '%u' // => output_char\n", index);
     #endif
 
     // output char
@@ -109,7 +109,7 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
 
     #ifdef DEBUG
         print_debug_indent();
-        printf("RETURN // output_char = %c\n", output_char);
+        printf("RETURN // output_char = '%c'\n", output_char);
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
     #endif
@@ -121,7 +121,7 @@ void turn_wheel(unsigned short wheel_number) {
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         print_debug_indent();
-        printf("FUNC: void turn_wheel(...) // unsigned short wheel_number = %u\n", wheel_number);
+        printf("FUNC: void turn_wheel(...) // unsigned short wheel_number = '%u'\n", wheel_number);
     #endif
 
     // validate wheel_number
@@ -167,11 +167,11 @@ void advance_wheels(void) {
         inc_debug_indent();  // to function result level
         current_wheel_offset = get_wheel_offset(0); // use var current_wheel_offset from this function
         print_debug_indent();
-        printf("CHECK: get_wheel_offset(...) // wheel_number = 0 // %u // should always be 0 (UKW)\n", current_wheel_offset);
+        printf("CHECK: get_wheel_offset(...) // wheel_number = 0 // '%u' // should always be 0 (UKW)\n", current_wheel_offset);
         for (unsigned short n = 1; n <= wheel_count; ++n) {
             current_wheel_offset =  get_wheel_offset(n); // use var current_wheel_offset from this function
             print_debug_indent();
-            printf("CHECK: get_wheel_offset(...) // wheel_number = %u // %u\n", n, current_wheel_offset);
+            printf("CHECK: get_wheel_offset(...) // wheel_number = '%u' // '%u'\n", n, current_wheel_offset);
         }
         dec_debug_indent();  // to function call level
         dec_debug_indent();  // to caller level
@@ -255,7 +255,7 @@ char *process_message(char *p_input_string) {
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         print_debug_indent();
-        printf("FUNC: char *process_message(...) // char *p_input_string = %s\n", p_input_string);
+        printf("FUNC: char *process_message(...) // char *p_input_string = '%s'\n", p_input_string);
         inc_debug_indent(); // to function inner level
     #endif
 
@@ -354,7 +354,7 @@ char *process_message(char *p_input_string) {
 
     #ifdef DEBUG
         print_debug_indent();
-        printf("RETURN // p_output_string = %s\n", p_output_string);
+        printf("RETURN // p_output_string = '%s'\n", p_output_string);
         dec_debug_indent(); // to function outer level
         dec_debug_indent(); // to caller level
     #endif

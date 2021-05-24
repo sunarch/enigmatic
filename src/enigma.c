@@ -74,7 +74,7 @@ int main (void) {
             #ifdef DEBUG
             i=0;
             while(message[i]!='\0'){
-                printf("ASCII Value of %c = %d\n", message[i], message[i]);
+                printf("ASCII Value of '%c' = '%d'\n", message[i], message[i]);
                 i++;
             }
             #endif
