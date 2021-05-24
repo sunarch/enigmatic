@@ -107,7 +107,7 @@ windows-clean:
 >   rmdir $(ASM_DIR)
 >   del $(OBJECT_DIR)\*.o
 >   rmdir $(OBJECT_DIR)
->   del $(EXEC_DIR)\$(EXEC_NAME)
+>   del $(EXEC_DIR)\$(EXEC_NAME_WINDOWS)
 >   rmdir $(EXEC_DIR)
 
 # targets
