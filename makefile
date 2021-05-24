@@ -72,8 +72,8 @@ $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
         $(C_FLAGS_OPTIMIZE) \
         $(C_FLAGS_OBJS_ONLY) \
 
-$(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS) $(GEN_ASM)
->   $(C_COMPILER) -o $(GEN_OBJS) \
+$(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
+>   $(C_COMPILER) -o $@ \
         $^ \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
@@ -112,8 +112,8 @@ windows-clean:
 
 # targets
 
-windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME)
+windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
 
-linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME)
+linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
 
 # END ##########################################################################
