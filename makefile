@@ -10,6 +10,7 @@
 # directories and executable file name #
 SOURCE_DIR = src
 OBJECT_DIR = gen-obj
+ASM_DIR = gen-asm-ref
 EXEC_DIR = gen-bin
 
 EXEC_NAME = enigmatic
@@ -35,6 +36,9 @@ C_FLAGS_WARNING = -Wpedantic \
 C_FLAGS_DEBUG = -g
 C_FLAGS_OPTIMIZE = -Og
 
+# flags only for assembly targets #
+C_FLAGS_ASM_ONLY = -S
+
 # flags only for object targets #
 C_FLAGS_OBJS_ONLY = -c
 
@@ -47,8 +51,17 @@ LD_FLAGS =
 # determine the list of object files for the executable #
 SOURCES := $(wildcard $(SOURCE_DIR)/*.c)
 GEN_OBJS := $(patsubst $(SOURCE_DIR)/%.c,$(OBJECT_DIR)/%.o,$(SOURCES))
+GEN_ASM := $(patsubst $(SOURCE_DIR)/%.c,$(ASM_DIR)/%.s,$(SOURCES))
 
 # RULES ########################################################################
+
+$(ASM_DIR)/%.s : $(SOURCE_DIR)/%.c
+>   $(C_COMPILER) -o $@ \
+        $< \
+        $(C_FLAGS_STD) \
+        $(C_FLAGS_WARNING) \
+        $(C_FLAGS_DEBUG) \
+        $(C_FLAGS_ASM_ONLY) \
 
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
 >   $(C_COMPILER) -o $@ \
@@ -59,7 +72,7 @@ $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
         $(C_FLAGS_OPTIMIZE) \
         $(C_FLAGS_OBJS_ONLY) \
 
-$(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
+$(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS) $(GEN_ASM)
 >   $(C_COMPILER) -o $@ \
         $^ \
         $(C_FLAGS_STD) \
@@ -69,50 +82,38 @@ $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
         $(C_FLAGS_EXEC_ONLY) \
         $(LD_FLAGS) \
 
-.PHONY: linux-clean
-
-linux-other: asm-linux
+.PHONY:
 
 linux-setup:
+>   mkdir -p $(ASM_DIR)
 >   mkdir -p $(OBJECT_DIR)
 >   mkdir -p $(EXEC_DIR)
 
 linux-clean: asm-clean-linux
+>   rm $(ASM_DIR)/*.s
+>   rmdir $(ASM_DIR)
 >   rm $(OBJECT_DIR)/*.o
 >   rmdir $(OBJECT_DIR)
 >   rm $(EXEC_DIR)/$(EXEC_NAME)
 >   rmdir $(EXEC_DIR)
 
-asm-linux:
->   scripts/gen-asm-ref.sh
-
-asm-clean-linux:
->   rm gen-asm-ref/*.s
->   rmdir gen-asm-ref
-
-windows-other: asm-windows
-
 windows-setup:
+>   if not exist $(ASM_DIR) md $(ASM_DIR)
 >   if not exist $(OBJECT_DIR) md $(OBJECT_DIR)
 >   if not exist $(EXEC_DIR) md $(EXEC_DIR)
 
 windows-clean: asm-clean-windows
+>   del $(ASM_DIR)\*.s
+>   rmdir $(ASM_DIR)
 >   del $(OBJECT_DIR)\*.o
 >   rmdir $(OBJECT_DIR)
 >   del $(EXEC_DIR)\$(EXEC_NAME)
 >   rmdir $(EXEC_DIR)
 
-asm-windows:
->   scripts\gen-asm-ref.bat
-
-asm-clean-windows:
->   del gen-asm-ref/*.s
->   rmdir gen-asm-ref
-
 # targets
 
-windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME) windows-other
+windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME)
 
-linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME) linux-other
+linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME)
 
 # END ##########################################################################
