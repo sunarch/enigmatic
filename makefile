@@ -89,7 +89,7 @@ linux-setup:
 >   mkdir -p $(OBJECT_DIR)
 >   mkdir -p $(EXEC_DIR)
 
-linux-clean: asm-clean-linux
+linux-clean:
 >   rm $(ASM_DIR)/*.s
 >   rmdir $(ASM_DIR)
 >   rm $(OBJECT_DIR)/*.o
@@ -102,7 +102,7 @@ windows-setup:
 >   if not exist $(OBJECT_DIR) md $(OBJECT_DIR)
 >   if not exist $(EXEC_DIR) md $(EXEC_DIR)
 
-windows-clean: asm-clean-windows
+windows-clean:
 >   del $(ASM_DIR)\*.s
 >   rmdir $(ASM_DIR)
 >   del $(OBJECT_DIR)\*.o
