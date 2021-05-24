@@ -8,11 +8,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef _UTIL_DEBUG_H_
 #define _UTIL_DEBUG_H_
 
-// DEBUG macro
-// if defined, debugging is on, else it is off
-#define  DEBUG
-
-
 #ifdef DEBUG
 
 void print_debug_indent(void);

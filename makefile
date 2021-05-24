@@ -10,11 +10,13 @@
 # directories and executable file name #
 SOURCE_DIR = src
 OBJECT_DIR = gen-obj
-ASM_DIR = gen-asm-ref
+OBJECT_DIR_DEBUG = gen-obj-debug
+ASM_DIR = gen-asm
+ASM_DIR_DEBUG = gen-asm-debug
 EXEC_DIR = gen-bin
 
 EXEC_NAME = enigmatic
-EXEC_NAME_WINDOWS = enigmatic.exe
+EXEC_NAME_DEBUG = enigmatic-debug
 
 # compiler for C sources #
 C_COMPILER = gcc
@@ -34,6 +36,7 @@ C_FLAGS_WARNING = -Wpedantic \
                 -Wbad-function-cast \
                 -Wstrict-prototypes
 C_FLAGS_DEBUG = -g
+C_FLAGS_PROG_DEBUG = -DDEBUG=true
 C_FLAGS_OPTIMIZE = -Og
 
 # flags only for assembly targets #
@@ -51,9 +54,11 @@ LD_FLAGS =
 # determine the list of object files for the executable #
 SOURCES := $(wildcard $(SOURCE_DIR)/*.c)
 GEN_OBJS := $(patsubst $(SOURCE_DIR)/%.c,$(OBJECT_DIR)/%.o,$(SOURCES))
+GEN_OBJS_DEBUG := $(patsubst $(SOURCE_DIR)/%.c,$(OBJECT_DIR_DEBUG)/%-debug.o,$(SOURCES))
 GEN_ASM := $(patsubst $(SOURCE_DIR)/%.c,$(ASM_DIR)/%.s,$(SOURCES))
+GEN_ASM_DEBUG := $(patsubst $(SOURCE_DIR)/%.c,$(ASM_DIR_DEBUG)/%-debug.s,$(SOURCES))
 
-# RULES ########################################################################
+# RULES - release ##############################################################
 
 $(ASM_DIR)/%.s : $(SOURCE_DIR)/%.c
 >   $(C_COMPILER) -o $@ \
@@ -82,6 +87,40 @@ $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
         $(C_FLAGS_EXEC_ONLY) \
         $(LD_FLAGS) \
 
+# RULES - debug ################################################################
+
+$(ASM_DIR_DEBUG)/%-debug.s : $(SOURCE_DIR)/%.c
+>   $(C_COMPILER) -o $@ \
+        $< \
+        $(C_FLAGS_STD) \
+        $(C_FLAGS_WARNING) \
+        $(C_FLAGS_DEBUG) \
+        $(C_FLAGS_PROG_DEBUG) \
+        $(C_FLAGS_ASM_ONLY) \
+
+$(OBJECT_DIR_DEBUG)/%-debug.o : $(SOURCE_DIR)/%.c
+>   $(C_COMPILER) -o $@ \
+        $< \
+        $(C_FLAGS_STD) \
+        $(C_FLAGS_WARNING) \
+        $(C_FLAGS_DEBUG) \
+        $(C_FLAGS_PROG_DEBUG) \
+        $(C_FLAGS_OPTIMIZE) \
+        $(C_FLAGS_OBJS_ONLY) \
+
+$(EXEC_DIR)/$(EXEC_NAME_DEBUG) : $(GEN_OBJS_DEBUG)
+>   $(C_COMPILER) -o $@ \
+        $^ \
+        $(C_FLAGS_STD) \
+        $(C_FLAGS_WARNING) \
+        $(C_FLAGS_DEBUG) \
+        $(C_FLAGS_PROG_DEBUG) \
+        $(C_FLAGS_OPTIMIZE) \
+        $(C_FLAGS_EXEC_ONLY) \
+        $(LD_FLAGS) \
+
+################################################################################
+
 .PHONY:
 
 linux-setup:
@@ -89,12 +128,27 @@ linux-setup:
 >   mkdir -p $(OBJECT_DIR)
 >   mkdir -p $(EXEC_DIR)
 
+linux-setup-debug:
+>   mkdir -p $(ASM_DIR_DEBUG)
+>   mkdir -p $(OBJECT_DIR_DEBUG)
+>   mkdir -p $(EXEC_DIR)
+
+linux-clean-all: linux-clean linux-clean-debug
+
 linux-clean:
 >   rm $(ASM_DIR)/*.s
 >   rmdir $(ASM_DIR)
 >   rm $(OBJECT_DIR)/*.o
 >   rmdir $(OBJECT_DIR)
->   rm $(EXEC_DIR)/$(EXEC_NAME)
+>   rm $(EXEC_DIR)/*
+>   rmdir $(EXEC_DIR)
+
+linux-clean-debug:
+>   rm $(ASM_DIR_DEBUG)/*.s
+>   rmdir $(ASM_DIR_DEBUG)
+>   rm $(OBJECT_DIR_DEBUG)/*.o
+>   rmdir $(OBJECT_DIR_DEBUG)
+>   rm $(EXEC_DIR)/*
 >   rmdir $(EXEC_DIR)
 
 windows-setup:
@@ -102,18 +156,37 @@ windows-setup:
 >   if not exist $(OBJECT_DIR) md $(OBJECT_DIR)
 >   if not exist $(EXEC_DIR) md $(EXEC_DIR)
 
+windows-setup-debug:
+>   if not exist $(ASM_DIR_DEBUG) md $(ASM_DIR_DEBUG)
+>   if not exist $(OBJECT_DIR_DEBUG) md $(OBJECT_DIR_DEBUG)
+>   if not exist $(EXEC_DIR) md $(EXEC_DIR)
+
+windows-clean-all: windows-clean windows-clean-debug
+
 windows-clean:
 >   del $(ASM_DIR)\*.s
 >   rmdir $(ASM_DIR)
 >   del $(OBJECT_DIR)\*.o
 >   rmdir $(OBJECT_DIR)
->   del $(EXEC_DIR)\$(EXEC_NAME_WINDOWS)
+>   del $(EXEC_DIR)\*.exe
+>   rmdir $(EXEC_DIR)
+
+windows-clean-debug:
+>   del $(ASM_DIR_DEBUG)\*.s
+>   rmdir $(ASM_DIR_DEBUG)
+>   del $(OBJECT_DIR_DEBUG)\*.o
+>   rmdir $(OBJECT_DIR_DEBUG)
+>   del $(EXEC_DIR)\*.exe
 >   rmdir $(EXEC_DIR)
 
 # targets
 
 windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
 
+windows-debug: windows-setup-debug $(EXEC_DIR)/$(EXEC_NAME_DEBUG) $(GEN_ASM_DEBUG)
+
 linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
+
+linux-debug: linux-setup-debug $(EXEC_DIR)/$(EXEC_NAME_DEBUG) $(GEN_ASM_DEBUG)
 
 # END ##########################################################################

@@ -2,9 +2,13 @@ doc-dev/
 
 # generated folders
 
+gen-asm/
+gen-asm-debug/
+
 gen-obj/
+gen-obj-debug/
+
 gen-bin/
-gen-asm-ref/
 
 # Code::Blocks IDE
 
