@@ -22,6 +22,10 @@ char *pArgument = argument;
 char message [BUFFER_LENGTH_MESSAGE] = ".";
 char *pMessage = message;
 
+#ifdef DEBUG
+int i;
+#endif
+
 int main (void) {
     #ifdef DEBUG
         print_debug_indent();
@@ -56,17 +60,26 @@ int main (void) {
 
             // get input
             if (fgets(pMessage, BUFFER_LENGTH_MESSAGE, stdin) == NULL) {
-                printf("Failed check with (fgets(pArgument, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
+                printf("Failed check with (fgets(pMessage, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
                 printf("Exiting...\n");
                 exit(1);
             };
             /* Remove trailing newline, if there. */
-            if ((strlen(pArgument) > 0) && (pArgument[strlen(pArgument) - 1] == '\n')) {
-                pArgument[strlen (pArgument) - 1] = '\0';
+            if ((strlen(pMessage) > 0) && (pMessage[strlen(pMessage) - 1] == '\n')) {
+                pMessage[strlen (pMessage) - 1] = '\0';
             }
 
-            printf("MSG: %s\n", pMessage);
-            printf("CMSG: %s\n", process_message(pMessage));
+            printf("MSG: \"%s\"\n", pMessage);
+
+            #ifdef DEBUG
+            i=0;
+            while(message[i]!='\0'){
+                printf("ASCII Value of %c = %d\n", message[i], message[i]);
+                i++;
+            }
+            #endif
+
+            printf("CMSG: \"%s\"\n", process_message(pMessage));
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
             printf("View config? (y/n): "); // argument prompt
