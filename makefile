@@ -2,6 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+.DEFAULT_GOAL = linux-release
 
 # change recipe prefix from TAB to ">" #
 .RECIPEPREFIX = >
@@ -10,7 +11,9 @@
 SOURCE_DIR = src
 OBJECT_DIR = gen-obj
 EXEC_DIR = gen-bin
-EXEC_NAME = enigma
+
+EXEC_NAME = enigmatic
+EXEC_NAME_WINDOWS = enigmatic.exe
 
 # compiler for C sources #
 C_COMPILER = gcc
@@ -48,7 +51,6 @@ GEN_OBJS := $(patsubst $(SOURCE_DIR)/%.c,$(OBJECT_DIR)/%.o,$(SOURCES))
 # RULES ########################################################################
 
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
->   mkdir -p $(OBJECT_DIR)
 >   $(C_COMPILER) -o $@ \
         $< \
         $(C_FLAGS_STD) \
@@ -58,7 +60,6 @@ $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
         $(C_FLAGS_OBJS_ONLY) \
 
 $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
->   mkdir -p $(EXEC_DIR)
 >   $(C_COMPILER) -o $@ \
         $^ \
         $(C_FLAGS_STD) \
@@ -68,19 +69,50 @@ $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
         $(C_FLAGS_EXEC_ONLY) \
         $(LD_FLAGS) \
 
-.PHONY: clean, asm, asm-clean
+.PHONY: linux-clean
 
-clean:
+linux-other: asm-linux
+
+linux-setup:
+>   mkdir -p $(OBJECT_DIR)
+>   mkdir -p $(EXEC_DIR)
+
+linux-clean: asm-clean-linux
 >   rm $(OBJECT_DIR)/*.o
 >   rmdir $(OBJECT_DIR)
 >   rm $(EXEC_DIR)/$(EXEC_NAME)
 >   rmdir $(EXEC_DIR)
 
-asm:
+asm-linux:
 >   scripts/gen-asm-ref.sh
 
-asm-clean:
+asm-clean-linux:
 >   rm gen-asm-ref/*.s
 >   rmdir gen-asm-ref
+
+windows-other: asm-windows
+
+windows-setup:
+>   if not exist $(OBJECT_DIR) md $(OBJECT_DIR)
+>   if not exist $(EXEC_DIR) md $(EXEC_DIR)
+
+windows-clean: asm-clean-windows
+>   del $(OBJECT_DIR)\*.o
+>   rmdir $(OBJECT_DIR)
+>   del $(EXEC_DIR)\$(EXEC_NAME)
+>   rmdir $(EXEC_DIR)
+
+asm-windows:
+>   scripts\gen-asm-ref.bat
+
+asm-clean-windows:
+>   del gen-asm-ref/*.s
+>   rmdir gen-asm-ref
+
+# targets
+
+windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME) windows-other
+
+linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME) linux-other
 
 # END ##########################################################################
