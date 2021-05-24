@@ -265,6 +265,7 @@ char *process_message(char *p_input_string) {
 
     char output_string[msg_len];
     char *p_output_string = output_string;
+    p_output_string[msg_len] = '\0'; // add null terminator to string
 
     char current_char = '?';
     bool letter_is_alphabetic = false;
