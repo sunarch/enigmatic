@@ -181,9 +181,13 @@ windows-clean-debug:
 
 # targets
 
+windows: windows-release windows-debug
+
 windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
 
 windows-debug: windows-setup-debug $(EXEC_DIR)/$(EXEC_NAME_DEBUG) $(GEN_ASM_DEBUG)
+
+linux: linux-release linux-debug
 
 linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
 
