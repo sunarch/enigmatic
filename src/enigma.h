@@ -24,7 +24,7 @@ char *pMessage;
 
 extern void apply_settings_default(void);
 extern void print_config(void);
-extern char *process_message(char *pInputString);
+extern char * process_message(char *p_input_string, char *p_output_string);
 
 int main (void);
 

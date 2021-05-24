@@ -251,7 +251,7 @@ void print_config(void) {
     #endif
 }
 
-char *process_message(char *p_input_string) {
+char * process_message(char *p_input_string, char *p_output_string) {
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         print_debug_indent();
@@ -262,10 +262,6 @@ char *process_message(char *p_input_string) {
     unsigned short wheel_count = get_used_wheel_count();
 
     unsigned long msg_len = strlen(p_input_string);
-
-    char output_string[msg_len];
-    char *p_output_string = output_string;
-    p_output_string[msg_len] = '\0'; // add null terminator to string
 
     char current_char = '?';
     bool letter_is_alphabetic = false;
@@ -352,6 +348,9 @@ char *process_message(char *p_input_string) {
         p_output_string[n] = current_char;
 
     }
+
+    // add null terminator to output string
+    p_output_string[msg_len] = '\0';
 
     #ifdef DEBUG
         print_debug_indent();

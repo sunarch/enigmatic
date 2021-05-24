@@ -22,6 +22,9 @@ char *pArgument = argument;
 char message [BUFFER_LENGTH_MESSAGE] = ".";
 char *pMessage = message;
 
+char crypto[BUFFER_LENGTH_MESSAGE];
+char *pCrypto = crypto;
+
 #ifdef DEBUG
 int i;
 #endif
@@ -79,7 +82,17 @@ int main (void) {
             }
             #endif
 
-            printf("CMSG: \"%s\"\n", process_message(pMessage));
+            process_message(pMessage, pCrypto);
+
+            printf("CMSG: \"%s\"\n", pCrypto);
+
+            #ifdef DEBUG
+            i=0;
+            while(crypto[i]!='\0'){
+                printf("ASCII Value of '%c' = '%d'\n", crypto[i], crypto[i]);
+                i++;
+            }
+            #endif
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
             printf("View config? (y/n): "); // argument prompt

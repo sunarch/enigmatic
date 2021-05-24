@@ -21,7 +21,7 @@ void advance_wheels(void);
 void print_config_section(signed short *wheel_wiring_rules);
 void print_config(void);
 
-char *process_message(char *pInputString);
+char * process_message(char *p_input_string, char *p_output_string);
 
 
 #endif
