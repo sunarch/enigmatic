@@ -1,4 +1,11 @@
 doc-dev/
-gen-asm-ref/
+
+# generated folders
+
 gen-obj/
 gen-bin/
+gen-asm-ref/
+
+# Code::Blocks IDE
+
+enigmatic.layout
