@@ -12,8 +12,45 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "util-debug.h"
 #include "util-validate.h"
 
-void set_wheel_wiring_rules(unsigned short wheel_number, const char *const wiring_alphabet);
-void set_used_wheel_count(unsigned short count);
+static void set_used_wheel_count(unsigned short new_wheel_count) {
+    #ifdef DEBUG
+        inc_debug_indent();  // to function call level
+        debug_print_indent();
+        printf("FUNC: void set_used_wheel_count(...) // unsigned short new_wheel_count = %u\n", new_wheel_count);
+    #endif
+
+    if (new_wheel_count > MAX_WHEEL_COUNT) {
+        printf("Failed check with (new_wheel_count > %i): (%u > %i)\n", MAX_WHEEL_COUNT, new_wheel_count, MAX_WHEEL_COUNT);
+        printf("Exiting...");
+        exit(1);
+    }
+
+    used_wheel_count = new_wheel_count;
+
+    // reset wheel offsets
+    reset_wheel_offsets();
+
+    #ifdef DEBUG
+        inc_debug_indent();  // to function result level
+        debug_print_indent();
+        printf("CHECK: get_used_wheel_count() returns %u\n", get_used_wheel_count());
+        dec_debug_indent();  // to function call level
+        dec_debug_indent();  // to caller level
+    #endif
+}
+
+static void set_wheel_wiring_rules(unsigned short wheel_number, const char *const wiring_alphabet) {
+    // validate wheel number
+    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+
+    signed short wiring_rule;
+
+    for (unsigned short n = 0; n < 26; ++n) {
+        wiring_rule = (signed short) ((wiring_alphabet[n] - ABC_LOW[n]) % 26);
+        wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
+        wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % 26] = (-1) * wiring_rule;
+    }
+}
 
 const char ABC_UPP [27] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  // ordered Alphabet
 const char ABC_LOW [27] = "abcdefghijklmnopqrstuvwxyz";  // ordered Alphabet
@@ -570,48 +607,8 @@ signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number) {
     return wheel_wiring_rules_reverse[wheel_number];
 }
 
-void set_wheel_wiring_rules(unsigned short wheel_number, const char *const wiring_alphabet) {
-    // validate wheel number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
-
-    signed short wiring_rule;
-
-    for (unsigned short n = 0; n < 26; ++n) {
-        wiring_rule = (signed short) ((wiring_alphabet[n] - ABC_LOW[n]) % 26);
-        wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
-        wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % 26] = (-1) * wiring_rule;
-    }
-}
-
 unsigned short get_used_wheel_count(void) {
     // no debug messages in getter functions, include them as checks in calls
 
     return used_wheel_count;
-}
-
-void set_used_wheel_count(unsigned short new_wheel_count) {
-    #ifdef DEBUG
-        inc_debug_indent();  // to function call level
-        debug_print_indent();
-        printf("FUNC: void set_used_wheel_count(...) // unsigned short new_wheel_count = %u\n", new_wheel_count);
-    #endif
-
-    if (new_wheel_count > MAX_WHEEL_COUNT) {
-        printf("Failed check with (new_wheel_count > %i): (%u > %i)\n", MAX_WHEEL_COUNT, new_wheel_count, MAX_WHEEL_COUNT);
-        printf("Exiting...");
-        exit(1);
-    }
-
-    used_wheel_count = new_wheel_count;
-
-    // reset wheel offsets
-    reset_wheel_offsets();
-
-    #ifdef DEBUG
-        inc_debug_indent();  // to function result level
-        debug_print_indent();
-        printf("CHECK: get_used_wheel_count() returns %u\n", get_used_wheel_count());
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
-    #endif
 }

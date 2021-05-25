@@ -15,7 +15,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "util-debug.h"
 #include "util-validate.h"
 
-unsigned short calculate_index_after_wiring_rule(unsigned short index_before, signed short wiring_rule) {
+static unsigned short calculate_index_after_wiring_rule(unsigned short index_before, signed short wiring_rule) {
 
     // default index_after value, to be overwritten in this function
     // any number >= 26 should produce segmentation fault
@@ -36,7 +36,7 @@ unsigned short calculate_index_after_wiring_rule(unsigned short index_before, si
     return index_after;
 }
 
-char get_wheel_output(unsigned short wheel_number, unsigned short mode, char input_char) {
+static char get_wheel_output(unsigned short wheel_number, unsigned short mode, char input_char) {
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -117,7 +117,7 @@ char get_wheel_output(unsigned short wheel_number, unsigned short mode, char inp
     return output_char;
 }
 
-void turn_wheel(unsigned short wheel_number) {
+static void turn_wheel(unsigned short wheel_number) {
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -137,7 +137,7 @@ void turn_wheel(unsigned short wheel_number) {
 }
 
 
-void advance_wheels(void) {
+static void advance_wheels(void) {
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -178,7 +178,7 @@ void advance_wheels(void) {
     #endif
 }
 
-void print_config_section(signed short *wheel_wiring_rules) {
+static void print_config_section(signed short *wheel_wiring_rules) {
     // this function prints info, no need for debug messages
     // print the config for one side of one wheel
 
