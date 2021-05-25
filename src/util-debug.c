@@ -11,7 +11,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #ifdef DEBUG
 
-signed short debug_indent_level = 0;
+static signed short debug_indent_level = 0;
 
 void debug_print_indent() {
     if (debug_indent_level > 0) {

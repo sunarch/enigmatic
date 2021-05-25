@@ -15,17 +15,17 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "wheels.h"
 #include "util-debug.h"
 
-char command [BUFFER_LENGTH_COMMAND] = "start";
-char *pCommand = command;
+static char command [BUFFER_LENGTH_COMMAND] = "start";
+static char *pCommand = command;
 
-char argument [BUFFER_LENGTH_ARGUMENT] = "none";
-char *pArgument = argument;
+static char argument [BUFFER_LENGTH_ARGUMENT] = "none";
+static char *pArgument = argument;
 
-char message [BUFFER_LENGTH_MESSAGE] = ".";
-char *pMessage = message;
+static char message [BUFFER_LENGTH_MESSAGE] = ".";
+static char *pMessage = message;
 
-char crypto[BUFFER_LENGTH_MESSAGE];
-char *pCrypto = crypto;
+static char crypto[BUFFER_LENGTH_MESSAGE];
+static char *pCrypto = crypto;
 
 int main (void) {
     #ifdef DEBUG
