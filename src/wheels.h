@@ -14,19 +14,19 @@ extern const char ABC_LOW [27];  // ordered Alphabet
 // Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
 // Reflectors (UKW) ////////////////////////////////////////////////////////////
 
-void apply_settings_services(void);
-void apply_settings_army(void);
-void apply_settings_navy(void);
-void apply_settings_commercial(void);
-void apply_settings_swiss(void);
-void apply_settings_norway(void);
-void apply_settings_railway(void);
-void apply_settings_tirpitz(void);
-void apply_settings_zaehlwerk(void);
-void apply_settings_hungary(void);
-void apply_settings_argentina(void);
-void apply_settings_bletchley(void);
-void apply_settings_default(void);
+extern void apply_settings_services(void);
+extern void apply_settings_army(void);
+extern void apply_settings_navy(void);
+extern void apply_settings_commercial(void);
+extern void apply_settings_swiss(void);
+extern void apply_settings_norway(void);
+extern void apply_settings_railway(void);
+extern void apply_settings_tirpitz(void);
+extern void apply_settings_zaehlwerk(void);
+extern void apply_settings_hungary(void);
+extern void apply_settings_argentina(void);
+extern void apply_settings_bletchley(void);
+extern void apply_settings_default(void);
 
 // PROGRAM VARIABLES ///////////////////////////////////////////////////////////
 
@@ -35,13 +35,13 @@ void apply_settings_default(void);
 
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
-unsigned short get_wheel_offset(unsigned short wheelNumber);
-void set_wheel_offset(unsigned short wheelNumber, unsigned short new_offset);
-void reset_wheel_offsets(void);
+extern unsigned short get_wheel_offset(unsigned short wheelNumber);
+extern void set_wheel_offset(unsigned short wheelNumber, unsigned short new_offset);
+extern void reset_wheel_offsets(void);
 
-signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);
-signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number);
+extern signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);
+extern signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number);
 
-unsigned short get_used_wheel_count(void);
+extern unsigned short get_used_wheel_count(void);
 
 #endif

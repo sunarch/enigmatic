@@ -14,6 +14,4 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 # define  STRCMP_EQUAL  0
 
-int main (void);
-
 #endif
