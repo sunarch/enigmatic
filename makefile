@@ -89,47 +89,40 @@ GEN_ASM_DEBUG := $(patsubst $(SOURCE_DIR)/%.c,$(ASM_DIR_DEBUG)/%-debug.s,$(SOURC
 # RULES - release ##############################################################
 
 $(ASM_DIR)/%.s : $(SOURCE_DIR)/%.c
->   $(C_COMPILER) -o $@ \
-        $< \
+>   $(C_COMPILER) $< -o $@ \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
         $(C_FLAGS_ASM_RELEASE) \
 
 $(OBJECT_DIR)/%.o : $(SOURCE_DIR)/%.c
->   $(C_COMPILER) -o $@ \
-        $< \
+>   $(C_COMPILER) $< -o $@ \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
         $(C_FLAGS_OBJS_RELEASE) \
 
 $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
->   $(C_COMPILER) -o $@ \
-        $^ \
+>   $(C_COMPILER) -o $@ $^ \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
-        $(C_FLAGS_DEBUG) \
         $(C_FLAGS_EXEC_RELEASE) \
         $(LD_FLAGS) \
 
 # RULES - debug ################################################################
 
 $(ASM_DIR_DEBUG)/%-debug.s : $(SOURCE_DIR)/%.c
->   $(C_COMPILER) -o $@ \
-        $< \
+>   $(C_COMPILER) $< -o $@ \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
         $(C_FLAGS_ASM_DEBUG) \
 
 $(OBJECT_DIR_DEBUG)/%-debug.o : $(SOURCE_DIR)/%.c
->   $(C_COMPILER) -o $@ \
-		$< \
-		$(C_FLAGS_STD) \
-		$(C_FLAGS_WARNING) \
-		$(C_FLAGS_OBJS_DEBUG) \
+>   $(C_COMPILER) $< -o $@ \
+        $(C_FLAGS_STD) \
+        $(C_FLAGS_WARNING) \
+        $(C_FLAGS_OBJS_DEBUG) \
 
 $(EXEC_DIR)/$(EXEC_NAME_DEBUG) : $(GEN_OBJS_DEBUG)
->   $(C_COMPILER) -o $@ \
-        $^ \
+>   $(C_COMPILER) -o $@ $^ \
         $(C_FLAGS_STD) \
         $(C_FLAGS_WARNING) \
         $(C_FLAGS_EXEC_DEBUG) \
@@ -171,14 +164,14 @@ linux-clean-debug:
 # action groups: Windows #######################################################
 
 windows-setup:
->   if not exist $(ASM_DIR) md $(ASM_DIR)
->   if not exist $(OBJECT_DIR) md $(OBJECT_DIR)
->   if not exist $(EXEC_DIR) md $(EXEC_DIR)
+>   @ if not exist $(ASM_DIR) md $(ASM_DIR)
+>   @ if not exist $(OBJECT_DIR) md $(OBJECT_DIR)
+>   @ if not exist $(EXEC_DIR) md $(EXEC_DIR)
 
 windows-setup-debug:
->   if not exist $(ASM_DIR_DEBUG) md $(ASM_DIR_DEBUG)
->   if not exist $(OBJECT_DIR_DEBUG) md $(OBJECT_DIR_DEBUG)
->   if not exist $(EXEC_DIR) md $(EXEC_DIR)
+>   @ if not exist $(ASM_DIR_DEBUG) md $(ASM_DIR_DEBUG)
+>   @ if not exist $(OBJECT_DIR_DEBUG) md $(OBJECT_DIR_DEBUG)
+>   @ if not exist $(EXEC_DIR) md $(EXEC_DIR)
 
 windows-clean: windows-clean-release windows-clean-debug
 >   rmdir $(EXEC_DIR)
