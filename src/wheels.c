@@ -638,3 +638,22 @@ unsigned short get_used_wheel_count(void)
 
     return used_wheel_count;
 }
+
+void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
+{
+    if (position > 25) { return; }
+
+    for (unsigned short i = 0; i < 11; ++i) {
+        rules[i] = wheel_wiring_rules_front[i][position];
+    }
+
+}
+
+void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules)
+{
+    if (position > 25) { return; }
+
+    for (unsigned short i = 0; i < 11; ++i) {
+        rules[i] = wheel_wiring_rules_reverse[i][position];
+    }
+}

@@ -12,7 +12,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #define  WHEEL_MODE_FRONT    1
 #define  WHEEL_MODE_REVERSE  2
 
-extern void print_config(void);
+extern void print_config_v1(void);
+extern void print_config_v2(void);
 
 extern char * process_message(char *p_input_string,
                               char *p_output_string);

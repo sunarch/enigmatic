@@ -87,7 +87,7 @@ int main (void)
             #endif
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
-            printf("View config? (y/n): "); // argument prompt
+            printf("Config format: [1] (default) / [2] : "); // argument prompt
 
             // get input
             if (fgets(argument, BUFFER_LENGTH_ARGUMENT, stdin) == NULL) {
@@ -100,8 +100,12 @@ int main (void)
                 argument[strlen(argument) - 1] = '\0';
             }
 
-            if (strcmp(argument, "y") == STRCMP_EQUAL || strcmp(argument, "Y") == STRCMP_EQUAL) {
-                print_config();
+            if (strcmp(argument, "1") == STRCMP_EQUAL || strcmp(argument, "") == STRCMP_EQUAL) {
+                print_config_v1();
+            }
+
+            if (strcmp(argument, "2") == STRCMP_EQUAL) {
+                print_config_v2();
             }
         }
         else if (strcmp(command, "reset") == STRCMP_EQUAL) {
@@ -109,7 +113,7 @@ int main (void)
             printf("Wheel offsets reset.\n");
         }
         else if (strcmp(command, "help") == STRCMP_EQUAL) {
-            printf("Commands: help, msg/message, exit/quit\n");
+            printf("Commands: help, msg/message, config, exit/quit\n");
         }
         else if (strcmp(command, "exit") == STRCMP_EQUAL) {
             break; // exit program loop
