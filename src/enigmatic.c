@@ -42,9 +42,14 @@ int main (void)
             printf("Exiting...\n");
             exit(1);
         };
+
         /* Remove trailing newline, if there. */
         if ((strlen(command) > 0) && (command[strlen(command) - 1] == '\n')) {
             command[strlen(command) - 1] = '\0';
+        }
+
+        if (strlen(command) == 0) {
+            continue;
         }
 
         printf("COMMAND ENTERED: \"%s\"\n", command);
