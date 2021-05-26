@@ -72,7 +72,7 @@ int main (void)
                 message[strlen (message) - 1] = '\0';
             }
 
-            printf("MSG: \"%s\"\n", message);
+            printf("MSG:  \"%s\"\n", message);
 
             #ifdef DEBUG
             print_as_ascii(crypto);
