@@ -75,7 +75,7 @@ int main (void)
             printf("MSG:  \"%s\"\n", message);
 
             #ifdef DEBUG
-            print_as_ascii(crypto);
+            print_as_ascii(message);
             #endif
 
             process_message(message, crypto);
