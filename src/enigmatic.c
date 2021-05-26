@@ -15,17 +15,10 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "wheels.h"
 #include "util-debug.h"
 
-static char command [BUFFER_LENGTH_COMMAND] = "start";
-static char *p_command = command;
-
+static char command  [BUFFER_LENGTH_COMMAND]  = "start";
 static char argument [BUFFER_LENGTH_ARGUMENT] = "none";
-static char *p_argument = argument;
-
-static char message [BUFFER_LENGTH_MESSAGE] = ".";
-static char *p_message = message;
-
-static char crypto[BUFFER_LENGTH_MESSAGE];
-static char *p_crypto = crypto;
+static char message  [BUFFER_LENGTH_MESSAGE]  = ".";
+static char crypto   [BUFFER_LENGTH_MESSAGE]  = ".";
 
 int main (void)
 {
@@ -44,62 +37,62 @@ int main (void)
         printf("Enigmatic $ "); // command prompt
 
         // get input
-        if (fgets(p_command, BUFFER_LENGTH_COMMAND, stdin) == NULL) {
-            printf("Failed check with (fgets(p_command, %i, stdin) == NULL)\n", BUFFER_LENGTH_COMMAND);
+        if (fgets(command, BUFFER_LENGTH_COMMAND, stdin) == NULL) {
+            printf("Failed check with (fgets(command, %i, stdin) == NULL)\n", BUFFER_LENGTH_COMMAND);
             printf("Exiting...\n");
             exit(1);
         };
         /* Remove trailing newline, if there. */
-        if ((strlen(p_command) > 0) && (p_command[strlen(p_command) - 1] == '\n')) {
-            p_command[strlen(p_command) - 1] = '\0';
+        if ((strlen(command) > 0) && (command[strlen(command) - 1] == '\n')) {
+            command[strlen(command) - 1] = '\0';
         }
 
-        printf("COMMAND ENTERED: \"%s\"\n", p_command);
+        printf("COMMAND ENTERED: \"%s\"\n", command);
 
         if (strcmp(command, "msg") == STRCMP_EQUAL || strcmp(command, "message") == STRCMP_EQUAL) {
             printf("(max. message size is 1 KiB)\n");
             printf("Enter message: "); // argument prompt
 
             // get input
-            if (fgets(p_message, BUFFER_LENGTH_MESSAGE, stdin) == NULL) {
-                printf("Failed check with (fgets(p_message, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
+            if (fgets(message, BUFFER_LENGTH_MESSAGE, stdin) == NULL) {
+                printf("Failed check with (fgets(message, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
                 printf("Exiting...\n");
                 exit(1);
             };
             /* Remove trailing newline, if there. */
-            if ((strlen(p_message) > 0) && (p_message[strlen(p_message) - 1] == '\n')) {
-                p_message[strlen (p_message) - 1] = '\0';
+            if ((strlen(message) > 0) && (message[strlen(message) - 1] == '\n')) {
+                message[strlen (message) - 1] = '\0';
             }
 
-            printf("MSG: \"%s\"\n", p_message);
+            printf("MSG: \"%s\"\n", message);
 
             #ifdef DEBUG
-            print_as_ascii(p_crypto);
+            print_as_ascii(crypto);
             #endif
 
-            process_message(p_message, p_crypto);
+            process_message(message, crypto);
 
-            printf("CMSG: \"%s\"\n", p_crypto);
+            printf("CMSG: \"%s\"\n", crypto);
 
             #ifdef DEBUG
-            print_as_ascii(p_crypto);
+            print_as_ascii(crypto);
             #endif
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
             printf("View config? (y/n): "); // argument prompt
 
             // get input
-            if (fgets(p_argument, BUFFER_LENGTH_ARGUMENT, stdin) == NULL) {
-                printf("Failed check with (fgets(p_argument, %i, stdin) == NULL)\n", BUFFER_LENGTH_ARGUMENT);
+            if (fgets(argument, BUFFER_LENGTH_ARGUMENT, stdin) == NULL) {
+                printf("Failed check with (fgets(argument, %i, stdin) == NULL)\n", BUFFER_LENGTH_ARGUMENT);
                 printf("Exiting...\n");
                 exit(1);
             };
             /* Remove trailing newline, if there. */
-            if ((strlen(p_argument) > 0) && (p_argument[strlen(p_argument) - 1] == '\n')) {
-                p_argument[strlen(p_argument) - 1] = '\0';
+            if ((strlen(argument) > 0) && (argument[strlen(argument) - 1] == '\n')) {
+                argument[strlen(argument) - 1] = '\0';
             }
 
-            if (strcmp(p_argument, "y") == STRCMP_EQUAL || strcmp(p_argument, "Y") == STRCMP_EQUAL) {
+            if (strcmp(argument, "y") == STRCMP_EQUAL || strcmp(argument, "Y") == STRCMP_EQUAL) {
                 print_config();
             }
         }
