@@ -52,7 +52,10 @@ int main (void)
             continue;
         }
 
-        printf("COMMAND ENTERED: \"%s\"\n", command);
+        #ifdef DEBUG
+            debug_print_indent();
+            printf("COMMAND ENTERED: \"%s\"\n", command);
+        #endif
 
         if (strcmp(command, "msg") == STRCMP_EQUAL || strcmp(command, "message") == STRCMP_EQUAL) {
             printf("(max. message size is 1 KiB)\n");
