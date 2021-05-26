@@ -12,8 +12,12 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #define  UKW_INDEX  0
 #endif
 
-extern void validate_wheel_number_any(unsigned short wheel_number, unsigned short wheel_count);
+extern void validate_wheel_number_any(unsigned short wheel_number,
+                                      unsigned short wheel_count);
+
 extern void validate_wheel_number_ukw(unsigned short wheel_number);
-extern void validate_wheel_number_not_ukw(unsigned short wheel_number, unsigned short wheel_count);
+
+extern void validate_wheel_number_not_ukw(unsigned short wheel_number,
+                                          unsigned short wheel_count);
 
 #endif

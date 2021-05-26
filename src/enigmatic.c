@@ -27,7 +27,8 @@ static char *p_message = message;
 static char crypto[BUFFER_LENGTH_MESSAGE];
 static char *p_crypto = crypto;
 
-int main (void) {
+int main (void)
+{
     #ifdef DEBUG
         debug_print_indent();
         printf("Program starting...\n");

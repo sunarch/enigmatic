@@ -15,7 +15,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "util-debug.h"
 #include "util-validate.h"
 
-static unsigned short calculate_index_after_wiring_rule(unsigned short index_before, signed short wiring_rule) {
+static unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
+                                                        signed short wiring_rule)
+{
 
     // default index_after value, to be overwritten in this function
     // any number >= 26 should produce segmentation fault
@@ -36,7 +38,10 @@ static unsigned short calculate_index_after_wiring_rule(unsigned short index_bef
     return index_after;
 }
 
-static char get_wheel_output(unsigned short wheel_number, unsigned short mode, char input_char) {
+static char get_wheel_output(unsigned short wheel_number,
+                             unsigned short mode,
+                             char input_char)
+{
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -117,7 +122,8 @@ static char get_wheel_output(unsigned short wheel_number, unsigned short mode, c
     return output_char;
 }
 
-static void turn_wheel(unsigned short wheel_number) {
+static void turn_wheel(unsigned short wheel_number)
+{
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -137,7 +143,8 @@ static void turn_wheel(unsigned short wheel_number) {
 }
 
 
-static void advance_wheels(void) {
+static void advance_wheels(void)
+{
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -178,7 +185,8 @@ static void advance_wheels(void) {
     #endif
 }
 
-static void print_config_section(signed short *wheel_wiring_rules) {
+static void print_config_section(signed short *wheel_wiring_rules)
+{
     // this function prints info, no need for debug messages
     // print the config for one side of one wheel
 
@@ -207,7 +215,8 @@ static void print_config_section(signed short *wheel_wiring_rules) {
     }
 }
 
-void print_config(void) {
+void print_config(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -251,7 +260,9 @@ void print_config(void) {
     #endif
 }
 
-char * process_message(char *p_input_string, char *p_output_string) {
+char * process_message(char *p_input_string,
+                       char *p_output_string)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();

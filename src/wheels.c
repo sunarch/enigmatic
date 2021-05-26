@@ -21,7 +21,8 @@ static signed short wheel_wiring_rules_reverse[11][26];
 
 // GLOBAL FUNCTIONS ////////////////////////////////////////////////////////////
 
-static void set_used_wheel_count(unsigned short new_wheel_count) {
+static void set_used_wheel_count(unsigned short new_wheel_count)
+{
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -48,7 +49,9 @@ static void set_used_wheel_count(unsigned short new_wheel_count) {
     #endif
 }
 
-static void set_wheel_wiring_rules(unsigned short wheel_number, const char *const wiring_alphabet) {
+static void set_wheel_wiring_rules(unsigned short wheel_number,
+                                   const char *const wiring_alphabet)
+{
     // validate wheel number
     validate_wheel_number_any(wheel_number, get_used_wheel_count());
 
@@ -93,7 +96,8 @@ static const char UKW_C_DUENN [27] = "rdobjntkvehmlfcwzaxgyipsuq";  // UKW C "th
 static const char WALZE_BETA  [27] = "leyjvcnixwpbqmdrtakzgfuhos";
 static const char WALZE_GAMMA [27] = "fsokanuerhmbtiycwlqpzxvgjd";
 
-void apply_settings_services(void) {
+void apply_settings_services(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -120,7 +124,8 @@ void apply_settings_services(void) {
     #endif
 }
 
-void apply_settings_army(void) {
+void apply_settings_army(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -147,7 +152,8 @@ void apply_settings_army(void) {
     #endif
 }
 
-void apply_settings_navy(void) {
+void apply_settings_navy(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -183,7 +189,8 @@ static const char WALZE_3D [27] = "cjgdpshkturawzxfmynqobvlie";  //  'n', 'N|O',
 
 static const char UKW_D [27] = "imetcgfraysqbzxwlhkdvupojn";
 
-void apply_settings_commercial(void) {
+void apply_settings_commercial(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -217,7 +224,8 @@ static const char WALZE_1K [27] = "pezuohxscvfmtbglrinqjwaydk";  //  'y', 'Y|Z',
 static const char WALZE_2K [27] = "zouesydkfwpciqxhmvblgnjrat";  //  'e', 'E|F', '2K')
 static const char WALZE_3K [27] = "ehrvxgaobqusimzflynwktpdjc";  //  'n', 'N|O', '3K')
 
-void apply_settings_swiss(void) {
+void apply_settings_swiss(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -255,7 +263,8 @@ static const char WALZE_5N [27] = "hejxqotzbvfdascilwpgynmurk";  //  'z', 'Z|A',
 
 static const char UKW_N [27] = "mowjypuxndsraibfvlkzgqchet";
 
-void apply_settings_norway(void) {
+void apply_settings_norway(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -291,7 +300,8 @@ static const char WALZE_3R [27] = "jviubhtcdyakeqzposgxnrmwfl";  //  'y', 'Y|Z',
 
 static const char UKW_R [27] = "qyhognecvpuztfdjaxwmkisrbl";
 
-void apply_settings_railway(void) {
+void apply_settings_railway(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -332,7 +342,8 @@ static const char WALZE_8T [27] = "ymtpnzhwkodajxeluqvgcbisfr";  //  'xeimq', '5
 
 static const char UKW_T [27] = "gekpbtaumocniljdxzyfhwvqsr";
 
-void apply_settings_tirpitz(void) {
+void apply_settings_tirpitz(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -370,7 +381,8 @@ static const char WALZE_3A8 [27] = "cjgdpshkturawzxfmynqobvlie";  //  'uwxaefhkm
 
 static const char UKW_G [27] = "rulqmzjsygocetkwdahnbxpvif";
 
-void apply_settings_zaehlwerk(void) {
+void apply_settings_zaehlwerk(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -404,7 +416,8 @@ static const char WALZE_1G1 [27] = "wlrhbqundkjczsexotmagyfpvi";  //  'suvwzabce
 static const char WALZE_2G1 [27] = "tfjqazwmhlcuixrdygoevbnskp";  //  'stvyzacdfghkmnq', '15 notches (G-111)', '2G1')
 static const char WALZE_5G1 [27] = "qtpixwvdfrmusljohcanezkybg";  //  'swzfhmq', '7 notches (G-111)', '5G1')
 
-void apply_settings_hungary(void) {
+void apply_settings_hungary(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -438,7 +451,8 @@ static const char WALZE_1G2 [27] = "rcspblkqaumhwytifzvgojnexd";  //  'suvwzabce
 static const char WALZE_2G2 [27] = "wcmibvpjxarosgndlzkeyhufqt";  //  'stvyzacdfghkmnq', '15 notches (G-260)', '2G2')
 static const char WALZE_3G2 [27] = "fvdhzelsqmaxokyiwpgcbujtnr";  //  'uwxaefhkmnr', '11 notches (G-260)', '3G2')
 
-void apply_settings_argentina(void) {
+void apply_settings_argentina(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -472,7 +486,8 @@ static const char WALZE_1G3 [27] = "dmtwsilruyqnkfejcazbpgxohv";  //  'suvwzabce
 static const char WALZE_2G3 [27] = "hqzgpjtmoblncifdyawveusrkx";  //  'stvyzacdfghkmnq', '15 notches (G-312)', '2G3')
 static const char WALZE_3G3 [27] = "uqntlszfmrehdpxkibvygjcwoa";  //  'uwxaefhkmnr', '11 notches (G-312)', '3G3')
 
-void apply_settings_bletchley(void) {
+void apply_settings_bletchley(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -499,7 +514,8 @@ void apply_settings_bletchley(void) {
     #endif
 }
 
-void apply_settings_default(void) {
+void apply_settings_default(void)
+{
     #ifdef DEBUG
         inc_debug_indent(); // to function outer level
         debug_print_indent();
@@ -515,7 +531,8 @@ void apply_settings_default(void) {
 
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
-unsigned short get_wheel_offset(unsigned short wheel_number) {
+unsigned short get_wheel_offset(unsigned short wheel_number)
+{
     // no debug messages in getter functions, include them as checks in calls
 
     // validate wheel_number
@@ -524,7 +541,9 @@ unsigned short get_wheel_offset(unsigned short wheel_number) {
     return wheel_offsets[wheel_number];
 }
 
-void set_wheel_offset(unsigned short wheel_number, unsigned short new_offset) {
+void set_wheel_offset(unsigned short wheel_number,
+                      unsigned short new_offset)
+{
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -546,7 +565,8 @@ void set_wheel_offset(unsigned short wheel_number, unsigned short new_offset) {
     #endif
 }
 
-void reset_wheel_offsets(void) {
+void reset_wheel_offsets(void)
+{
     #ifdef DEBUG
         inc_debug_indent();  // to function call level
         debug_print_indent();
@@ -592,7 +612,8 @@ void reset_wheel_offsets(void) {
     #endif
 }
 
-signed short *get_wheel_wiring_rules_front(unsigned short wheel_number) {
+signed short *get_wheel_wiring_rules_front(unsigned short wheel_number)
+{
     // no debug messages in getter functions, include them as checks in calls
 
     // validate wheel number
@@ -601,7 +622,8 @@ signed short *get_wheel_wiring_rules_front(unsigned short wheel_number) {
     return wheel_wiring_rules_front[wheel_number];
 }
 
-signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number) {
+signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
+{
     // no debug messages in getter functions, include them as checks in calls
 
     // validate wheel number
@@ -610,7 +632,8 @@ signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number) {
     return wheel_wiring_rules_reverse[wheel_number];
 }
 
-unsigned short get_used_wheel_count(void) {
+unsigned short get_used_wheel_count(void)
+{
     // no debug messages in getter functions, include them as checks in calls
 
     return used_wheel_count;

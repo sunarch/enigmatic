@@ -36,7 +36,10 @@ extern void apply_settings_default(void);
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
 extern unsigned short get_wheel_offset(unsigned short wheelNumber);
-extern void set_wheel_offset(unsigned short wheelNumber, unsigned short new_offset);
+
+extern void set_wheel_offset(unsigned short wheelNumber,
+                             unsigned short new_offset);
+
 extern void reset_wheel_offsets(void);
 
 extern signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);

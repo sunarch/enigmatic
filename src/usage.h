@@ -14,6 +14,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 extern void print_config(void);
 
-extern char * process_message(char *p_input_string, char *p_output_string);
+extern char * process_message(char *p_input_string,
+                              char *p_output_string);
 
 #endif
