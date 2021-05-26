@@ -113,12 +113,9 @@ int main (void)
             printf("Wheel offsets reset.\n");
         }
         else if (strcmp(command, "help") == STRCMP_EQUAL) {
-            printf("Commands: help, msg/message, config, exit/quit\n");
+            printf("Commands: help, msg/message, reset, config, exit\n");
         }
         else if (strcmp(command, "exit") == STRCMP_EQUAL) {
-            break; // exit program loop
-        }
-        else if (strcmp(command, "quit") == STRCMP_EQUAL) {
             break; // exit program loop
         }
         else {
