@@ -12,6 +12,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "enigmatic.h"
 #include "usage.h"
 #include "wheels.h"
+#include "disp-config.h"
 #include "util-debug.h"
 
 static char command  [BUFFER_LENGTH_COMMAND]  = "start";
