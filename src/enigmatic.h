@@ -13,4 +13,4 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 # define  STRCMP_EQUAL  0
 
-#endif
+#endif // ndef _ENIGMATIC_H_

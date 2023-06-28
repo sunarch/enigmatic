@@ -19,4 +19,4 @@ extern void validate_wheel_number_ukw(unsigned short wheel_number);
 extern void validate_wheel_number_not_ukw(unsigned short wheel_number,
                                           unsigned short wheel_count);
 
-#endif
+#endif // ndef _UTIL_VALIDATE_H_

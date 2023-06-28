@@ -15,6 +15,6 @@ extern void dec_debug_indent(void);
 
 extern void print_as_ascii(char *p_text);
 
-#endif
+#endif // def DEBUG
 
-#endif
+#endif // ndef _UTIL_DEBUG_H_

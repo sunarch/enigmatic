@@ -49,4 +49,4 @@ extern unsigned short get_used_wheel_count(void);
 void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules);
 void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules);
 
-#endif
+#endif // ndef _WHEELS_H_

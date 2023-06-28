@@ -18,4 +18,4 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 extern void print_config_v1(void);
 extern void print_config_v2(void);
 
-#endif
+#endif // ndef _DISP_CONFIG_H_

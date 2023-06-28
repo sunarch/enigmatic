@@ -17,4 +17,4 @@ unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
 extern char * process_message(char *p_input_string,
                               char *p_output_string);
 
-#endif
+#endif // ndef _USAGE_H_
