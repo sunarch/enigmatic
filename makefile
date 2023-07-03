@@ -27,19 +27,31 @@ C_COMPILER = gcc
 # basic flags ##################################################################
 
 # flags for both object and executable targets (C standard) #
-#C_FLAG_STD = -std=c90 -Wc90-c99-compat
+#C_FLAG_STD = -std=c90 -Wc90-c99-compat # c90 | c89 | iso9899:1990 | -ansi || gnu90 | gnu89
 #C_FLAG_STD = -std=iso9899:199409 -Wc90-c99-compat
-C_FLAGS_STD = -std=c99 -Wc99-c11-compat
-#C_FLAG_STD = -std=c11
+C_FLAGS_STD = -std=c99 -Wc99-c11-compat # iso9899:1999 || gnu99
+#C_FLAG_STD = -std=c11 # -Wc11-c2x-compat # iso9899:2011 || gnu11
+#C_FLAG_STD = -std=c17 # c18 | iso9899:2017 | iso9899:2018 || gnu17 | gnu18
+#C_FLAG_STD = -std=c2x # || gnu2x
 
 # flags for both object and executable targets #
-C_FLAGS_WARNING = -Wpedantic \
-                -Wall \
-                -Wextra \
-                -Wcast-align \
-                -Wredundant-decls \
-                -Wbad-function-cast \
-                -Wstrict-prototypes
+C_FLAGS_WARNING = -Wall -Wextra -Wpedantic \
+                  -Waggregate-return \
+                  -Wbad-function-cast \
+                  -Wcast-align \
+                  -Wcast-qual \
+                  -Wconversion \
+                  -Wfloat-equal \
+                  -Wpointer-arith \
+                  -Wredundant-decls \
+                  -Wshadow \
+                  -Wstrict-prototypes \
+                  -Wswitch-default \
+                  -Wswitch-enum \
+                  -Wundef \
+                  -Wunreachable-code \
+                  -Wwrite-strings
+# to upgrade warnings to errors: -Werror
 
 # flag components ##############################################################
 
