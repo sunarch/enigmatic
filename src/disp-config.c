@@ -84,10 +84,10 @@ void print_config_v1(void)
     printf("\n");
 
     #ifdef DEBUG
-        dec_debug_indent(); // to function outer level
+        debug_indent_decrement(); // to function outer level
         debug_print_indent();
         printf("END of configuration v1\n");
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -225,9 +225,9 @@ void print_config_v2(void)
     printf("\n");
 
     #ifdef DEBUG
-        dec_debug_indent(); // to function outer level
+        debug_indent_decrement(); // to function outer level
         debug_print_indent();
         printf("END of configuration v2\n");
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }

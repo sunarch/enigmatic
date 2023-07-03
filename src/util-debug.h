@@ -11,7 +11,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 extern void debug_print_indent(void);
 extern void inc_debug_indent(void);
-extern void dec_debug_indent(void);
+extern void debug_indent_decrement(void);
 
 extern void debug_print_as_ascii(char *p_text);
 

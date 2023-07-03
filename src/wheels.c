@@ -43,8 +43,8 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
         inc_debug_indent();  // to function result level
         debug_print_indent();
         printf("CHECK: get_used_wheel_count() returns %u\n", get_used_wheel_count());
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
+        debug_indent_decrement();  // to function call level
+        debug_indent_decrement();  // to caller level
     #endif
 }
 
@@ -119,7 +119,7 @@ void apply_settings_services(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_A);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -147,7 +147,7 @@ void apply_settings_army(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_B);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -175,7 +175,7 @@ void apply_settings_navy(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_C);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -212,7 +212,7 @@ void apply_settings_commercial(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_D);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -247,7 +247,7 @@ void apply_settings_swiss(void)
     set_wheel_wiring_rules(UKW_INDEX, ABC_LOW);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -286,7 +286,7 @@ void apply_settings_norway(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_N);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -323,7 +323,7 @@ void apply_settings_railway(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_R);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -365,7 +365,7 @@ void apply_settings_tirpitz(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_T);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -404,7 +404,7 @@ void apply_settings_zaehlwerk(void)
     set_wheel_wiring_rules(UKW_INDEX, ABC_LOW);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -439,7 +439,7 @@ void apply_settings_hungary(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -474,7 +474,7 @@ void apply_settings_argentina(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -509,7 +509,7 @@ void apply_settings_bletchley(void)
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -524,7 +524,7 @@ void apply_settings_default(void)
     apply_settings_bletchley();
 
     #ifdef DEBUG
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to caller level
     #endif
 }
 
@@ -559,8 +559,8 @@ void set_wheel_offset(unsigned short wheel_number,
         inc_debug_indent();  // to function result level
         debug_print_indent();
         printf("CHECK: get_wheel_offset(%u) returns %u\n", wheel_number, get_wheel_offset(wheel_number));
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
+        debug_indent_decrement();  // to function call level
+        debug_indent_decrement();  // to caller level
     #endif
 }
 
@@ -586,7 +586,7 @@ void reset_wheel_offsets(void)
             debug_print_indent();
             printf("CHECK: get_wheel_offset(...) // wheel_number = %u // %u\n", n, check_value_wheel_offset);
         }
-        dec_debug_indent();  // to function status level
+        debug_indent_decrement();  // to function status level
     #endif
 
     for (unsigned short n = 0; n < 11; ++n) {
@@ -605,9 +605,9 @@ void reset_wheel_offsets(void)
             debug_print_indent();
             printf("CHECK: get_wheel_offset(...) // wheel_number = %u // %u\n", n, check_value_wheel_offset);
         }
-        dec_debug_indent();  // to function status level
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
+        debug_indent_decrement();  // to function status level
+        debug_indent_decrement();  // to function call level
+        debug_indent_decrement();  // to caller level
     #endif
 }
 

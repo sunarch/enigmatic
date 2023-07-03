@@ -114,8 +114,8 @@ static char get_wheel_output(unsigned short wheel_number,
     #ifdef DEBUG
         debug_print_indent();
         printf("RETURN // output_char = '%c'\n", output_char);
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
+        debug_indent_decrement();  // to function call level
+        debug_indent_decrement();  // to caller level
     #endif
 
     return output_char;
@@ -137,7 +137,7 @@ static void turn_wheel(unsigned short wheel_number)
 
     #ifdef DEBUG
         // CHECK included in setter function
-        dec_debug_indent();  // to caller level
+        debug_indent_decrement();  // to caller level
     #endif
 }
 
@@ -179,8 +179,8 @@ static void advance_wheels(void)
             debug_print_indent();
             printf("CHECK: get_wheel_offset(...) // wheel_number = '%u' // '%u'\n", n, current_wheel_offset);
         }
-        dec_debug_indent();  // to function call level
-        dec_debug_indent();  // to caller level
+        debug_indent_decrement();  // to function call level
+        debug_indent_decrement();  // to caller level
     #endif
 }
 
@@ -273,7 +273,7 @@ char * process_message(char *p_input_string,
 
         // end of character processing
         #ifdef DEBUG
-            dec_debug_indent(); // to function inner level
+            debug_indent_decrement(); // to function inner level
             debug_print_indent();
             printf("%lu./%lu  CHAR after processing: '%c'\n", (n + 1), (msg_len), current_char);
         #endif
@@ -290,8 +290,8 @@ char * process_message(char *p_input_string,
     #ifdef DEBUG
         debug_print_indent();
         printf("RETURN // p_output_string = '%s'\n", p_output_string);
-        dec_debug_indent(); // to function outer level
-        dec_debug_indent(); // to caller level
+        debug_indent_decrement(); // to function outer level
+        debug_indent_decrement(); // to caller level
     #endif
 
     return p_output_string;

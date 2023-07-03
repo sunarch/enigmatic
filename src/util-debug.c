@@ -25,7 +25,7 @@ void inc_debug_indent(void) {
     debug_indent_level += 1;
 }
 
-void dec_debug_indent(void) {
+void debug_indent_decrement(void) {
     if (debug_indent_level > 0) {
         debug_indent_level -= 1;
     }
