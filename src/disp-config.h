@@ -15,7 +15,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #define  WHEEL_MODE_REVERSE  2
 #endif
 
-extern void print_config_v1(void);
-extern void print_config_v2(void);
+extern void print_config(void);
 
 #endif // ndef _DISP_CONFIG_H_

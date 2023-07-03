@@ -87,26 +87,7 @@ int main (void)
             #endif
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
-            printf("Config format: [1] (default) / [2] : "); // argument prompt
-
-            // get input
-            if (fgets(argument, BUFFER_LENGTH_ARGUMENT, stdin) == NULL) {
-                printf("Failed check with (fgets(argument, %i, stdin) == NULL)\n", BUFFER_LENGTH_ARGUMENT);
-                printf("Exiting...\n");
-                exit(1);
-            };
-            /* Remove trailing newline, if there. */
-            if ((strlen(argument) > 0) && (argument[strlen(argument) - 1] == '\n')) {
-                argument[strlen(argument) - 1] = '\0';
-            }
-
-            if (strcmp(argument, "1") == STRCMP_EQUAL || strcmp(argument, "") == STRCMP_EQUAL) {
-                print_config_v1();
-            }
-
-            if (strcmp(argument, "2") == STRCMP_EQUAL) {
-                print_config_v2();
-            }
+            print_config();
         }
         else if (strcmp(command, "reset") == STRCMP_EQUAL) {
             reset_wheel_offsets();
