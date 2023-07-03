@@ -21,7 +21,7 @@ void debug_print_indent(void)
     }
 }
 
-void inc_debug_indent(void) {
+void debug_indent_increment(void) {
     debug_indent_level += 1;
 }
 

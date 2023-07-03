@@ -23,7 +23,7 @@ static signed short wheel_wiring_rules_reverse[11][26];
 static void set_used_wheel_count(unsigned short new_wheel_count)
 {
     #ifdef DEBUG
-        inc_debug_indent();  // to function call level
+        debug_indent_increment();  // to function call level
         debug_print_indent();
         printf("FUNC: void set_used_wheel_count(...) // unsigned short new_wheel_count = %u\n", new_wheel_count);
     #endif
@@ -40,7 +40,7 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
     reset_wheel_offsets();
 
     #ifdef DEBUG
-        inc_debug_indent();  // to function result level
+        debug_indent_increment();  // to function result level
         debug_print_indent();
         printf("CHECK: get_used_wheel_count() returns %u\n", get_used_wheel_count());
         debug_indent_decrement();  // to function call level
@@ -98,7 +98,7 @@ static const char WALZE_GAMMA [27] = "fsokanuerhmbtiycwlqpzxvgjd";
 void apply_settings_services(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: services\n");
     #endif
@@ -126,7 +126,7 @@ void apply_settings_services(void)
 void apply_settings_army(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: army\n");
     #endif
@@ -154,7 +154,7 @@ void apply_settings_army(void)
 void apply_settings_navy(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: navy\n");
     #endif
@@ -191,7 +191,7 @@ static const char UKW_D [27] = "imetcgfraysqbzxwlhkdvupojn";
 void apply_settings_commercial(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: commercial\n");
     #endif
@@ -226,7 +226,7 @@ static const char WALZE_3K [27] = "ehrvxgaobqusimzflynwktpdjc";  //  'n', 'N|O',
 void apply_settings_swiss(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: \"Swiss K\" (Swiss)\n");
     #endif
@@ -265,7 +265,7 @@ static const char UKW_N [27] = "mowjypuxndsraibfvlkzgqchet";
 void apply_settings_norway(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: \"Norenigma\" (Norway)\n");
     #endif
@@ -302,7 +302,7 @@ static const char UKW_R [27] = "qyhognecvpuztfdjaxwmkisrbl";
 void apply_settings_railway(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: \"Rocket\" (Railway)\n");
     #endif
@@ -344,7 +344,7 @@ static const char UKW_T [27] = "gekpbtaumocniljdxzyfhwvqsr";
 void apply_settings_tirpitz(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: \"Tirpitz\" (Japan)\n");
     #endif
@@ -383,7 +383,7 @@ static const char UKW_G [27] = "rulqmzjsygocetkwdahnbxpvif";
 void apply_settings_zaehlwerk(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: \"Zählwerk\" (1928)\n");
     #endif
@@ -418,7 +418,7 @@ static const char WALZE_5G1 [27] = "qtpixwvdfrmusljohcanezkybg";  //  'swzfhmq',
 void apply_settings_hungary(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: Hungary / Munich\n");
     #endif
@@ -453,7 +453,7 @@ static const char WALZE_3G2 [27] = "fvdhzelsqmaxokyiwpgcbujtnr";  //  'uwxaefhkm
 void apply_settings_argentina(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: Abwehr in Argentina\n");
     #endif
@@ -488,7 +488,7 @@ static const char WALZE_3G3 [27] = "uqntlszfmrehdpxkibvygjcwoa";  //  'uwxaefhkm
 void apply_settings_bletchley(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: Abwehr / Bletchley Park\n");
     #endif
@@ -516,7 +516,7 @@ void apply_settings_bletchley(void)
 void apply_settings_default(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("Applying settings: (default)\n");
     #endif
@@ -544,7 +544,7 @@ void set_wheel_offset(unsigned short wheel_number,
                       unsigned short new_offset)
 {
     #ifdef DEBUG
-        inc_debug_indent();  // to function call level
+        debug_indent_increment();  // to function call level
         debug_print_indent();
         printf("FUNC: void set_wheel_offset(...) // unsigned short wheel_number = %u // unsigned short new_offset = %u\n", wheel_number, new_offset);
     #endif
@@ -556,7 +556,7 @@ void set_wheel_offset(unsigned short wheel_number,
     wheel_offsets[wheel_number] = new_offset % 26;
 
     #ifdef DEBUG
-        inc_debug_indent();  // to function result level
+        debug_indent_increment();  // to function result level
         debug_print_indent();
         printf("CHECK: get_wheel_offset(%u) returns %u\n", wheel_number, get_wheel_offset(wheel_number));
         debug_indent_decrement();  // to function call level
@@ -567,17 +567,17 @@ void set_wheel_offset(unsigned short wheel_number,
 void reset_wheel_offsets(void)
 {
     #ifdef DEBUG
-        inc_debug_indent();  // to function call level
+        debug_indent_increment();  // to function call level
         debug_print_indent();
         printf("FUNC: void reset_wheel_offsets(void)\n");
         unsigned short check_value_wheel_offset;
     #endif
 
     #ifdef DEBUG
-        inc_debug_indent();  // to function status level
+        debug_indent_increment();  // to function status level
         debug_print_indent();
         printf("Before reset:\n");
-        inc_debug_indent();  // to function result level
+        debug_indent_increment();  // to function result level
         check_value_wheel_offset = get_wheel_offset(0);
         debug_print_indent();
         printf("CHECK: get_wheel_offset(...) // wheel_number = 0 // %u // should always be 0 (UKW)\n", check_value_wheel_offset);
@@ -596,7 +596,7 @@ void reset_wheel_offsets(void)
     #ifdef DEBUG
         debug_print_indent();
         printf("After reset:\n");
-        inc_debug_indent();  // to function result level
+        debug_indent_increment();  // to function result level
         check_value_wheel_offset = get_wheel_offset(0);
         debug_print_indent();
         printf("CHECK: get_wheel_offset(...) // wheel_number = 0 // %u // should always be 0 (UKW)\n", check_value_wheel_offset);

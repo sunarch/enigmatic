@@ -44,10 +44,10 @@ static void print_config_section_v1(signed short *wheel_wiring_rules)
 void print_config_v1(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("START of configuration v1\n");
-        inc_debug_indent(); // to function inner level
+        debug_indent_increment(); // to function inner level
     #endif
 
     unsigned short wheel_count = get_used_wheel_count();
@@ -195,10 +195,10 @@ static void print_config_section_v2(unsigned short direction, unsigned short whe
 void print_config_v2(void)
 {
     #ifdef DEBUG
-        inc_debug_indent(); // to function outer level
+        debug_indent_increment(); // to function outer level
         debug_print_indent();
         printf("START of configuration v2\n");
-        inc_debug_indent(); // to function inner level
+        debug_indent_increment(); // to function inner level
     #endif
 
     unsigned short wheel_count = get_used_wheel_count();
