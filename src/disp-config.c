@@ -45,7 +45,7 @@ void print_config_v1(void)
 {
     #ifdef DEBUG
         debug_indent_increment(); // to function outer level
-        debug_print_indent();
+        debug_indent_print();
         printf("START of configuration v1\n");
         debug_indent_increment(); // to function inner level
     #endif
@@ -85,7 +85,7 @@ void print_config_v1(void)
 
     #ifdef DEBUG
         debug_indent_decrement(); // to function outer level
-        debug_print_indent();
+        debug_indent_print();
         printf("END of configuration v1\n");
         debug_indent_decrement(); // to caller level
     #endif
@@ -196,7 +196,7 @@ void print_config_v2(void)
 {
     #ifdef DEBUG
         debug_indent_increment(); // to function outer level
-        debug_print_indent();
+        debug_indent_print();
         printf("START of configuration v2\n");
         debug_indent_increment(); // to function inner level
     #endif
@@ -226,7 +226,7 @@ void print_config_v2(void)
 
     #ifdef DEBUG
         debug_indent_decrement(); // to function outer level
-        debug_print_indent();
+        debug_indent_print();
         printf("END of configuration v2\n");
         debug_indent_decrement(); // to caller level
     #endif

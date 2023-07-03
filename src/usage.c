@@ -43,7 +43,7 @@ static char get_wheel_output(unsigned short wheel_number,
 {
     #ifdef DEBUG
         debug_indent_increment();  // to function call level
-        debug_print_indent();
+        debug_indent_print();
         printf("FUNC: char get_wheel_output(...) // unsigned short wheel_number = '%u' // unsigned short mode = '%u' // char input_char = '%c'\n", wheel_number, mode, input_char);
         debug_indent_increment();  // to function result level
     #endif
@@ -72,7 +72,7 @@ static char get_wheel_output(unsigned short wheel_number,
         exit(1);
     }
     #ifdef DEBUG
-        debug_print_indent();
+        debug_indent_print();
         printf("index of input char in alphabet // '%u' // <= input_char\n", index);
     #endif
 
@@ -94,9 +94,9 @@ static char get_wheel_output(unsigned short wheel_number,
             exit(1);
     }
     #ifdef DEBUG
-        debug_print_indent();
+        debug_indent_print();
         printf("wheel offset for wheel '%u' // '%u'\n", wheel_number, wheel_offset);
-        debug_print_indent();
+        debug_indent_print();
         printf("wiring rule from offset index // '%d'\n", wiring_rule);
     #endif
 
@@ -104,7 +104,7 @@ static char get_wheel_output(unsigned short wheel_number,
     //index = (unsigned short) (((signed short) index + wiring_rule) % 26);
     index = calculate_index_after_wiring_rule(index, wiring_rule);
     #ifdef DEBUG
-        debug_print_indent();
+        debug_indent_print();
         printf("index after wiring rule applied // '%u' // => output_char\n", index);
     #endif
 
@@ -112,7 +112,7 @@ static char get_wheel_output(unsigned short wheel_number,
     output_char = ABC_LOW[index];
 
     #ifdef DEBUG
-        debug_print_indent();
+        debug_indent_print();
         printf("RETURN // output_char = '%c'\n", output_char);
         debug_indent_decrement();  // to function call level
         debug_indent_decrement();  // to caller level
@@ -125,7 +125,7 @@ static void turn_wheel(unsigned short wheel_number)
 {
     #ifdef DEBUG
         debug_indent_increment();  // to function call level
-        debug_print_indent();
+        debug_indent_print();
         printf("FUNC: void turn_wheel(...) // unsigned short wheel_number = '%u'\n", wheel_number);
     #endif
 
@@ -146,7 +146,7 @@ static void advance_wheels(void)
 {
     #ifdef DEBUG
         debug_indent_increment();  // to function call level
-        debug_print_indent();
+        debug_indent_print();
         printf("FUNC: void advance_wheels(void)\n");
     #endif
 
@@ -172,11 +172,11 @@ static void advance_wheels(void)
     #ifdef DEBUG
         debug_indent_increment();  // to function result level
         current_wheel_offset = get_wheel_offset(0); // use var current_wheel_offset from this function
-        debug_print_indent();
+        debug_indent_print();
         printf("CHECK: get_wheel_offset(...) // wheel_number = 0 // '%u' // should always be 0 (UKW)\n", current_wheel_offset);
         for (unsigned short n = 1; n <= wheel_count; ++n) {
             current_wheel_offset =  get_wheel_offset(n); // use var current_wheel_offset from this function
-            debug_print_indent();
+            debug_indent_print();
             printf("CHECK: get_wheel_offset(...) // wheel_number = '%u' // '%u'\n", n, current_wheel_offset);
         }
         debug_indent_decrement();  // to function call level
@@ -189,7 +189,7 @@ char * process_message(char *p_input_string,
 {
     #ifdef DEBUG
         debug_indent_increment(); // to function outer level
-        debug_print_indent();
+        debug_indent_print();
         printf("FUNC: char *process_message(...) // char *p_input_string = '%s'\n", p_input_string);
         debug_indent_increment(); // to function inner level
     #endif
@@ -207,7 +207,7 @@ char * process_message(char *p_input_string,
 
         // start of character processing
         #ifdef DEBUG
-            debug_print_indent();
+            debug_indent_print();
             printf("%lu./%lu  CHAR to be processed: '%c'\n", (n + 1), (msg_len), current_char);
             debug_indent_increment(); // to character processing inner level
         #endif
@@ -244,7 +244,7 @@ char * process_message(char *p_input_string,
 
             // first-to-last pass / front pass
             #ifdef DEBUG
-                debug_print_indent();
+                debug_indent_print();
                 printf("first-to-last pass / front pass\n");
             #endif
             for (unsigned short n = 1; n <= wheel_count; ++n) {
@@ -253,14 +253,14 @@ char * process_message(char *p_input_string,
 
             // UKW pass (same front and reverse)
             #ifdef DEBUG
-                debug_print_indent();
+                debug_indent_print();
                 printf("UKW pass (same front and reverse)\n");
             #endif
             current_char = get_wheel_output(UKW_INDEX, WHEEL_MODE_UKW, current_char);
 
             // last-to-first pass / reverse pass
             #ifdef DEBUG
-                debug_print_indent();
+                debug_indent_print();
                 printf("last-to-first pass / reverse pass\n");
             #endif
             for (unsigned short n = wheel_count; n >= 1; --n) {
@@ -274,7 +274,7 @@ char * process_message(char *p_input_string,
         // end of character processing
         #ifdef DEBUG
             debug_indent_decrement(); // to function inner level
-            debug_print_indent();
+            debug_indent_print();
             printf("%lu./%lu  CHAR after processing: '%c'\n", (n + 1), (msg_len), current_char);
         #endif
 
@@ -288,7 +288,7 @@ char * process_message(char *p_input_string,
     p_output_string[msg_len] = '\0';
 
     #ifdef DEBUG
-        debug_print_indent();
+        debug_indent_print();
         printf("RETURN // p_output_string = '%s'\n", p_output_string);
         debug_indent_decrement(); // to function outer level
         debug_indent_decrement(); // to caller level

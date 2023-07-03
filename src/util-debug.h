@@ -9,7 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #ifdef DEBUG
 
-extern void debug_print_indent(void);
+extern void debug_indent_print(void);
 extern void debug_indent_increment(void);
 extern void debug_indent_decrement(void);
 

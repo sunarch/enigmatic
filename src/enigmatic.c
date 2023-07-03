@@ -23,7 +23,7 @@ static char crypto   [BUFFER_LENGTH_MESSAGE]  = ".";
 int main (void)
 {
     #ifdef DEBUG
-        debug_print_indent();
+        debug_indent_print();
         printf("Program starting...\n");
     #endif
 
@@ -53,7 +53,7 @@ int main (void)
         }
 
         #ifdef DEBUG
-            debug_print_indent();
+            debug_indent_print();
             printf("COMMAND ENTERED: \"%s\"\n", command);
         #endif
 
@@ -124,9 +124,9 @@ int main (void)
     }
 
     #ifdef DEBUG
-        debug_print_indent();
+        debug_indent_print();
         printf("Program finished without errors.\n");
-        debug_print_indent();
+        debug_indent_print();
         printf("Shutting down...\n");
     #endif
 
