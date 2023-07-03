@@ -75,7 +75,7 @@ int main (void)
             printf("MSG:  \"%s\"\n", message);
 
             #ifdef DEBUG
-            print_as_ascii(message);
+            debug_print_as_ascii(message);
             #endif
 
             process_message(message, crypto);
@@ -83,7 +83,7 @@ int main (void)
             printf("CMSG: \"%s\"\n", crypto);
 
             #ifdef DEBUG
-            print_as_ascii(crypto);
+            debug_print_as_ascii(crypto);
             #endif
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {

@@ -13,7 +13,7 @@ extern void debug_print_indent(void);
 extern void inc_debug_indent(void);
 extern void dec_debug_indent(void);
 
-extern void print_as_ascii(char *p_text);
+extern void debug_print_as_ascii(char *p_text);
 
 #endif // def DEBUG
 

@@ -31,11 +31,11 @@ void dec_debug_indent(void) {
     }
 }
 
-void print_as_ascii(char *p_text)
+void debug_print_as_ascii(char *p_text)
 {
-    int i=0;
+    int i = 0;
     printf("ASCII: ");
-    while(p_text[i]!='\0'){
+    while(p_text[i] != '\0') {
         printf("'%c'/'%d' ", p_text[i], p_text[i]);
         i++;
     }
