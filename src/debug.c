@@ -4,14 +4,12 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#ifdef DEBUG
+
 #include <stdio.h>
 
-#ifdef DEBUG
-    #include "debug.h"
-#endif
+#include "debug.h"
 
-
-#ifdef DEBUG
 
 static signed short debug_indent_level = 0;
 
