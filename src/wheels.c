@@ -10,7 +10,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "wheels.h"
 
 #ifdef DEBUG
-    #include "util-debug.h"
+    #include "debug.h"
 #endif
 
 

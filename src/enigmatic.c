@@ -15,7 +15,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "disp-config.h"
 
 #ifdef DEBUG
-    #include "util-debug.h"
+    #include "debug.h"
 #endif
 
 
