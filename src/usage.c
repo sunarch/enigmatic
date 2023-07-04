@@ -17,6 +17,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+#define  REPLACEMENT_CHAR  '_'
+
 
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
                                                         signed short wiring_rule)
@@ -180,6 +182,65 @@ static void advance_wheels(void)
     #endif
 }
 
+
+static char process_character(char character, unsigned short wheel_count)
+{
+    // preprocess character: uppercase to lowercase, skip special
+
+    bool letter_is_alphabetic = true;
+
+    if (!is_alphabetic_lower(character)) {
+        short index_upper = abc_index_upper(character);
+
+        if (index_upper < 0) { // not uppercase letter
+            letter_is_alphabetic = false;
+        }
+        else {
+            letter_is_alphabetic = true;
+            character = abc_lower(index_upper);
+        }
+    }
+
+    if (!letter_is_alphabetic) {
+        // only allow a period of the non-alphabetic characters
+        // change all other characters to underscores
+        if (character != '.') {
+            character = REPLACEMENT_CHAR;
+        }
+    }
+
+    if(letter_is_alphabetic) {
+
+        // first-to-last pass / front pass
+        #ifdef DEBUG
+            debug_indent_print();
+            printf("first-to-last pass / front pass\n");
+        #endif
+        for (unsigned short n = 1; n <= wheel_count; ++n) {
+            character = get_wheel_output(n, WHEEL_MODE_FRONT, character);
+        }
+
+        // UKW pass (same front and reverse)
+        #ifdef DEBUG
+            debug_indent_print();
+            printf("UKW pass (same front and reverse)\n");
+        #endif
+        character = get_wheel_output(UKW_INDEX, WHEEL_MODE_UKW, character);
+
+        // last-to-first pass / reverse pass
+        #ifdef DEBUG
+            debug_indent_print();
+            printf("last-to-first pass / reverse pass\n");
+        #endif
+        for (unsigned short n = wheel_count; n >= 1; --n) {
+            character = get_wheel_output(n, WHEEL_MODE_REVERSE, character);
+        }
+    }
+
+    return character;
+}
+
+
 char * process_message(char *p_input_string,
                        char *p_output_string)
 {
@@ -195,8 +256,6 @@ char * process_message(char *p_input_string,
     unsigned long msg_len = strlen(p_input_string);
 
     char current_char;
-    short index_upper;
-    bool letter_is_alphabetic;
 
     for (unsigned long n = 0; n < msg_len; ++n) {
 
@@ -209,55 +268,9 @@ char * process_message(char *p_input_string,
             debug_indent_increment(); // to character processing inner level
         #endif
 
-        // preprocess character: uppercase to lowercase, skip special
-        letter_is_alphabetic = true;
-        if (!is_alphabetic_lower(current_char)) {
-            index_upper = abc_index_upper(current_char);
+        current_char = process_character(current_char, wheel_count);
 
-            if (index_upper < 0) { // not uppercase letter
-                letter_is_alphabetic = false;
-            }
-            else {
-                letter_is_alphabetic = true;
-                current_char = abc_lower(index_upper);
-            }
-        }
-
-        if (!letter_is_alphabetic) {
-            // only allow a period of the non-alphabetic characters
-            // change all other characters to underscores
-            if (current_char != '.') {
-                current_char = '_';
-            }
-        }
-
-        if(letter_is_alphabetic) {
-
-            // first-to-last pass / front pass
-            #ifdef DEBUG
-                debug_indent_print();
-                printf("first-to-last pass / front pass\n");
-            #endif
-            for (unsigned short n = 1; n <= wheel_count; ++n) {
-                current_char = get_wheel_output(n, WHEEL_MODE_FRONT, current_char);
-            }
-
-            // UKW pass (same front and reverse)
-            #ifdef DEBUG
-                debug_indent_print();
-                printf("UKW pass (same front and reverse)\n");
-            #endif
-            current_char = get_wheel_output(UKW_INDEX, WHEEL_MODE_UKW, current_char);
-
-            // last-to-first pass / reverse pass
-            #ifdef DEBUG
-                debug_indent_print();
-                printf("last-to-first pass / reverse pass\n");
-            #endif
-            for (unsigned short n = wheel_count; n >= 1; --n) {
-                current_char = get_wheel_output(n, WHEEL_MODE_REVERSE, current_char);
-            }
-
+        if (current_char != REPLACEMENT_CHAR) {
             // advance wheels only after processed chars
             advance_wheels();
         }
