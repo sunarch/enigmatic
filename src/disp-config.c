@@ -9,7 +9,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "disp-config.h"
 #include "wheels.h"
 #include "usage.h"
-#include "util-debug.h"
+
+#ifdef DEBUG
+    #include "util-debug.h"
+#endif
+
 
 static void print_aligned_wheel_header(unsigned short wheel_number)
 {

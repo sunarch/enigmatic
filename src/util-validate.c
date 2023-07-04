@@ -9,6 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "util-validate.h"
 
+
 void validate_wheel_number_any(unsigned short wheel_number,
                                unsigned short wheel_count)
 {

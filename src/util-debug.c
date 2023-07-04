@@ -6,7 +6,10 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include <stdio.h>
 
-#include "util-debug.h"
+#ifdef DEBUG
+    #include "util-debug.h"
+#endif
+
 
 #ifdef DEBUG
 

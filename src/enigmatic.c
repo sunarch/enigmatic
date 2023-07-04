@@ -13,7 +13,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "usage.h"
 #include "wheels.h"
 #include "disp-config.h"
-#include "util-debug.h"
+
+#ifdef DEBUG
+    #include "util-debug.h"
+#endif
+
 
 static char command  [BUFFER_LENGTH_COMMAND]  = "start";
 static char message  [BUFFER_LENGTH_MESSAGE]  = ".";
