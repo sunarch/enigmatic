@@ -4,9 +4,9 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef ENIGMATIC_WHEELS_DISPLAY_H
-#define ENIGMATIC_WHEELS_DISPLAY_H
+#ifndef ENIGMATIC_COMMON_H
+#define ENIGMATIC_COMMON_H
 
-extern void display_config(void);
+#define  STRCMP_EQUAL  0
 
-#endif // ndef ENIGMATIC_WHEELS_DISPLAY_H
+#endif // ndef ENIGMATIC_COMMON_H

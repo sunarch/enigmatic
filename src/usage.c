@@ -12,6 +12,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "alphabet.h"
 #include "usage.h"
 #include "wheels.h"
+#include "wheels-common.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"
 

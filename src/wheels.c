@@ -8,6 +8,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdlib.h>
 #include <string.h>
 
+#include "common.h"
 #include "wheels.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"

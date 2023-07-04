@@ -17,7 +17,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
-static unsigned short wheel_offsets[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+static unsigned short wheel_offsets[MAX_WHEEL_COUNT + 1] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 

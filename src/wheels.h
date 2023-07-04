@@ -7,16 +7,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_WHEELS_H
 #define ENIGMATIC_WHEELS_H
 
-// MACRO VALUES ////////////////////////////////////////////////////////////////
-
-#ifndef STRCMP_EQUAL
-    #define  STRCMP_EQUAL  0
-#endif // ndef STRCMP_EQUAL
-
-#ifndef UKW_INDEX
-    #define  UKW_INDEX  0
-#endif // ndef UKW_INDEX
-
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 extern signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);

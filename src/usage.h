@@ -7,12 +7,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_USAGE_H
 #define ENIGMATIC_USAGE_H
 
-// MACRO VALUES ////////////////////////////////////////////////////////////////
-
-#define  WHEEL_MODE_UKW      0
-#define  WHEEL_MODE_FRONT    1
-#define  WHEEL_MODE_REVERSE  2
-
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,

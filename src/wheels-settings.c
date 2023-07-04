@@ -8,6 +8,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdlib.h>
 
 #include "alphabet.h"
+#include "wheels-common.h"
 #include "wheels-settings.h"
 
 #ifdef DEBUG

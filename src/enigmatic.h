@@ -12,8 +12,4 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # define  BUFFER_LENGTH_COMMAND     32
 # define  BUFFER_LENGTH_MESSAGE   1024
 
-#ifndef STRCMP_EQUAL
-    #define  STRCMP_EQUAL  0
-#endif // ndef STRCMP_EQUAL
-
 #endif // ndef ENIGMATIC_ENIGMATIC_H

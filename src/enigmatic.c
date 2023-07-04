@@ -9,6 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdbool.h>
 #include <string.h>
 
+#include "common.h"
 #include "enigmatic.h"
 #include "usage.h"
 #include "wheels.h"
