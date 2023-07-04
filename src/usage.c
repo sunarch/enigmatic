@@ -55,7 +55,7 @@ static char get_wheel_output(unsigned short wheel_number,
     #endif
 
     // validate wheel_number
-    validate_wheel_number(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number);
 
     char output_char = '?';
     unsigned short wheel_offset = 0;
@@ -128,7 +128,7 @@ static void turn_wheel(unsigned short wheel_number)
     #endif
 
     // validate wheel_number
-    validate_wheel_number(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number);
 
     // move wheel offset by 1
     set_wheel_offset(wheel_number, ((get_wheel_offset(wheel_number) + 1) % 26));
@@ -148,7 +148,7 @@ static void advance_wheels(void)
         printf("FUNC: void advance_wheels(void)\n");
     #endif
 
-    unsigned short wheel_count = get_used_wheel_count();
+    unsigned short wheel_count = wheels_get_count();
     unsigned short current_wheel_offset = 0;
 
     for (unsigned short n = 1; n <= wheel_count; ++n) {
@@ -251,7 +251,7 @@ char * process_message(char *p_input_string,
         debug_indent_increment(); // to function inner level
     #endif
 
-    unsigned short wheel_count = get_used_wheel_count();
+    unsigned short wheel_count = wheels_get_count();
 
     unsigned long msg_len = strlen(p_input_string);
 

@@ -7,32 +7,19 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_WHEELS_H
 #define ENIGMATIC_WHEELS_H
 
-// Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
-// Reflectors (UKW) ////////////////////////////////////////////////////////////
+// settings ////////////////////////////////////////////////////////////////////
 
-extern void apply_settings_services(void);
-extern void apply_settings_army(void);
-extern void apply_settings_navy(void);
-extern void apply_settings_commercial(void);
-extern void apply_settings_swiss(void);
-extern void apply_settings_norway(void);
-extern void apply_settings_railway(void);
-extern void apply_settings_tirpitz(void);
-extern void apply_settings_zaehlwerk(void);
-extern void apply_settings_hungary(void);
-extern void apply_settings_argentina(void);
-extern void apply_settings_bletchley(void);
-extern void apply_settings_default(void);
+extern void wheels_apply_default(void);
 
-// PROGRAM VARIABLES ///////////////////////////////////////////////////////////
+// GENERAL CONSTANTS ///////////////////////////////////////////////////////////
 
-#define  MAX_WHEEL_COUNT  10
-#define  UKW_INDEX  0
+#ifndef UKW_INDEX
+    #define  UKW_INDEX  0
+#endif // ndef UKW_INDEX
 
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
-extern void validate_wheel_number(unsigned short wheel_number,
-                                  unsigned short wheel_count);
+extern void validate_wheel_number(unsigned short wheel_number);
 
 extern unsigned short get_wheel_offset(unsigned short wheelNumber);
 
@@ -44,7 +31,7 @@ extern void reset_wheel_offsets(void);
 extern signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);
 extern signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number);
 
-extern unsigned short get_used_wheel_count(void);
+extern unsigned short wheels_get_count(void);
 
 void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules);
 void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules);

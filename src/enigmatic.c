@@ -33,7 +33,7 @@ int main (void)
     printf("Welcome to Enigmatic - an Enigma emulator\n"); // welcome message
 
     // apply default settings
-    apply_settings_default();
+    wheels_apply_default();
 
     while (true) {
 

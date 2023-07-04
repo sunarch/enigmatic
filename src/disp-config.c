@@ -9,6 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "alphabet.h"
 #include "disp-config.h"
 #include "wheels.h"
+#include "wheels-settings.h"
 #include "usage.h"
 
 #ifdef DEBUG
