@@ -27,11 +27,6 @@ static char crypto   [BUFFER_LENGTH_MESSAGE]  = ".";
 
 int main (void)
 {
-    #ifdef DEBUG
-        debug_indent_print();
-        printf("Program starting...\n");
-    #endif
-
     printf("Welcome to Enigmatic - an Enigma emulator\n"); // welcome message
 
     // apply default settings
@@ -109,13 +104,6 @@ int main (void)
             printf("Command not recognized.\n");
         }
     }
-
-    #ifdef DEBUG
-        debug_indent_print();
-        printf("Program finished without errors.\n");
-        debug_indent_print();
-        printf("Shutting down...\n");
-    #endif
 
     printf("Thank you for using Enigmatic!\n");
 
