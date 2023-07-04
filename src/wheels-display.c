@@ -18,7 +18,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // cells ///////////////////////////////////////////////////////////////////////
 
-static void print_aligned_wheel_header(unsigned short wheel_number)
+static void display_cell_wheel_name(unsigned short wheel_number)
 {
     if (wheel_number == UKW_INDEX) {
         printf("    UKW   |");
@@ -72,19 +72,18 @@ static void display_row_header(unsigned short direction, unsigned short wheel_co
 {
     unsigned short wheel_index;
 
-    printf("|");
-    printf(" position |");
+    printf("| position |");
 
     if (direction == WHEEL_MODE_FRONT) {
         for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
-            print_aligned_wheel_header(wheel_index);
+            display_cell_wheel_name(wheel_index);
         }
-        print_aligned_wheel_header(UKW_INDEX);
+        display_cell_wheel_name(UKW_INDEX);
     }
     else if (direction == WHEEL_MODE_REVERSE) {
-        print_aligned_wheel_header(UKW_INDEX);
+        display_cell_wheel_name(UKW_INDEX);
         for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
-            print_aligned_wheel_header(wheel_index);
+            display_cell_wheel_name(wheel_index);
         }
     }
 
@@ -95,8 +94,7 @@ static void display_row_offsets(unsigned short direction, unsigned short wheel_c
 {
     unsigned short wheel_index;
 
-    printf("|");
-    printf(" offsets: |");
+    printf("| offsets: |");
 
     if (direction == WHEEL_MODE_FRONT) {
         for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
