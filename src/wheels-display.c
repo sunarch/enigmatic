@@ -99,7 +99,7 @@ static void display_section(unsigned short direction, unsigned short wheel_count
     }
 
     signed short rules[11];
-    unsigned short i_pos, i_wheel;
+    unsigned short position, wheel_index;
 
     // header row
     display_row_header(direction, wheel_count);
@@ -109,38 +109,38 @@ static void display_section(unsigned short direction, unsigned short wheel_count
 
     // lines
 
-    for (i_pos = 0; i_pos < 26; ++i_pos) {
+    for (position = 0; position < 26; ++position) {
 
         if (direction == WHEEL_MODE_FRONT) {
-            collect_wheel_wiring_rules_front_for_position(i_pos, rules);
+            collect_wheel_wiring_rules_front_for_position(position, rules);
         }
         else if (direction == WHEEL_MODE_REVERSE) {
-            collect_wheel_wiring_rules_reverse_for_position(i_pos, rules);
+            collect_wheel_wiring_rules_reverse_for_position(position, rules);
         }
 
         printf("|");
 
-        print_aligned_rule(i_pos);
-        printf("  (%c) |", abc_lower(i_pos));  // position
+        print_aligned_rule(position);
+        printf("  (%c) |", abc_lower(position));  // position
 
         if (direction == WHEEL_MODE_FRONT) {
             // regular wheels
-            for (i_wheel = 1; i_wheel <= wheel_count; ++i_wheel) {
-                print_aligned_rule(rules[i_wheel]);
-                print_aligned_index_letter(i_pos, rules[i_wheel]);
+            for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
+                print_aligned_rule(rules[wheel_index]);
+                print_aligned_index_letter(position, rules[wheel_index]);
             }
             // UKW
             print_aligned_rule(rules[UKW_INDEX]);
-            print_aligned_index_letter(i_pos, rules[UKW_INDEX]);
+            print_aligned_index_letter(position, rules[UKW_INDEX]);
         }
         else if (direction == WHEEL_MODE_REVERSE) {
             // UKW
             print_aligned_rule(rules[UKW_INDEX]);
-            print_aligned_index_letter(i_pos, rules[UKW_INDEX]);
+            print_aligned_index_letter(position, rules[UKW_INDEX]);
             // regular wheels
-            for (i_wheel = wheel_count; i_wheel >= 1; --i_wheel) {
-                print_aligned_rule(rules[i_wheel]);
-                print_aligned_index_letter(i_pos, rules[i_wheel]);
+            for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
+                print_aligned_rule(rules[wheel_index]);
+                print_aligned_index_letter(position, rules[wheel_index]);
             }
         }
 
