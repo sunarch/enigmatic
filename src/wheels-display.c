@@ -16,6 +16,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+// cells ///////////////////////////////////////////////////////////////////////
 
 static void print_aligned_wheel_header(unsigned short wheel_number)
 {
@@ -28,6 +29,20 @@ static void print_aligned_wheel_header(unsigned short wheel_number)
             printf(" ");
         }
         printf("%u |", wheel_number);
+    }
+}
+
+static void display_cell_offset(unsigned short wheel_number, unsigned short offset)
+{
+    if (wheel_number == UKW_INDEX) {
+        printf("          |");
+    }
+    else {
+        printf(" +     ");
+        if (offset < 10) {
+            printf(" ");
+        }
+        printf("%u |", offset);
     }
 }
 
@@ -76,6 +91,29 @@ static void display_row_header(unsigned short direction, unsigned short wheel_co
     printf("\n");
 }
 
+static void display_row_offsets(unsigned short direction, unsigned short wheel_count)
+{
+    unsigned short wheel_index;
+
+    printf("|");
+    printf(" offsets: |");
+
+    if (direction == WHEEL_MODE_FRONT) {
+        for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
+            display_cell_offset(wheel_index, get_wheel_offset(wheel_index));
+        }
+        display_cell_offset(UKW_INDEX, get_wheel_offset(UKW_INDEX));
+    }
+    else if (direction == WHEEL_MODE_REVERSE) {
+        display_cell_offset(UKW_INDEX, get_wheel_offset(UKW_INDEX));
+        for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
+            display_cell_offset(wheel_index, get_wheel_offset(wheel_index));
+        }
+    }
+
+    printf("\n");
+}
+
 static void display_row_separator(unsigned short wheel_count)
 {
     unsigned short wheel_index;
@@ -103,6 +141,12 @@ static void display_section(unsigned short direction, unsigned short wheel_count
 
     // header row
     display_row_header(direction, wheel_count);
+
+    // separator
+    display_row_separator(wheel_count);
+
+    // offsets
+    display_row_offsets(direction, wheel_count);
 
     // separator
     display_row_separator(wheel_count);
