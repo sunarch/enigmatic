@@ -11,6 +11,20 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "usage.h"
 #include "util-debug.h"
 
+static void print_aligned_wheel_header(unsigned short wheel_number)
+{
+    if (wheel_number == UKW_INDEX) {
+        printf("    UKW   |");
+    }
+    else {
+        printf(" wheel ");
+        if (wheel_number < 10) {
+            printf(" ");
+        }
+        printf("%u |", wheel_number);
+    }
+}
+
 static void print_aligned_rule(signed short rule)
 {
     if (rule < -9) {
@@ -47,20 +61,17 @@ static void print_config_section(unsigned short direction, unsigned short wheel_
 
     printf(" position |");
 
-    if (direction == WHEEL_MODE_REVERSE) {
-        printf("    UKW   |");
-    }
-
-    for (i_wheel = 1; i_wheel <= wheel_count; ++i_wheel) {
-        printf(" wheel ");
-        if (i_wheel < 10) {
-            printf(" ");
-        }
-        printf("%u |", i_wheel);
-    }
-
     if (direction == WHEEL_MODE_FRONT) {
-        printf("    UKW   |");
+        for (i_wheel = 1; i_wheel <= wheel_count; ++i_wheel) {
+            print_aligned_wheel_header(i_wheel);
+        }
+        print_aligned_wheel_header(UKW_INDEX);
+    }
+    else if (direction == WHEEL_MODE_REVERSE) {
+        print_aligned_wheel_header(UKW_INDEX);
+        for (i_wheel = wheel_count; i_wheel >= 1; --i_wheel) {
+            print_aligned_wheel_header(i_wheel);
+        }
     }
 
     printf("\n");
@@ -79,11 +90,11 @@ static void print_config_section(unsigned short direction, unsigned short wheel_
 
     for (i_pos = 0; i_pos < 26; ++i_pos) {
 
-        if (direction == WHEEL_MODE_REVERSE) {
-            collect_wheel_wiring_rules_reverse_for_position(i_pos, rules);
-        }
-        else if (direction == WHEEL_MODE_FRONT) {
+        if (direction == WHEEL_MODE_FRONT) {
             collect_wheel_wiring_rules_front_for_position(i_pos, rules);
+        }
+        else if (direction == WHEEL_MODE_REVERSE) {
+            collect_wheel_wiring_rules_reverse_for_position(i_pos, rules);
         }
 
         printf("|");
@@ -91,21 +102,25 @@ static void print_config_section(unsigned short direction, unsigned short wheel_
         print_aligned_rule(i_pos);
         printf("  (%c) |", ABC_LOW[i_pos]);  // position
 
-        // UKW
-        if (direction == WHEEL_MODE_REVERSE) {
-            print_aligned_rule(rules[0]);
-            print_aligned_index_letter(i_pos, rules[0]);
-        }
-
-        for (i_wheel = 1; i_wheel <= wheel_count; ++i_wheel) {
-            print_aligned_rule(rules[i_wheel]);
-            print_aligned_index_letter(i_pos, rules[i_wheel]);
-        }
-
-        // UKW
         if (direction == WHEEL_MODE_FRONT) {
-            print_aligned_rule(rules[0]);
-            print_aligned_index_letter(i_pos, rules[0]);
+            // regular wheels
+            for (i_wheel = 1; i_wheel <= wheel_count; ++i_wheel) {
+                print_aligned_rule(rules[i_wheel]);
+                print_aligned_index_letter(i_pos, rules[i_wheel]);
+            }
+            // UKW
+            print_aligned_rule(rules[UKW_INDEX]);
+            print_aligned_index_letter(i_pos, rules[UKW_INDEX]);
+        }
+        else if (direction == WHEEL_MODE_REVERSE) {
+            // UKW
+            print_aligned_rule(rules[UKW_INDEX]);
+            print_aligned_index_letter(i_pos, rules[UKW_INDEX]);
+            // regular wheels
+            for (i_wheel = wheel_count; i_wheel >= 1; --i_wheel) {
+                print_aligned_rule(rules[i_wheel]);
+                print_aligned_index_letter(i_pos, rules[i_wheel]);
+            }
         }
 
         printf("\n");
