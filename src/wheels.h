@@ -24,15 +24,6 @@ extern void wheels_apply_prompt(void);
 
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
-extern void validate_wheel_number(unsigned short wheel_number);
-
-extern unsigned short get_wheel_offset(unsigned short wheelNumber);
-
-extern void set_wheel_offset(unsigned short wheelNumber,
-                             unsigned short new_offset);
-
-extern void reset_wheel_offsets(void);
-
 extern signed short *get_wheel_wiring_rules_front(unsigned short wheel_number);
 extern signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number);
 

@@ -9,6 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "alphabet.h"
 #include "wheels.h"
 #include "wheels-display.h"
+#include "wheels-offsets.h"
 #include "wheels-settings.h"
 #include "usage.h"
 
@@ -95,14 +96,14 @@ static void display_row_offsets(unsigned short direction, unsigned short wheel_c
 
     if (direction == WHEEL_MODE_FRONT) {
         for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
-            display_cell_offset(wheel_index, get_wheel_offset(wheel_index));
+            display_cell_offset(wheel_index, offsets_get(wheel_index));
         }
-        display_cell_offset(UKW_INDEX, get_wheel_offset(UKW_INDEX));
+        display_cell_offset(UKW_INDEX, offsets_get(UKW_INDEX));
     }
     else if (direction == WHEEL_MODE_REVERSE) {
-        display_cell_offset(UKW_INDEX, get_wheel_offset(UKW_INDEX));
+        display_cell_offset(UKW_INDEX, offsets_get(UKW_INDEX));
         for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
-            display_cell_offset(wheel_index, get_wheel_offset(wheel_index));
+            display_cell_offset(wheel_index, offsets_get(wheel_index));
         }
     }
 

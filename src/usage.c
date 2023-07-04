@@ -12,6 +12,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "alphabet.h"
 #include "usage.h"
 #include "wheels.h"
+#include "wheels-offsets.h"
+#include "wheels-settings.h"
 
 #ifdef DEBUG
     #include "debug.h"
@@ -75,7 +77,7 @@ static char get_wheel_output(unsigned short wheel_number,
     #endif
 
     // wiring rule from offset index
-    wheel_offset = get_wheel_offset(wheel_number);
+    wheel_offset = offsets_get(wheel_number);
     offset_index = (index + wheel_offset) % 26;
     switch(mode) {
         case WHEEL_MODE_UKW:
@@ -131,7 +133,7 @@ static void turn_wheel(unsigned short wheel_number)
     validate_wheel_number(wheel_number);
 
     // move wheel offset by 1
-    set_wheel_offset(wheel_number, ((get_wheel_offset(wheel_number) + 1) % 26));
+    offsets_set(wheel_number, ((offsets_get(wheel_number) + 1) % 26));
 
     #ifdef DEBUG
         // CHECK included in setter function
@@ -152,7 +154,7 @@ static void advance_wheels(void)
     unsigned short current_wheel_offset = 0;
 
     for (unsigned short n = 1; n <= wheel_count; ++n) {
-        current_wheel_offset = get_wheel_offset(n);
+        current_wheel_offset = offsets_get(n);
 
         if (current_wheel_offset < 25) {
             turn_wheel(n);
@@ -169,13 +171,13 @@ static void advance_wheels(void)
 
     #ifdef DEBUG
         debug_indent_increment();  // to function result level
-        current_wheel_offset = get_wheel_offset(0); // use var current_wheel_offset from this function
+        current_wheel_offset = offsets_get(0); // use var current_wheel_offset from this function
         debug_indent_print();
-        printf("CHECK: get_wheel_offset(...) // wheel_number = 0 // '%u' // should always be 0 (UKW)\n", current_wheel_offset);
+        printf("CHECK: offsets_get(...) // wheel_number = 0 // '%u' // should always be 0 (UKW)\n", current_wheel_offset);
         for (unsigned short n = 1; n <= wheel_count; ++n) {
-            current_wheel_offset =  get_wheel_offset(n); // use var current_wheel_offset from this function
+            current_wheel_offset =  offsets_get(n); // use var current_wheel_offset from this function
             debug_indent_print();
-            printf("CHECK: get_wheel_offset(...) // wheel_number = '%u' // '%u'\n", n, current_wheel_offset);
+            printf("CHECK: offsets_get(...) // wheel_number = '%u' // '%u'\n", n, current_wheel_offset);
         }
         debug_indent_decrement();  // to function call level
         debug_indent_decrement();  // to caller level

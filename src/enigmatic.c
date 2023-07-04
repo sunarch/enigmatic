@@ -13,6 +13,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "usage.h"
 #include "wheels.h"
 #include "wheels-display.h"
+#include "wheels-offsets.h"
 
 #ifdef DEBUG
     #include "debug.h"
@@ -96,7 +97,7 @@ int main (void)
             display_config();
         }
         else if (strcmp(command, "reset") == STRCMP_EQUAL) {
-            reset_wheel_offsets();
+            offsets_reset();
             printf("Wheel offsets reset.\n");
         }
         else if (strcmp(command, "help") == STRCMP_EQUAL) {

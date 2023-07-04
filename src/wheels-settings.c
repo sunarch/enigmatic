@@ -32,6 +32,19 @@ unsigned short get_used_wheel_count(void)
     return used_wheel_count;
 }
 
+// INTERNAL VARIABLES - VALIDATORS /////////////////////////////////////////////
+
+void validate_wheel_number(unsigned short wheel_number)
+{
+    unsigned short wheel_count = get_used_wheel_count();
+
+    if (wheel_number > wheel_count) {
+        printf("Failed check with (wheel_number > wheel_count): (%u > %u)\n", wheel_number, wheel_count);
+        printf("Exiting...\n");
+        exit(1);
+    }
+}
+
 // INTERNAL FUNCTIONS //////////////////////////////////////////////////////////
 
 static void set_used_wheel_count(unsigned short new_wheel_count)

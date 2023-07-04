@@ -21,6 +21,10 @@ extern signed short wheel_wiring_rules_reverse[11][26];
 
 extern unsigned short get_used_wheel_count(void);
 
+// INTERNAL VARIABLES - VALIDATORS /////////////////////////////////////////////
+
+extern void validate_wheel_number(unsigned short wheel_number);
+
 // Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
 // Reflectors (UKW) ////////////////////////////////////////////////////////////
 
