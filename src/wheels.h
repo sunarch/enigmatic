@@ -10,8 +10,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 // settings ////////////////////////////////////////////////////////////////////
 
 extern void wheels_apply_default(void);
+extern void wheels_apply_prompt(void);
 
 // GENERAL CONSTANTS ///////////////////////////////////////////////////////////
+
+#ifndef STRCMP_EQUAL
+    #define  STRCMP_EQUAL  0
+#endif // ndef STRCMP_EQUAL
 
 #ifndef UKW_INDEX
     #define  UKW_INDEX  0

@@ -6,6 +6,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "wheels.h"
 #include "wheels-settings.h"
@@ -13,6 +14,10 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifdef DEBUG
     #include "debug.h"
 #endif
+
+// INTERNAL CONSTANTS //////////////////////////////////////////////////////////
+
+#define  BUFFER_LENGTH_APPLY_OPTION  16
 
 // INTERNAL VARIABLES //////////////////////////////////////////////////////////
 
@@ -23,6 +28,82 @@ static unsigned short wheel_offsets[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 void wheels_apply_default(void)
 {
     apply_settings_default();
+}
+
+void wheels_apply_prompt(void)
+{
+    reset_wheel_offsets();
+
+    printf("Select option to apply\n:");
+    printf("|-> 'argentina'  - G-260 (Abwehr in Argentina)\n");
+    printf("|-> 'army'       - M3 (Army, Navy)\n");
+    printf("|-> 'bletchley'  - G-312 (Abwehr / Bletchley Park)\n");
+    printf("|-> 'commercial' - D (commercial)\n");
+    printf("|-> 'hungary'    - G-111 (Hungary / Munich)\n");
+    printf("|-> 'navy'       - M3 (Army, Navy)\n");
+    printf("|-> 'norway'     - N \"Norenigma\" (Norway)\n");
+    printf("|-> 'railway'    - R \"Rocket\" (Railway)\n");
+    printf("|-> 'services'   - I \"Services\" (Army, GAF)\n");
+    printf("|-> 'swiss'      - K \"Swiss K\" (Swiss)\n");
+    printf("|-> 'tirpitz'    - T \"Tirpitz\" (Japan)\n");
+    printf("|-> 'zaehlwerk'  - A-865 \"Zählwerk\" (1928)\n");
+    printf("Apply option: ");
+
+    static char apply_option[BUFFER_LENGTH_APPLY_OPTION]  = "-";
+
+    // get input
+    if (fgets(apply_option, BUFFER_LENGTH_APPLY_OPTION, stdin) == NULL) {
+        printf("Failed to get apply option\n");
+        printf("Exiting...\n");
+        exit(1);
+    };
+
+    /* Remove trailing newline, if there. */
+    unsigned short apply_option_length = strlen(apply_option);
+    if ((apply_option_length > 0) && (apply_option[apply_option_length - 1] == '\n')) {
+        apply_option[apply_option_length - 1] = '\0';
+    }
+
+    if (strcmp(apply_option, "argentina") == STRCMP_EQUAL) {
+        apply_settings_argentina();
+    }
+    else if (strcmp(apply_option, "army") == STRCMP_EQUAL) {
+        apply_settings_army();
+    }
+    else if (strcmp(apply_option, "bletchley") == STRCMP_EQUAL) {
+        apply_settings_bletchley();
+    }
+    else if (strcmp(apply_option, "commercial") == STRCMP_EQUAL) {
+        apply_settings_commercial();
+    }
+    else if (strcmp(apply_option, "hungary") == STRCMP_EQUAL) {
+        apply_settings_hungary();
+    }
+    else if (strcmp(apply_option, "navy") == STRCMP_EQUAL) {
+        apply_settings_navy();
+    }
+    else if (strcmp(apply_option, "norway") == STRCMP_EQUAL) {
+        apply_settings_norway();
+    }
+    else if (strcmp(apply_option, "railway") == STRCMP_EQUAL) {
+        apply_settings_railway();
+    }
+    else if (strcmp(apply_option, "services") == STRCMP_EQUAL) {
+        apply_settings_services();
+    }
+    else if (strcmp(apply_option, "swiss") == STRCMP_EQUAL) {
+        apply_settings_swiss();
+    }
+    else if (strcmp(apply_option, "tirpitz") == STRCMP_EQUAL) {
+        apply_settings_tirpitz();
+    }
+    else if (strcmp(apply_option, "zaehlwerk") == STRCMP_EQUAL) {
+        apply_settings_zaehlwerk();
+    }
+    else {
+        printf("Setting option not recognized: '%s'\n", apply_option);
+        apply_settings_default();
+    }
 }
 
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////

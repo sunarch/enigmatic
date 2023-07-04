@@ -89,6 +89,9 @@ int main (void)
             debug_print_as_ascii(crypto);
             #endif
         }
+        else if (strcmp(command, "apply") == STRCMP_EQUAL) {
+            wheels_apply_prompt();
+        }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
             print_config();
         }
@@ -97,7 +100,7 @@ int main (void)
             printf("Wheel offsets reset.\n");
         }
         else if (strcmp(command, "help") == STRCMP_EQUAL) {
-            printf("Commands: help, msg/message, reset, config, exit\n");
+            printf("Commands: help, msg/message, reset, config, apply, exit\n");
         }
         else if (strcmp(command, "exit") == STRCMP_EQUAL) {
             break; // exit program loop
