@@ -6,6 +6,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include <stdio.h>
 
+#include "alphabet.h"
 #include "disp-config.h"
 #include "wheels.h"
 #include "usage.h"
@@ -46,7 +47,7 @@ static void print_aligned_rule(signed short rule)
 
 static void print_aligned_index_letter(unsigned short pos, signed short rule)
 {
-    printf("  (%c) |", ABC_LOW[calculate_index_after_wiring_rule(pos, rule)]);
+    printf("  (%c) |", abc_lower(calculate_index_after_wiring_rule(pos, rule)));
 }
 
 static void print_config_section(unsigned short direction, unsigned short wheel_count)
@@ -104,7 +105,7 @@ static void print_config_section(unsigned short direction, unsigned short wheel_
         printf("|");
 
         print_aligned_rule(i_pos);
-        printf("  (%c) |", ABC_LOW[i_pos]);  // position
+        printf("  (%c) |", abc_lower(i_pos));  // position
 
         if (direction == WHEEL_MODE_FRONT) {
             // regular wheels

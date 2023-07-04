@@ -7,9 +7,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef _WHEELS_H_
 #define _WHEELS_H_
 
-extern const char ABC_UPP [27];  // ordered Alphabet
-extern const char ABC_LOW [27];  // ordered Alphabet
-
 // Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
 // Reflectors (UKW) ////////////////////////////////////////////////////////////
 

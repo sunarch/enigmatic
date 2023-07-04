@@ -9,6 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdbool.h>
 #include <string.h>
 
+#include "alphabet.h"
 #include "usage.h"
 #include "wheels.h"
 
@@ -62,13 +63,13 @@ static char get_wheel_output(unsigned short wheel_number,
     signed short wiring_rule = 0;
 
     // index from input (input char location in wiring alphabet)
-    p_occurence = strchr(ABC_LOW, input_char);
+    p_occurence = strchr(ABC_LOWER, input_char);
     if(p_occurence == NULL) {
         printf("Failed check with (p_occurence == NULL): (%p == NULL)\n", p_occurence);
         printf("Exiting...\n");
         exit(1);
     }
-    index = p_occurence - ABC_LOW;
+    index = p_occurence - ABC_LOWER;
     if (index >= 26) {
         printf("Failed check with (index >= 26): (%u >= 26)\n", index);
         printf("Exiting...\n");
@@ -112,7 +113,7 @@ static char get_wheel_output(unsigned short wheel_number,
     #endif
 
     // output char
-    output_char = ABC_LOW[index];
+    output_char = abc_lower(index);
 
     #ifdef DEBUG
         debug_indent_print();
@@ -219,10 +220,10 @@ char * process_message(char *p_input_string,
         unsigned short index;
         char *p_occurence;
 
-        p_occurence = strchr(ABC_LOW, current_char);
+        p_occurence = strchr(ABC_LOWER, current_char);
         if(p_occurence == NULL) { // character not in uppercase alphabet
 
-            p_occurence = strchr(ABC_UPP, current_char);
+            p_occurence = strchr(ABC_UPPER, current_char);
             if(p_occurence == NULL) { // character not in uppercase alphabet
 
                 // only allow a period of the non-alphabetic characters
@@ -234,8 +235,8 @@ char * process_message(char *p_input_string,
                 letter_is_alphabetic = false;
             }
             else { // uppercase character: convert to lowercase
-                index = p_occurence - ABC_UPP;
-                current_char = ABC_LOW[index];
+                index = p_occurence - ABC_UPPER;
+                current_char = abc_lower(index);
                 letter_is_alphabetic = true;
             }
         }

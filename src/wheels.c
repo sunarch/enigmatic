@@ -7,12 +7,12 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "alphabet.h"
 #include "wheels.h"
 
 #ifdef DEBUG
     #include "debug.h"
 #endif
-
 
 // PROGRAM VARIABLES ///////////////////////////////////////////////////////////
 
@@ -60,14 +60,11 @@ static void set_wheel_wiring_rules(unsigned short wheel_number,
     signed short wiring_rule;
 
     for (unsigned short n = 0; n < 26; ++n) {
-        wiring_rule = (signed short) ((wiring_alphabet[n] - ABC_LOW[n]) % 26);
+        wiring_rule = (signed short) ((wiring_alphabet[n] - abc_lower(n)) % 26);
         wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
         wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % 26] = (-1) * wiring_rule;
     }
 }
-
-const char ABC_UPP [27] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  // ordered Alphabet
-const char ABC_LOW [27] = "abcdefghijklmnopqrstuvwxyz";  // ordered Alphabet
 
 // Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
 // Reflectors (UKW) ////////////////////////////////////////////////////////////
@@ -116,8 +113,8 @@ void apply_settings_services(void)
     // set_wheel_wiring_rules(6, WALZE_VI);
     // set_wheel_wiring_rules(7, WALZE_VII);
     // set_wheel_wiring_rules(8, WALZE_VIII);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_A);
 
@@ -144,8 +141,8 @@ void apply_settings_army(void)
     set_wheel_wiring_rules(6, WALZE_VI);
     set_wheel_wiring_rules(7, WALZE_VII);
     set_wheel_wiring_rules(8, WALZE_VIII);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_B);
 
@@ -204,13 +201,13 @@ void apply_settings_commercial(void)
     set_wheel_wiring_rules(1, WALZE_1D);
     set_wheel_wiring_rules(2, WALZE_2D);
     set_wheel_wiring_rules(3, WALZE_3D);
-    // set_wheel_wiring_rules(4, ABC_LOW);
-    // set_wheel_wiring_rules(5, ABC_LOW);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(4, ABC_LOWER);
+    // set_wheel_wiring_rules(5, ABC_LOWER);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_D);
 
@@ -239,15 +236,15 @@ void apply_settings_swiss(void)
     set_wheel_wiring_rules(1, WALZE_1K);
     set_wheel_wiring_rules(2, WALZE_2K);
     set_wheel_wiring_rules(3, WALZE_3K);
-    // set_wheel_wiring_rules(4, ABC_LOW);
-    // set_wheel_wiring_rules(5, ABC_LOW);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(4, ABC_LOWER);
+    // set_wheel_wiring_rules(5, ABC_LOWER);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, ABC_LOW);
+    set_wheel_wiring_rules(UKW_INDEX, ABC_LOWER);
 
     #ifdef DEBUG
         debug_indent_decrement(); // to caller level
@@ -280,11 +277,11 @@ void apply_settings_norway(void)
     set_wheel_wiring_rules(3, WALZE_3N);
     set_wheel_wiring_rules(4, WALZE_4N);
     set_wheel_wiring_rules(5, WALZE_5N);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_N);
 
@@ -315,13 +312,13 @@ void apply_settings_railway(void)
     set_wheel_wiring_rules(1, WALZE_1R);
     set_wheel_wiring_rules(2, WALZE_2R);
     set_wheel_wiring_rules(3, WALZE_3R);
-    // set_wheel_wiring_rules(4, ABC_LOW);
-    // set_wheel_wiring_rules(5, ABC_LOW);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(4, ABC_LOWER);
+    // set_wheel_wiring_rules(5, ABC_LOWER);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_R);
 
@@ -362,8 +359,8 @@ void apply_settings_tirpitz(void)
     set_wheel_wiring_rules(6, WALZE_6T);
     set_wheel_wiring_rules(7, WALZE_7T);
     set_wheel_wiring_rules(8, WALZE_8T);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_T);
 
@@ -396,15 +393,15 @@ void apply_settings_zaehlwerk(void)
     set_wheel_wiring_rules(1, WALZE_1A8);
     set_wheel_wiring_rules(2, WALZE_2A8);
     set_wheel_wiring_rules(3, WALZE_3A8);
-    // set_wheel_wiring_rules(4, ABC_LOW);
-    // set_wheel_wiring_rules(5, ABC_LOW);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(4, ABC_LOWER);
+    // set_wheel_wiring_rules(5, ABC_LOWER);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, ABC_LOW);
+    set_wheel_wiring_rules(UKW_INDEX, ABC_LOWER);
 
     #ifdef DEBUG
         debug_indent_decrement(); // to caller level
@@ -431,13 +428,13 @@ void apply_settings_hungary(void)
     set_wheel_wiring_rules(1, WALZE_1G1);
     set_wheel_wiring_rules(2, WALZE_2G1);
     set_wheel_wiring_rules(3, WALZE_5G1);
-    // set_wheel_wiring_rules(4, ABC_LOW);
-    // set_wheel_wiring_rules(5, ABC_LOW);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(4, ABC_LOWER);
+    // set_wheel_wiring_rules(5, ABC_LOWER);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
 
@@ -466,13 +463,13 @@ void apply_settings_argentina(void)
     set_wheel_wiring_rules(1, WALZE_1G2);
     set_wheel_wiring_rules(2, WALZE_2G2);
     set_wheel_wiring_rules(3, WALZE_3G2);
-    // set_wheel_wiring_rules(4, ABC_LOW);
-    // set_wheel_wiring_rules(5, ABC_LOW);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(4, ABC_LOWER);
+    // set_wheel_wiring_rules(5, ABC_LOWER);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
 
@@ -501,13 +498,13 @@ void apply_settings_bletchley(void)
     set_wheel_wiring_rules(1, WALZE_1G3);
     set_wheel_wiring_rules(2, WALZE_2G3);
     set_wheel_wiring_rules(3, WALZE_3G3);
-    // set_wheel_wiring_rules(4, ABC_LOW);
-    // set_wheel_wiring_rules(5, ABC_LOW);
-    // set_wheel_wiring_rules(6, ABC_LOW);
-    // set_wheel_wiring_rules(7, ABC_LOW);
-    // set_wheel_wiring_rules(8, ABC_LOW);
-    // set_wheel_wiring_rules(9, ABC_LOW);
-    // set_wheel_wiring_rules(10, ABC_LOW);
+    // set_wheel_wiring_rules(4, ABC_LOWER);
+    // set_wheel_wiring_rules(5, ABC_LOWER);
+    // set_wheel_wiring_rules(6, ABC_LOWER);
+    // set_wheel_wiring_rules(7, ABC_LOWER);
+    // set_wheel_wiring_rules(8, ABC_LOWER);
+    // set_wheel_wiring_rules(9, ABC_LOWER);
+    // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
 
