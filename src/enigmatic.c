@@ -12,7 +12,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "enigmatic.h"
 #include "usage.h"
 #include "wheels.h"
-#include "disp-config.h"
+#include "wheels-display.h"
 
 #ifdef DEBUG
     #include "debug.h"

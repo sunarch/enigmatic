@@ -4,8 +4,8 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef ENIGMATIC_DISP_CONFIG_H
-#define ENIGMATIC_DISP_CONFIG_H
+#ifndef ENIGMATIC_WHEELS_DISPLAY_H
+#define ENIGMATIC_WHEELS_DISPLAY_H
 
 #ifndef WHEEL_MODE_FRONT
 #define  WHEEL_MODE_FRONT    1
@@ -17,4 +17,4 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 extern void print_config(void);
 
-#endif // ndef ENIGMATIC_DISP_CONFIG_H
+#endif // ndef ENIGMATIC_WHEELS_DISPLAY_H
