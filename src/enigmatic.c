@@ -16,7 +16,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "util-debug.h"
 
 static char command  [BUFFER_LENGTH_COMMAND]  = "start";
-static char argument [BUFFER_LENGTH_ARGUMENT] = "none";
 static char message  [BUFFER_LENGTH_MESSAGE]  = ".";
 static char crypto   [BUFFER_LENGTH_MESSAGE]  = ".";
 

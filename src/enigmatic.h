@@ -8,7 +8,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #define _ENIGMATIC_H_
 
 # define  BUFFER_LENGTH_COMMAND     32
-# define  BUFFER_LENGTH_ARGUMENT    96
 # define  BUFFER_LENGTH_MESSAGE   1024
 
 # define  STRCMP_EQUAL  0
