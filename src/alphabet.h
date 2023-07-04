@@ -2,6 +2,8 @@
 // Created by anemeth on 2023.07.04..
 //
 
+#include <stdbool.h>
+
 #ifndef _ALPHABET_H_
 #define _ALPHABET_H_
 
@@ -19,5 +21,14 @@ extern const char ABC_LOWER [ABC_LENGTH_STRING];
 
 extern char abc_upper(unsigned int index);
 extern char abc_lower(unsigned int index);
+
+// GENERAL FUNCTIONS ///////////////////////////////////////////////////////////
+
+extern short abc_index_upper(char character);
+extern short abc_index_lower(char character);
+
+extern bool is_alphabetic_upper(char character);
+extern bool is_alphabetic_lower(char character);
+extern bool is_alphabetic(char character);
 
 #endif // ndef _ALPHABET_H_

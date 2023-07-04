@@ -4,9 +4,9 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 
 #include "alphabet.h"
@@ -56,25 +56,17 @@ static char get_wheel_output(unsigned short wheel_number,
     validate_wheel_number(wheel_number, get_used_wheel_count());
 
     char output_char = '?';
-    char *p_occurence;
-    unsigned short index = 0;
     unsigned short wheel_offset = 0;
     unsigned short offset_index = 0;
     signed short wiring_rule = 0;
 
-    // index from input (input char location in wiring alphabet)
-    p_occurence = strchr(ABC_LOWER, input_char);
-    if(p_occurence == NULL) {
-        printf("Failed check with (p_occurence == NULL): (%p == NULL)\n", p_occurence);
+    short index = abc_index_lower(input_char);
+    if(index < 0) {
+        printf("Char '%c' not found in alphabet\n", input_char);
         printf("Exiting...\n");
         exit(1);
     }
-    index = p_occurence - ABC_LOWER;
-    if (index >= 26) {
-        printf("Failed check with (index >= 26): (%u >= 26)\n", index);
-        printf("Exiting...\n");
-        exit(1);
-    }
+
     #ifdef DEBUG
         debug_indent_print();
         printf("index of input char in alphabet // '%u' // <= input_char\n", index);
@@ -202,8 +194,9 @@ char * process_message(char *p_input_string,
 
     unsigned long msg_len = strlen(p_input_string);
 
-    char current_char = '?';
-    bool letter_is_alphabetic = false;
+    char current_char;
+    short index_upper;
+    bool letter_is_alphabetic;
 
     for (unsigned long n = 0; n < msg_len; ++n) {
 
@@ -217,31 +210,25 @@ char * process_message(char *p_input_string,
         #endif
 
         // preprocess character: uppercase to lowercase, skip special
-        unsigned short index;
-        char *p_occurence;
+        letter_is_alphabetic = true;
+        if (!is_alphabetic_lower(current_char)) {
+            index_upper = abc_index_upper(current_char);
 
-        p_occurence = strchr(ABC_LOWER, current_char);
-        if(p_occurence == NULL) { // character not in uppercase alphabet
-
-            p_occurence = strchr(ABC_UPPER, current_char);
-            if(p_occurence == NULL) { // character not in uppercase alphabet
-
-                // only allow a period of the non-alphabetic characters
-                // change all other characters to underscores
-                if (current_char != '.') {
-                    current_char = '_';
-                }
-                // put character through without processing
+            if (index_upper < 0) { // not uppercase letter
                 letter_is_alphabetic = false;
             }
-            else { // uppercase character: convert to lowercase
-                index = p_occurence - ABC_UPPER;
-                current_char = abc_lower(index);
+            else {
                 letter_is_alphabetic = true;
+                current_char = abc_lower(index_upper);
             }
         }
-        else { // lowercase character: proceed normally
-            letter_is_alphabetic = true;
+
+        if (!letter_is_alphabetic) {
+            // only allow a period of the non-alphabetic characters
+            // change all other characters to underscores
+            if (current_char != '.') {
+                current_char = '_';
+            }
         }
 
         if(letter_is_alphabetic) {
