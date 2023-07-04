@@ -93,7 +93,7 @@ int main (void)
             wheels_apply_prompt();
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
-            print_config();
+            display_config();
         }
         else if (strcmp(command, "reset") == STRCMP_EQUAL) {
             reset_wheel_offsets();

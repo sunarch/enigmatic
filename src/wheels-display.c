@@ -51,7 +51,47 @@ static void print_aligned_index_letter(unsigned short pos, signed short rule)
     printf("  (%c) |", abc_lower(calculate_index_after_wiring_rule(pos, rule)));
 }
 
-static void print_config_section(unsigned short direction, unsigned short wheel_count)
+// rows ////////////////////////////////////////////////////////////////////////
+
+static void display_row_header(unsigned short direction, unsigned short wheel_count)
+{
+    unsigned short wheel_index;
+
+    printf("|");
+    printf(" position |");
+
+    if (direction == WHEEL_MODE_FRONT) {
+        for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
+            print_aligned_wheel_header(wheel_index);
+        }
+        print_aligned_wheel_header(UKW_INDEX);
+    }
+    else if (direction == WHEEL_MODE_REVERSE) {
+        print_aligned_wheel_header(UKW_INDEX);
+        for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
+            print_aligned_wheel_header(wheel_index);
+        }
+    }
+
+    printf("\n");
+}
+
+static void display_row_separator(unsigned short wheel_count)
+{
+    unsigned short wheel_index;
+
+    printf("|");
+
+    for (wheel_index = 0; wheel_index <= wheel_count + 1; ++wheel_index) {
+        printf(" -------- |");
+    }
+
+    printf("\n");
+}
+
+// section /////////////////////////////////////////////////////////////////////
+
+static void display_section(unsigned short direction, unsigned short wheel_count)
 {
     if (direction != WHEEL_MODE_FRONT && direction != WHEEL_MODE_REVERSE) {
         printf("Config section type error.");
@@ -59,38 +99,13 @@ static void print_config_section(unsigned short direction, unsigned short wheel_
     }
 
     signed short rules[11];
-    unsigned short i_pos, i_col, i_wheel;
+    unsigned short i_pos, i_wheel;
 
     // header row
-
-    printf("|");
-
-    printf(" position |");
-
-    if (direction == WHEEL_MODE_FRONT) {
-        for (i_wheel = 1; i_wheel <= wheel_count; ++i_wheel) {
-            print_aligned_wheel_header(i_wheel);
-        }
-        print_aligned_wheel_header(UKW_INDEX);
-    }
-    else if (direction == WHEEL_MODE_REVERSE) {
-        print_aligned_wheel_header(UKW_INDEX);
-        for (i_wheel = wheel_count; i_wheel >= 1; --i_wheel) {
-            print_aligned_wheel_header(i_wheel);
-        }
-    }
-
-    printf("\n");
+    display_row_header(direction, wheel_count);
 
     // separator
-
-    printf("|");
-
-    for (i_col = 0; i_col <= wheel_count + 1; ++i_col) {
-        printf(" -------- |");
-    }
-
-    printf("\n");
+    display_row_separator(wheel_count);
 
     // lines
 
@@ -133,7 +148,9 @@ static void print_config_section(unsigned short direction, unsigned short wheel_
     }
 }
 
-void print_config(void)
+// main ////////////////////////////////////////////////////////////////////////
+
+void display_config(void)
 {
     #ifdef DEBUG
         debug_indent_increment(); // to function outer level
@@ -154,7 +171,7 @@ void print_config(void)
     printf("wiring rules front:\n");
     printf("\n");
 
-    print_config_section(WHEEL_MODE_FRONT, wheel_count);
+    display_section(WHEEL_MODE_FRONT, wheel_count);
     printf("\n");
 
     // reverse -----------------------------------------------------------------
@@ -162,7 +179,7 @@ void print_config(void)
     printf("wiring rules reverse:\n");
     printf("\n");
 
-    print_config_section(WHEEL_MODE_REVERSE, wheel_count);
+    display_section(WHEEL_MODE_REVERSE, wheel_count);
     printf("\n");
 
     #ifdef DEBUG
