@@ -11,11 +11,15 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "common.h"
 #include "debug.h"
-#include "enigmatic.h"
 #include "usage.h"
 #include "wheels.h"
 #include "wheels-display.h"
 #include "wheels-offsets.h"
+
+// MACRO VALUES ////////////////////////////////////////////////////////////////
+
+# define  BUFFER_LENGTH_COMMAND     32
+# define  BUFFER_LENGTH_MESSAGE   1024
 
 // PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
