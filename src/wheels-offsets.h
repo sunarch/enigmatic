@@ -9,9 +9,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 extern unsigned short offsets_get(unsigned short wheel_number);
 
-extern void offsets_set(unsigned short wheel_number,
-                        unsigned short new_offset);
-
 extern void offsets_reset(void);
+
+extern void offsets_advance(void);
 
 #endif // ndef ENIGMATIC_WHEELS_OFFSETS_H

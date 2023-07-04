@@ -121,69 +121,6 @@ static char get_wheel_output(unsigned short wheel_number,
     return output_char;
 }
 
-static void turn_wheel(unsigned short wheel_number)
-{
-    #ifdef DEBUG
-        debug_indent_increment();  // to function call level
-        debug_indent_print();
-        printf("FUNC: void turn_wheel(...) // unsigned short wheel_number = '%u'\n", wheel_number);
-    #endif
-
-    // validate wheel_number
-    validate_wheel_number(wheel_number);
-
-    // move wheel offset by 1
-    offsets_set(wheel_number, ((offsets_get(wheel_number) + 1) % 26));
-
-    #ifdef DEBUG
-        // CHECK included in setter function
-        debug_indent_decrement();  // to caller level
-    #endif
-}
-
-
-static void advance_wheels(void)
-{
-    #ifdef DEBUG
-        debug_indent_increment();  // to function call level
-        debug_indent_print();
-        printf("FUNC: void advance_wheels(void)\n");
-    #endif
-
-    unsigned short wheel_count = wheels_get_count();
-    unsigned short current_wheel_offset = 0;
-
-    for (unsigned short n = 1; n <= wheel_count; ++n) {
-        current_wheel_offset = offsets_get(n);
-
-        if (current_wheel_offset < 25) {
-            turn_wheel(n);
-            break;
-        }
-        else if (current_wheel_offset == 25) {
-            turn_wheel(n);
-            continue;
-        }
-        else {
-            exit(1);
-        }
-    }
-
-    #ifdef DEBUG
-        debug_indent_increment();  // to function result level
-        current_wheel_offset = offsets_get(0); // use var current_wheel_offset from this function
-        debug_indent_print();
-        printf("CHECK: offsets_get(...) // wheel_number = 0 // '%u' // should always be 0 (UKW)\n", current_wheel_offset);
-        for (unsigned short n = 1; n <= wheel_count; ++n) {
-            current_wheel_offset =  offsets_get(n); // use var current_wheel_offset from this function
-            debug_indent_print();
-            printf("CHECK: offsets_get(...) // wheel_number = '%u' // '%u'\n", n, current_wheel_offset);
-        }
-        debug_indent_decrement();  // to function call level
-        debug_indent_decrement();  // to caller level
-    #endif
-}
-
 
 static char process_character(char character, unsigned short wheel_count)
 {
@@ -274,7 +211,7 @@ char * process_message(char *p_input_string,
 
         if (current_char != REPLACEMENT_CHAR) {
             // advance wheels only after processed chars
-            advance_wheels();
+            offsets_advance();
         }
 
         // end of character processing
