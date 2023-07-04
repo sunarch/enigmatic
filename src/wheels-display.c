@@ -46,8 +46,10 @@ static void display_cell_offset(unsigned short wheel_number, unsigned short offs
     }
 }
 
-static void print_aligned_rule(signed short rule)
+static void display_cell_rule(unsigned short position, signed short rule)
 {
+    char representation = abc_lower(calculate_index_after_wiring_rule(position, rule));
+
     if (rule < -9) {
         printf(" ");
     }
@@ -58,12 +60,7 @@ static void print_aligned_rule(signed short rule)
         printf("   ");
     }
 
-    printf("%d", rule);
-}
-
-static void print_aligned_index_letter(unsigned short pos, signed short rule)
-{
-    printf("  (%c) |", abc_lower(calculate_index_after_wiring_rule(pos, rule)));
+    printf("%d  (%c) |", rule, representation);
 }
 
 // rows ////////////////////////////////////////////////////////////////////////
@@ -141,27 +138,18 @@ static void display_row_rules(unsigned short direction,
 
     printf("|");
 
-    print_aligned_rule(position);
-    printf("  (%c) |", abc_lower(position));  // position
+    display_cell_rule(0, position);
 
     if (direction == WHEEL_MODE_FRONT) {
-        // regular wheels
         for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
-            print_aligned_rule(rules[wheel_index]);
-            print_aligned_index_letter(position, rules[wheel_index]);
+            display_cell_rule(position, rules[wheel_index]);
         }
-        // UKW
-        print_aligned_rule(rules[UKW_INDEX]);
-        print_aligned_index_letter(position, rules[UKW_INDEX]);
+        display_cell_rule(position, rules[UKW_INDEX]);
     }
     else if (direction == WHEEL_MODE_REVERSE) {
-        // UKW
-        print_aligned_rule(rules[UKW_INDEX]);
-        print_aligned_index_letter(position, rules[UKW_INDEX]);
-        // regular wheels
+        display_cell_rule(position, rules[UKW_INDEX]);
         for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
-            print_aligned_rule(rules[wheel_index]);
-            print_aligned_index_letter(position, rules[wheel_index]);
+            display_cell_rule(position, rules[wheel_index]);
         }
     }
 
