@@ -194,7 +194,7 @@ char * process_message(char *p_input_string,
         debug_indent_increment(); // to function inner level
     #endif
 
-    unsigned short wheel_count = wheels_get_count();
+    unsigned short wheel_count = get_used_wheel_count();
 
     unsigned long msg_len = strlen(p_input_string);
 

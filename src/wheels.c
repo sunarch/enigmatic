@@ -43,11 +43,6 @@ signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
     return wheel_wiring_rules_reverse[wheel_number];
 }
 
-unsigned short wheels_get_count(void)
-{
-    return get_used_wheel_count();
-}
-
 void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
 {
     if (position > 25) { return; }
