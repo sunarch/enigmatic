@@ -8,7 +8,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdlib.h>
 
 #include "wheels.h"
-#include "util-validate.h"
 
 #ifdef DEBUG
     #include "util-debug.h"
@@ -533,6 +532,16 @@ void apply_settings_default(void)
 }
 
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////
+
+void validate_wheel_number(unsigned short wheel_number,
+                           unsigned short wheel_count)
+{
+    if (wheel_number > wheel_count) {
+        printf("Failed check with (wheel_number > wheel_count): (%u > %u)\n", wheel_number, wheel_count);
+        printf("Exiting...\n");
+        exit(1);
+    }
+}
 
 unsigned short get_wheel_offset(unsigned short wheel_number)
 {

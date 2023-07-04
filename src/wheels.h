@@ -34,6 +34,9 @@ extern void apply_settings_default(void);
 
 // OTHER FUNCTIONS /////////////////////////////////////////////////////////////
 
+extern void validate_wheel_number(unsigned short wheel_number,
+                                  unsigned short wheel_count);
+
 extern unsigned short get_wheel_offset(unsigned short wheelNumber);
 
 extern void set_wheel_offset(unsigned short wheelNumber,
