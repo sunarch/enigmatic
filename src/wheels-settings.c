@@ -14,25 +14,23 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
-// GENERAL VARIABLES ///////////////////////////////////////////////////////////
+// PUBLIC VARIABLES ////////////////////////////////////////////////////////////
 
 signed short wheel_wiring_rules_front[11][26];
 signed short wheel_wiring_rules_reverse[11][26];
 
-// INTERNAL VARIABLES //////////////////////////////////////////////////////////
+// PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
 static unsigned short used_wheel_count;
 
-// INTERNAL VARIABLES - ACCESSORS //////////////////////////////////////////////
+// GETTERS /////////////////////////////////////////////////////////////////////
 
 unsigned short get_used_wheel_count(void)
 {
-    // no debug messages in getter functions, include them as checks in calls
-
     return used_wheel_count;
 }
 
-// INTERNAL VARIABLES - VALIDATORS /////////////////////////////////////////////
+// VALIDATORS //////////////////////////////////////////////////////////////////
 
 void validate_wheel_number(unsigned short wheel_number)
 {
@@ -45,7 +43,7 @@ void validate_wheel_number(unsigned short wheel_number)
     }
 }
 
-// INTERNAL FUNCTIONS //////////////////////////////////////////////////////////
+// SETTERS - INTERNAL //////////////////////////////////////////////////////////
 
 static void set_used_wheel_count(unsigned short new_wheel_count)
 {
@@ -85,8 +83,10 @@ static void set_wheel_wiring_rules(unsigned short wheel_number,
     }
 }
 
-// Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
-// Reflectors (UKW) ////////////////////////////////////////////////////////////
+// SETTERS /////////////////////////////////////////////////////////////////////
+
+// Rotor wheels (wiring, turnover points, c-o info, name)
+// Reflectors (UKW)
 
 // =============================================================================
 

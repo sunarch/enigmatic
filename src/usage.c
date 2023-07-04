@@ -19,8 +19,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+// MACRO VALUES ////////////////////////////////////////////////////////////////
+
 #define  REPLACEMENT_CHAR  '_'
 
+// CALCULATORS /////////////////////////////////////////////////////////////////
 
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
                                                  signed short wiring_rule)

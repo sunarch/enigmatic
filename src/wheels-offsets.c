@@ -15,9 +15,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+// PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
 static unsigned short wheel_offsets[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+// GETTERS /////////////////////////////////////////////////////////////////////
 
 unsigned short offsets_get(unsigned short wheel_number)
 {
@@ -26,7 +28,9 @@ unsigned short offsets_get(unsigned short wheel_number)
     return wheel_offsets[wheel_number];
 }
 
-void offsets_set(unsigned short wheel_number,
+// SETTERS /////////////////////////////////////////////////////////////////////
+
+static void offsets_set(unsigned short wheel_number,
                  unsigned short new_offset)
 {
 #ifdef DEBUG

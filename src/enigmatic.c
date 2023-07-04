@@ -19,10 +19,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+// PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
 static char command  [BUFFER_LENGTH_COMMAND]  = "start";
 static char message  [BUFFER_LENGTH_MESSAGE]  = ".";
 static char crypto   [BUFFER_LENGTH_MESSAGE]  = ".";
+
+// ENTRY POINT /////////////////////////////////////////////////////////////////
 
 int main (void)
 {

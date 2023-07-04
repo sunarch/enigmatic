@@ -16,11 +16,57 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
-// INTERNAL CONSTANTS //////////////////////////////////////////////////////////
+// MACRO VALUES ////////////////////////////////////////////////////////////////
 
 #define  BUFFER_LENGTH_APPLY_OPTION  16
 
-// settings ////////////////////////////////////////////////////////////////////
+// GETTERS /////////////////////////////////////////////////////////////////////
+
+signed short *get_wheel_wiring_rules_front(unsigned short wheel_number)
+{
+    // no debug messages in getter functions, include them as checks in calls
+
+    // validate wheel number
+    validate_wheel_number(wheel_number);
+
+    return wheel_wiring_rules_front[wheel_number];
+}
+
+signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
+{
+    // no debug messages in getter functions, include them as checks in calls
+
+    // validate wheel number
+    validate_wheel_number(wheel_number);
+
+    return wheel_wiring_rules_reverse[wheel_number];
+}
+
+unsigned short wheels_get_count(void)
+{
+    return get_used_wheel_count();
+}
+
+void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
+{
+    if (position > 25) { return; }
+
+    for (unsigned short i = 0; i < 11; ++i) {
+        rules[i] = wheel_wiring_rules_front[i][position];
+    }
+
+}
+
+void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules)
+{
+    if (position > 25) { return; }
+
+    for (unsigned short i = 0; i < 11; ++i) {
+        rules[i] = wheel_wiring_rules_reverse[i][position];
+    }
+}
+
+// SETTERS /////////////////////////////////////////////////////////////////////
 
 void wheels_apply_default(void)
 {
@@ -104,51 +150,5 @@ void wheels_apply_prompt(void)
     else {
         printf("Setting option not recognized: '%s'\n", apply_option);
         settings_default_apply();
-    }
-}
-
-// OTHER FUNCTIONS /////////////////////////////////////////////////////////////
-
-signed short *get_wheel_wiring_rules_front(unsigned short wheel_number)
-{
-    // no debug messages in getter functions, include them as checks in calls
-
-    // validate wheel number
-    validate_wheel_number(wheel_number);
-
-    return wheel_wiring_rules_front[wheel_number];
-}
-
-signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
-{
-    // no debug messages in getter functions, include them as checks in calls
-
-    // validate wheel number
-    validate_wheel_number(wheel_number);
-
-    return wheel_wiring_rules_reverse[wheel_number];
-}
-
-unsigned short wheels_get_count(void)
-{
-    return get_used_wheel_count();
-}
-
-void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
-{
-    if (position > 25) { return; }
-
-    for (unsigned short i = 0; i < 11; ++i) {
-        rules[i] = wheel_wiring_rules_front[i][position];
-    }
-
-}
-
-void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules)
-{
-    if (position > 25) { return; }
-
-    for (unsigned short i = 0; i < 11; ++i) {
-        rules[i] = wheel_wiring_rules_reverse[i][position];
     }
 }

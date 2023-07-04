@@ -7,10 +7,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_WHEELS_OFFSETS_H
 #define ENIGMATIC_WHEELS_OFFSETS_H
 
+// GETTERS /////////////////////////////////////////////////////////////////////
+
 extern unsigned short offsets_get(unsigned short wheel_number);
 
-extern void offsets_reset(void);
+// SETTERS /////////////////////////////////////////////////////////////////////
 
+extern void offsets_reset(void);
 extern void offsets_advance(void);
 
 #endif // ndef ENIGMATIC_WHEELS_OFFSETS_H

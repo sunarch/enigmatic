@@ -7,6 +7,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_ENIGMATIC_H
 #define ENIGMATIC_ENIGMATIC_H
 
+// MACRO VALUES ////////////////////////////////////////////////////////////////
+
 # define  BUFFER_LENGTH_COMMAND     32
 # define  BUFFER_LENGTH_MESSAGE   1024
 
