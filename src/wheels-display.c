@@ -125,6 +125,49 @@ static void display_row_separator(unsigned short wheel_count)
     printf("\n");
 }
 
+static void display_row_rules(unsigned short direction,
+                              unsigned short wheel_count,
+                              unsigned short position)
+{
+    unsigned short wheel_index;
+    signed short rules[11];
+
+    if (direction == WHEEL_MODE_FRONT) {
+        collect_wheel_wiring_rules_front_for_position(position, rules);
+    }
+    else if (direction == WHEEL_MODE_REVERSE) {
+        collect_wheel_wiring_rules_reverse_for_position(position, rules);
+    }
+
+    printf("|");
+
+    print_aligned_rule(position);
+    printf("  (%c) |", abc_lower(position));  // position
+
+    if (direction == WHEEL_MODE_FRONT) {
+        // regular wheels
+        for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
+            print_aligned_rule(rules[wheel_index]);
+            print_aligned_index_letter(position, rules[wheel_index]);
+        }
+        // UKW
+        print_aligned_rule(rules[UKW_INDEX]);
+        print_aligned_index_letter(position, rules[UKW_INDEX]);
+    }
+    else if (direction == WHEEL_MODE_REVERSE) {
+        // UKW
+        print_aligned_rule(rules[UKW_INDEX]);
+        print_aligned_index_letter(position, rules[UKW_INDEX]);
+        // regular wheels
+        for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
+            print_aligned_rule(rules[wheel_index]);
+            print_aligned_index_letter(position, rules[wheel_index]);
+        }
+    }
+
+    printf("\n");
+}
+
 // section /////////////////////////////////////////////////////////////////////
 
 static void display_section(unsigned short direction, unsigned short wheel_count)
@@ -134,8 +177,7 @@ static void display_section(unsigned short direction, unsigned short wheel_count
         return;
     }
 
-    signed short rules[11];
-    unsigned short position, wheel_index;
+    unsigned short position;
 
     // header row
     display_row_header(direction, wheel_count);
@@ -150,43 +192,8 @@ static void display_section(unsigned short direction, unsigned short wheel_count
     display_row_separator(wheel_count);
 
     // lines
-
     for (position = 0; position < 26; ++position) {
-
-        if (direction == WHEEL_MODE_FRONT) {
-            collect_wheel_wiring_rules_front_for_position(position, rules);
-        }
-        else if (direction == WHEEL_MODE_REVERSE) {
-            collect_wheel_wiring_rules_reverse_for_position(position, rules);
-        }
-
-        printf("|");
-
-        print_aligned_rule(position);
-        printf("  (%c) |", abc_lower(position));  // position
-
-        if (direction == WHEEL_MODE_FRONT) {
-            // regular wheels
-            for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
-                print_aligned_rule(rules[wheel_index]);
-                print_aligned_index_letter(position, rules[wheel_index]);
-            }
-            // UKW
-            print_aligned_rule(rules[UKW_INDEX]);
-            print_aligned_index_letter(position, rules[UKW_INDEX]);
-        }
-        else if (direction == WHEEL_MODE_REVERSE) {
-            // UKW
-            print_aligned_rule(rules[UKW_INDEX]);
-            print_aligned_index_letter(position, rules[UKW_INDEX]);
-            // regular wheels
-            for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
-                print_aligned_rule(rules[wheel_index]);
-                print_aligned_index_letter(position, rules[wheel_index]);
-            }
-        }
-
-        printf("\n");
+        display_row_rules(direction, wheel_count, position);
     }
 }
 
