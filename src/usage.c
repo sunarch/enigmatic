@@ -53,7 +53,7 @@ static char get_wheel_output(unsigned short wheel_number,
     #endif
 
     // validate wheel_number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number, get_used_wheel_count());
 
     char output_char = '?';
     char *p_occurence;
@@ -134,7 +134,7 @@ static void turn_wheel(unsigned short wheel_number)
     #endif
 
     // validate wheel_number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number, get_used_wheel_count());
 
     // move wheel offset by 1
     set_wheel_offset(wheel_number, ((get_wheel_offset(wheel_number) + 1) % 26));

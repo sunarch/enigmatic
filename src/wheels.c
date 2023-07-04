@@ -56,7 +56,7 @@ static void set_wheel_wiring_rules(unsigned short wheel_number,
                                    const char *const wiring_alphabet)
 {
     // validate wheel number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number, get_used_wheel_count());
 
     signed short wiring_rule;
 
@@ -539,7 +539,7 @@ unsigned short get_wheel_offset(unsigned short wheel_number)
     // no debug messages in getter functions, include them as checks in calls
 
     // validate wheel_number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number, get_used_wheel_count());
 
     return wheel_offsets[wheel_number];
 }
@@ -554,7 +554,7 @@ void set_wheel_offset(unsigned short wheel_number,
     #endif
 
     // validate wheel_number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number, get_used_wheel_count());
 
     // change wheel offset
     wheel_offsets[wheel_number] = new_offset % 26;
@@ -620,7 +620,7 @@ signed short *get_wheel_wiring_rules_front(unsigned short wheel_number)
     // no debug messages in getter functions, include them as checks in calls
 
     // validate wheel number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number, get_used_wheel_count());
 
     return wheel_wiring_rules_front[wheel_number];
 }
@@ -630,7 +630,7 @@ signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
     // no debug messages in getter functions, include them as checks in calls
 
     // validate wheel number
-    validate_wheel_number_any(wheel_number, get_used_wheel_count());
+    validate_wheel_number(wheel_number, get_used_wheel_count());
 
     return wheel_wiring_rules_reverse[wheel_number];
 }
