@@ -10,15 +10,12 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <string.h>
 
 #include "common.h"
+#include "debug.h"
 #include "enigmatic.h"
 #include "usage.h"
 #include "wheels.h"
 #include "wheels-display.h"
 #include "wheels-offsets.h"
-
-#ifdef DEBUG
-    #include "debug.h"
-#endif
 
 // PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
@@ -65,7 +62,10 @@ int main (void)
             printf("COMMAND ENTERED: \"%s\"\n", command);
         #endif
 
-        if (strcmp(command, "msg") == STRCMP_EQUAL || strcmp(command, "message") == STRCMP_EQUAL) {
+        if (strcmp(command, "help") == STRCMP_EQUAL) {
+            printf("Commands: help, msg/message, ascii, config, apply, reset, exit\n");
+        }
+        else if (strcmp(command, "msg") == STRCMP_EQUAL || strcmp(command, "message") == STRCMP_EQUAL) {
             printf("(max. message size is 1 KiB)\n");
             printf("Enter message: "); // argument prompt
 
@@ -82,30 +82,25 @@ int main (void)
 
             printf("MSG:  \"%s\"\n", message);
 
-            #ifdef DEBUG
-            debug_print_as_ascii(message);
-            #endif
-
             process_message(message, crypto);
 
             printf("CMSG: \"%s\"\n", crypto);
-
-            #ifdef DEBUG
-            debug_print_as_ascii(crypto);
-            #endif
         }
-        else if (strcmp(command, "apply") == STRCMP_EQUAL) {
-            wheels_apply_prompt();
+        else if (strcmp(command, "ascii") == STRCMP_EQUAL) {
+            printf("MSG:  ");
+            debug_print_as_ascii(message);
+            printf("CMSG: ");
+            debug_print_as_ascii(crypto);
         }
         else if (strcmp(command, "config") == STRCMP_EQUAL) {
             display_config();
         }
+        else if (strcmp(command, "apply") == STRCMP_EQUAL) {
+            wheels_apply_prompt();
+        }
         else if (strcmp(command, "reset") == STRCMP_EQUAL) {
             offsets_reset();
             printf("Wheel offsets reset.\n");
-        }
-        else if (strcmp(command, "help") == STRCMP_EQUAL) {
-            printf("Commands: help, msg/message, reset, config, apply, exit\n");
         }
         else if (strcmp(command, "exit") == STRCMP_EQUAL) {
             break; // exit program loop

@@ -4,12 +4,24 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifdef DEBUG
-
 #include <stdio.h>
 
 #include "debug.h"
 
+
+void debug_print_as_ascii(char *p_text)
+{
+    int index = 0;
+    printf("ASCII: ");
+    while(p_text[index] != '\0') {
+        printf("'%c'/'%d' ", p_text[index], p_text[index]);
+        index++;
+    }
+    printf("\n");
+}
+
+
+#ifdef DEBUG
 
 static signed short debug_indent_level = 0;
 
@@ -30,17 +42,6 @@ void debug_indent_decrement(void) {
     if (debug_indent_level > 0) {
         debug_indent_level -= 1;
     }
-}
-
-void debug_print_as_ascii(char *p_text)
-{
-    int i = 0;
-    printf("ASCII: ");
-    while(p_text[i] != '\0') {
-        printf("'%c'/'%d' ", p_text[i], p_text[i]);
-        i++;
-    }
-    printf("\n");
 }
 
 #endif
