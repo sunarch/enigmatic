@@ -4,8 +4,8 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef _UTIL_DEBUG_H_
-#define _UTIL_DEBUG_H_
+#ifndef ENIGMATIC_UTIL_DEBUG_H
+#define ENIGMATIC_UTIL_DEBUG_H
 
 #ifdef DEBUG
 
@@ -17,4 +17,4 @@ extern void debug_print_as_ascii(char *p_text);
 
 #endif // def DEBUG
 
-#endif // ndef _UTIL_DEBUG_H_
+#endif // ndef ENIGMATIC_UTIL_DEBUG_H

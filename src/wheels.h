@@ -4,8 +4,8 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#ifndef _WHEELS_H_
-#define _WHEELS_H_
+#ifndef ENIGMATIC_WHEELS_H
+#define ENIGMATIC_WHEELS_H
 
 // Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
 // Reflectors (UKW) ////////////////////////////////////////////////////////////
@@ -49,4 +49,4 @@ extern unsigned short get_used_wheel_count(void);
 void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules);
 void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules);
 
-#endif // ndef _WHEELS_H_
+#endif // ndef ENIGMATIC_WHEELS_H

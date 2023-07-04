@@ -1,11 +1,13 @@
-//
-// Created by anemeth on 2023.07.04..
-//
+/*
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+*/
 
 #include <stdbool.h>
 
-#ifndef _ALPHABET_H_
-#define _ALPHABET_H_
+#ifndef ENIGMATIC_ALPHABET_H
+#define ENIGMATIC_ALPHABET_H
 
 // PROGRAM VALUES //////////////////////////////////////////////////////////////
 
@@ -31,4 +33,4 @@ extern bool is_alphabetic_upper(char character);
 extern bool is_alphabetic_lower(char character);
 extern bool is_alphabetic(char character);
 
-#endif // ndef _ALPHABET_H_
+#endif // ndef ENIGMATIC_ALPHABET_H

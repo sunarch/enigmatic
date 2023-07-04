@@ -21,7 +21,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
-                                                        signed short wiring_rule)
+                                                 signed short wiring_rule)
 {
 
     // default index_after value, to be overwritten in this function
