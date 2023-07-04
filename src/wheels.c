@@ -27,26 +27,27 @@ static unsigned short wheel_offsets[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 void wheels_apply_default(void)
 {
-    apply_settings_default();
+    settings_default_apply();
 }
 
 void wheels_apply_prompt(void)
 {
     reset_wheel_offsets();
 
-    printf("Select option to apply\n:");
-    printf("|-> 'argentina'  - G-260 (Abwehr in Argentina)\n");
-    printf("|-> 'army'       - M3 (Army, Navy)\n");
-    printf("|-> 'bletchley'  - G-312 (Abwehr / Bletchley Park)\n");
-    printf("|-> 'commercial' - D (commercial)\n");
-    printf("|-> 'hungary'    - G-111 (Hungary / Munich)\n");
-    printf("|-> 'navy'       - M3 (Army, Navy)\n");
-    printf("|-> 'norway'     - N \"Norenigma\" (Norway)\n");
-    printf("|-> 'railway'    - R \"Rocket\" (Railway)\n");
-    printf("|-> 'services'   - I \"Services\" (Army, GAF)\n");
-    printf("|-> 'swiss'      - K \"Swiss K\" (Swiss)\n");
-    printf("|-> 'tirpitz'    - T \"Tirpitz\" (Japan)\n");
-    printf("|-> 'zaehlwerk'  - A-865 \"Zählwerk\" (1928)\n");
+    printf("Select option to apply:\n");
+    printf("|-> '%s'%s- ", ARGENTINA,  PADDING_ARGENTINA);  settings_argentina_comment();  printf("\n");
+    printf("|-> '%s'%s- ", ARMY,       PADDING_ARMY);       settings_army_comment();       printf("\n");
+    printf("|-> '%s'%s- ", BLETCHLEY,  PADDING_BLETCHLEY);  settings_bletchley_comment();  printf("\n");
+    printf("|-> '%s'%s- ", COMMERCIAL, PADDING_COMMERCIAL); settings_commercial_comment(); printf("\n");
+    printf("|-> '%s'%s- ", HUNGARY,    PADDING_HUNGARY);    settings_hungary_comment();    printf("\n");
+    printf("|-> '%s'%s- ", NAVY,       PADDING_NAVY);       settings_navy_comment();       printf("\n");
+    printf("|-> '%s'%s- ", NORWAY,     PADDING_NORWAY);     settings_norway_comment();     printf("\n");
+    printf("|-> '%s'%s- ", RAILWAY,    PADDING_RAILWAY);    settings_railway_comment();    printf("\n");
+    printf("|-> '%s'%s- ", SERVICES,   PADDING_SERVICES);   settings_services_comment();   printf("\n");
+    printf("|-> '%s'%s- ", SWISS,      PADDING_SWISS);      settings_swiss_comment();      printf("\n");
+    printf("|-> '%s'%s- ", TIRPITZ,    PADDING_TIRPITZ);    settings_tirpitz_comment();    printf("\n");
+    printf("|-> '%s'%s- ", ZAEHLWERK,  PADDING_ZAEHLWERK);  settings_zaehlwerk_comment();  printf("\n");
+    printf("Default: ");                                    settings_default_comment();    printf("\n");
     printf("Apply option: ");
 
     static char apply_option[BUFFER_LENGTH_APPLY_OPTION]  = "-";
@@ -64,45 +65,48 @@ void wheels_apply_prompt(void)
         apply_option[apply_option_length - 1] = '\0';
     }
 
-    if (strcmp(apply_option, "argentina") == STRCMP_EQUAL) {
-        apply_settings_argentina();
+    if (strcmp(apply_option, DEFAULT) == STRCMP_EQUAL) {
+        settings_default_apply();
     }
-    else if (strcmp(apply_option, "army") == STRCMP_EQUAL) {
-        apply_settings_army();
+    else if (strcmp(apply_option, ARGENTINA) == STRCMP_EQUAL) {
+        settings_argentina_apply();
     }
-    else if (strcmp(apply_option, "bletchley") == STRCMP_EQUAL) {
-        apply_settings_bletchley();
+    else if (strcmp(apply_option, ARMY) == STRCMP_EQUAL) {
+        settings_army_apply();
     }
-    else if (strcmp(apply_option, "commercial") == STRCMP_EQUAL) {
-        apply_settings_commercial();
+    else if (strcmp(apply_option, BLETCHLEY) == STRCMP_EQUAL) {
+        settings_bletchley_apply();
     }
-    else if (strcmp(apply_option, "hungary") == STRCMP_EQUAL) {
-        apply_settings_hungary();
+    else if (strcmp(apply_option, COMMERCIAL) == STRCMP_EQUAL) {
+        settings_commercial_apply();
     }
-    else if (strcmp(apply_option, "navy") == STRCMP_EQUAL) {
-        apply_settings_navy();
+    else if (strcmp(apply_option, HUNGARY) == STRCMP_EQUAL) {
+        settings_hungary_apply();
     }
-    else if (strcmp(apply_option, "norway") == STRCMP_EQUAL) {
-        apply_settings_norway();
+    else if (strcmp(apply_option, NAVY) == STRCMP_EQUAL) {
+        settings_navy_apply();
     }
-    else if (strcmp(apply_option, "railway") == STRCMP_EQUAL) {
-        apply_settings_railway();
+    else if (strcmp(apply_option, NORWAY) == STRCMP_EQUAL) {
+        settings_norway_apply();
     }
-    else if (strcmp(apply_option, "services") == STRCMP_EQUAL) {
-        apply_settings_services();
+    else if (strcmp(apply_option, RAILWAY) == STRCMP_EQUAL) {
+        settings_railway_apply();
     }
-    else if (strcmp(apply_option, "swiss") == STRCMP_EQUAL) {
-        apply_settings_swiss();
+    else if (strcmp(apply_option, SERVICES) == STRCMP_EQUAL) {
+        settings_services_apply();
     }
-    else if (strcmp(apply_option, "tirpitz") == STRCMP_EQUAL) {
-        apply_settings_tirpitz();
+    else if (strcmp(apply_option, SWISS) == STRCMP_EQUAL) {
+        settings_swiss_apply();
     }
-    else if (strcmp(apply_option, "zaehlwerk") == STRCMP_EQUAL) {
-        apply_settings_zaehlwerk();
+    else if (strcmp(apply_option, TIRPITZ) == STRCMP_EQUAL) {
+        settings_tirpitz_apply();
+    }
+    else if (strcmp(apply_option, ZAEHLWERK) == STRCMP_EQUAL) {
+        settings_zaehlwerk_apply();
     }
     else {
         printf("Setting option not recognized: '%s'\n", apply_option);
-        apply_settings_default();
+        settings_default_apply();
     }
 }
 

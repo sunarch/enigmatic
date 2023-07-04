@@ -75,6 +75,8 @@ static void set_wheel_wiring_rules(unsigned short wheel_number,
 // Rotor wheels (wiring, turnover points, c-o info, name) //////////////////////
 // Reflectors (UKW) ////////////////////////////////////////////////////////////
 
+// =============================================================================
+
 // W. I-VIII (I,M3,M4)
 // I "Services" (Army, GAF)
 // M3 (Army, Navy)
@@ -101,7 +103,13 @@ static const char UKW_C_DUENN [27] = "rdobjntkvehmlfcwzaxgyipsuq";  // UKW C "th
 static const char WALZE_BETA  [27] = "leyjvcnixwpbqmdrtakzgfuhos";
 static const char WALZE_GAMMA [27] = "fsokanuerhmbtiycwlqpzxvgjd";
 
-void apply_settings_services(void)
+// -----------------------------------------------------------------------------
+
+void settings_services_comment(void) {
+    printf("I \"Services\" (Army, GAF)");
+}
+
+void settings_services_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -129,7 +137,13 @@ void apply_settings_services(void)
 #endif
 }
 
-void apply_settings_army(void)
+// -----------------------------------------------------------------------------
+
+extern void settings_army_comment(void) {
+    printf("M3 (Army, Navy)");
+}
+
+void settings_army_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -157,7 +171,13 @@ void apply_settings_army(void)
 #endif
 }
 
-void apply_settings_navy(void)
+// -----------------------------------------------------------------------------
+
+void settings_navy_comment(void) {
+    printf("M3 (Army, Navy)");
+}
+
+void settings_navy_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -185,6 +205,8 @@ void apply_settings_navy(void)
 #endif
 }
 
+// =============================================================================
+
 // I-III (D)
 // D (commercial)
 
@@ -194,7 +216,13 @@ static const char WALZE_3D [27] = "cjgdpshkturawzxfmynqobvlie";  //  'n', 'N|O',
 
 static const char UKW_D [27] = "imetcgfraysqbzxwlhkdvupojn";
 
-void apply_settings_commercial(void)
+// -----------------------------------------------------------------------------
+
+void settings_commercial_comment(void) {
+    printf("D (commercial)");
+}
+
+void settings_commercial_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -222,6 +250,8 @@ void apply_settings_commercial(void)
 #endif
 }
 
+// =============================================================================
+
 // I-III (K)
 // K "Swiss K" (Swiss)
 
@@ -229,7 +259,13 @@ static const char WALZE_1K [27] = "pezuohxscvfmtbglrinqjwaydk";  //  'y', 'Y|Z',
 static const char WALZE_2K [27] = "zouesydkfwpciqxhmvblgnjrat";  //  'e', 'E|F', '2K')
 static const char WALZE_3K [27] = "ehrvxgaobqusimzflynwktpdjc";  //  'n', 'N|O', '3K')
 
-void apply_settings_swiss(void)
+// -----------------------------------------------------------------------------
+
+void settings_swiss_comment(void) {
+    printf("K \"Swiss K\" (Swiss)");
+}
+
+void settings_swiss_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -257,6 +293,8 @@ void apply_settings_swiss(void)
 #endif
 }
 
+// =============================================================================
+
 // I-V (N)
 // N "Norenigma" (Norway)
 
@@ -268,7 +306,13 @@ static const char WALZE_5N [27] = "hejxqotzbvfdascilwpgynmurk";  //  'z', 'Z|A',
 
 static const char UKW_N [27] = "mowjypuxndsraibfvlkzgqchet";
 
-void apply_settings_norway(void)
+// -----------------------------------------------------------------------------
+
+void settings_norway_comment(void) {
+    printf("N \"Norenigma\" (Norway)");
+}
+
+void settings_norway_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -296,6 +340,8 @@ void apply_settings_norway(void)
 #endif
 }
 
+// =============================================================================
+
 // I-III (R)
 // R "Rocket" (Railway)
 
@@ -305,7 +351,13 @@ static const char WALZE_3R [27] = "jviubhtcdyakeqzposgxnrmwfl";  //  'y', 'Y|Z',
 
 static const char UKW_R [27] = "qyhognecvpuztfdjaxwmkisrbl";
 
-void apply_settings_railway(void)
+// -----------------------------------------------------------------------------
+
+void settings_railway_comment(void) {
+    printf("R \"Rocket\" (Railway)");
+}
+
+void settings_railway_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -333,6 +385,8 @@ void apply_settings_railway(void)
 #endif
 }
 
+// =============================================================================
+
 // I-VIII (T)
 // T "Tirpitz" (Japan)
 
@@ -347,7 +401,13 @@ static const char WALZE_8T [27] = "ymtpnzhwkodajxeluqvgcbisfr";  //  'xeimq', '5
 
 static const char UKW_T [27] = "gekpbtaumocniljdxzyfhwvqsr";
 
-void apply_settings_tirpitz(void)
+// -----------------------------------------------------------------------------
+
+void settings_tirpitz_comment(void) {
+    printf("T \"Tirpitz\" (Japan)");
+}
+
+void settings_tirpitz_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -375,6 +435,8 @@ void apply_settings_tirpitz(void)
 #endif
 }
 
+// =============================================================================
+
 // I-III (A) [A-865]
 // A-865 "Zählwerk" (1928)
 
@@ -386,7 +448,13 @@ static const char WALZE_3A8 [27] = "cjgdpshkturawzxfmynqobvlie";  //  'uwxaefhkm
 
 static const char UKW_G [27] = "rulqmzjsygocetkwdahnbxpvif";
 
-void apply_settings_zaehlwerk(void)
+// -----------------------------------------------------------------------------
+
+void settings_zaehlwerk_comment(void) {
+    printf("A-865 \"Zählwerk\" (1928)");
+}
+
+void settings_zaehlwerk_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -414,6 +482,8 @@ void apply_settings_zaehlwerk(void)
 #endif
 }
 
+// =============================================================================
+
 // I-III (G1) [G-111]
 // G-111 (Hungary / Munich)
 
@@ -421,7 +491,13 @@ static const char WALZE_1G1 [27] = "wlrhbqundkjczsexotmagyfpvi";  //  'suvwzabce
 static const char WALZE_2G1 [27] = "tfjqazwmhlcuixrdygoevbnskp";  //  'stvyzacdfghkmnq', '15 notches (G-111)', '2G1')
 static const char WALZE_5G1 [27] = "qtpixwvdfrmusljohcanezkybg";  //  'swzfhmq', '7 notches (G-111)', '5G1')
 
-void apply_settings_hungary(void)
+// -----------------------------------------------------------------------------
+
+void settings_hungary_comment(void) {
+    printf("G-111 (Hungary / Munich)");
+}
+
+void settings_hungary_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -449,6 +525,8 @@ void apply_settings_hungary(void)
 #endif
 }
 
+// =============================================================================
+
 // I-III (G2) [G-260]
 // G-260 (Abwehr in Argentina)
 
@@ -456,7 +534,13 @@ static const char WALZE_1G2 [27] = "rcspblkqaumhwytifzvgojnexd";  //  'suvwzabce
 static const char WALZE_2G2 [27] = "wcmibvpjxarosgndlzkeyhufqt";  //  'stvyzacdfghkmnq', '15 notches (G-260)', '2G2')
 static const char WALZE_3G2 [27] = "fvdhzelsqmaxokyiwpgcbujtnr";  //  'uwxaefhkmnr', '11 notches (G-260)', '3G2')
 
-void apply_settings_argentina(void)
+// -----------------------------------------------------------------------------
+
+void settings_argentina_comment(void) {
+    printf("G-260 (Abwehr in Argentina)");
+}
+
+void settings_argentina_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -484,6 +568,8 @@ void apply_settings_argentina(void)
 #endif
 }
 
+// =============================================================================
+
 // I-III (G3) [G-312]
 // G-312 (Abwehr / Bletchley Park)
 
@@ -491,7 +577,13 @@ static const char WALZE_1G3 [27] = "dmtwsilruyqnkfejcazbpgxohv";  //  'suvwzabce
 static const char WALZE_2G3 [27] = "hqzgpjtmoblncifdyawveusrkx";  //  'stvyzacdfghkmnq', '15 notches (G-312)', '2G3')
 static const char WALZE_3G3 [27] = "uqntlszfmrehdpxkibvygjcwoa";  //  'uwxaefhkmnr', '11 notches (G-312)', '3G3')
 
-void apply_settings_bletchley(void)
+// -----------------------------------------------------------------------------
+
+void settings_bletchley_comment(void) {
+    printf("G-312 (Abwehr / Bletchley Park)");
+}
+
+void settings_bletchley_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -519,7 +611,13 @@ void apply_settings_bletchley(void)
 #endif
 }
 
-void apply_settings_default(void)
+// =============================================================================
+
+void settings_default_comment(void) {
+    printf("'%s'", BLETCHLEY);
+}
+
+void settings_default_apply(void)
 {
 #ifdef DEBUG
     debug_indent_increment(); // to function outer level
@@ -527,7 +625,7 @@ void apply_settings_default(void)
         printf("Applying settings: (default)\n");
 #endif
 
-    apply_settings_bletchley();
+    settings_bletchley_apply();
 
 #ifdef DEBUG
     debug_indent_decrement(); // to caller level
