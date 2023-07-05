@@ -129,7 +129,7 @@ static void display_row_rules(unsigned short direction,
                               unsigned short position)
 {
     unsigned short wheel_index;
-    signed short rules[11];
+    signed short rules[WHEELS_COUNT_MAX_TOTAL];
 
     if (direction == WHEEL_MODE_FRONT) {
         collect_wheel_wiring_rules_front_for_position(position, rules);
@@ -182,7 +182,7 @@ static void display_section(unsigned short direction, unsigned short wheel_count
     display_row_separator(wheel_count);
 
     // lines
-    for (position = 0; position < 26; ++position) {
+    for (position = 0; position < ABC_LENGTH; ++position) {
         display_row_rules(direction, wheel_count, position);
     }
 }

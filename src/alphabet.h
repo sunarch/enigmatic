@@ -4,15 +4,12 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#include <stdbool.h>
-
 #ifndef ENIGMATIC_ALPHABET_H
 #define ENIGMATIC_ALPHABET_H
 
-// MACRO VALUES ////////////////////////////////////////////////////////////////
+#include <stdbool.h>
 
-# define  ABC_LENGTH  26 // English alphabet
-# define  ABC_LENGTH_STRING  ABC_LENGTH + 1 // letters + \0
+#include "alphabet-common.h"
 
 // PUBLIC CONSTANTS ////////////////////////////////////////////////////////////
 

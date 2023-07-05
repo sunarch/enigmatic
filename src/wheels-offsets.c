@@ -6,6 +6,9 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include <stdlib.h>
 
+#include "alphabet-common.h"
+#include "common.h"
+#include "wheels-common.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"
 
@@ -17,7 +20,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
-static unsigned short wheel_offsets[MAX_WHEEL_COUNT + 1] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+static unsigned short wheel_offsets[WHEELS_COUNT_MAX_TOTAL] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
@@ -41,7 +44,7 @@ static void offsets_set(unsigned short wheel_number,
 
     validate_wheel_number(wheel_number);
 
-    wheel_offsets[wheel_number] = new_offset % 26;
+    wheel_offsets[wheel_number] = new_offset % ABC_LENGTH;
 
 #ifdef DEBUG
     debug_indent_increment();  // to function result level
@@ -66,7 +69,7 @@ void offsets_reset(void)
     debug_indent_print();
     printf("Before reset:\n");
     debug_indent_increment();  // to function result level
-    check_value_wheel_offset = offsets_get(0);
+    check_value_wheel_offset = offsets_get(UKW_INDEX);
     debug_indent_print();
     printf("CHECK: offsets_get(...) // wheel_number = 0 // %u // should always be 0 (UKW)\n", check_value_wheel_offset);
     for (unsigned short n = 1; n <= get_used_wheel_count(); ++n) {
@@ -77,7 +80,7 @@ void offsets_reset(void)
     debug_indent_decrement();  // to function status level
 #endif
 
-    for (unsigned short n = 0; n < 11; ++n) {
+    for (unsigned short n = 0; n < WHEELS_COUNT_MAX_TOTAL; ++n) {
         wheel_offsets[n] = 0;
     }
 
@@ -85,7 +88,7 @@ void offsets_reset(void)
     debug_indent_print();
     printf("After reset:\n");
     debug_indent_increment();  // to function result level
-    check_value_wheel_offset = offsets_get(0);
+    check_value_wheel_offset = offsets_get(UKW_INDEX);
     debug_indent_print();
     printf("CHECK: offsets_get(...) // wheel_number = 0 // %u // should always be 0 (UKW)\n", check_value_wheel_offset);
     for (unsigned short n = 1; n <= get_used_wheel_count(); ++n) {
@@ -111,7 +114,7 @@ static void offsets_advance_single(unsigned short wheel_number)
     validate_wheel_number(wheel_number);
 
     // move wheel offset by 1
-    offsets_set(wheel_number, ((offsets_get(wheel_number) + 1) % 26));
+    offsets_set(wheel_number, ((offsets_get(wheel_number) + 1) % ABC_LENGTH));
 
 #ifdef DEBUG
     // CHECK included in setter function
@@ -134,22 +137,22 @@ void offsets_advance(void)
     for (unsigned short n = 1; n <= wheel_count; ++n) {
         current_wheel_offset = offsets_get(n);
 
-        if (current_wheel_offset < 25) {
+        if (current_wheel_offset < ABC_LAST_INDEX) {
             offsets_advance_single(n);
             break;
         }
-        else if (current_wheel_offset == 25) {
+        else if (current_wheel_offset == ABC_LAST_INDEX) {
             offsets_advance_single(n);
             continue;
         }
         else {
-            exit(1);
+            exit(RETURN_CODE_ERROR);
         }
     }
 
 #ifdef DEBUG
     debug_indent_increment();  // to function result level
-        current_wheel_offset = offsets_get(0); // use var current_wheel_offset from this function
+        current_wheel_offset = offsets_get(UKW_INDEX); // use var current_wheel_offset from this function
         debug_indent_print();
         printf("CHECK: offsets_get(...) // wheel_number = 0 // '%u' // should always be 0 (UKW)\n", current_wheel_offset);
         for (unsigned short n = 1; n <= wheel_count; ++n) {

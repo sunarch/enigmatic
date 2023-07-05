@@ -7,14 +7,13 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_WHEELS_SETTINGS_H
 #define ENIGMATIC_WHEELS_SETTINGS_H
 
-// MACRO VALUES ////////////////////////////////////////////////////////////////
-
-#define  MAX_WHEEL_COUNT  10
+#include "alphabet-common.h"
+#include "wheels-common.h"
 
 // PUBLIC VARIABLES ////////////////////////////////////////////////////////////
 
-extern signed short wheel_wiring_rules_front[11][26];
-extern signed short wheel_wiring_rules_reverse[11][26];
+extern signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+extern signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 

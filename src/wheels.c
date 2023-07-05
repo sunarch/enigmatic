@@ -10,6 +10,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "common.h"
 #include "wheels.h"
+#include "wheels-common.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"
 
@@ -45,9 +46,9 @@ signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
 
 void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
 {
-    if (position > 25) { return; }
+    if (position >= ABC_LENGTH) { return; }
 
-    for (unsigned short i = 0; i < 11; ++i) {
+    for (unsigned short i = 0; i < WHEELS_COUNT_MAX_TOTAL; ++i) {
         rules[i] = wheel_wiring_rules_front[i][position];
     }
 
@@ -55,9 +56,9 @@ void collect_wheel_wiring_rules_front_for_position(unsigned short position, sign
 
 void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules)
 {
-    if (position > 25) { return; }
+    if (position >= ABC_LENGTH) { return; }
 
-    for (unsigned short i = 0; i < 11; ++i) {
+    for (unsigned short i = 0; i < WHEELS_COUNT_MAX_TOTAL; ++i) {
         rules[i] = wheel_wiring_rules_reverse[i][position];
     }
 }
@@ -95,7 +96,7 @@ void wheels_apply_prompt(void)
     if (fgets(apply_option, BUFFER_LENGTH_APPLY_OPTION, stdin) == NULL) {
         printf("Failed to get apply option\n");
         printf("Exiting...\n");
-        exit(1);
+        exit(RETURN_CODE_ERROR);
     };
 
     /* Remove trailing newline, if there. */

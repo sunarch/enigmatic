@@ -8,6 +8,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdlib.h>
 
 #include "alphabet.h"
+#include "alphabet-common.h"
+#include "common.h"
 #include "wheels-common.h"
 #include "wheels-settings.h"
 
@@ -17,8 +19,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // PUBLIC VARIABLES ////////////////////////////////////////////////////////////
 
-signed short wheel_wiring_rules_front[11][26];
-signed short wheel_wiring_rules_reverse[11][26];
+signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
 
 // PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
@@ -40,7 +42,7 @@ void validate_wheel_number(unsigned short wheel_number)
     if (wheel_number > wheel_count) {
         printf("Failed check with (wheel_number > wheel_count): (%u > %u)\n", wheel_number, wheel_count);
         printf("Exiting...\n");
-        exit(1);
+        exit(RETURN_CODE_ERROR);
     }
 }
 
@@ -54,10 +56,10 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
         printf("FUNC: void set_used_wheel_count(...) // unsigned short new_wheel_count = %u\n", new_wheel_count);
 #endif
 
-    if (new_wheel_count > MAX_WHEEL_COUNT) {
-        printf("Failed check with (new_wheel_count > %i): (%u > %i)\n", MAX_WHEEL_COUNT, new_wheel_count, MAX_WHEEL_COUNT);
+    if (new_wheel_count > WHEELS_COUNT_MAX_REGULAR) {
+        printf("Failed check with (new_wheel_count (%u) > %i)\n", new_wheel_count, WHEELS_COUNT_MAX_REGULAR);
         printf("Exiting...");
-        exit(1);
+        exit(RETURN_CODE_ERROR);
     }
 
     used_wheel_count = new_wheel_count;
@@ -77,10 +79,10 @@ static void set_wheel_wiring_rules(unsigned short wheel_number,
 
     signed short wiring_rule;
 
-    for (unsigned short n = 0; n < 26; ++n) {
-        wiring_rule = (signed short) ((wiring_alphabet[n] - abc_lower(n)) % 26);
+    for (unsigned short n = 0; n < ABC_LENGTH; ++n) {
+        wiring_rule = (signed short) ((wiring_alphabet[n] - abc_lower(n)) % ABC_LENGTH);
         wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
-        wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % 26] = (-1) * wiring_rule;
+        wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % ABC_LENGTH] = (-1) * wiring_rule;
     }
 }
 
@@ -96,26 +98,26 @@ static void set_wheel_wiring_rules(unsigned short wheel_number,
 // M3 (Army, Navy)
 // M4 "Shark" (U-Boats)
 
-static const char WALZE_I    [27] = "ekmflgdqvzntowyhxuspaibrcj";  //  'q', 'Q|R', 'I')
-static const char WALZE_II   [27] = "ajdksiruxblhwtmcqgznpyfvoe";  //  'e', 'E|F', 'II')
-static const char WALZE_III  [27] = "bdfhjlcprtxvznyeiwgakmusqo";  //  'v', 'V|W', 'III')
-static const char WALZE_IV   [27] = "esovpzjayquirhxlnftgkdcmwb";  //  'j', 'J|K', 'IV')
-static const char WALZE_V    [27] = "vzbrgityupsdnhlxawmjqofeck";  //  'z', 'Z|A', 'V')
-static const char WALZE_VI   [27] = "jpgvoumfyqbenhzrdkasxlictw";  //  'zm', 'Z|A, M|N', 'VI')
-static const char WALZE_VII  [27] = "nzjhgrcxmyswboufaivlpekqdt";  //  'zm', 'Z|A, M|N', 'VII')
-static const char WALZE_VIII [27] = "fkqhtlxocbjspdzramewniuygv";  //  'zm', 'Z|A, M|N', 'VIII')
+static const char WALZE_I    [ABC_LENGTH_STRING] = "ekmflgdqvzntowyhxuspaibrcj";  //  'q', 'Q|R', 'I')
+static const char WALZE_II   [ABC_LENGTH_STRING] = "ajdksiruxblhwtmcqgznpyfvoe";  //  'e', 'E|F', 'II')
+static const char WALZE_III  [ABC_LENGTH_STRING] = "bdfhjlcprtxvznyeiwgakmusqo";  //  'v', 'V|W', 'III')
+static const char WALZE_IV   [ABC_LENGTH_STRING] = "esovpzjayquirhxlnftgkdcmwb";  //  'j', 'J|K', 'IV')
+static const char WALZE_V    [ABC_LENGTH_STRING] = "vzbrgityupsdnhlxawmjqofeck";  //  'z', 'Z|A', 'V')
+static const char WALZE_VI   [ABC_LENGTH_STRING] = "jpgvoumfyqbenhzrdkasxlictw";  //  'zm', 'Z|A, M|N', 'VI')
+static const char WALZE_VII  [ABC_LENGTH_STRING] = "nzjhgrcxmyswboufaivlpekqdt";  //  'zm', 'Z|A, M|N', 'VII')
+static const char WALZE_VIII [ABC_LENGTH_STRING] = "fkqhtlxocbjspdzramewniuygv";  //  'zm', 'Z|A, M|N', 'VIII')
 
-static const char UKW_A [27] = "ejmzalyxvbwfcrquontspikhgd";
-static const char UKW_B [27] = "yruhqsldpxngokmiebfzcwvjat";
-static const char UKW_C [27] = "fvpjiaoyedrzxwgctkuqsbnmhl";
+static const char UKW_A [ABC_LENGTH_STRING] = "ejmzalyxvbwfcrquontspikhgd";
+static const char UKW_B [ABC_LENGTH_STRING] = "yruhqsldpxngokmiebfzcwvjat";
+static const char UKW_C [ABC_LENGTH_STRING] = "fvpjiaoyedrzxwgctkuqsbnmhl";
 
 // (M4):
 /* UKW B and C "thin" are not currently used in any configuration
-static const char UKW_B_DUENN [27] = "enkqauywjicopblmdxzvfthrgs";  // UKW B "thin"
-static const char UKW_C_DUENN [27] = "rdobjntkvehmlfcwzaxgyipsuq";  // UKW C "thin"
+static const char UKW_B_DUENN [ABC_LENGTH_STRING] = "enkqauywjicopblmdxzvfthrgs";  // UKW B "thin"
+static const char UKW_C_DUENN [ABC_LENGTH_STRING] = "rdobjntkvehmlfcwzaxgyipsuq";  // UKW C "thin"
 */
-static const char WALZE_BETA  [27] = "leyjvcnixwpbqmdrtakzgfuhos";
-static const char WALZE_GAMMA [27] = "fsokanuerhmbtiycwlqpzxvgjd";
+static const char WALZE_BETA  [ABC_LENGTH_STRING] = "leyjvcnixwpbqmdrtakzgfuhos";
+static const char WALZE_GAMMA [ABC_LENGTH_STRING] = "fsokanuerhmbtiycwlqpzxvgjd";
 
 // -----------------------------------------------------------------------------
 
@@ -224,11 +226,11 @@ void settings_navy_apply(void)
 // I-III (D)
 // D (commercial)
 
-static const char WALZE_1D [27] = "lpgszmhaeoqkvxrfybutnicjdw";  //  'y', 'Y|Z', '1D')
-static const char WALZE_2D [27] = "slvgbtfxjqohewirzyamkpcndu";  //  'e', 'E|F', '2D')
-static const char WALZE_3D [27] = "cjgdpshkturawzxfmynqobvlie";  //  'n', 'N|O', '3D')
+static const char WALZE_1D [ABC_LENGTH_STRING] = "lpgszmhaeoqkvxrfybutnicjdw";  //  'y', 'Y|Z', '1D')
+static const char WALZE_2D [ABC_LENGTH_STRING] = "slvgbtfxjqohewirzyamkpcndu";  //  'e', 'E|F', '2D')
+static const char WALZE_3D [ABC_LENGTH_STRING] = "cjgdpshkturawzxfmynqobvlie";  //  'n', 'N|O', '3D')
 
-static const char UKW_D [27] = "imetcgfraysqbzxwlhkdvupojn";
+static const char UKW_D [ABC_LENGTH_STRING] = "imetcgfraysqbzxwlhkdvupojn";
 
 // -----------------------------------------------------------------------------
 
@@ -269,9 +271,9 @@ void settings_commercial_apply(void)
 // I-III (K)
 // K "Swiss K" (Swiss)
 
-static const char WALZE_1K [27] = "pezuohxscvfmtbglrinqjwaydk";  //  'y', 'Y|Z', '1K')
-static const char WALZE_2K [27] = "zouesydkfwpciqxhmvblgnjrat";  //  'e', 'E|F', '2K')
-static const char WALZE_3K [27] = "ehrvxgaobqusimzflynwktpdjc";  //  'n', 'N|O', '3K')
+static const char WALZE_1K [ABC_LENGTH_STRING] = "pezuohxscvfmtbglrinqjwaydk";  //  'y', 'Y|Z', '1K')
+static const char WALZE_2K [ABC_LENGTH_STRING] = "zouesydkfwpciqxhmvblgnjrat";  //  'e', 'E|F', '2K')
+static const char WALZE_3K [ABC_LENGTH_STRING] = "ehrvxgaobqusimzflynwktpdjc";  //  'n', 'N|O', '3K')
 
 // -----------------------------------------------------------------------------
 
@@ -312,13 +314,13 @@ void settings_swiss_apply(void)
 // I-V (N)
 // N "Norenigma" (Norway)
 
-static const char WALZE_1N [27] = "wtokasuyvrbxjhqcpzefmdinlg";  //  'q', 'Q|R', '1N')
-static const char WALZE_2N [27] = "gjlpubswemctqvhxaofzdrkyni";  //  'e', 'E|F', '2N')
-static const char WALZE_3N [27] = "jwfmhnbpusdytixvzgrqlaoekc";  //  'v', 'V|W', '3N')
-static const char WALZE_4N [27] = "esovpzjayquirhxlnftgkdcmwb";  //  'j', 'J|K', '4N')
-static const char WALZE_5N [27] = "hejxqotzbvfdascilwpgynmurk";  //  'z', 'Z|A', '5N')
+static const char WALZE_1N [ABC_LENGTH_STRING] = "wtokasuyvrbxjhqcpzefmdinlg";  //  'q', 'Q|R', '1N')
+static const char WALZE_2N [ABC_LENGTH_STRING] = "gjlpubswemctqvhxaofzdrkyni";  //  'e', 'E|F', '2N')
+static const char WALZE_3N [ABC_LENGTH_STRING] = "jwfmhnbpusdytixvzgrqlaoekc";  //  'v', 'V|W', '3N')
+static const char WALZE_4N [ABC_LENGTH_STRING] = "esovpzjayquirhxlnftgkdcmwb";  //  'j', 'J|K', '4N')
+static const char WALZE_5N [ABC_LENGTH_STRING] = "hejxqotzbvfdascilwpgynmurk";  //  'z', 'Z|A', '5N')
 
-static const char UKW_N [27] = "mowjypuxndsraibfvlkzgqchet";
+static const char UKW_N [ABC_LENGTH_STRING] = "mowjypuxndsraibfvlkzgqchet";
 
 // -----------------------------------------------------------------------------
 
@@ -359,11 +361,11 @@ void settings_norway_apply(void)
 // I-III (R)
 // R "Rocket" (Railway)
 
-static const char WALZE_1R [27] = "jgdqoxuscamifrvtpnewkblzyh";  //  'n', 'N|O', '1R')
-static const char WALZE_2R [27] = "ntzpsfbokmwrcjdivlaeyuxhgq";  //  'e', 'E|F', '2R')
-static const char WALZE_3R [27] = "jviubhtcdyakeqzposgxnrmwfl";  //  'y', 'Y|Z', '3R')
+static const char WALZE_1R [ABC_LENGTH_STRING] = "jgdqoxuscamifrvtpnewkblzyh";  //  'n', 'N|O', '1R')
+static const char WALZE_2R [ABC_LENGTH_STRING] = "ntzpsfbokmwrcjdivlaeyuxhgq";  //  'e', 'E|F', '2R')
+static const char WALZE_3R [ABC_LENGTH_STRING] = "jviubhtcdyakeqzposgxnrmwfl";  //  'y', 'Y|Z', '3R')
 
-static const char UKW_R [27] = "qyhognecvpuztfdjaxwmkisrbl";
+static const char UKW_R [ABC_LENGTH_STRING] = "qyhognecvpuztfdjaxwmkisrbl";
 
 // -----------------------------------------------------------------------------
 
@@ -404,16 +406,16 @@ void settings_railway_apply(void)
 // I-VIII (T)
 // T "Tirpitz" (Japan)
 
-static const char WALZE_1T [27] = "kptyuelocvgrfqdanjmbswhzxi";  //  'wzekq', '5 notches', '1T')
-static const char WALZE_2T [27] = "uphzlweqmtdjxcaksoigvbyfnr";  //  'wzflr', '5 notches', '2T')
-static const char WALZE_3T [27] = "qudlyrfekonvzaxwhmgpjbsict";  //  'wzekq', '5 notches', '3T')
-static const char WALZE_4T [27] = "ciwtbkxnrespflydagvhquojzm";  //  'wzflr', '5 notches', '4T')
-static const char WALZE_5T [27] = "uaxgisnjbverdylfzwtpckohmq";  //  'ycfkr', '5 notches', '5T')
-static const char WALZE_6T [27] = "xfuzgalvhcnysewqtdmrbkpioj";  //  'xeimq', '5 notches', '6T')
-static const char WALZE_7T [27] = "bjvftxplnayozikwgdqeruchsm";  //  'ycfkr', '5 notches', '7T')
-static const char WALZE_8T [27] = "ymtpnzhwkodajxeluqvgcbisfr";  //  'xeimq', '5 notches', '8T')
+static const char WALZE_1T [ABC_LENGTH_STRING] = "kptyuelocvgrfqdanjmbswhzxi";  //  'wzekq', '5 notches', '1T')
+static const char WALZE_2T [ABC_LENGTH_STRING] = "uphzlweqmtdjxcaksoigvbyfnr";  //  'wzflr', '5 notches', '2T')
+static const char WALZE_3T [ABC_LENGTH_STRING] = "qudlyrfekonvzaxwhmgpjbsict";  //  'wzekq', '5 notches', '3T')
+static const char WALZE_4T [ABC_LENGTH_STRING] = "ciwtbkxnrespflydagvhquojzm";  //  'wzflr', '5 notches', '4T')
+static const char WALZE_5T [ABC_LENGTH_STRING] = "uaxgisnjbverdylfzwtpckohmq";  //  'ycfkr', '5 notches', '5T')
+static const char WALZE_6T [ABC_LENGTH_STRING] = "xfuzgalvhcnysewqtdmrbkpioj";  //  'xeimq', '5 notches', '6T')
+static const char WALZE_7T [ABC_LENGTH_STRING] = "bjvftxplnayozikwgdqeruchsm";  //  'ycfkr', '5 notches', '7T')
+static const char WALZE_8T [ABC_LENGTH_STRING] = "ymtpnzhwkodajxeluqvgcbisfr";  //  'xeimq', '5 notches', '8T')
 
-static const char UKW_T [27] = "gekpbtaumocniljdxzyfhwvqsr";
+static const char UKW_T [ABC_LENGTH_STRING] = "gekpbtaumocniljdxzyfhwvqsr";
 
 // -----------------------------------------------------------------------------
 
@@ -454,13 +456,13 @@ void settings_tirpitz_apply(void)
 // I-III (A) [A-865]
 // A-865 "Zählwerk" (1928)
 
-static const char WALZE_1A8 [27] = "lpgszmhaeoqkvxrfybutnicjdw";  //  'suvwzabcefgiklopq', '17 notches (A-865)', '1A8')
-static const char WALZE_2A8 [27] = "slvgbtfxjqohewirzyamkpcndu";  //  'stvyzacdfghkmnq', '15 notches (A-865)', '2A8')
-static const char WALZE_3A8 [27] = "cjgdpshkturawzxfmynqobvlie";  //  'uwxaefhkmnr', '11 notches (A-865)', '3A8')
+static const char WALZE_1A8 [ABC_LENGTH_STRING] = "lpgszmhaeoqkvxrfybutnicjdw";  //  'suvwzabcefgiklopq', '17 notches (A-865)', '1A8')
+static const char WALZE_2A8 [ABC_LENGTH_STRING] = "slvgbtfxjqohewirzyamkpcndu";  //  'stvyzacdfghkmnq', '15 notches (A-865)', '2A8')
+static const char WALZE_3A8 [ABC_LENGTH_STRING] = "cjgdpshkturawzxfmynqobvlie";  //  'uwxaefhkmnr', '11 notches (A-865)', '3A8')
 
 // (G)
 
-static const char UKW_G [27] = "rulqmzjsygocetkwdahnbxpvif";
+static const char UKW_G [ABC_LENGTH_STRING] = "rulqmzjsygocetkwdahnbxpvif";
 
 // -----------------------------------------------------------------------------
 
@@ -501,9 +503,9 @@ void settings_zaehlwerk_apply(void)
 // I-III (G1) [G-111]
 // G-111 (Hungary / Munich)
 
-static const char WALZE_1G1 [27] = "wlrhbqundkjczsexotmagyfpvi";  //  'suvwzabcefgiklopq', '17 notches (G-111)', '1G1')
-static const char WALZE_2G1 [27] = "tfjqazwmhlcuixrdygoevbnskp";  //  'stvyzacdfghkmnq', '15 notches (G-111)', '2G1')
-static const char WALZE_5G1 [27] = "qtpixwvdfrmusljohcanezkybg";  //  'swzfhmq', '7 notches (G-111)', '5G1')
+static const char WALZE_1G1 [ABC_LENGTH_STRING] = "wlrhbqundkjczsexotmagyfpvi";  //  'suvwzabcefgiklopq', '17 notches (G-111)', '1G1')
+static const char WALZE_2G1 [ABC_LENGTH_STRING] = "tfjqazwmhlcuixrdygoevbnskp";  //  'stvyzacdfghkmnq', '15 notches (G-111)', '2G1')
+static const char WALZE_5G1 [ABC_LENGTH_STRING] = "qtpixwvdfrmusljohcanezkybg";  //  'swzfhmq', '7 notches (G-111)', '5G1')
 
 // -----------------------------------------------------------------------------
 
@@ -544,9 +546,9 @@ void settings_hungary_apply(void)
 // I-III (G2) [G-260]
 // G-260 (Abwehr in Argentina)
 
-static const char WALZE_1G2 [27] = "rcspblkqaumhwytifzvgojnexd";  //  'suvwzabcefgiklopq', '17 notches (G-260)', '1G2')
-static const char WALZE_2G2 [27] = "wcmibvpjxarosgndlzkeyhufqt";  //  'stvyzacdfghkmnq', '15 notches (G-260)', '2G2')
-static const char WALZE_3G2 [27] = "fvdhzelsqmaxokyiwpgcbujtnr";  //  'uwxaefhkmnr', '11 notches (G-260)', '3G2')
+static const char WALZE_1G2 [ABC_LENGTH_STRING] = "rcspblkqaumhwytifzvgojnexd";  //  'suvwzabcefgiklopq', '17 notches (G-260)', '1G2')
+static const char WALZE_2G2 [ABC_LENGTH_STRING] = "wcmibvpjxarosgndlzkeyhufqt";  //  'stvyzacdfghkmnq', '15 notches (G-260)', '2G2')
+static const char WALZE_3G2 [ABC_LENGTH_STRING] = "fvdhzelsqmaxokyiwpgcbujtnr";  //  'uwxaefhkmnr', '11 notches (G-260)', '3G2')
 
 // -----------------------------------------------------------------------------
 
@@ -587,9 +589,9 @@ void settings_argentina_apply(void)
 // I-III (G3) [G-312]
 // G-312 (Abwehr / Bletchley Park)
 
-static const char WALZE_1G3 [27] = "dmtwsilruyqnkfejcazbpgxohv";  //  'suvwzabcefgiklopq', '17 notches (G-312)', '1G3')
-static const char WALZE_2G3 [27] = "hqzgpjtmoblncifdyawveusrkx";  //  'stvyzacdfghkmnq', '15 notches (G-312)', '2G3')
-static const char WALZE_3G3 [27] = "uqntlszfmrehdpxkibvygjcwoa";  //  'uwxaefhkmnr', '11 notches (G-312)', '3G3')
+static const char WALZE_1G3 [ABC_LENGTH_STRING] = "dmtwsilruyqnkfejcazbpgxohv";  //  'suvwzabcefgiklopq', '17 notches (G-312)', '1G3')
+static const char WALZE_2G3 [ABC_LENGTH_STRING] = "hqzgpjtmoblncifdyawveusrkx";  //  'stvyzacdfghkmnq', '15 notches (G-312)', '2G3')
+static const char WALZE_3G3 [ABC_LENGTH_STRING] = "uqntlszfmrehdpxkibvygjcwoa";  //  'uwxaefhkmnr', '11 notches (G-312)', '3G3')
 
 // -----------------------------------------------------------------------------
 

@@ -10,6 +10,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <string.h>
 
 #include "alphabet.h"
+#include "common.h"
 
 // PUBLIC CONSTANTS ////////////////////////////////////////////////////////////
 
@@ -23,7 +24,7 @@ char abc_upper(unsigned int index)
     if (index > ABC_LENGTH) {
         printf("Tried to access index outside alphabet: '%d'\n", index);
         printf("Exiting...\n");
-        exit(1);
+        exit(RETURN_CODE_ERROR);
     };
     return ABC_UPPER[index];
 }
@@ -33,7 +34,7 @@ char abc_lower(unsigned int index)
     if (index > ABC_LENGTH) {
         printf("Tried to access index outside alphabet: '%d'\n", index);
         printf("Exiting...\n");
-        exit(1);
+        exit(RETURN_CODE_ERROR);
     };
     return ABC_LOWER[index];
 }

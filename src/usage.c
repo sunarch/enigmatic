@@ -10,6 +10,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <string.h>
 
 #include "alphabet.h"
+#include "alphabet-common.h"
+#include "common.h"
 #include "usage.h"
 #include "wheels.h"
 #include "wheels-common.h"
@@ -38,11 +40,11 @@ unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
 
     // modulo 26
     if (index_plus_rule >= 0) {
-        index_plus_rule = index_plus_rule % 26;
+        index_plus_rule = index_plus_rule % ABC_LENGTH;
         index_after = (unsigned short) index_plus_rule;
     }
     else {
-        index_plus_rule = (signed short) (26 - (abs(index_plus_rule) % 26));
+        index_plus_rule = (signed short) (ABC_LENGTH - (abs(index_plus_rule) % ABC_LENGTH));
         index_after = (unsigned short) index_plus_rule;
     }
 
@@ -72,7 +74,7 @@ static char get_wheel_output(unsigned short wheel_number,
     if(index < 0) {
         printf("Char '%c' not found in alphabet\n", input_char);
         printf("Exiting...\n");
-        exit(1);
+        exit(RETURN_CODE_ERROR);
     }
 
     #ifdef DEBUG
@@ -82,7 +84,7 @@ static char get_wheel_output(unsigned short wheel_number,
 
     // wiring rule from offset index
     wheel_offset = offsets_get(wheel_number);
-    offset_index = (index + wheel_offset) % 26;
+    offset_index = (index + wheel_offset) % ABC_LENGTH;
     switch(mode) {
         case WHEEL_MODE_UKW:
             // use the WHEEL_MODE_FRONT method for WHEEL_MODE_UKW
@@ -95,7 +97,7 @@ static char get_wheel_output(unsigned short wheel_number,
             wiring_rule = get_wheel_wiring_rules_reverse(wheel_number)[offset_index];
             break;
         default:
-            exit(1);
+            exit(RETURN_CODE_ERROR);
     }
     #ifdef DEBUG
         debug_indent_print();

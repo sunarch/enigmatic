@@ -44,7 +44,7 @@ int main (void)
         if (fgets(command, BUFFER_LENGTH_COMMAND, stdin) == NULL) {
             printf("Failed check with (fgets(command, %i, stdin) == NULL)\n", BUFFER_LENGTH_COMMAND);
             printf("Exiting...\n");
-            exit(1);
+            exit(RETURN_CODE_ERROR);
         };
 
         /* Remove trailing newline, if there. */
@@ -72,7 +72,7 @@ int main (void)
             if (fgets(message, BUFFER_LENGTH_MESSAGE, stdin) == NULL) {
                 printf("Failed check with (fgets(message, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
                 printf("Exiting...\n");
-                exit(1);
+                exit(RETURN_CODE_ERROR);
             };
             /* Remove trailing newline, if there. */
             if ((strlen(message) > 0) && (message[strlen(message) - 1] == '\n')) {
@@ -111,5 +111,5 @@ int main (void)
 
     printf("Thank you for using Enigmatic!\n");
 
-    return 0;
+    return RETURN_CODE_SUCCESS;
 }
