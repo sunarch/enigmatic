@@ -27,11 +27,75 @@ static char command  [BUFFER_LENGTH_COMMAND]  = "start";
 static char message  [BUFFER_LENGTH_MESSAGE]  = ".";
 static char crypto   [BUFFER_LENGTH_MESSAGE]  = ".";
 
+// HANDLERS ////////////////////////////////////////////////////////////////////
+
+static void command_empty(void)
+{
+    printf("No command provided.\n");
+}
+
+static void command_help(void)
+{
+    printf("Commands: help, msg/message, ascii, config, apply, reset, exit\n");
+}
+
+static void command_message(void)
+{
+    printf("(max. message size is 1 KiB)\n");
+    printf("Enter message: "); // argument prompt
+
+    // get input
+    if (fgets(message, BUFFER_LENGTH_MESSAGE, stdin) == NULL) {
+        printf("Failed check with (fgets(message, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
+        printf("Exiting...\n");
+        exit(RETURN_CODE_ERROR);
+    }
+    /* Remove trailing newline, if there. */
+    if ((strlen(message) > 0) && (message[strlen(message) - 1] == '\n')) {
+        message[strlen (message) - 1] = '\0';
+    }
+
+    printf("MSG:  \"%s\"\n", message);
+
+    message_process(message, crypto);
+
+    printf("CMSG: \"%s\"\n", crypto);
+}
+
+static void command_ascii(void)
+{
+    printf("MSG:  ");
+    debug_print_as_ascii(message);
+    printf("CMSG: ");
+    debug_print_as_ascii(crypto);
+}
+
+static void command_config(void)
+{
+    display_config();
+}
+
+static void command_apply(void)
+{
+    wheels_apply_prompt();
+}
+
+static void command_reset(void)
+{
+    offsets_reset();
+    printf("Wheel offsets reset.\n");
+}
+
+static void command_unknown(void)
+{
+    printf("Command not recognized.\n");
+}
+
 // ENTRY POINT /////////////////////////////////////////////////////////////////
 
 int main (void)
 {
-    printf("Welcome to Enigmatic - an Enigma emulator\n"); // welcome message
+    printf("Welcome to Enigmatic - an Enigma emulator\n");
 
     // apply default settings
     wheels_apply_default();
@@ -53,6 +117,7 @@ int main (void)
         }
 
         if (strlen(command) == 0) {
+            command_empty();
             continue;
         }
 
@@ -61,52 +126,15 @@ int main (void)
             printf("Command: '%s'\n", command);
         #endif
 
-        if (strcmp(command, "help") == STRCMP_EQUAL) {
-            printf("Commands: help, msg/message, ascii, config, apply, reset, exit\n");
-        }
-        else if (strcmp(command, "msg") == STRCMP_EQUAL || strcmp(command, "message") == STRCMP_EQUAL) {
-            printf("(max. message size is 1 KiB)\n");
-            printf("Enter message: "); // argument prompt
-
-            // get input
-            if (fgets(message, BUFFER_LENGTH_MESSAGE, stdin) == NULL) {
-                printf("Failed check with (fgets(message, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
-                printf("Exiting...\n");
-                exit(RETURN_CODE_ERROR);
-            }
-            /* Remove trailing newline, if there. */
-            if ((strlen(message) > 0) && (message[strlen(message) - 1] == '\n')) {
-                message[strlen (message) - 1] = '\0';
-            }
-
-            printf("MSG:  \"%s\"\n", message);
-
-            message_process(message, crypto);
-
-            printf("CMSG: \"%s\"\n", crypto);
-        }
-        else if (strcmp(command, "ascii") == STRCMP_EQUAL) {
-            printf("MSG:  ");
-            debug_print_as_ascii(message);
-            printf("CMSG: ");
-            debug_print_as_ascii(crypto);
-        }
-        else if (strcmp(command, "config") == STRCMP_EQUAL) {
-            display_config();
-        }
-        else if (strcmp(command, "apply") == STRCMP_EQUAL) {
-            wheels_apply_prompt();
-        }
-        else if (strcmp(command, "reset") == STRCMP_EQUAL) {
-            offsets_reset();
-            printf("Wheel offsets reset.\n");
-        }
-        else if (strcmp(command, "exit") == STRCMP_EQUAL) {
-            break; // exit program loop
-        }
-        else {
-            printf("Command not recognized.\n");
-        }
+             if (strcmp(command, "help")    == STRCMP_EQUAL) { command_help();    }
+        else if (strcmp(command, "message") == STRCMP_EQUAL) { command_message(); }
+        else if (strcmp(command, "msg")     == STRCMP_EQUAL) { command_message(); }
+        else if (strcmp(command, "ascii")   == STRCMP_EQUAL) { command_ascii();   }
+        else if (strcmp(command, "config")  == STRCMP_EQUAL) { command_config();  }
+        else if (strcmp(command, "apply")   == STRCMP_EQUAL) { command_apply();   }
+        else if (strcmp(command, "reset")   == STRCMP_EQUAL) { command_reset();   }
+        else if (strcmp(command, "exit")    == STRCMP_EQUAL) { break;             }
+        else                                                 { command_unknown(); }
     }
 
     printf("Thank you for using Enigmatic!\n");
