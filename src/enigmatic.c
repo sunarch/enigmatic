@@ -57,8 +57,8 @@ int main (void)
         }
 
         #ifdef DEBUG
-            debug_indent_print();
-            printf("COMMAND ENTERED: \"%s\"\n", command);
+            debug_prefix();
+            printf("Command: '%s'\n", command);
         #endif
 
         if (strcmp(command, "help") == STRCMP_EQUAL) {

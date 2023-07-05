@@ -191,13 +191,6 @@ static void display_section(unsigned short direction, unsigned short wheel_count
 
 void display_config(void)
 {
-    #ifdef DEBUG
-        debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("START of configuration\n");
-        debug_indent_increment(); // to function inner level
-    #endif
-
     unsigned short wheel_count = get_used_wheel_count();
 
     printf("\n");
@@ -220,11 +213,4 @@ void display_config(void)
 
     display_section(WHEEL_MODE_REVERSE, wheel_count);
     printf("\n");
-
-    #ifdef DEBUG
-        debug_indent_decrement(); // to function outer level
-        debug_indent_print();
-        printf("END of configuration\n");
-        debug_indent_decrement(); // to caller level
-    #endif
 }

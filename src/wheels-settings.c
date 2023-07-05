@@ -51,13 +51,12 @@ void validate_wheel_number(unsigned short wheel_number)
 static void set_used_wheel_count(unsigned short new_wheel_count)
 {
 #ifdef DEBUG
-    debug_indent_increment();  // to function call level
-        debug_indent_print();
-        printf("FUNC: void set_used_wheel_count(...) // unsigned short new_wheel_count = %u\n", new_wheel_count);
+    debug_prefix();
+    printf("set_used_wheel_count '%u' -> '%u'", get_used_wheel_count(), new_wheel_count);
 #endif
 
     if (new_wheel_count > WHEELS_COUNT_MAX_REGULAR) {
-        printf("Failed check with (new_wheel_count (%u) > %i)\n", new_wheel_count, WHEELS_COUNT_MAX_REGULAR);
+        printf("Failed check with (new_wheel_count (%u) > %u)", new_wheel_count, WHEELS_COUNT_MAX_REGULAR);
         printf("Exiting...");
         exit(RETURN_CODE_ERROR);
     }
@@ -65,11 +64,7 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
     used_wheel_count = new_wheel_count;
 
 #ifdef DEBUG
-    debug_indent_increment();  // to function result level
-        debug_indent_print();
-        printf("CHECK: get_used_wheel_count() returns %u\n", get_used_wheel_count());
-        debug_indent_decrement();  // to function call level
-        debug_indent_decrement();  // to caller level
+    printf(" | check: '%u'\n", get_used_wheel_count());
 #endif
 }
 
@@ -128,9 +123,8 @@ void settings_services_comment(void) {
 void settings_services_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: services\n");
+    debug_prefix();
+    printf("Applying settings: services\n");
 #endif
 
     set_used_wheel_count(5);
@@ -147,10 +141,6 @@ void settings_services_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_A);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // -----------------------------------------------------------------------------
@@ -162,9 +152,8 @@ extern void settings_army_comment(void) {
 void settings_army_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: army\n");
+    debug_prefix();
+    printf("Applying settings: army\n");
 #endif
 
     set_used_wheel_count(8);
@@ -181,10 +170,6 @@ void settings_army_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_B);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // -----------------------------------------------------------------------------
@@ -196,9 +181,8 @@ void settings_navy_comment(void) {
 void settings_navy_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: navy\n");
+    debug_prefix();
+    printf("Applying settings: navy\n");
 #endif
 
     set_used_wheel_count(10);
@@ -215,10 +199,6 @@ void settings_navy_apply(void)
     set_wheel_wiring_rules(10, WALZE_VIII);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_C);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -241,9 +221,8 @@ void settings_commercial_comment(void) {
 void settings_commercial_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: commercial\n");
+    debug_prefix();
+    printf("Applying settings: commercial\n");
 #endif
 
     set_used_wheel_count(3);
@@ -260,10 +239,6 @@ void settings_commercial_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_D);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -284,9 +259,8 @@ void settings_swiss_comment(void) {
 void settings_swiss_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: \"Swiss K\" (Swiss)\n");
+    debug_prefix();
+    printf("Applying settings: \"Swiss K\" (Swiss)\n");
 #endif
 
     set_used_wheel_count(3);
@@ -303,10 +277,6 @@ void settings_swiss_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, ABC_LOWER);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -331,9 +301,8 @@ void settings_norway_comment(void) {
 void settings_norway_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: \"Norenigma\" (Norway)\n");
+    debug_prefix();
+    printf("Applying settings: \"Norenigma\" (Norway)\n");
 #endif
 
     set_used_wheel_count(5);
@@ -350,10 +319,6 @@ void settings_norway_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_N);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -376,9 +341,8 @@ void settings_railway_comment(void) {
 void settings_railway_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: \"Rocket\" (Railway)\n");
+    debug_prefix();
+    printf("Applying settings: \"Rocket\" (Railway)\n");
 #endif
 
     set_used_wheel_count(3);
@@ -395,10 +359,6 @@ void settings_railway_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_R);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -426,9 +386,8 @@ void settings_tirpitz_comment(void) {
 void settings_tirpitz_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: \"Tirpitz\" (Japan)\n");
+    debug_prefix();
+    printf("Applying settings: \"Tirpitz\" (Japan)\n");
 #endif
 
     set_used_wheel_count(8);
@@ -445,10 +404,6 @@ void settings_tirpitz_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_T);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -473,9 +428,8 @@ void settings_zaehlwerk_comment(void) {
 void settings_zaehlwerk_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: \"Zählwerk\" (1928)\n");
+    debug_prefix();
+    printf("Applying settings: \"Zählwerk\" (1928)\n");
 #endif
 
     set_used_wheel_count(3);
@@ -492,10 +446,6 @@ void settings_zaehlwerk_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, ABC_LOWER);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -516,9 +466,8 @@ void settings_hungary_comment(void) {
 void settings_hungary_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: Hungary / Munich\n");
+    debug_prefix();
+    printf("Applying settings: Hungary / Munich\n");
 #endif
 
     set_used_wheel_count(3);
@@ -535,10 +484,6 @@ void settings_hungary_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -559,9 +504,8 @@ void settings_argentina_comment(void) {
 void settings_argentina_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: Abwehr in Argentina\n");
+    debug_prefix();
+    printf("Applying settings: Abwehr in Argentina\n");
 #endif
 
     set_used_wheel_count(3);
@@ -578,10 +522,6 @@ void settings_argentina_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -602,9 +542,8 @@ void settings_bletchley_comment(void) {
 void settings_bletchley_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: Abwehr / Bletchley Park\n");
+    debug_prefix();
+    printf("Applying settings: Abwehr / Bletchley Park\n");
 #endif
 
     set_used_wheel_count(3);
@@ -621,10 +560,6 @@ void settings_bletchley_apply(void)
     // set_wheel_wiring_rules(10, ABC_LOWER);
 
     set_wheel_wiring_rules(UKW_INDEX, UKW_G);
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }
 
 // =============================================================================
@@ -636,14 +571,9 @@ void settings_default_comment(void) {
 void settings_default_apply(void)
 {
 #ifdef DEBUG
-    debug_indent_increment(); // to function outer level
-        debug_indent_print();
-        printf("Applying settings: (default)\n");
+    debug_prefix();
+    printf("Applying settings: (default)\n");
 #endif
 
     settings_bletchley_apply();
-
-#ifdef DEBUG
-    debug_indent_decrement(); // to caller level
-#endif
 }

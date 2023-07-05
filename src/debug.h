@@ -15,6 +15,12 @@ extern void debug_indent_print(void);
 extern void debug_indent_increment(void);
 extern void debug_indent_decrement(void);
 
+extern void debug_prefix(void);
+
+extern void debug_number_unsigned_hundred(unsigned short number);
+extern void debug_number_unsigned(unsigned short number);
+extern void debug_number_signed(signed short number);
+
 #endif // def DEBUG
 
 #endif // ndef ENIGMATIC_UTIL_DEBUG_H

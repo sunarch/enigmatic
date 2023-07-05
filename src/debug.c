@@ -44,4 +44,43 @@ void debug_indent_decrement(void) {
     }
 }
 
+void debug_prefix(void)
+{
+    printf("[DEBUG] ");
+}
+
+void debug_number_unsigned_hundred(unsigned short number)
+{
+    printf("'");
+
+    if (number < 100) { printf(" "); }
+    if (number <  10) { printf(" "); }
+
+    printf("%u'", number);
+}
+
+void debug_number_unsigned(unsigned short number)
+{
+    printf("'");
+
+    if (number < 10) { printf(" "); }
+
+    printf("%u'", number);
+}
+
+void debug_number_signed(signed short number)
+{
+    printf("'");
+
+    if (number < -9) { }
+    else if (number < 0 || number > 9) {
+        printf(" ");
+    }
+    else {
+        printf("  ");
+    }
+
+    printf("%d'", number);
+}
+
 #endif
