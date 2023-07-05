@@ -8,7 +8,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <string.h>
 
 #include "alphabet.h"
-#include "usage.h"
+#include "message.h"
 #include "wheels.h"
 #include "wheels-common.h"
 #include "wheels-offsets.h"
@@ -26,7 +26,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
-static char process_character(char character, unsigned short wheel_count)
+static char message_process_character(char character, unsigned short wheel_count)
 {
 #ifdef DEBUG
     printf("Process character '%c' over '%u' wheels\n", character, wheel_count);
@@ -96,7 +96,7 @@ static char process_character(char character, unsigned short wheel_count)
 }
 
 
-char * process_message(char *p_input_string,
+char * message_process(char *p_input_string,
                        char *p_output_string)
 {
 #ifdef DEBUG
@@ -124,7 +124,7 @@ char * process_message(char *p_input_string,
         printf(") ");
     #endif
 
-        current_char = process_character(current_char, wheel_count);
+        current_char = message_process_character(current_char, wheel_count);
 
         if (current_char != REPLACEMENT_CHAR) {
             // advance wheels only after processed chars

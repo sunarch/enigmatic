@@ -11,7 +11,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "common.h"
 #include "debug.h"
-#include "usage.h"
+#include "message.h"
 #include "wheels.h"
 #include "wheels-display.h"
 #include "wheels-offsets.h"
@@ -81,7 +81,7 @@ int main (void)
 
             printf("MSG:  \"%s\"\n", message);
 
-            process_message(message, crypto);
+            message_process(message, crypto);
 
             printf("CMSG: \"%s\"\n", crypto);
         }

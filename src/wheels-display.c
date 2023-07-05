@@ -12,7 +12,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "wheels-display.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"
-#include "usage.h"
 
 #ifdef DEBUG
     #include "debug.h"
