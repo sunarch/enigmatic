@@ -31,21 +31,16 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
                                                  signed short wiring_rule)
 {
-    unsigned short index_after;
-
     signed short index_plus_rule = ((signed short) index_before) + wiring_rule;
 
-    // modulo 26
-    if (index_plus_rule >= 0) {
-        index_plus_rule = index_plus_rule % ABC_LENGTH;
-        index_after = (unsigned short) index_plus_rule;
+    unsigned short index_abc_offset = abs(index_plus_rule) % ABC_LENGTH;
+
+    if (index_plus_rule < 0) {
+        return ABC_LENGTH - index_abc_offset;
     }
     else {
-        index_plus_rule = (signed short) (ABC_LENGTH - (abs(index_plus_rule) % ABC_LENGTH));
-        index_after = (unsigned short) index_plus_rule;
+        return index_abc_offset;
     }
-
-    return index_after;
 }
 
 static char get_wheel_output(unsigned short wheel_number,
