@@ -9,9 +9,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
-unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
-                                                        signed short wiring_rule);
-
 extern char * process_message(char *p_input_string,
                               char *p_output_string);
 
