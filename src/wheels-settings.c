@@ -35,7 +35,7 @@ unsigned short get_used_wheel_count(void)
 
 signed short get_wheel_wiring_rule(unsigned short mode,
                                    unsigned short wheel_number,
-                                   unsigned short wheel_index)
+                                   unsigned short position)
 {
     validate_wheel_number(wheel_number);
 
@@ -45,9 +45,9 @@ signed short get_wheel_wiring_rule(unsigned short mode,
             // front and reverse should be same for UKW
             // no break.
         case WHEEL_MODE_FRONT:
-            return wheel_wiring_rules_front[wheel_number][wheel_index];
+            return wheel_wiring_rules_front[wheel_number][position];
         case WHEEL_MODE_REVERSE:
-            return wheel_wiring_rules_reverse[wheel_number][wheel_index];
+            return wheel_wiring_rules_reverse[wheel_number][position];
         default:
             exit(RETURN_CODE_ERROR);
     }

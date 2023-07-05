@@ -7,10 +7,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_WHEELS_H
 #define ENIGMATIC_WHEELS_H
 
-// GETTERS /////////////////////////////////////////////////////////////////////
-
-void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules);
-void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules);
 
 // SETTERS /////////////////////////////////////////////////////////////////////
 

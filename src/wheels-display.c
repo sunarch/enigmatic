@@ -135,14 +135,7 @@ static void display_row_rules(unsigned short direction,
                               unsigned short position)
 {
     unsigned short wheel_index;
-    signed short rules[WHEELS_COUNT_MAX_TOTAL];
-
-    if (direction == WHEEL_MODE_FRONT) {
-        collect_wheel_wiring_rules_front_for_position(position, rules);
-    }
-    else if (direction == WHEEL_MODE_REVERSE) {
-        collect_wheel_wiring_rules_reverse_for_position(position, rules);
-    }
+    signed short rule;
 
     printf("|");
 
@@ -150,14 +143,18 @@ static void display_row_rules(unsigned short direction,
 
     if (direction == WHEEL_MODE_FRONT) {
         for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
-            display_cell_rule(position, rules[wheel_index]);
+            rule = get_wheel_wiring_rule(WHEEL_MODE_FRONT, wheel_index, position);
+            display_cell_rule(position, rule);
         }
-        display_cell_rule(position, rules[UKW_INDEX]);
+        rule = get_wheel_wiring_rule(WHEEL_MODE_UKW, UKW_INDEX, position);
+        display_cell_rule(position, rule);
     }
     else if (direction == WHEEL_MODE_REVERSE) {
-        display_cell_rule(position, rules[UKW_INDEX]);
+        rule = get_wheel_wiring_rule(WHEEL_MODE_UKW, UKW_INDEX, position);
+        display_cell_rule(position, rule);
         for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
-            display_cell_rule(position, rules[wheel_index]);
+            rule = get_wheel_wiring_rule(WHEEL_MODE_REVERSE, wheel_index, position);
+            display_cell_rule(position, rule);
         }
     }
 

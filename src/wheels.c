@@ -12,7 +12,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "alphabet-common.h"
 #include "common.h"
 #include "wheels.h"
-#include "wheels-common.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"
 
@@ -24,29 +23,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 // MACRO VALUES ////////////////////////////////////////////////////////////////
 
 #define  BUFFER_LENGTH_APPLY_OPTION  16
-
-
-// GETTERS /////////////////////////////////////////////////////////////////////
-
-void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
-{
-    if (position >= ABC_LENGTH) { return; }
-
-    for (unsigned short i = 0; i < WHEELS_COUNT_MAX_TOTAL; ++i) {
-        rules[i] = get_wheel_wiring_rule(WHEEL_MODE_FRONT, i, position);
-    }
-
-}
-
-
-void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules)
-{
-    if (position >= ABC_LENGTH) { return; }
-
-    for (unsigned short i = 0; i < WHEELS_COUNT_MAX_TOTAL; ++i) {
-        rules[i] = get_wheel_wiring_rule(WHEEL_MODE_REVERSE, i, position);
-    }
-}
 
 
 // SETTERS /////////////////////////////////////////////////////////////////////

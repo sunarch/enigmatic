@@ -17,7 +17,7 @@ extern unsigned short get_used_wheel_count(void);
 
 extern signed short get_wheel_wiring_rule(unsigned short mode,
                                           unsigned short wheel_number,
-                                          unsigned short wheel_index);
+                                          unsigned short position);
 
 // VALIDATORS //////////////////////////////////////////////////////////////////
 
