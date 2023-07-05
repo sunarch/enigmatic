@@ -18,21 +18,39 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #endif
 
 
-// PUBLIC VARIABLES ////////////////////////////////////////////////////////////
-
-signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
-signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
-
 // PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
 static unsigned short used_wheel_count;
 
+static signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+static signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 unsigned short get_used_wheel_count(void)
 {
     return used_wheel_count;
+}
+
+
+signed short get_wheel_wiring_rule(unsigned short mode,
+                                   unsigned short wheel_number,
+                                   unsigned short wheel_index)
+{
+    validate_wheel_number(wheel_number);
+
+    switch(mode) {
+        case WHEEL_MODE_UKW:
+            // use the WHEEL_MODE_FRONT method for WHEEL_MODE_UKW
+            // front and reverse should be same for UKW
+            // no break.
+        case WHEEL_MODE_FRONT:
+            return wheel_wiring_rules_front[wheel_number][wheel_index];
+        case WHEEL_MODE_REVERSE:
+            return wheel_wiring_rules_reverse[wheel_number][wheel_index];
+        default:
+            exit(RETURN_CODE_ERROR);
+    }
 }
 
 

@@ -10,14 +10,14 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "alphabet-common.h"
 #include "wheels-common.h"
 
-// PUBLIC VARIABLES ////////////////////////////////////////////////////////////
-
-extern signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
-extern signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 extern unsigned short get_used_wheel_count(void);
+
+extern signed short get_wheel_wiring_rule(unsigned short mode,
+                                          unsigned short wheel_number,
+                                          unsigned short wheel_index);
 
 // VALIDATORS //////////////////////////////////////////////////////////////////
 

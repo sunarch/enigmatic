@@ -28,28 +28,12 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
-signed short *get_wheel_wiring_rules_front(unsigned short wheel_number)
-{
-    validate_wheel_number(wheel_number);
-
-    return wheel_wiring_rules_front[wheel_number];
-}
-
-
-signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
-{
-    validate_wheel_number(wheel_number);
-
-    return wheel_wiring_rules_reverse[wheel_number];
-}
-
-
 void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
 {
     if (position >= ABC_LENGTH) { return; }
 
     for (unsigned short i = 0; i < WHEELS_COUNT_MAX_TOTAL; ++i) {
-        rules[i] = wheel_wiring_rules_front[i][position];
+        rules[i] = get_wheel_wiring_rule(WHEEL_MODE_FRONT, i, position);
     }
 
 }
@@ -60,7 +44,7 @@ void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, si
     if (position >= ABC_LENGTH) { return; }
 
     for (unsigned short i = 0; i < WHEELS_COUNT_MAX_TOTAL; ++i) {
-        rules[i] = wheel_wiring_rules_reverse[i][position];
+        rules[i] = get_wheel_wiring_rule(WHEEL_MODE_REVERSE, i, position);
     }
 }
 
@@ -205,21 +189,7 @@ char get_wheel_output(unsigned short wheel_number,
     printf(") ");
 #endif
 
-    signed short wiring_rule;
-    switch(mode) {
-        case WHEEL_MODE_UKW:
-            // use the WHEEL_MODE_FRONT method for WHEEL_MODE_UKW
-            // front and reverse should be same for UKW
-            // no break.
-        case WHEEL_MODE_FRONT:
-            wiring_rule = get_wheel_wiring_rules_front(wheel_number)[offset_index];
-            break;
-        case WHEEL_MODE_REVERSE:
-            wiring_rule = get_wheel_wiring_rules_reverse(wheel_number)[offset_index];
-            break;
-        default:
-            exit(RETURN_CODE_ERROR);
-    }
+    signed short wiring_rule = get_wheel_wiring_rule(mode, wheel_number, offset_index);
 
 #ifdef DEBUG
     printf(" -> (");
