@@ -47,7 +47,7 @@ static char message_process_character(char character, unsigned short wheel_count
         }
         else {
             letter_is_alphabetic = true;
-            character = abc_lower(index_upper);
+            character = abc_lower((unsigned short) index_upper);
         }
     }
 
@@ -120,9 +120,9 @@ char * message_process(char *p_input_string,
     #ifdef DEBUG
         debug_prefix();
         printf("(");
-        debug_number_unsigned_hundred(n + 1);
+        debug_number_unsigned_hundred((unsigned short) (n + 1));
         printf("./");
-        debug_number_unsigned_hundred(msg_len);
+        debug_number_unsigned_hundred((unsigned short) msg_len);
         printf(") ");
     #endif
 

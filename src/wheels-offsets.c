@@ -100,7 +100,8 @@ static void offsets_advance_single(unsigned short wheel_number)
     validate_wheel_number(wheel_number);
 
     // move wheel offset by 1
-    offsets_set(wheel_number, ((offsets_get(wheel_number) + 1) % ABC_LENGTH));
+    unsigned short new_offset = (unsigned short) ((offsets_get(wheel_number) + 1) % ABC_LENGTH);
+    offsets_set(wheel_number, new_offset);
 }
 
 

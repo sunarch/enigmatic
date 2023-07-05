@@ -103,7 +103,7 @@ void wheels_apply_prompt(void)
     }
 
     /* Remove trailing newline, if there. */
-    unsigned short apply_option_length = strlen(apply_option);
+    unsigned short apply_option_length = (unsigned short) strlen(apply_option);
     if ((apply_option_length > 0) && (apply_option[apply_option_length - 1] == '\n')) {
         apply_option[apply_option_length - 1] = '\0';
     }
@@ -188,26 +188,24 @@ char get_wheel_output(unsigned short wheel_number,
     // validate wheel_number
     validate_wheel_number(wheel_number);
 
-    char output_char;
-    unsigned short wheel_offset;
-    unsigned short offset_index;
-    signed short wiring_rule;
-
-    short index = abc_index_lower(input_char);
-    if(index < 0) {
+    short index_found = abc_index_lower(input_char);
+    if(index_found < 0) {
         printf("Char '%c' not found in alphabet\n", input_char);
         printf("Exiting...\n");
         exit(RETURN_CODE_ERROR);
     }
+    unsigned short input_index = (unsigned short) index_found;
 
     // wiring rule from offset index
-    wheel_offset = offsets_get(wheel_number);
-    offset_index = (index + wheel_offset) % ABC_LENGTH;
+    unsigned short wheel_offset = offsets_get(wheel_number);
+    unsigned short offset_index = (unsigned short) ((input_index + wheel_offset) % ABC_LENGTH);
+
 #ifdef DEBUG
     debug_number_unsigned(offset_index);
     printf(") ");
 #endif
 
+    signed short wiring_rule;
     switch(mode) {
         case WHEEL_MODE_UKW:
             // use the WHEEL_MODE_FRONT method for WHEEL_MODE_UKW
@@ -231,15 +229,16 @@ char get_wheel_output(unsigned short wheel_number,
 #endif
 
     // index after wiring rule applied
-    //index = (unsigned short) (((signed short) index + wiring_rule) % 26);
-    index = calculate_index_after_wiring_rule(index, wiring_rule);
+    unsigned short output_index = calculate_index_after_wiring_rule(input_index, wiring_rule);
+
 #ifdef DEBUG
     printf(" -> (");
-    debug_number_signed(index);
+    debug_number_unsigned(output_index);
 #endif
 
     // output char
-    output_char = abc_lower(index);
+    char output_char = abc_lower(output_index);
+
 #ifdef DEBUG
     printf(" | '%c')\n", output_char);
     debug_indent_decrement();

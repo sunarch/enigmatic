@@ -146,7 +146,7 @@ static void display_row_rules(unsigned short direction,
 
     printf("|");
 
-    display_cell_rule(0, position);
+    display_cell_rule(0, (signed short) position);
 
     if (direction == WHEEL_MODE_FRONT) {
         for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
