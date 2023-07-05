@@ -46,6 +46,15 @@ void validate_wheel_number(unsigned short wheel_number)
     }
 }
 
+// DEBUG /////////////////////////////////////////////////////////////////////
+
+#ifdef DEBUG
+static void print_prefix_apply(void)
+{
+    printf("Applying settings: ");
+}
+#endif
+
 // SETTERS - INTERNAL //////////////////////////////////////////////////////////
 
 static void set_used_wheel_count(unsigned short new_wheel_count)
@@ -71,7 +80,6 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
 static void set_wheel_wiring_rules(unsigned short wheel_number,
                                    const char *const wiring_alphabet)
 {
-
     signed short wiring_rule;
 
     for (unsigned short n = 0; n < ABC_LENGTH; ++n) {
@@ -124,7 +132,9 @@ void settings_services_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: services\n");
+    print_prefix_apply();
+    settings_services_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(5);
@@ -146,14 +156,16 @@ void settings_services_apply(void)
 // -----------------------------------------------------------------------------
 
 extern void settings_army_comment(void) {
-    printf("M3 (Army, Navy)");
+    printf("M3 (Army, Navy) -> Army");
 }
 
 void settings_army_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: army\n");
+    print_prefix_apply();
+    settings_army_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(8);
@@ -175,14 +187,16 @@ void settings_army_apply(void)
 // -----------------------------------------------------------------------------
 
 void settings_navy_comment(void) {
-    printf("M3 (Army, Navy)");
+    printf("M3 (Army, Navy) -> Navy");
 }
 
 void settings_navy_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: navy\n");
+    print_prefix_apply();
+    settings_navy_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(10);
@@ -222,7 +236,9 @@ void settings_commercial_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: commercial\n");
+    print_prefix_apply();
+    settings_commercial_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(3);
@@ -260,7 +276,9 @@ void settings_swiss_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: \"Swiss K\" (Swiss)\n");
+    print_prefix_apply();
+    settings_swiss_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(3);
@@ -302,7 +320,9 @@ void settings_norway_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: \"Norenigma\" (Norway)\n");
+    print_prefix_apply();
+    settings_norway_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(5);
@@ -342,7 +362,9 @@ void settings_railway_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: \"Rocket\" (Railway)\n");
+    print_prefix_apply();
+    settings_railway_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(3);
@@ -387,7 +409,9 @@ void settings_tirpitz_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: \"Tirpitz\" (Japan)\n");
+    print_prefix_apply();
+    settings_tirpitz_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(8);
@@ -429,7 +453,9 @@ void settings_zaehlwerk_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: \"Zählwerk\" (1928)\n");
+    print_prefix_apply();
+    settings_zaehlwerk_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(3);
@@ -467,7 +493,9 @@ void settings_hungary_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: Hungary / Munich\n");
+    print_prefix_apply();
+    settings_hungary_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(3);
@@ -505,7 +533,9 @@ void settings_argentina_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: Abwehr in Argentina\n");
+    print_prefix_apply();
+    settings_argentina_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(3);
@@ -543,7 +573,9 @@ void settings_bletchley_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: Abwehr / Bletchley Park\n");
+    print_prefix_apply();
+    settings_bletchley_comment();
+    printf("\n");
 #endif
 
     set_used_wheel_count(3);
@@ -572,7 +604,10 @@ void settings_default_apply(void)
 {
 #ifdef DEBUG
     debug_prefix();
-    printf("Applying settings: (default)\n");
+    print_prefix_apply();
+    printf("(default) ");
+    settings_default_comment();
+    printf("\n");
 #endif
 
     settings_bletchley_apply();
