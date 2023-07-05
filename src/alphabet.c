@@ -12,6 +12,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "alphabet.h"
 #include "common.h"
 
+
 // PUBLIC CONSTANTS ////////////////////////////////////////////////////////////
 
 const char ABC_UPPER [ABC_LENGTH_STRING] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -29,6 +30,7 @@ char abc_upper(unsigned int index)
     return ABC_UPPER[index];
 }
 
+
 char abc_lower(unsigned int index)
 {
     if (index > ABC_LENGTH) {
@@ -38,6 +40,7 @@ char abc_lower(unsigned int index)
     }
     return ABC_LOWER[index];
 }
+
 
 // SEARCH //////////////////////////////////////////////////////////////////////
 
@@ -50,6 +53,7 @@ short abc_index_upper(char character)
     return (short) (p_occurrence - ABC_UPPER);
 }
 
+
 short abc_index_lower(char character)
 {
     char *p_occurrence = strchr(ABC_LOWER, character);
@@ -59,6 +63,7 @@ short abc_index_lower(char character)
     return (short) (p_occurrence - ABC_LOWER);
 }
 
+
 // CHECK ///////////////////////////////////////////////////////////////////////
 
 bool is_alphabetic_upper(char character)
@@ -67,11 +72,13 @@ bool is_alphabetic_upper(char character)
     else { return true; }
 }
 
+
 bool is_alphabetic_lower(char character)
 {
     if(abc_index_lower(character) < 0) { return false; }
     else { return true; }
 }
+
 
 bool is_alphabetic(char character)
 {

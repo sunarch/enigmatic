@@ -17,6 +17,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+
 // cells ///////////////////////////////////////////////////////////////////////
 
 static void display_cell_wheel_name(unsigned short wheel_number)
@@ -33,6 +34,7 @@ static void display_cell_wheel_name(unsigned short wheel_number)
     }
 }
 
+
 static void display_cell_offset(unsigned short wheel_number, unsigned short offset)
 {
     if (wheel_number == UKW_INDEX) {
@@ -46,6 +48,7 @@ static void display_cell_offset(unsigned short wheel_number, unsigned short offs
         printf("%u |", offset);
     }
 }
+
 
 static void display_cell_rule(unsigned short position, signed short rule)
 {
@@ -63,6 +66,7 @@ static void display_cell_rule(unsigned short position, signed short rule)
 
     printf("%d  (%c) |", rule, representation);
 }
+
 
 // rows ////////////////////////////////////////////////////////////////////////
 
@@ -88,6 +92,7 @@ static void display_row_header(unsigned short direction, unsigned short wheel_co
     printf("\n");
 }
 
+
 static void display_row_offsets(unsigned short direction, unsigned short wheel_count)
 {
     unsigned short wheel_index;
@@ -110,6 +115,7 @@ static void display_row_offsets(unsigned short direction, unsigned short wheel_c
     printf("\n");
 }
 
+
 static void display_row_separator(unsigned short wheel_count)
 {
     unsigned short wheel_index;
@@ -122,6 +128,7 @@ static void display_row_separator(unsigned short wheel_count)
 
     printf("\n");
 }
+
 
 static void display_row_rules(unsigned short direction,
                               unsigned short wheel_count,
@@ -157,6 +164,7 @@ static void display_row_rules(unsigned short direction,
     printf("\n");
 }
 
+
 // section /////////////////////////////////////////////////////////////////////
 
 static void display_section(unsigned short direction, unsigned short wheel_count)
@@ -185,6 +193,7 @@ static void display_section(unsigned short direction, unsigned short wheel_count
         display_row_rules(direction, wheel_count, position);
     }
 }
+
 
 // main ////////////////////////////////////////////////////////////////////////
 

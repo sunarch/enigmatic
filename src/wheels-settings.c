@@ -17,6 +17,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+
 // PUBLIC VARIABLES ////////////////////////////////////////////////////////////
 
 signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
@@ -26,12 +27,14 @@ signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
 
 static unsigned short used_wheel_count;
 
+
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 unsigned short get_used_wheel_count(void)
 {
     return used_wheel_count;
 }
+
 
 // VALIDATORS //////////////////////////////////////////////////////////////////
 
@@ -46,6 +49,7 @@ void validate_wheel_number(unsigned short wheel_number)
     }
 }
 
+
 // DEBUG /////////////////////////////////////////////////////////////////////
 
 #ifdef DEBUG
@@ -54,6 +58,7 @@ static void print_prefix_apply(void)
     printf("Applying settings: ");
 }
 #endif
+
 
 // SETTERS - INTERNAL //////////////////////////////////////////////////////////
 
@@ -77,6 +82,7 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
 #endif
 }
 
+
 static void set_wheel_wiring_rules(unsigned short wheel_number,
                                    const char *const wiring_alphabet)
 {
@@ -88,6 +94,7 @@ static void set_wheel_wiring_rules(unsigned short wheel_number,
         wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % ABC_LENGTH] = (-1) * wiring_rule;
     }
 }
+
 
 // SETTERS /////////////////////////////////////////////////////////////////////
 

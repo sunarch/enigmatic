@@ -25,6 +25,7 @@ void debug_print_as_ascii(char *p_text)
 
 static signed short debug_indent_level = 0;
 
+
 void debug_indent_print(void)
 {
     if (debug_indent_level > 0) {
@@ -34,9 +35,11 @@ void debug_indent_print(void)
     }
 }
 
+
 void debug_indent_increment(void) {
     debug_indent_level += 1;
 }
+
 
 void debug_indent_decrement(void) {
     if (debug_indent_level > 0) {
@@ -44,10 +47,12 @@ void debug_indent_decrement(void) {
     }
 }
 
+
 void debug_prefix(void)
 {
     printf("[DEBUG] ");
 }
+
 
 void debug_number_unsigned_hundred(unsigned short number)
 {
@@ -59,6 +64,7 @@ void debug_number_unsigned_hundred(unsigned short number)
     printf("%u'", number);
 }
 
+
 void debug_number_unsigned(unsigned short number)
 {
     printf("'");
@@ -67,6 +73,7 @@ void debug_number_unsigned(unsigned short number)
 
     printf("%u'", number);
 }
+
 
 void debug_number_signed(signed short number)
 {

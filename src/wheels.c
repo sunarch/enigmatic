@@ -20,9 +20,11 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
     #include "debug.h"
 #endif
 
+
 // MACRO VALUES ////////////////////////////////////////////////////////////////
 
 #define  BUFFER_LENGTH_APPLY_OPTION  16
+
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
@@ -33,12 +35,14 @@ signed short *get_wheel_wiring_rules_front(unsigned short wheel_number)
     return wheel_wiring_rules_front[wheel_number];
 }
 
+
 signed short *get_wheel_wiring_rules_reverse(unsigned short wheel_number)
 {
     validate_wheel_number(wheel_number);
 
     return wheel_wiring_rules_reverse[wheel_number];
 }
+
 
 void collect_wheel_wiring_rules_front_for_position(unsigned short position, signed short *rules)
 {
@@ -50,6 +54,7 @@ void collect_wheel_wiring_rules_front_for_position(unsigned short position, sign
 
 }
 
+
 void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, signed short *rules)
 {
     if (position >= ABC_LENGTH) { return; }
@@ -59,12 +64,14 @@ void collect_wheel_wiring_rules_reverse_for_position(unsigned short position, si
     }
 }
 
+
 // SETTERS /////////////////////////////////////////////////////////////////////
 
 void wheels_apply_default(void)
 {
     settings_default_apply();
 }
+
 
 void wheels_apply_prompt(void)
 {
@@ -146,6 +153,7 @@ void wheels_apply_prompt(void)
     }
 }
 
+
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
@@ -162,6 +170,7 @@ unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
         return index_abc_offset;
     }
 }
+
 
 char get_wheel_output(unsigned short wheel_number,
                       unsigned short mode,

@@ -16,6 +16,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "wheels-display.h"
 #include "wheels-offsets.h"
 
+
 // MACRO VALUES ////////////////////////////////////////////////////////////////
 
 # define  BUFFER_LENGTH_COMMAND     32
@@ -27,6 +28,7 @@ static char command  [BUFFER_LENGTH_COMMAND]  = "start";
 static char message  [BUFFER_LENGTH_MESSAGE]  = ".";
 static char crypto   [BUFFER_LENGTH_MESSAGE]  = ".";
 
+
 // HANDLERS ////////////////////////////////////////////////////////////////////
 
 static void command_empty(void)
@@ -34,10 +36,12 @@ static void command_empty(void)
     printf("No command provided.\n");
 }
 
+
 static void command_help(void)
 {
     printf("Commands: help, msg/message, ascii, config, apply, reset, exit\n");
 }
+
 
 static void command_message(void)
 {
@@ -62,6 +66,7 @@ static void command_message(void)
     printf("CMSG: \"%s\"\n", crypto);
 }
 
+
 static void command_ascii(void)
 {
     printf("MSG:  ");
@@ -70,15 +75,18 @@ static void command_ascii(void)
     debug_print_as_ascii(crypto);
 }
 
+
 static void command_config(void)
 {
     display_config();
 }
 
+
 static void command_apply(void)
 {
     wheels_apply_prompt();
 }
+
 
 static void command_reset(void)
 {
@@ -86,10 +94,12 @@ static void command_reset(void)
     printf("Wheel offsets reset.\n");
 }
 
+
 static void command_unknown(void)
 {
     printf("Command not recognized.\n");
 }
+
 
 // ENTRY POINT /////////////////////////////////////////////////////////////////
 
