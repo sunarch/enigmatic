@@ -97,7 +97,7 @@ void wheels_apply_prompt(void)
         printf("Failed to get apply option\n");
         printf("Exiting...\n");
         exit(RETURN_CODE_ERROR);
-    };
+    }
 
     /* Remove trailing newline, if there. */
     unsigned short apply_option_length = strlen(apply_option);

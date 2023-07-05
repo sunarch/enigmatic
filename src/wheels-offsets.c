@@ -4,7 +4,6 @@ License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "alphabet-common.h"
@@ -14,6 +13,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include "wheels-settings.h"
 
 #ifdef DEBUG
+    #include <stdio.h>
+
     #include "debug.h"
 #endif
 
@@ -105,7 +106,7 @@ void offsets_advance(void)
 #endif
 
     unsigned short wheel_count = get_used_wheel_count();
-    unsigned short current_wheel_offset = 0;
+    unsigned short current_wheel_offset;
 
     for (unsigned short n = 1; n <= wheel_count; ++n) {
         current_wheel_offset = offsets_get(n);

@@ -31,10 +31,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
                                                  signed short wiring_rule)
 {
-
-    // default index_after value, to be overwritten in this function
-    // any number >= 26 should produce segmentation fault
-    unsigned short index_after = 31;
+    unsigned short index_after;
 
     signed short index_plus_rule = ((signed short) index_before) + wiring_rule;
 
@@ -67,10 +64,10 @@ static char get_wheel_output(unsigned short wheel_number,
     // validate wheel_number
     validate_wheel_number(wheel_number);
 
-    char output_char = '?';
-    unsigned short wheel_offset = 0;
-    unsigned short offset_index = 0;
-    signed short wiring_rule = 0;
+    char output_char;
+    unsigned short wheel_offset;
+    unsigned short offset_index;
+    signed short wiring_rule;
 
     short index = abc_index_lower(input_char);
     if(index < 0) {

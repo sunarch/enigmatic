@@ -45,7 +45,7 @@ int main (void)
             printf("Failed check with (fgets(command, %i, stdin) == NULL)\n", BUFFER_LENGTH_COMMAND);
             printf("Exiting...\n");
             exit(RETURN_CODE_ERROR);
-        };
+        }
 
         /* Remove trailing newline, if there. */
         if ((strlen(command) > 0) && (command[strlen(command) - 1] == '\n')) {
@@ -73,7 +73,7 @@ int main (void)
                 printf("Failed check with (fgets(message, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
                 printf("Exiting...\n");
                 exit(RETURN_CODE_ERROR);
-            };
+            }
             /* Remove trailing newline, if there. */
             if ((strlen(message) > 0) && (message[strlen(message) - 1] == '\n')) {
                 message[strlen (message) - 1] = '\0';

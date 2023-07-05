@@ -25,7 +25,7 @@ char abc_upper(unsigned int index)
         printf("Tried to access index outside alphabet: '%d'\n", index);
         printf("Exiting...\n");
         exit(RETURN_CODE_ERROR);
-    };
+    }
     return ABC_UPPER[index];
 }
 
@@ -35,7 +35,7 @@ char abc_lower(unsigned int index)
         printf("Tried to access index outside alphabet: '%d'\n", index);
         printf("Exiting...\n");
         exit(RETURN_CODE_ERROR);
-    };
+    }
     return ABC_LOWER[index];
 }
 
