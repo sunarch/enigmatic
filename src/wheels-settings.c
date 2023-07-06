@@ -101,8 +101,8 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
 }
 
 
-static void set_wheel_wiring_rules(unsigned short wheel_number,
-                                   const char *const wiring_alphabet)
+static void set_wheel_by_alphabet(unsigned short wheel_number,
+                                  const char *const wiring_alphabet)
 {
     signed short wiring_rule;
 
@@ -164,18 +164,18 @@ void settings_services_apply(void)
 
     set_used_wheel_count(5);
 
-    set_wheel_wiring_rules(1, WALZE_I);
-    set_wheel_wiring_rules(2, WALZE_II);
-    set_wheel_wiring_rules(3, WALZE_III);
-    set_wheel_wiring_rules(4, WALZE_IV);
-    set_wheel_wiring_rules(5, WALZE_V);
-    // set_wheel_wiring_rules(6, WALZE_VI);
-    // set_wheel_wiring_rules(7, WALZE_VII);
-    // set_wheel_wiring_rules(8, WALZE_VIII);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_I);
+    set_wheel_by_alphabet(2, WALZE_II);
+    set_wheel_by_alphabet(3, WALZE_III);
+    set_wheel_by_alphabet(4, WALZE_IV);
+    set_wheel_by_alphabet(5, WALZE_V);
+    // set_wheel_by_alphabet(6, WALZE_VI);
+    // set_wheel_by_alphabet(7, WALZE_VII);
+    // set_wheel_by_alphabet(8, WALZE_VIII);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_A);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_A);
 }
 
 // -----------------------------------------------------------------------------
@@ -195,18 +195,18 @@ void settings_army_apply(void)
 
     set_used_wheel_count(8);
 
-    set_wheel_wiring_rules(1, WALZE_I);
-    set_wheel_wiring_rules(2, WALZE_II);
-    set_wheel_wiring_rules(3, WALZE_III);
-    set_wheel_wiring_rules(4, WALZE_IV);
-    set_wheel_wiring_rules(5, WALZE_V);
-    set_wheel_wiring_rules(6, WALZE_VI);
-    set_wheel_wiring_rules(7, WALZE_VII);
-    set_wheel_wiring_rules(8, WALZE_VIII);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_I);
+    set_wheel_by_alphabet(2, WALZE_II);
+    set_wheel_by_alphabet(3, WALZE_III);
+    set_wheel_by_alphabet(4, WALZE_IV);
+    set_wheel_by_alphabet(5, WALZE_V);
+    set_wheel_by_alphabet(6, WALZE_VI);
+    set_wheel_by_alphabet(7, WALZE_VII);
+    set_wheel_by_alphabet(8, WALZE_VIII);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_B);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_B);
 }
 
 // -----------------------------------------------------------------------------
@@ -226,18 +226,18 @@ void settings_navy_apply(void)
 
     set_used_wheel_count(10);
 
-    set_wheel_wiring_rules(1, WALZE_BETA);
-    set_wheel_wiring_rules(2, WALZE_GAMMA);
-    set_wheel_wiring_rules(3, WALZE_I);
-    set_wheel_wiring_rules(4, WALZE_II);
-    set_wheel_wiring_rules(5, WALZE_III);
-    set_wheel_wiring_rules(6, WALZE_IV);
-    set_wheel_wiring_rules(7, WALZE_V);
-    set_wheel_wiring_rules(8, WALZE_VI);
-    set_wheel_wiring_rules(9, WALZE_VII);
-    set_wheel_wiring_rules(10, WALZE_VIII);
+    set_wheel_by_alphabet(1, WALZE_BETA);
+    set_wheel_by_alphabet(2, WALZE_GAMMA);
+    set_wheel_by_alphabet(3, WALZE_I);
+    set_wheel_by_alphabet(4, WALZE_II);
+    set_wheel_by_alphabet(5, WALZE_III);
+    set_wheel_by_alphabet(6, WALZE_IV);
+    set_wheel_by_alphabet(7, WALZE_V);
+    set_wheel_by_alphabet(8, WALZE_VI);
+    set_wheel_by_alphabet(9, WALZE_VII);
+    set_wheel_by_alphabet(10, WALZE_VIII);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_C);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_C);
 }
 
 // =============================================================================
@@ -268,18 +268,18 @@ void settings_commercial_apply(void)
 
     set_used_wheel_count(3);
 
-    set_wheel_wiring_rules(1, WALZE_1D);
-    set_wheel_wiring_rules(2, WALZE_2D);
-    set_wheel_wiring_rules(3, WALZE_3D);
-    // set_wheel_wiring_rules(4, ABC_LOWER);
-    // set_wheel_wiring_rules(5, ABC_LOWER);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1D);
+    set_wheel_by_alphabet(2, WALZE_2D);
+    set_wheel_by_alphabet(3, WALZE_3D);
+    // set_wheel_by_alphabet(4, ABC_LOWER);
+    // set_wheel_by_alphabet(5, ABC_LOWER);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_D);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_D);
 }
 
 // =============================================================================
@@ -308,18 +308,18 @@ void settings_swiss_apply(void)
 
     set_used_wheel_count(3);
 
-    set_wheel_wiring_rules(1, WALZE_1K);
-    set_wheel_wiring_rules(2, WALZE_2K);
-    set_wheel_wiring_rules(3, WALZE_3K);
-    // set_wheel_wiring_rules(4, ABC_LOWER);
-    // set_wheel_wiring_rules(5, ABC_LOWER);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1K);
+    set_wheel_by_alphabet(2, WALZE_2K);
+    set_wheel_by_alphabet(3, WALZE_3K);
+    // set_wheel_by_alphabet(4, ABC_LOWER);
+    // set_wheel_by_alphabet(5, ABC_LOWER);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, ABC_LOWER);
+    set_wheel_by_alphabet(UKW_INDEX, ABC_LOWER);
 }
 
 // =============================================================================
@@ -352,18 +352,18 @@ void settings_norway_apply(void)
 
     set_used_wheel_count(5);
 
-    set_wheel_wiring_rules(1, WALZE_1N);
-    set_wheel_wiring_rules(2, WALZE_2N);
-    set_wheel_wiring_rules(3, WALZE_3N);
-    set_wheel_wiring_rules(4, WALZE_4N);
-    set_wheel_wiring_rules(5, WALZE_5N);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1N);
+    set_wheel_by_alphabet(2, WALZE_2N);
+    set_wheel_by_alphabet(3, WALZE_3N);
+    set_wheel_by_alphabet(4, WALZE_4N);
+    set_wheel_by_alphabet(5, WALZE_5N);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_N);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_N);
 }
 
 // =============================================================================
@@ -394,18 +394,18 @@ void settings_railway_apply(void)
 
     set_used_wheel_count(3);
 
-    set_wheel_wiring_rules(1, WALZE_1R);
-    set_wheel_wiring_rules(2, WALZE_2R);
-    set_wheel_wiring_rules(3, WALZE_3R);
-    // set_wheel_wiring_rules(4, ABC_LOWER);
-    // set_wheel_wiring_rules(5, ABC_LOWER);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1R);
+    set_wheel_by_alphabet(2, WALZE_2R);
+    set_wheel_by_alphabet(3, WALZE_3R);
+    // set_wheel_by_alphabet(4, ABC_LOWER);
+    // set_wheel_by_alphabet(5, ABC_LOWER);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_R);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_R);
 }
 
 // =============================================================================
@@ -441,18 +441,18 @@ void settings_tirpitz_apply(void)
 
     set_used_wheel_count(8);
 
-    set_wheel_wiring_rules(1, WALZE_1T);
-    set_wheel_wiring_rules(2, WALZE_2T);
-    set_wheel_wiring_rules(3, WALZE_3T);
-    set_wheel_wiring_rules(4, WALZE_4T);
-    set_wheel_wiring_rules(5, WALZE_5T);
-    set_wheel_wiring_rules(6, WALZE_6T);
-    set_wheel_wiring_rules(7, WALZE_7T);
-    set_wheel_wiring_rules(8, WALZE_8T);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1T);
+    set_wheel_by_alphabet(2, WALZE_2T);
+    set_wheel_by_alphabet(3, WALZE_3T);
+    set_wheel_by_alphabet(4, WALZE_4T);
+    set_wheel_by_alphabet(5, WALZE_5T);
+    set_wheel_by_alphabet(6, WALZE_6T);
+    set_wheel_by_alphabet(7, WALZE_7T);
+    set_wheel_by_alphabet(8, WALZE_8T);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_T);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_T);
 }
 
 // =============================================================================
@@ -485,18 +485,18 @@ void settings_zaehlwerk_apply(void)
 
     set_used_wheel_count(3);
 
-    set_wheel_wiring_rules(1, WALZE_1A8);
-    set_wheel_wiring_rules(2, WALZE_2A8);
-    set_wheel_wiring_rules(3, WALZE_3A8);
-    // set_wheel_wiring_rules(4, ABC_LOWER);
-    // set_wheel_wiring_rules(5, ABC_LOWER);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1A8);
+    set_wheel_by_alphabet(2, WALZE_2A8);
+    set_wheel_by_alphabet(3, WALZE_3A8);
+    // set_wheel_by_alphabet(4, ABC_LOWER);
+    // set_wheel_by_alphabet(5, ABC_LOWER);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, ABC_LOWER);
+    set_wheel_by_alphabet(UKW_INDEX, ABC_LOWER);
 }
 
 // =============================================================================
@@ -525,18 +525,18 @@ void settings_hungary_apply(void)
 
     set_used_wheel_count(3);
 
-    set_wheel_wiring_rules(1, WALZE_1G1);
-    set_wheel_wiring_rules(2, WALZE_2G1);
-    set_wheel_wiring_rules(3, WALZE_5G1);
-    // set_wheel_wiring_rules(4, ABC_LOWER);
-    // set_wheel_wiring_rules(5, ABC_LOWER);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1G1);
+    set_wheel_by_alphabet(2, WALZE_2G1);
+    set_wheel_by_alphabet(3, WALZE_5G1);
+    // set_wheel_by_alphabet(4, ABC_LOWER);
+    // set_wheel_by_alphabet(5, ABC_LOWER);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_G);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
@@ -565,18 +565,18 @@ void settings_argentina_apply(void)
 
     set_used_wheel_count(3);
 
-    set_wheel_wiring_rules(1, WALZE_1G2);
-    set_wheel_wiring_rules(2, WALZE_2G2);
-    set_wheel_wiring_rules(3, WALZE_3G2);
-    // set_wheel_wiring_rules(4, ABC_LOWER);
-    // set_wheel_wiring_rules(5, ABC_LOWER);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1G2);
+    set_wheel_by_alphabet(2, WALZE_2G2);
+    set_wheel_by_alphabet(3, WALZE_3G2);
+    // set_wheel_by_alphabet(4, ABC_LOWER);
+    // set_wheel_by_alphabet(5, ABC_LOWER);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_G);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
@@ -605,18 +605,18 @@ void settings_bletchley_apply(void)
 
     set_used_wheel_count(3);
 
-    set_wheel_wiring_rules(1, WALZE_1G3);
-    set_wheel_wiring_rules(2, WALZE_2G3);
-    set_wheel_wiring_rules(3, WALZE_3G3);
-    // set_wheel_wiring_rules(4, ABC_LOWER);
-    // set_wheel_wiring_rules(5, ABC_LOWER);
-    // set_wheel_wiring_rules(6, ABC_LOWER);
-    // set_wheel_wiring_rules(7, ABC_LOWER);
-    // set_wheel_wiring_rules(8, ABC_LOWER);
-    // set_wheel_wiring_rules(9, ABC_LOWER);
-    // set_wheel_wiring_rules(10, ABC_LOWER);
+    set_wheel_by_alphabet(1, WALZE_1G3);
+    set_wheel_by_alphabet(2, WALZE_2G3);
+    set_wheel_by_alphabet(3, WALZE_3G3);
+    // set_wheel_by_alphabet(4, ABC_LOWER);
+    // set_wheel_by_alphabet(5, ABC_LOWER);
+    // set_wheel_by_alphabet(6, ABC_LOWER);
+    // set_wheel_by_alphabet(7, ABC_LOWER);
+    // set_wheel_by_alphabet(8, ABC_LOWER);
+    // set_wheel_by_alphabet(9, ABC_LOWER);
+    // set_wheel_by_alphabet(10, ABC_LOWER);
 
-    set_wheel_wiring_rules(UKW_INDEX, UKW_G);
+    set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
