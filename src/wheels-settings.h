@@ -7,10 +7,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_WHEELS_SETTINGS_H
 #define ENIGMATIC_WHEELS_SETTINGS_H
 
-#include "alphabet-common.h"
-#include "wheels-common.h"
-
-
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 extern unsigned short get_used_wheel_count(void);

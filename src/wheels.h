@@ -7,7 +7,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #ifndef ENIGMATIC_WHEELS_H
 #define ENIGMATIC_WHEELS_H
 
-
 // SETTERS /////////////////////////////////////////////////////////////////////
 
 extern void wheels_apply_default(void);

@@ -7,6 +7,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <stdio.h>
 
 #include "alphabet.h"
+#include "alphabet-common.h"
 #include "wheels.h"
 #include "wheels-common.h"
 #include "wheels-display.h"
