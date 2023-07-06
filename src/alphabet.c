@@ -10,13 +10,14 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #include <string.h>
 
 #include "alphabet.h"
+#include "alphabet-common.h"
 #include "common.h"
 
 
 // PUBLIC CONSTANTS ////////////////////////////////////////////////////////////
 
-const char ABC_UPPER [ABC_LENGTH_STRING] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const char ABC_LOWER [ABC_LENGTH_STRING] = "abcdefghijklmnopqrstuvwxyz";
+static const char ABC_UPPER [ABC_LENGTH_STRING] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+static const char ABC_LOWER [ABC_LENGTH_STRING] = "abcdefghijklmnopqrstuvwxyz";
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 

@@ -9,13 +9,6 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include <stdbool.h>
 
-#include "alphabet-common.h"
-
-// PUBLIC CONSTANTS ////////////////////////////////////////////////////////////
-
-extern const char ABC_UPPER [ABC_LENGTH_STRING];
-extern const char ABC_LOWER [ABC_LENGTH_STRING];
-
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 extern char abc_upper(unsigned int index);
