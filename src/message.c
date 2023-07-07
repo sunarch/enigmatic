@@ -23,7 +23,8 @@
 
 // MACRO VALUES ////////////////////////////////////////////////////////////////
 
-#define  REPLACEMENT_CHAR  '_'
+#define  SEPARATOR_CHARACTER    '.'
+#define  REPLACEMENT_CHARACTER  '_'
 
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
@@ -100,8 +101,8 @@ static char message_process_character(char character, unsigned short wheel_count
     if (!letter_is_alphabetic) {
         // only allow a period of the non-alphabetic characters
         // change all other characters to underscores
-        if (character != '.') {
-            character = REPLACEMENT_CHAR;
+        if (character != SEPARATOR_CHARACTER) {
+            character = REPLACEMENT_CHARACTER;
         }
     }
 
@@ -149,7 +150,7 @@ char * message_process(char *p_input_string,
 
         current_char = message_process_character(current_char, wheel_count);
 
-        if (current_char != REPLACEMENT_CHAR) {
+        if (current_char != REPLACEMENT_CHARACTER) {
             // advance wheels only after processed chars
             offsets_advance();
         }
