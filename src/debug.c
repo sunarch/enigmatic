@@ -9,12 +9,24 @@
 #include "debug.h"
 
 
+void debug_number_unsigned_hundred(unsigned short number)
+{
+    printf("'");
+
+    if (number < 100) { printf(" "); }
+    if (number <  10) { printf(" "); }
+
+    printf("%u'", number);
+}
+
+
 void debug_print_as_ascii(char *p_text)
 {
     int index = 0;
-    printf("ASCII: ");
+    printf("ASCII:");
     while(p_text[index] != '\0') {
-        printf("'%c'/'%d' ", p_text[index], p_text[index]);
+        printf(" '%c'/", p_text[index]);
+        debug_number_unsigned_hundred(p_text[index]);
         index++;
     }
     printf("\n");
@@ -51,17 +63,6 @@ void debug_indent_decrement(void) {
 void debug_prefix(void)
 {
     printf("[DEBUG] ");
-}
-
-
-void debug_number_unsigned_hundred(unsigned short number)
-{
-    printf("'");
-
-    if (number < 100) { printf(" "); }
-    if (number <  10) { printf(" "); }
-
-    printf("%u'", number);
 }
 
 
