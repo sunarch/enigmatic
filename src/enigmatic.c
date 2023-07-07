@@ -70,9 +70,9 @@ static void command_message(void)
 static void command_ascii(void)
 {
     printf("MSG:  ");
-    debug_print_as_ascii(message);
+    debug_print_as_ascii(message, 6);
     printf("CMSG: ");
-    debug_print_as_ascii(crypto);
+    debug_print_as_ascii(crypto, 6);
 }
 
 

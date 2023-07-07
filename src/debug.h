@@ -7,7 +7,7 @@
 #ifndef ENIGMATIC_UTIL_DEBUG_H
 #define ENIGMATIC_UTIL_DEBUG_H
 
-extern void debug_print_as_ascii(char *p_text);
+extern void debug_print_as_ascii(char *p_text, unsigned short indent_length);
 
 #ifdef DEBUG
 

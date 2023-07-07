@@ -20,13 +20,24 @@ void debug_number_unsigned_hundred(unsigned short number)
 }
 
 
-void debug_print_as_ascii(char *p_text)
+void debug_print_as_ascii(char *p_text, unsigned short indent_length)
 {
     int index = 0;
-    printf("ASCII:");
+    printf("       ");
     while(p_text[index] != '\0') {
-        printf(" '%c'/", p_text[index]);
-        debug_number_unsigned_hundred(p_text[index]);
+        printf(" '%c' ", p_text[index]);
+        index++;
+    }
+    printf("\n");
+
+    for (index = 0; index < indent_length; index++) {
+        printf(" ");
+    }
+
+    index = 0;
+    printf("ASCII: ");
+    while(p_text[index] != '\0') {
+        debug_number_unsigned_hundred((unsigned short) p_text[index]);
         index++;
     }
     printf("\n");
