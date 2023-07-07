@@ -28,6 +28,52 @@
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
+static char message_character_front_pass(char character, unsigned short wheel_count)
+{
+#ifdef DEBUG
+    debug_prefix();
+    debug_indent_print();
+    printf("first-to-last pass / front pass\n");
+#endif
+
+    for (unsigned short i = 1; i <= wheel_count; ++i) {
+        character = get_wheel_output(i, WHEEL_MODE_FRONT, character);
+    }
+
+    return character;
+}
+
+
+static char message_character_ukw_pass(char character)
+{
+#ifdef DEBUG
+    debug_prefix();
+    debug_indent_print();
+    printf("UKW pass (same front and reverse)\n");
+#endif
+
+    character = get_wheel_output(UKW_INDEX, WHEEL_MODE_UKW, character);
+
+    return character;
+}
+
+
+static char message_character_reverse_pass(char character, unsigned short wheel_count)
+{
+#ifdef DEBUG
+    debug_prefix();
+    debug_indent_print();
+    printf("last-to-first pass / reverse pass\n");
+#endif
+
+    for (unsigned short i = wheel_count; i >= 1; --i) {
+        character = get_wheel_output(i, WHEEL_MODE_REVERSE, character);
+    }
+
+    return character;
+}
+
+
 static char message_process_character(char character, unsigned short wheel_count)
 {
 #ifdef DEBUG
@@ -60,34 +106,9 @@ static char message_process_character(char character, unsigned short wheel_count
     }
 
     if(letter_is_alphabetic) {
-
-        // first-to-last pass / front pass
-    #ifdef DEBUG
-        debug_prefix();
-        debug_indent_print();
-        printf("first-to-last pass / front pass\n");
-    #endif
-        for (unsigned short n = 1; n <= wheel_count; ++n) {
-            character = get_wheel_output(n, WHEEL_MODE_FRONT, character);
-        }
-
-        // UKW pass (same front and reverse)
-    #ifdef DEBUG
-        debug_prefix();
-        debug_indent_print();
-        printf("UKW pass (same front and reverse)\n");
-    #endif
-        character = get_wheel_output(UKW_INDEX, WHEEL_MODE_UKW, character);
-
-        // last-to-first pass / reverse pass
-    #ifdef DEBUG
-        debug_prefix();
-        debug_indent_print();
-        printf("last-to-first pass / reverse pass\n");
-    #endif
-        for (unsigned short n = wheel_count; n >= 1; --n) {
-            character = get_wheel_output(n, WHEEL_MODE_REVERSE, character);
-        }
+        character = message_character_front_pass(character, wheel_count);
+        character = message_character_ukw_pass(character);
+        character = message_character_reverse_pass(character, wheel_count);
     }
 
 #ifdef DEBUG
