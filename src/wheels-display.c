@@ -145,17 +145,17 @@ static void display_row_rules(unsigned short direction,
 
         if (direction == WHEEL_MODE_FRONT) {
                 for (wheel_index = 1; wheel_index <= wheel_count; ++wheel_index) {
-                        rule = get_wheel_wiring_rule(WHEEL_MODE_FRONT, wheel_index, position);
+                        rule = settings_get_wheel_wiring_rule(WHEEL_MODE_FRONT, wheel_index, position);
                         display_cell_rule(position, rule);
                 }
-                rule = get_wheel_wiring_rule(WHEEL_MODE_UKW, UKW_INDEX, position);
+                rule = settings_get_wheel_wiring_rule(WHEEL_MODE_UKW, UKW_INDEX, position);
                 display_cell_rule(position, rule);
         }
         else if (direction == WHEEL_MODE_REVERSE) {
-                rule = get_wheel_wiring_rule(WHEEL_MODE_UKW, UKW_INDEX, position);
+                rule = settings_get_wheel_wiring_rule(WHEEL_MODE_UKW, UKW_INDEX, position);
                 display_cell_rule(position, rule);
                 for (wheel_index = wheel_count; wheel_index >= 1; --wheel_index) {
-                        rule = get_wheel_wiring_rule(WHEEL_MODE_REVERSE, wheel_index, position);
+                        rule = settings_get_wheel_wiring_rule(WHEEL_MODE_REVERSE, wheel_index, position);
                         display_cell_rule(position, rule);
                 }
         }
@@ -198,7 +198,7 @@ static void display_section(unsigned short direction, unsigned short wheel_count
 
 void display_config(void)
 {
-        unsigned short wheel_count = get_used_wheel_count();
+        unsigned short wheel_count = settings_get_used_wheel_count();
 
         printf("\n");
 

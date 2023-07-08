@@ -29,17 +29,17 @@ static signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENG
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
-unsigned short get_used_wheel_count(void)
+unsigned short settings_get_used_wheel_count(void)
 {
         return used_wheel_count;
 }
 
 
-signed short get_wheel_wiring_rule(unsigned short mode,
-                                   unsigned short wheel_number,
-                                   unsigned short position)
+signed short settings_get_wheel_wiring_rule(unsigned short mode,
+                                            unsigned short wheel_number,
+                                            unsigned short position)
 {
-        validate_wheel_number(wheel_number);
+        settings_validate_wheel_number(wheel_number);
 
         switch (mode) {
                 case WHEEL_MODE_UKW:
@@ -58,9 +58,9 @@ signed short get_wheel_wiring_rule(unsigned short mode,
 
 // VALIDATORS //////////////////////////////////////////////////////////////////
 
-void validate_wheel_number(unsigned short wheel_number)
+void settings_validate_wheel_number(unsigned short wheel_number)
 {
-        unsigned short wheel_count = get_used_wheel_count();
+        unsigned short wheel_count = settings_get_used_wheel_count();
 
         if (wheel_number > wheel_count) {
                 printf("Failed check with (wheel_number > wheel_count): (%u > %u)\n", wheel_number, wheel_count);
@@ -73,7 +73,7 @@ void validate_wheel_number(unsigned short wheel_number)
 // DEBUG /////////////////////////////////////////////////////////////////////
 
 #ifdef DEBUG
-static void print_prefix_apply(void)
+static void settings_print_prefix_apply(void)
 {
     printf("Applying settings: ");
 }
@@ -82,11 +82,11 @@ static void print_prefix_apply(void)
 
 // SETTERS - INTERNAL //////////////////////////////////////////////////////////
 
-static void set_used_wheel_count(unsigned short new_wheel_count)
+static void settings_set_used_wheel_count(unsigned short new_wheel_count)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        printf("set_used_wheel_count '%u' -> '%u'", get_used_wheel_count(), new_wheel_count);
+        printf("set_used_wheel_count '%u' -> '%u'", settings_get_used_wheel_count(), new_wheel_count);
 #endif
 
         if (new_wheel_count > WHEELS_COUNT_MAX_REGULAR) {
@@ -98,13 +98,13 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
         used_wheel_count = new_wheel_count;
 
 #ifdef DEBUG
-        printf(" | check: '%u'\n", get_used_wheel_count());
+        printf(" | check: '%u'\n", settings_get_used_wheel_count());
 #endif
 }
 
 
-static void set_wheel_by_alphabet(unsigned short wheel_number,
-                                  const char *const wiring_alphabet)
+static void settings_set_wheel_by_alphabet(unsigned short wheel_number,
+                                           const char *const wiring_alphabet)
 {
         signed short wiring_rule;
 
@@ -116,7 +116,7 @@ static void set_wheel_by_alphabet(unsigned short wheel_number,
 }
 
 
-static void set_wheel_blank(unsigned short wheel_number)
+static void settings_set_wheel_blank(unsigned short wheel_number)
 {
         for (signed short n = 0; n < ABC_LENGTH; ++n) {
                 wheel_wiring_rules_front[wheel_number][n] = n;
@@ -170,25 +170,25 @@ void settings_services_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_services_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(5);
+        settings_set_used_wheel_count(5);
 
-        set_wheel_by_alphabet(1, WALZE_I);
-        set_wheel_by_alphabet(2, WALZE_II);
-        set_wheel_by_alphabet(3, WALZE_III);
-        set_wheel_by_alphabet(4, WALZE_IV);
-        set_wheel_by_alphabet(5, WALZE_V);
-        set_wheel_by_alphabet(6, WALZE_VI); // above 5 unused
-        set_wheel_by_alphabet(7, WALZE_VII); // above 5 unused
-        set_wheel_by_alphabet(8, WALZE_VIII); // above 5 unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_I);
+        settings_set_wheel_by_alphabet(2, WALZE_II);
+        settings_set_wheel_by_alphabet(3, WALZE_III);
+        settings_set_wheel_by_alphabet(4, WALZE_IV);
+        settings_set_wheel_by_alphabet(5, WALZE_V);
+        settings_set_wheel_by_alphabet(6, WALZE_VI); // above 5 unused
+        settings_set_wheel_by_alphabet(7, WALZE_VII); // above 5 unused
+        settings_set_wheel_by_alphabet(8, WALZE_VIII); // above 5 unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_A);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_A);
 }
 
 // -----------------------------------------------------------------------------
@@ -203,25 +203,25 @@ void settings_army_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_army_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(8);
+        settings_set_used_wheel_count(8);
 
-        set_wheel_by_alphabet(1, WALZE_I);
-        set_wheel_by_alphabet(2, WALZE_II);
-        set_wheel_by_alphabet(3, WALZE_III);
-        set_wheel_by_alphabet(4, WALZE_IV);
-        set_wheel_by_alphabet(5, WALZE_V);
-        set_wheel_by_alphabet(6, WALZE_VI);
-        set_wheel_by_alphabet(7, WALZE_VII);
-        set_wheel_by_alphabet(8, WALZE_VIII);
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_I);
+        settings_set_wheel_by_alphabet(2, WALZE_II);
+        settings_set_wheel_by_alphabet(3, WALZE_III);
+        settings_set_wheel_by_alphabet(4, WALZE_IV);
+        settings_set_wheel_by_alphabet(5, WALZE_V);
+        settings_set_wheel_by_alphabet(6, WALZE_VI);
+        settings_set_wheel_by_alphabet(7, WALZE_VII);
+        settings_set_wheel_by_alphabet(8, WALZE_VIII);
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_B);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_B);
 }
 
 // -----------------------------------------------------------------------------
@@ -236,25 +236,25 @@ void settings_navy_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_navy_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(10);
+        settings_set_used_wheel_count(10);
 
-        set_wheel_by_alphabet(1, WALZE_BETA);
-        set_wheel_by_alphabet(2, WALZE_GAMMA);
-        set_wheel_by_alphabet(3, WALZE_I);
-        set_wheel_by_alphabet(4, WALZE_II);
-        set_wheel_by_alphabet(5, WALZE_III);
-        set_wheel_by_alphabet(6, WALZE_IV);
-        set_wheel_by_alphabet(7, WALZE_V);
-        set_wheel_by_alphabet(8, WALZE_VI);
-        set_wheel_by_alphabet(9, WALZE_VII);
-        set_wheel_by_alphabet(10, WALZE_VIII);
+        settings_set_wheel_by_alphabet(1, WALZE_BETA);
+        settings_set_wheel_by_alphabet(2, WALZE_GAMMA);
+        settings_set_wheel_by_alphabet(3, WALZE_I);
+        settings_set_wheel_by_alphabet(4, WALZE_II);
+        settings_set_wheel_by_alphabet(5, WALZE_III);
+        settings_set_wheel_by_alphabet(6, WALZE_IV);
+        settings_set_wheel_by_alphabet(7, WALZE_V);
+        settings_set_wheel_by_alphabet(8, WALZE_VI);
+        settings_set_wheel_by_alphabet(9, WALZE_VII);
+        settings_set_wheel_by_alphabet(10, WALZE_VIII);
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_C);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_C);
 }
 
 // =============================================================================
@@ -280,25 +280,25 @@ void settings_commercial_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_commercial_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(3);
+        settings_set_used_wheel_count(3);
 
-        set_wheel_by_alphabet(1, WALZE_1D);
-        set_wheel_by_alphabet(2, WALZE_2D);
-        set_wheel_by_alphabet(3, WALZE_3D);
-        set_wheel_blank(4); // unused
-        set_wheel_blank(5); // unused
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1D);
+        settings_set_wheel_by_alphabet(2, WALZE_2D);
+        settings_set_wheel_by_alphabet(3, WALZE_3D);
+        settings_set_wheel_blank(4); // unused
+        settings_set_wheel_blank(5); // unused
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_D);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_D);
 }
 
 // =============================================================================
@@ -322,25 +322,25 @@ void settings_swiss_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_swiss_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(3);
+        settings_set_used_wheel_count(3);
 
-        set_wheel_by_alphabet(1, WALZE_1K);
-        set_wheel_by_alphabet(2, WALZE_2K);
-        set_wheel_by_alphabet(3, WALZE_3K);
-        set_wheel_blank(4); // unused
-        set_wheel_blank(5); // unused
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1K);
+        settings_set_wheel_by_alphabet(2, WALZE_2K);
+        settings_set_wheel_by_alphabet(3, WALZE_3K);
+        settings_set_wheel_blank(4); // unused
+        settings_set_wheel_blank(5); // unused
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_blank(UKW_INDEX);
+        settings_set_wheel_blank(UKW_INDEX);
 }
 
 // =============================================================================
@@ -368,25 +368,25 @@ void settings_norway_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_norway_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(5);
+        settings_set_used_wheel_count(5);
 
-        set_wheel_by_alphabet(1, WALZE_1N);
-        set_wheel_by_alphabet(2, WALZE_2N);
-        set_wheel_by_alphabet(3, WALZE_3N);
-        set_wheel_by_alphabet(4, WALZE_4N);
-        set_wheel_by_alphabet(5, WALZE_5N);
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1N);
+        settings_set_wheel_by_alphabet(2, WALZE_2N);
+        settings_set_wheel_by_alphabet(3, WALZE_3N);
+        settings_set_wheel_by_alphabet(4, WALZE_4N);
+        settings_set_wheel_by_alphabet(5, WALZE_5N);
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_N);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_N);
 }
 
 // =============================================================================
@@ -412,25 +412,25 @@ void settings_railway_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_railway_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(3);
+        settings_set_used_wheel_count(3);
 
-        set_wheel_by_alphabet(1, WALZE_1R);
-        set_wheel_by_alphabet(2, WALZE_2R);
-        set_wheel_by_alphabet(3, WALZE_3R);
-        set_wheel_blank(4); // unused
-        set_wheel_blank(5); // unused
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1R);
+        settings_set_wheel_by_alphabet(2, WALZE_2R);
+        settings_set_wheel_by_alphabet(3, WALZE_3R);
+        settings_set_wheel_blank(4); // unused
+        settings_set_wheel_blank(5); // unused
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_R);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_R);
 }
 
 // =============================================================================
@@ -461,25 +461,25 @@ void settings_tirpitz_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_tirpitz_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(8);
+        settings_set_used_wheel_count(8);
 
-        set_wheel_by_alphabet(1, WALZE_1T);
-        set_wheel_by_alphabet(2, WALZE_2T);
-        set_wheel_by_alphabet(3, WALZE_3T);
-        set_wheel_by_alphabet(4, WALZE_4T);
-        set_wheel_by_alphabet(5, WALZE_5T);
-        set_wheel_by_alphabet(6, WALZE_6T);
-        set_wheel_by_alphabet(7, WALZE_7T);
-        set_wheel_by_alphabet(8, WALZE_8T);
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1T);
+        settings_set_wheel_by_alphabet(2, WALZE_2T);
+        settings_set_wheel_by_alphabet(3, WALZE_3T);
+        settings_set_wheel_by_alphabet(4, WALZE_4T);
+        settings_set_wheel_by_alphabet(5, WALZE_5T);
+        settings_set_wheel_by_alphabet(6, WALZE_6T);
+        settings_set_wheel_by_alphabet(7, WALZE_7T);
+        settings_set_wheel_by_alphabet(8, WALZE_8T);
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_T);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_T);
 }
 
 // =============================================================================
@@ -507,25 +507,25 @@ void settings_zaehlwerk_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_zaehlwerk_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(3);
+        settings_set_used_wheel_count(3);
 
-        set_wheel_by_alphabet(1, WALZE_1A8);
-        set_wheel_by_alphabet(2, WALZE_2A8);
-        set_wheel_by_alphabet(3, WALZE_3A8);
-        set_wheel_blank(4); // unused
-        set_wheel_blank(5); // unused
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1A8);
+        settings_set_wheel_by_alphabet(2, WALZE_2A8);
+        settings_set_wheel_by_alphabet(3, WALZE_3A8);
+        settings_set_wheel_blank(4); // unused
+        settings_set_wheel_blank(5); // unused
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_blank(UKW_INDEX);
+        settings_set_wheel_blank(UKW_INDEX);
 }
 
 // =============================================================================
@@ -549,25 +549,25 @@ void settings_hungary_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_hungary_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(3);
+        settings_set_used_wheel_count(3);
 
-        set_wheel_by_alphabet(1, WALZE_1G1);
-        set_wheel_by_alphabet(2, WALZE_2G1);
-        set_wheel_by_alphabet(3, WALZE_5G1);
-        set_wheel_blank(4); // unused
-        set_wheel_blank(5); // unused
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1G1);
+        settings_set_wheel_by_alphabet(2, WALZE_2G1);
+        settings_set_wheel_by_alphabet(3, WALZE_5G1);
+        settings_set_wheel_blank(4); // unused
+        settings_set_wheel_blank(5); // unused
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_G);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
@@ -591,25 +591,25 @@ void settings_argentina_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_argentina_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(3);
+        settings_set_used_wheel_count(3);
 
-        set_wheel_by_alphabet(1, WALZE_1G2);
-        set_wheel_by_alphabet(2, WALZE_2G2);
-        set_wheel_by_alphabet(3, WALZE_3G2);
-        set_wheel_blank(4); // unused
-        set_wheel_blank(5); // unused
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1G2);
+        settings_set_wheel_by_alphabet(2, WALZE_2G2);
+        settings_set_wheel_by_alphabet(3, WALZE_3G2);
+        settings_set_wheel_blank(4); // unused
+        settings_set_wheel_blank(5); // unused
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_G);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
@@ -633,25 +633,25 @@ void settings_bletchley_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         settings_bletchley_comment();
         printf("\n");
 #endif
 
-        set_used_wheel_count(3);
+        settings_set_used_wheel_count(3);
 
-        set_wheel_by_alphabet(1, WALZE_1G3);
-        set_wheel_by_alphabet(2, WALZE_2G3);
-        set_wheel_by_alphabet(3, WALZE_3G3);
-        set_wheel_blank(4); // unused
-        set_wheel_blank(5); // unused
-        set_wheel_blank(6); // unused
-        set_wheel_blank(7); // unused
-        set_wheel_blank(8); // unused
-        set_wheel_blank(9); // unused
-        set_wheel_blank(10); // unused
+        settings_set_wheel_by_alphabet(1, WALZE_1G3);
+        settings_set_wheel_by_alphabet(2, WALZE_2G3);
+        settings_set_wheel_by_alphabet(3, WALZE_3G3);
+        settings_set_wheel_blank(4); // unused
+        settings_set_wheel_blank(5); // unused
+        settings_set_wheel_blank(6); // unused
+        settings_set_wheel_blank(7); // unused
+        settings_set_wheel_blank(8); // unused
+        settings_set_wheel_blank(9); // unused
+        settings_set_wheel_blank(10); // unused
 
-        set_wheel_by_alphabet(UKW_INDEX, UKW_G);
+        settings_set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
@@ -666,7 +666,7 @@ void settings_default_apply(void)
 {
 #ifdef DEBUG
         debug_print_prefix();
-        print_prefix_apply();
+        settings_print_prefix_apply();
         printf("(default) ");
         settings_default_comment();
         printf("\n");

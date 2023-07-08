@@ -129,7 +129,7 @@ void message_process(char *p_input_string,
 #endif
 
         unsigned long msg_len = strlen(p_input_string);
-        unsigned short wheel_count = get_used_wheel_count();
+        unsigned short wheel_count = settings_get_used_wheel_count();
 
         char current_char;
 

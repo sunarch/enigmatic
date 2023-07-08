@@ -9,15 +9,15 @@
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
-extern unsigned short get_used_wheel_count(void);
+extern unsigned short settings_get_used_wheel_count(void);
 
-extern signed short get_wheel_wiring_rule(unsigned short mode,
-                                          unsigned short wheel_number,
-                                          unsigned short position);
+extern signed short settings_get_wheel_wiring_rule(unsigned short mode,
+                                                   unsigned short wheel_number,
+                                                   unsigned short position);
 
 // VALIDATORS //////////////////////////////////////////////////////////////////
 
-extern void validate_wheel_number(unsigned short wheel_number);
+extern void settings_validate_wheel_number(unsigned short wheel_number);
 
 // SETTERS /////////////////////////////////////////////////////////////////////
 

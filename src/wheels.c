@@ -155,7 +155,7 @@ char get_wheel_output(unsigned short wheel_number,
 #endif
 
         // validate wheel_number
-        validate_wheel_number(wheel_number);
+        settings_validate_wheel_number(wheel_number);
 
         short index_found = abc_index_from_char_lower(input_char);
         if (index_found < 0) {
@@ -180,7 +180,7 @@ char get_wheel_output(unsigned short wheel_number,
 #endif
 
         unsigned short offset_index = calculate_index_after_offset(input_index, wheel_offset);
-        signed short wiring_rule = get_wheel_wiring_rule(mode, wheel_number, offset_index);
+        signed short wiring_rule = settings_get_wheel_wiring_rule(mode, wheel_number, offset_index);
 
 #ifdef DEBUG
         printf(" (rule ");

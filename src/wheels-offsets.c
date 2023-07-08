@@ -28,7 +28,7 @@ static unsigned short wheel_offsets[WHEELS_COUNT_MAX_TOTAL] = {0}; // all zeroes
 
 unsigned short offsets_get(unsigned short wheel_number)
 {
-        validate_wheel_number(wheel_number);
+        settings_validate_wheel_number(wheel_number);
 
         return wheel_offsets[wheel_number];
 }
@@ -49,7 +49,7 @@ static void offsets_set(unsigned short wheel_number,
         debug_print_number_unsigned_limited(new_offset, ABC_LENGTH);
 #endif
 
-        validate_wheel_number(wheel_number);
+        settings_validate_wheel_number(wheel_number);
 
         wheel_offsets[wheel_number] = new_offset % ABC_LENGTH;
 
@@ -66,7 +66,7 @@ static void offsets_display(void)
 {
         printf("offsets: | UKW: ");
         debug_print_number_unsigned_limited(offsets_get(UKW_INDEX), ABC_LENGTH);
-        for (unsigned short i = 1; i <= get_used_wheel_count(); ++i) {
+        for (unsigned short i = 1; i <= settings_get_used_wheel_count(); ++i) {
                 printf(" | ");
                 debug_print_number_unsigned_limited(i, WHEELS_COUNT_MAX_TOTAL);
                 printf(": ");
@@ -109,8 +109,7 @@ static void offsets_advance_single(unsigned short wheel_number)
         printf(")\n");
 #endif
 
-        // validate wheel_number
-        validate_wheel_number(wheel_number);
+        settings_validate_wheel_number(wheel_number);
 
         // move wheel offset by 1
         unsigned short new_offset = (unsigned short) ((offsets_get(wheel_number) + 1) % ABC_LENGTH);
@@ -125,7 +124,7 @@ void offsets_advance(void)
         printf("offsets_advance()\n");
 #endif
 
-        unsigned short wheel_count = get_used_wheel_count();
+        unsigned short wheel_count = settings_get_used_wheel_count();
         unsigned short current_wheel_offset;
 
         for (unsigned short n = 1; n <= wheel_count; ++n) {
