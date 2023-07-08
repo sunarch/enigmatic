@@ -4,9 +4,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
+#include "common.h"
 #include "morse.h"
+
+// CONSTANTS ///////////////////////////////////////////////////////////////////
+
+#define  PART_MAX_LENGTH  20
 
 // Paddings by morse code length ///////////////////////////////////////////////
 
@@ -199,27 +206,85 @@ static void morse_print_char(char character)
 }
 
 
+static void morse_line_match_indent(unsigned short indent_length)
+{
+    for (unsigned short index = 0; index < indent_length; index++) {
+        printf(" ");
+    }
+}
+
+
+static void morse_item_formatted_char(char character)
+{
+    printf("'%c'    ", character);
+}
+
+
+static void morse_item_print_formatted_code(char character)
+{
+    morse_print_char(character);
+}
+
+
+static int morse_print_line(char *p_text, int starting_index, void (*pf_print_formatted)(char))
+{
+    int part_max_index = starting_index + PART_MAX_LENGTH;
+    int continue_index = part_max_index;
+
+    int index;
+    char current_character;
+
+    index = starting_index;
+    while(true) {
+        current_character = p_text[index];
+        if (current_character == '\0') {
+            continue_index = -1;
+            break;
+        }
+        if (index == part_max_index) {
+            break;
+        }
+        pf_print_formatted(current_character);
+        index++;
+    }
+    printf("\n");
+
+    return continue_index;
+}
+
+
+static int morse_print_part(char *p_text, unsigned short indent_length, int starting_index)
+{
+    int continue_index_1;
+    int continue_index_2;
+
+    morse_line_match_indent(indent_length);
+    printf("        ");
+    continue_index_1 = morse_print_line(p_text, starting_index, &morse_item_formatted_char);
+
+    morse_line_match_indent(indent_length);
+    printf("MORSE:  ");
+    continue_index_2 = morse_print_line(p_text, starting_index, &morse_item_print_formatted_code);
+
+    if (continue_index_2 != continue_index_1) {
+        printf("Morse print part counted chars (%d) and codes (%d) differently: \n", continue_index_1, continue_index_2);
+        printf("Exiting...\n");
+        exit(RETURN_CODE_ERROR);
+    }
+
+    return continue_index_2;
+}
+
+
 // GENERAL /////////////////////////////////////////////////////////////////////
 
 void morse_print(char *p_text, unsigned short indent_length)
 {
-    int index = 0;
-    printf("        ");
-    while(p_text[index] != '\0') {
-        printf("'%c'    ", p_text[index]);
-        index++;
-    }
-    printf("\n");
+    int current_index = 0;
 
-    for (index = 0; index < indent_length; index++) {
-        printf(" ");
+    while (current_index != -1) {
+        printf("\n");
+        current_index = morse_print_part(p_text, indent_length, current_index);
     }
 
-    index = 0;
-    printf("MORSE:  ");
-    while(p_text[index] != '\0') {
-        morse_print_char(p_text[index]);
-        index++;
-    }
-    printf("\n");
 }
