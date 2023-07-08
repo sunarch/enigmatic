@@ -128,9 +128,8 @@ char *message_process(char *p_input_string,
         printf("Process message\n");
 #endif
 
-        unsigned short wheel_count = get_used_wheel_count();
-
         unsigned long msg_len = strlen(p_input_string);
+        unsigned short wheel_count = get_used_wheel_count();
 
         char current_char;
 
@@ -138,7 +137,6 @@ char *message_process(char *p_input_string,
 
                 current_char = p_input_string[n];
 
-                // start of character processing
 #ifdef DEBUG
                 debug_print_prefix();
                 printf("(");
@@ -149,15 +147,12 @@ char *message_process(char *p_input_string,
 #endif
 
                 current_char = message_process_character(current_char, wheel_count);
+                p_output_string[n] = current_char;
 
                 if (current_char != REPLACEMENT_CHARACTER) {
                         // advance wheels only after processed chars
                         offsets_advance();
                 }
-
-                // move current char into output string
-                // for both processed and unprocessed chars
-                p_output_string[n] = current_char;
         }
 
         // add null terminator to output string
