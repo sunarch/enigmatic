@@ -14,7 +14,7 @@
 #include "wheels-settings.h"
 
 #ifdef DEBUG
-    #include "debug.h"
+    #include "util-debug.h"
 #endif
 
 

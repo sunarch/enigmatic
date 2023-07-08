@@ -15,7 +15,7 @@
 #ifdef DEBUG
     #include <stdio.h>
 
-    #include "debug.h"
+    #include "util-debug.h"
 #endif
 
 

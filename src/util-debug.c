@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-#include "debug.h"
+#include "util-debug.h"
 #include "util-pager.h"
 
 

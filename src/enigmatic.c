@@ -10,9 +10,9 @@
 #include <string.h>
 
 #include "common.h"
-#include "debug.h"
 #include "message.h"
 #include "morse.h"
+#include "util-debug.h"
 #include "wheels.h"
 #include "wheels-display.h"
 #include "wheels-offsets.h"
