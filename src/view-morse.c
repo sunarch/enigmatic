@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-#include "util-morse.h"
+#include "view-morse.h"
 #include "util-pager.h"
 
 

@@ -4,9 +4,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#ifndef ENIGMATIC_MORSE_H
-#define ENIGMATIC_MORSE_H
+#ifndef ENIGMATIC_VIEW_MORSE_H
+#define ENIGMATIC_VIEW_MORSE_H
 
 extern void morse_print(char *p_text, unsigned short indent_length);
 
-#endif // ndef ENIGMATIC_MORSE_H
+#endif // ndef ENIGMATIC_VIEW_MORSE_H
