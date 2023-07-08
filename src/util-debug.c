@@ -11,11 +11,11 @@
 
 static void debug_print_padding_unsigned_number(unsigned short number, unsigned long limit)
 {
-    unsigned long current_factor = 10;
-    while (current_factor < limit) {
-        if (number <  current_factor) { printf(" "); }
-        current_factor *= 10;
-    }
+        unsigned long current_factor = 10;
+        while (current_factor < limit) {
+                if (number < current_factor) { printf(" "); }
+                current_factor *= 10;
+        }
 }
 
 
@@ -23,9 +23,9 @@ static void debug_print_padding_unsigned_number(unsigned short number, unsigned 
 
 void debug_print_number_unsigned_limited(unsigned short number, unsigned long limit)
 {
-    printf("'");
-    debug_print_padding_unsigned_number(number, limit);
-    printf("%u'", number);
+        printf("'");
+        debug_print_padding_unsigned_number(number, limit);
+        printf("%u'", number);
 }
 
 
@@ -38,45 +38,45 @@ static signed short debug_indent_level = 0;
 
 void debug_indent_print(void)
 {
-    if (debug_indent_level > 0) {
-        for (unsigned short n = 1; n <= debug_indent_level; ++n) {
-            printf("|   ");
+        if (debug_indent_level > 0) {
+                for (unsigned short n = 1; n <= debug_indent_level; ++n) {
+                        printf("|   ");
+                }
         }
-    }
 }
 
 
 void debug_indent_increment(void) {
-    debug_indent_level += 1;
+        debug_indent_level += 1;
 }
 
 
 void debug_indent_decrement(void) {
-    if (debug_indent_level > 0) {
-        debug_indent_level -= 1;
-    }
+        if (debug_indent_level > 0) {
+                debug_indent_level -= 1;
+        }
 }
 
 
 void debug_print_prefix(void)
 {
-    printf("[DEBUG] ");
+        printf("[DEBUG] ");
 }
 
 
 void debug_print_number_signed_tens(signed short number)
 {
-    printf("'");
+        printf("'");
 
-    if (number < -9) { }
-    else if (number < 0 || number > 9) {
-        printf(" ");
-    }
-    else {
-        printf("  ");
-    }
+        if (number < -9) { }
+        else if (number < 0 || number > 9) {
+                printf(" ");
+        }
+        else {
+                printf("  ");
+        }
 
-    printf("%d'", number);
+        printf("%d'", number);
 }
 
 #endif

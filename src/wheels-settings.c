@@ -13,8 +13,9 @@
 #include "wheels-common.h"
 #include "wheels-settings.h"
 
+
 #ifdef DEBUG
-    #include "util-debug.h"
+#include "util-debug.h"
 #endif
 
 
@@ -22,14 +23,14 @@
 
 static unsigned short used_wheel_count;
 
-static signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
-static signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+static signed short wheel_wiring_rules_front[WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+static signed short wheel_wiring_rules_reverse[WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 unsigned short get_used_wheel_count(void)
 {
-    return used_wheel_count;
+        return used_wheel_count;
 }
 
 
@@ -37,20 +38,20 @@ signed short get_wheel_wiring_rule(unsigned short mode,
                                    unsigned short wheel_number,
                                    unsigned short position)
 {
-    validate_wheel_number(wheel_number);
+        validate_wheel_number(wheel_number);
 
-    switch(mode) {
-        case WHEEL_MODE_UKW:
-            // use the WHEEL_MODE_FRONT method for WHEEL_MODE_UKW
-            // front and reverse should be same for UKW
-            // no break.
-        case WHEEL_MODE_FRONT:
-            return wheel_wiring_rules_front[wheel_number][position];
-        case WHEEL_MODE_REVERSE:
-            return wheel_wiring_rules_reverse[wheel_number][position];
-        default:
-            exit(RETURN_CODE_ERROR);
-    }
+        switch (mode) {
+                case WHEEL_MODE_UKW:
+                        // use the WHEEL_MODE_FRONT method for WHEEL_MODE_UKW
+                        // front and reverse should be same for UKW
+                        // no break.
+                case WHEEL_MODE_FRONT:
+                        return wheel_wiring_rules_front[wheel_number][position];
+                case WHEEL_MODE_REVERSE:
+                        return wheel_wiring_rules_reverse[wheel_number][position];
+                default:
+                        exit(RETURN_CODE_ERROR);
+        }
 }
 
 
@@ -58,13 +59,13 @@ signed short get_wheel_wiring_rule(unsigned short mode,
 
 void validate_wheel_number(unsigned short wheel_number)
 {
-    unsigned short wheel_count = get_used_wheel_count();
+        unsigned short wheel_count = get_used_wheel_count();
 
-    if (wheel_number > wheel_count) {
-        printf("Failed check with (wheel_number > wheel_count): (%u > %u)\n", wheel_number, wheel_count);
-        printf("Exiting...\n");
-        exit(RETURN_CODE_ERROR);
-    }
+        if (wheel_number > wheel_count) {
+                printf("Failed check with (wheel_number > wheel_count): (%u > %u)\n", wheel_number, wheel_count);
+                printf("Exiting...\n");
+                exit(RETURN_CODE_ERROR);
+        }
 }
 
 
@@ -83,20 +84,20 @@ static void print_prefix_apply(void)
 static void set_used_wheel_count(unsigned short new_wheel_count)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    printf("set_used_wheel_count '%u' -> '%u'", get_used_wheel_count(), new_wheel_count);
+        debug_print_prefix();
+        printf("set_used_wheel_count '%u' -> '%u'", get_used_wheel_count(), new_wheel_count);
 #endif
 
-    if (new_wheel_count > WHEELS_COUNT_MAX_REGULAR) {
-        printf("Failed check with (new_wheel_count (%u) > %u)", new_wheel_count, WHEELS_COUNT_MAX_REGULAR);
-        printf("Exiting...");
-        exit(RETURN_CODE_ERROR);
-    }
+        if (new_wheel_count > WHEELS_COUNT_MAX_REGULAR) {
+                printf("Failed check with (new_wheel_count (%u) > %u)", new_wheel_count, WHEELS_COUNT_MAX_REGULAR);
+                printf("Exiting...");
+                exit(RETURN_CODE_ERROR);
+        }
 
-    used_wheel_count = new_wheel_count;
+        used_wheel_count = new_wheel_count;
 
 #ifdef DEBUG
-    printf(" | check: '%u'\n", get_used_wheel_count());
+        printf(" | check: '%u'\n", get_used_wheel_count());
 #endif
 }
 
@@ -104,22 +105,22 @@ static void set_used_wheel_count(unsigned short new_wheel_count)
 static void set_wheel_by_alphabet(unsigned short wheel_number,
                                   const char *const wiring_alphabet)
 {
-    signed short wiring_rule;
+        signed short wiring_rule;
 
-    for (unsigned short n = 0; n < ABC_LENGTH; ++n) {
-        wiring_rule = (signed short) ((wiring_alphabet[n] - abc_char_lower_from_index(n)) % ABC_LENGTH);
-        wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
-        wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % ABC_LENGTH] = (-1) * wiring_rule;
-    }
+        for (unsigned short n = 0; n < ABC_LENGTH; ++n) {
+                wiring_rule = (signed short) ((wiring_alphabet[n] - abc_char_lower_from_index(n)) % ABC_LENGTH);
+                wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
+                wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % ABC_LENGTH] = (-1) * wiring_rule;
+        }
 }
 
 
 static void set_wheel_blank(unsigned short wheel_number)
 {
-    for (signed short n = 0; n < ABC_LENGTH; ++n) {
-        wheel_wiring_rules_front[wheel_number][n] = n;
-        wheel_wiring_rules_reverse[wheel_number][n] = n;
-    }
+        for (signed short n = 0; n < ABC_LENGTH; ++n) {
+                wheel_wiring_rules_front[wheel_number][n] = n;
+                wheel_wiring_rules_reverse[wheel_number][n] = n;
+        }
 }
 
 
@@ -158,95 +159,101 @@ static const char WALZE_GAMMA [ABC_LENGTH_STRING] = "fsokanuerhmbtiycwlqpzxvgjd"
 
 // -----------------------------------------------------------------------------
 
-void settings_services_comment(void) {
-    printf("I \"Services\" (Army, GAF)");
+void settings_services_comment(void)
+{
+        printf("I \"Services\" (Army, GAF)");
 }
+
 
 void settings_services_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_services_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_services_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(5);
+        set_used_wheel_count(5);
 
-    set_wheel_by_alphabet(1, WALZE_I);
-    set_wheel_by_alphabet(2, WALZE_II);
-    set_wheel_by_alphabet(3, WALZE_III);
-    set_wheel_by_alphabet(4, WALZE_IV);
-    set_wheel_by_alphabet(5, WALZE_V);
-    set_wheel_by_alphabet(6, WALZE_VI); // above 5 unused
-    set_wheel_by_alphabet(7, WALZE_VII); // above 5 unused
-    set_wheel_by_alphabet(8, WALZE_VIII); // above 5 unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_I);
+        set_wheel_by_alphabet(2, WALZE_II);
+        set_wheel_by_alphabet(3, WALZE_III);
+        set_wheel_by_alphabet(4, WALZE_IV);
+        set_wheel_by_alphabet(5, WALZE_V);
+        set_wheel_by_alphabet(6, WALZE_VI); // above 5 unused
+        set_wheel_by_alphabet(7, WALZE_VII); // above 5 unused
+        set_wheel_by_alphabet(8, WALZE_VIII); // above 5 unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_A);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_A);
 }
 
 // -----------------------------------------------------------------------------
 
-extern void settings_army_comment(void) {
-    printf("M3 (Army, Navy) -> Army");
+extern void settings_army_comment(void)
+{
+        printf("M3 (Army, Navy) -> Army");
 }
+
 
 void settings_army_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_army_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_army_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(8);
+        set_used_wheel_count(8);
 
-    set_wheel_by_alphabet(1, WALZE_I);
-    set_wheel_by_alphabet(2, WALZE_II);
-    set_wheel_by_alphabet(3, WALZE_III);
-    set_wheel_by_alphabet(4, WALZE_IV);
-    set_wheel_by_alphabet(5, WALZE_V);
-    set_wheel_by_alphabet(6, WALZE_VI);
-    set_wheel_by_alphabet(7, WALZE_VII);
-    set_wheel_by_alphabet(8, WALZE_VIII);
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_I);
+        set_wheel_by_alphabet(2, WALZE_II);
+        set_wheel_by_alphabet(3, WALZE_III);
+        set_wheel_by_alphabet(4, WALZE_IV);
+        set_wheel_by_alphabet(5, WALZE_V);
+        set_wheel_by_alphabet(6, WALZE_VI);
+        set_wheel_by_alphabet(7, WALZE_VII);
+        set_wheel_by_alphabet(8, WALZE_VIII);
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_B);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_B);
 }
 
 // -----------------------------------------------------------------------------
 
-void settings_navy_comment(void) {
-    printf("M3 (Army, Navy) -> Navy");
+void settings_navy_comment(void)
+{
+        printf("M3 (Army, Navy) -> Navy");
 }
+
 
 void settings_navy_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_navy_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_navy_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(10);
+        set_used_wheel_count(10);
 
-    set_wheel_by_alphabet(1, WALZE_BETA);
-    set_wheel_by_alphabet(2, WALZE_GAMMA);
-    set_wheel_by_alphabet(3, WALZE_I);
-    set_wheel_by_alphabet(4, WALZE_II);
-    set_wheel_by_alphabet(5, WALZE_III);
-    set_wheel_by_alphabet(6, WALZE_IV);
-    set_wheel_by_alphabet(7, WALZE_V);
-    set_wheel_by_alphabet(8, WALZE_VI);
-    set_wheel_by_alphabet(9, WALZE_VII);
-    set_wheel_by_alphabet(10, WALZE_VIII);
+        set_wheel_by_alphabet(1, WALZE_BETA);
+        set_wheel_by_alphabet(2, WALZE_GAMMA);
+        set_wheel_by_alphabet(3, WALZE_I);
+        set_wheel_by_alphabet(4, WALZE_II);
+        set_wheel_by_alphabet(5, WALZE_III);
+        set_wheel_by_alphabet(6, WALZE_IV);
+        set_wheel_by_alphabet(7, WALZE_V);
+        set_wheel_by_alphabet(8, WALZE_VI);
+        set_wheel_by_alphabet(9, WALZE_VII);
+        set_wheel_by_alphabet(10, WALZE_VIII);
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_C);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_C);
 }
 
 // =============================================================================
@@ -262,33 +269,35 @@ static const char UKW_D [ABC_LENGTH_STRING] = "imetcgfraysqbzxwlhkdvupojn";
 
 // -----------------------------------------------------------------------------
 
-void settings_commercial_comment(void) {
-    printf("D (commercial)");
+void settings_commercial_comment(void)
+{
+        printf("D (commercial)");
 }
+
 
 void settings_commercial_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_commercial_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_commercial_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(3);
+        set_used_wheel_count(3);
 
-    set_wheel_by_alphabet(1, WALZE_1D);
-    set_wheel_by_alphabet(2, WALZE_2D);
-    set_wheel_by_alphabet(3, WALZE_3D);
-    set_wheel_blank(4); // unused
-    set_wheel_blank(5); // unused
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1D);
+        set_wheel_by_alphabet(2, WALZE_2D);
+        set_wheel_by_alphabet(3, WALZE_3D);
+        set_wheel_blank(4); // unused
+        set_wheel_blank(5); // unused
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_D);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_D);
 }
 
 // =============================================================================
@@ -302,33 +311,35 @@ static const char WALZE_3K [ABC_LENGTH_STRING] = "ehrvxgaobqusimzflynwktpdjc";  
 
 // -----------------------------------------------------------------------------
 
-void settings_swiss_comment(void) {
-    printf("K \"Swiss K\" (Swiss)");
+void settings_swiss_comment(void)
+{
+        printf("K \"Swiss K\" (Swiss)");
 }
+
 
 void settings_swiss_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_swiss_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_swiss_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(3);
+        set_used_wheel_count(3);
 
-    set_wheel_by_alphabet(1, WALZE_1K);
-    set_wheel_by_alphabet(2, WALZE_2K);
-    set_wheel_by_alphabet(3, WALZE_3K);
-    set_wheel_blank(4); // unused
-    set_wheel_blank(5); // unused
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1K);
+        set_wheel_by_alphabet(2, WALZE_2K);
+        set_wheel_by_alphabet(3, WALZE_3K);
+        set_wheel_blank(4); // unused
+        set_wheel_blank(5); // unused
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_blank(UKW_INDEX);
+        set_wheel_blank(UKW_INDEX);
 }
 
 // =============================================================================
@@ -346,33 +357,35 @@ static const char UKW_N [ABC_LENGTH_STRING] = "mowjypuxndsraibfvlkzgqchet";
 
 // -----------------------------------------------------------------------------
 
-void settings_norway_comment(void) {
-    printf("N \"Norenigma\" (Norway)");
+void settings_norway_comment(void)
+{
+        printf("N \"Norenigma\" (Norway)");
 }
+
 
 void settings_norway_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_norway_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_norway_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(5);
+        set_used_wheel_count(5);
 
-    set_wheel_by_alphabet(1, WALZE_1N);
-    set_wheel_by_alphabet(2, WALZE_2N);
-    set_wheel_by_alphabet(3, WALZE_3N);
-    set_wheel_by_alphabet(4, WALZE_4N);
-    set_wheel_by_alphabet(5, WALZE_5N);
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1N);
+        set_wheel_by_alphabet(2, WALZE_2N);
+        set_wheel_by_alphabet(3, WALZE_3N);
+        set_wheel_by_alphabet(4, WALZE_4N);
+        set_wheel_by_alphabet(5, WALZE_5N);
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_N);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_N);
 }
 
 // =============================================================================
@@ -388,33 +401,35 @@ static const char UKW_R [ABC_LENGTH_STRING] = "qyhognecvpuztfdjaxwmkisrbl";
 
 // -----------------------------------------------------------------------------
 
-void settings_railway_comment(void) {
-    printf("R \"Rocket\" (Railway)");
+void settings_railway_comment(void)
+{
+        printf("R \"Rocket\" (Railway)");
 }
+
 
 void settings_railway_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_railway_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_railway_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(3);
+        set_used_wheel_count(3);
 
-    set_wheel_by_alphabet(1, WALZE_1R);
-    set_wheel_by_alphabet(2, WALZE_2R);
-    set_wheel_by_alphabet(3, WALZE_3R);
-    set_wheel_blank(4); // unused
-    set_wheel_blank(5); // unused
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1R);
+        set_wheel_by_alphabet(2, WALZE_2R);
+        set_wheel_by_alphabet(3, WALZE_3R);
+        set_wheel_blank(4); // unused
+        set_wheel_blank(5); // unused
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_R);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_R);
 }
 
 // =============================================================================
@@ -435,33 +450,35 @@ static const char UKW_T [ABC_LENGTH_STRING] = "gekpbtaumocniljdxzyfhwvqsr";
 
 // -----------------------------------------------------------------------------
 
-void settings_tirpitz_comment(void) {
-    printf("T \"Tirpitz\" (Japan)");
+void settings_tirpitz_comment(void)
+{
+        printf("T \"Tirpitz\" (Japan)");
 }
+
 
 void settings_tirpitz_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_tirpitz_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_tirpitz_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(8);
+        set_used_wheel_count(8);
 
-    set_wheel_by_alphabet(1, WALZE_1T);
-    set_wheel_by_alphabet(2, WALZE_2T);
-    set_wheel_by_alphabet(3, WALZE_3T);
-    set_wheel_by_alphabet(4, WALZE_4T);
-    set_wheel_by_alphabet(5, WALZE_5T);
-    set_wheel_by_alphabet(6, WALZE_6T);
-    set_wheel_by_alphabet(7, WALZE_7T);
-    set_wheel_by_alphabet(8, WALZE_8T);
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1T);
+        set_wheel_by_alphabet(2, WALZE_2T);
+        set_wheel_by_alphabet(3, WALZE_3T);
+        set_wheel_by_alphabet(4, WALZE_4T);
+        set_wheel_by_alphabet(5, WALZE_5T);
+        set_wheel_by_alphabet(6, WALZE_6T);
+        set_wheel_by_alphabet(7, WALZE_7T);
+        set_wheel_by_alphabet(8, WALZE_8T);
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_T);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_T);
 }
 
 // =============================================================================
@@ -479,33 +496,35 @@ static const char UKW_G [ABC_LENGTH_STRING] = "rulqmzjsygocetkwdahnbxpvif";
 
 // -----------------------------------------------------------------------------
 
-void settings_zaehlwerk_comment(void) {
-    printf("A-865 \"Zählwerk\" (1928)");
+void settings_zaehlwerk_comment(void)
+{
+        printf("A-865 \"Zählwerk\" (1928)");
 }
+
 
 void settings_zaehlwerk_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_zaehlwerk_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_zaehlwerk_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(3);
+        set_used_wheel_count(3);
 
-    set_wheel_by_alphabet(1, WALZE_1A8);
-    set_wheel_by_alphabet(2, WALZE_2A8);
-    set_wheel_by_alphabet(3, WALZE_3A8);
-    set_wheel_blank(4); // unused
-    set_wheel_blank(5); // unused
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1A8);
+        set_wheel_by_alphabet(2, WALZE_2A8);
+        set_wheel_by_alphabet(3, WALZE_3A8);
+        set_wheel_blank(4); // unused
+        set_wheel_blank(5); // unused
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_blank(UKW_INDEX);
+        set_wheel_blank(UKW_INDEX);
 }
 
 // =============================================================================
@@ -519,33 +538,35 @@ static const char WALZE_5G1 [ABC_LENGTH_STRING] = "qtpixwvdfrmusljohcanezkybg"; 
 
 // -----------------------------------------------------------------------------
 
-void settings_hungary_comment(void) {
-    printf("G-111 (Hungary / Munich)");
+void settings_hungary_comment(void)
+{
+        printf("G-111 (Hungary / Munich)");
 }
+
 
 void settings_hungary_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_hungary_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_hungary_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(3);
+        set_used_wheel_count(3);
 
-    set_wheel_by_alphabet(1, WALZE_1G1);
-    set_wheel_by_alphabet(2, WALZE_2G1);
-    set_wheel_by_alphabet(3, WALZE_5G1);
-    set_wheel_blank(4); // unused
-    set_wheel_blank(5); // unused
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1G1);
+        set_wheel_by_alphabet(2, WALZE_2G1);
+        set_wheel_by_alphabet(3, WALZE_5G1);
+        set_wheel_blank(4); // unused
+        set_wheel_blank(5); // unused
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_G);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
@@ -559,33 +580,35 @@ static const char WALZE_3G2 [ABC_LENGTH_STRING] = "fvdhzelsqmaxokyiwpgcbujtnr"; 
 
 // -----------------------------------------------------------------------------
 
-void settings_argentina_comment(void) {
-    printf("G-260 (Abwehr in Argentina)");
+void settings_argentina_comment(void)
+{
+        printf("G-260 (Abwehr in Argentina)");
 }
+
 
 void settings_argentina_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_argentina_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_argentina_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(3);
+        set_used_wheel_count(3);
 
-    set_wheel_by_alphabet(1, WALZE_1G2);
-    set_wheel_by_alphabet(2, WALZE_2G2);
-    set_wheel_by_alphabet(3, WALZE_3G2);
-    set_wheel_blank(4); // unused
-    set_wheel_blank(5); // unused
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1G2);
+        set_wheel_by_alphabet(2, WALZE_2G2);
+        set_wheel_by_alphabet(3, WALZE_3G2);
+        set_wheel_blank(4); // unused
+        set_wheel_blank(5); // unused
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_G);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
@@ -599,50 +622,54 @@ static const char WALZE_3G3 [ABC_LENGTH_STRING] = "uqntlszfmrehdpxkibvygjcwoa"; 
 
 // -----------------------------------------------------------------------------
 
-void settings_bletchley_comment(void) {
-    printf("G-312 (Abwehr / Bletchley Park)");
+void settings_bletchley_comment(void)
+{
+        printf("G-312 (Abwehr / Bletchley Park)");
 }
+
 
 void settings_bletchley_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    settings_bletchley_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        settings_bletchley_comment();
+        printf("\n");
 #endif
 
-    set_used_wheel_count(3);
+        set_used_wheel_count(3);
 
-    set_wheel_by_alphabet(1, WALZE_1G3);
-    set_wheel_by_alphabet(2, WALZE_2G3);
-    set_wheel_by_alphabet(3, WALZE_3G3);
-    set_wheel_blank(4); // unused
-    set_wheel_blank(5); // unused
-    set_wheel_blank(6); // unused
-    set_wheel_blank(7); // unused
-    set_wheel_blank(8); // unused
-    set_wheel_blank(9); // unused
-    set_wheel_blank(10); // unused
+        set_wheel_by_alphabet(1, WALZE_1G3);
+        set_wheel_by_alphabet(2, WALZE_2G3);
+        set_wheel_by_alphabet(3, WALZE_3G3);
+        set_wheel_blank(4); // unused
+        set_wheel_blank(5); // unused
+        set_wheel_blank(6); // unused
+        set_wheel_blank(7); // unused
+        set_wheel_blank(8); // unused
+        set_wheel_blank(9); // unused
+        set_wheel_blank(10); // unused
 
-    set_wheel_by_alphabet(UKW_INDEX, UKW_G);
+        set_wheel_by_alphabet(UKW_INDEX, UKW_G);
 }
 
 // =============================================================================
 
-void settings_default_comment(void) {
-    printf("'%s'", BLETCHLEY);
+void settings_default_comment(void)
+{
+        printf("'%s'", BLETCHLEY);
 }
+
 
 void settings_default_apply(void)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    print_prefix_apply();
-    printf("(default) ");
-    settings_default_comment();
-    printf("\n");
+        debug_print_prefix();
+        print_prefix_apply();
+        printf("(default) ");
+        settings_default_comment();
+        printf("\n");
 #endif
 
-    settings_bletchley_apply();
+        settings_bletchley_apply();
 }

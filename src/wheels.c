@@ -15,9 +15,10 @@
 #include "wheels-offsets.h"
 #include "wheels-settings.h"
 
+
 #ifdef DEBUG
-    #include "util-debug.h"
-    #include "wheels-common.h"
+#include "util-debug.h"
+#include "wheels-common.h"
 #endif
 
 
@@ -30,88 +31,88 @@
 
 void wheels_apply_default(void)
 {
-    settings_default_apply();
+        settings_default_apply();
 }
 
 
 void wheels_apply_prompt(void)
 {
-    offsets_reset();
+        offsets_reset();
 
-    printf("Select option to apply:\n");
-    printf("|-> '%s'%s- ", ARGENTINA,  PADDING_ARGENTINA);  settings_argentina_comment();  printf("\n");
-    printf("|-> '%s'%s- ", ARMY,       PADDING_ARMY);       settings_army_comment();       printf("\n");
-    printf("|-> '%s'%s- ", BLETCHLEY,  PADDING_BLETCHLEY);  settings_bletchley_comment();  printf("\n");
-    printf("|-> '%s'%s- ", COMMERCIAL, PADDING_COMMERCIAL); settings_commercial_comment(); printf("\n");
-    printf("|-> '%s'%s- ", HUNGARY,    PADDING_HUNGARY);    settings_hungary_comment();    printf("\n");
-    printf("|-> '%s'%s- ", NAVY,       PADDING_NAVY);       settings_navy_comment();       printf("\n");
-    printf("|-> '%s'%s- ", NORWAY,     PADDING_NORWAY);     settings_norway_comment();     printf("\n");
-    printf("|-> '%s'%s- ", RAILWAY,    PADDING_RAILWAY);    settings_railway_comment();    printf("\n");
-    printf("|-> '%s'%s- ", SERVICES,   PADDING_SERVICES);   settings_services_comment();   printf("\n");
-    printf("|-> '%s'%s- ", SWISS,      PADDING_SWISS);      settings_swiss_comment();      printf("\n");
-    printf("|-> '%s'%s- ", TIRPITZ,    PADDING_TIRPITZ);    settings_tirpitz_comment();    printf("\n");
-    printf("|-> '%s'%s- ", ZAEHLWERK,  PADDING_ZAEHLWERK);  settings_zaehlwerk_comment();  printf("\n");
-    printf("Default: ");                                    settings_default_comment();    printf("\n");
-    printf("Apply option: ");
+        printf("Select option to apply:\n");
+        printf("|-> '%s'%s- ", ARGENTINA,  PADDING_ARGENTINA);  settings_argentina_comment();  printf("\n");
+        printf("|-> '%s'%s- ", ARMY,       PADDING_ARMY);       settings_army_comment();       printf("\n");
+        printf("|-> '%s'%s- ", BLETCHLEY,  PADDING_BLETCHLEY);  settings_bletchley_comment();  printf("\n");
+        printf("|-> '%s'%s- ", COMMERCIAL, PADDING_COMMERCIAL); settings_commercial_comment(); printf("\n");
+        printf("|-> '%s'%s- ", HUNGARY,    PADDING_HUNGARY);    settings_hungary_comment();    printf("\n");
+        printf("|-> '%s'%s- ", NAVY,       PADDING_NAVY);       settings_navy_comment();       printf("\n");
+        printf("|-> '%s'%s- ", NORWAY,     PADDING_NORWAY);     settings_norway_comment();     printf("\n");
+        printf("|-> '%s'%s- ", RAILWAY,    PADDING_RAILWAY);    settings_railway_comment();    printf("\n");
+        printf("|-> '%s'%s- ", SERVICES,   PADDING_SERVICES);   settings_services_comment();   printf("\n");
+        printf("|-> '%s'%s- ", SWISS,      PADDING_SWISS);      settings_swiss_comment();      printf("\n");
+        printf("|-> '%s'%s- ", TIRPITZ,    PADDING_TIRPITZ);    settings_tirpitz_comment();    printf("\n");
+        printf("|-> '%s'%s- ", ZAEHLWERK,  PADDING_ZAEHLWERK);  settings_zaehlwerk_comment();  printf("\n");
+        printf("Default: ");                                    settings_default_comment();    printf("\n");
+        printf("Apply option: ");
 
-    static char apply_option[BUFFER_LENGTH_APPLY_OPTION]  = "-";
+        static char apply_option[BUFFER_LENGTH_APPLY_OPTION] = "-";
 
-    // get input
-    if (fgets(apply_option, BUFFER_LENGTH_APPLY_OPTION, stdin) == NULL) {
-        printf("Failed to get apply option\n");
-        printf("Exiting...\n");
-        exit(RETURN_CODE_ERROR);
-    }
+        // get input
+        if (fgets(apply_option, BUFFER_LENGTH_APPLY_OPTION, stdin) == NULL) {
+                printf("Failed to get apply option\n");
+                printf("Exiting...\n");
+                exit(RETURN_CODE_ERROR);
+        }
 
-    /* Remove trailing newline, if there. */
-    unsigned short apply_option_length = (unsigned short) strlen(apply_option);
-    if ((apply_option_length > 0) && (apply_option[apply_option_length - 1] == '\n')) {
-        apply_option[apply_option_length - 1] = '\0';
-    }
+        /* Remove trailing newline, if there. */
+        unsigned short apply_option_length = (unsigned short) strlen(apply_option);
+        if ((apply_option_length > 0) && (apply_option[apply_option_length - 1] == '\n')) {
+                apply_option[apply_option_length - 1] = '\0';
+        }
 
-    if (strcmp(apply_option, DEFAULT) == STRCMP_EQUAL) {
-        settings_default_apply();
-    }
-    else if (strcmp(apply_option, ARGENTINA) == STRCMP_EQUAL) {
-        settings_argentina_apply();
-    }
-    else if (strcmp(apply_option, ARMY) == STRCMP_EQUAL) {
-        settings_army_apply();
-    }
-    else if (strcmp(apply_option, BLETCHLEY) == STRCMP_EQUAL) {
-        settings_bletchley_apply();
-    }
-    else if (strcmp(apply_option, COMMERCIAL) == STRCMP_EQUAL) {
-        settings_commercial_apply();
-    }
-    else if (strcmp(apply_option, HUNGARY) == STRCMP_EQUAL) {
-        settings_hungary_apply();
-    }
-    else if (strcmp(apply_option, NAVY) == STRCMP_EQUAL) {
-        settings_navy_apply();
-    }
-    else if (strcmp(apply_option, NORWAY) == STRCMP_EQUAL) {
-        settings_norway_apply();
-    }
-    else if (strcmp(apply_option, RAILWAY) == STRCMP_EQUAL) {
-        settings_railway_apply();
-    }
-    else if (strcmp(apply_option, SERVICES) == STRCMP_EQUAL) {
-        settings_services_apply();
-    }
-    else if (strcmp(apply_option, SWISS) == STRCMP_EQUAL) {
-        settings_swiss_apply();
-    }
-    else if (strcmp(apply_option, TIRPITZ) == STRCMP_EQUAL) {
-        settings_tirpitz_apply();
-    }
-    else if (strcmp(apply_option, ZAEHLWERK) == STRCMP_EQUAL) {
-        settings_zaehlwerk_apply();
-    }
-    else {
-        printf("Setting option not recognized: '%s'\n", apply_option);
-        settings_default_apply();
-    }
+        if (strcmp(apply_option, DEFAULT) == STRCMP_EQUAL) {
+                settings_default_apply();
+        }
+        else if (strcmp(apply_option, ARGENTINA) == STRCMP_EQUAL) {
+                settings_argentina_apply();
+        }
+        else if (strcmp(apply_option, ARMY) == STRCMP_EQUAL) {
+                settings_army_apply();
+        }
+        else if (strcmp(apply_option, BLETCHLEY) == STRCMP_EQUAL) {
+                settings_bletchley_apply();
+        }
+        else if (strcmp(apply_option, COMMERCIAL) == STRCMP_EQUAL) {
+                settings_commercial_apply();
+        }
+        else if (strcmp(apply_option, HUNGARY) == STRCMP_EQUAL) {
+                settings_hungary_apply();
+        }
+        else if (strcmp(apply_option, NAVY) == STRCMP_EQUAL) {
+                settings_navy_apply();
+        }
+        else if (strcmp(apply_option, NORWAY) == STRCMP_EQUAL) {
+                settings_norway_apply();
+        }
+        else if (strcmp(apply_option, RAILWAY) == STRCMP_EQUAL) {
+                settings_railway_apply();
+        }
+        else if (strcmp(apply_option, SERVICES) == STRCMP_EQUAL) {
+                settings_services_apply();
+        }
+        else if (strcmp(apply_option, SWISS) == STRCMP_EQUAL) {
+                settings_swiss_apply();
+        }
+        else if (strcmp(apply_option, TIRPITZ) == STRCMP_EQUAL) {
+                settings_tirpitz_apply();
+        }
+        else if (strcmp(apply_option, ZAEHLWERK) == STRCMP_EQUAL) {
+                settings_zaehlwerk_apply();
+        }
+        else {
+                printf("Setting option not recognized: '%s'\n", apply_option);
+                settings_default_apply();
+        }
 }
 
 
@@ -120,16 +121,16 @@ void wheels_apply_prompt(void)
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
                                                  signed short wiring_rule)
 {
-    signed short index_plus_rule = ((signed short) index_before) + wiring_rule;
+        signed short index_plus_rule = ((signed short) index_before) + wiring_rule;
 
-    unsigned short index_abc_offset = abs(index_plus_rule) % ABC_LENGTH;
+        unsigned short index_abc_offset = abs(index_plus_rule) % ABC_LENGTH;
 
-    if (index_plus_rule < 0) {
-        return ABC_LENGTH - index_abc_offset;
-    }
-    else {
-        return index_abc_offset;
-    }
+        if (index_plus_rule < 0) {
+                return ABC_LENGTH - index_abc_offset;
+        }
+        else {
+                return index_abc_offset;
+        }
 }
 
 
@@ -138,58 +139,58 @@ char get_wheel_output(unsigned short wheel_number,
                       char input_char)
 {
 #ifdef DEBUG
-    debug_print_prefix();
-    debug_indent_increment();
-    debug_indent_print();
-    printf("get_wheel_output (wheel ");
-    debug_print_number_unsigned_limited(wheel_number, WHEELS_COUNT_MAX_TOTAL);
-    printf(") (mode '%u') ('%c' | ", mode, input_char);
+        debug_print_prefix();
+        debug_indent_increment();
+        debug_indent_print();
+        printf("get_wheel_output (wheel ");
+        debug_print_number_unsigned_limited(wheel_number, WHEELS_COUNT_MAX_TOTAL);
+        printf(") (mode '%u') ('%c' | ", mode, input_char);
 #endif
 
-    // validate wheel_number
-    validate_wheel_number(wheel_number);
+        // validate wheel_number
+        validate_wheel_number(wheel_number);
 
-    short index_found = abc_index_from_char_lower(input_char);
-    if(index_found < 0) {
-        printf("Char '%c' not found in alphabet\n", input_char);
-        printf("Exiting...\n");
-        exit(RETURN_CODE_ERROR);
-    }
-    unsigned short input_index = (unsigned short) index_found;
+        short index_found = abc_index_from_char_lower(input_char);
+        if (index_found < 0) {
+                printf("Char '%c' not found in alphabet\n", input_char);
+                printf("Exiting...\n");
+                exit(RETURN_CODE_ERROR);
+        }
+        unsigned short input_index = (unsigned short) index_found;
 
-    // wiring rule from offset index
-    unsigned short wheel_offset = offsets_get(wheel_number);
-    unsigned short offset_index = (unsigned short) ((input_index + wheel_offset) % ABC_LENGTH);
+        // wiring rule from offset index
+        unsigned short wheel_offset = offsets_get(wheel_number);
+        unsigned short offset_index = (unsigned short) ((input_index + wheel_offset) % ABC_LENGTH);
 
 #ifdef DEBUG
-    debug_print_number_unsigned_limited(offset_index, ABC_LENGTH);
-    printf(") ");
+        debug_print_number_unsigned_limited(offset_index, ABC_LENGTH);
+        printf(") ");
 #endif
 
-    signed short wiring_rule = get_wheel_wiring_rule(mode, wheel_number, offset_index);
+        signed short wiring_rule = get_wheel_wiring_rule(mode, wheel_number, offset_index);
 
 #ifdef DEBUG
-    printf(" -> (");
-    debug_print_number_unsigned_limited(wheel_offset, WHEELS_COUNT_MAX_TOTAL);
-    printf(") ");
-    debug_print_number_signed_tens(wiring_rule);
+        printf(" -> (");
+        debug_print_number_unsigned_limited(wheel_offset, WHEELS_COUNT_MAX_TOTAL);
+        printf(") ");
+        debug_print_number_signed_tens(wiring_rule);
 #endif
 
-    // index after wiring rule applied
-    unsigned short output_index = calculate_index_after_wiring_rule(input_index, wiring_rule);
+        // index after wiring rule applied
+        unsigned short output_index = calculate_index_after_wiring_rule(input_index, wiring_rule);
 
 #ifdef DEBUG
-    printf(" -> (");
-    debug_print_number_unsigned_limited(output_index, ABC_LENGTH);
+        printf(" -> (");
+        debug_print_number_unsigned_limited(output_index, ABC_LENGTH);
 #endif
 
-    // output char
-    char output_char = abc_char_lower_from_index(output_index);
+        // output char
+        char output_char = abc_char_lower_from_index(output_index);
 
 #ifdef DEBUG
-    printf(" | '%c')\n", output_char);
-    debug_indent_decrement();
+        printf(" | '%c')\n", output_char);
+        debug_indent_decrement();
 #endif
 
-    return output_char;
+        return output_char;
 }

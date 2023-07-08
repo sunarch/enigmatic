@@ -89,143 +89,143 @@
 
 static void morse_print_char(char character)
 {
-    switch (character) {
-        case 'a':
-            printf(A_MORSE);
-            printf(A_PADDING);
-            break;
-        case 'b':
-            printf(B_MORSE);
-            printf(B_PADDING);
-            break;
-        case 'c':
-            printf(C_MORSE);
-            printf(C_PADDING);
-            break;
-        case 'd':
-            printf(D_MORSE);
-            printf(D_PADDING);
-            break;
-        case 'e':
-            printf(E_MORSE);
-            printf(E_PADDING);
-            break;
-        case 'f':
-            printf(F_MORSE);
-            printf(F_PADDING);
-            break;
-        case 'g':
-            printf(G_MORSE);
-            printf(G_PADDING);
-            break;
-        case 'h':
-            printf(H_MORSE);
-            printf(H_PADDING);
-            break;
-        case 'i':
-            printf(I_MORSE);
-            printf(I_PADDING);
-            break;
-        case 'j':
-            printf(J_MORSE);
-            printf(J_PADDING);
-            break;
-        case 'k':
-            printf(K_MORSE);
-            printf(K_PADDING);
-            break;
-        case 'l':
-            printf(L_MORSE);
-            printf(L_PADDING);
-            break;
-        case 'm':
-            printf(M_MORSE);
-            printf(M_PADDING);
-            break;
-        case 'n':
-            printf(N_MORSE);
-            printf(N_PADDING);
-            break;
-        case 'o':
-            printf(O_MORSE);
-            printf(O_PADDING);
-            break;
-        case 'p':
-            printf(P_MORSE);
-            printf(P_PADDING);
-            break;
-        case 'q':
-            printf(Q_MORSE);
-            printf(Q_PADDING);
-            break;
-        case 'r':
-            printf(R_MORSE);
-            printf(R_PADDING);
-            break;
-        case 's':
-            printf(S_MORSE);
-            printf(S_PADDING);
-            break;
-        case 't':
-            printf(T_MORSE);
-            printf(T_PADDING);
-            break;
-        case 'u':
-            printf(U_MORSE);
-            printf(U_PADDING);
-            break;
-        case 'v':
-            printf(V_MORSE);
-            printf(V_PADDING);
-            break;
-        case 'w':
-            printf(W_MORSE);
-            printf(W_PADDING);
-            break;
-        case 'x':
-            printf(X_MORSE);
-            printf(X_PADDING);
-            break;
-        case 'y':
-            printf(Y_MORSE);
-            printf(Y_PADDING);
-            break;
-        case 'z':
-            printf(Z_MORSE);
-            printf(Z_PADDING);
-            break;
-        case '.':
-            printf(DOT_MORSE);
-            printf(DOT_PADDING);
-            break;
-        default:
-            printf(PADDING_MORSE_0);
-            break;
-    }
+        switch (character) {
+                case 'a':
+                        printf(A_MORSE);
+                        printf(A_PADDING);
+                        break;
+                case 'b':
+                        printf(B_MORSE);
+                        printf(B_PADDING);
+                        break;
+                case 'c':
+                        printf(C_MORSE);
+                        printf(C_PADDING);
+                        break;
+                case 'd':
+                        printf(D_MORSE);
+                        printf(D_PADDING);
+                        break;
+                case 'e':
+                        printf(E_MORSE);
+                        printf(E_PADDING);
+                        break;
+                case 'f':
+                        printf(F_MORSE);
+                        printf(F_PADDING);
+                        break;
+                case 'g':
+                        printf(G_MORSE);
+                        printf(G_PADDING);
+                        break;
+                case 'h':
+                        printf(H_MORSE);
+                        printf(H_PADDING);
+                        break;
+                case 'i':
+                        printf(I_MORSE);
+                        printf(I_PADDING);
+                        break;
+                case 'j':
+                        printf(J_MORSE);
+                        printf(J_PADDING);
+                        break;
+                case 'k':
+                        printf(K_MORSE);
+                        printf(K_PADDING);
+                        break;
+                case 'l':
+                        printf(L_MORSE);
+                        printf(L_PADDING);
+                        break;
+                case 'm':
+                        printf(M_MORSE);
+                        printf(M_PADDING);
+                        break;
+                case 'n':
+                        printf(N_MORSE);
+                        printf(N_PADDING);
+                        break;
+                case 'o':
+                        printf(O_MORSE);
+                        printf(O_PADDING);
+                        break;
+                case 'p':
+                        printf(P_MORSE);
+                        printf(P_PADDING);
+                        break;
+                case 'q':
+                        printf(Q_MORSE);
+                        printf(Q_PADDING);
+                        break;
+                case 'r':
+                        printf(R_MORSE);
+                        printf(R_PADDING);
+                        break;
+                case 's':
+                        printf(S_MORSE);
+                        printf(S_PADDING);
+                        break;
+                case 't':
+                        printf(T_MORSE);
+                        printf(T_PADDING);
+                        break;
+                case 'u':
+                        printf(U_MORSE);
+                        printf(U_PADDING);
+                        break;
+                case 'v':
+                        printf(V_MORSE);
+                        printf(V_PADDING);
+                        break;
+                case 'w':
+                        printf(W_MORSE);
+                        printf(W_PADDING);
+                        break;
+                case 'x':
+                        printf(X_MORSE);
+                        printf(X_PADDING);
+                        break;
+                case 'y':
+                        printf(Y_MORSE);
+                        printf(Y_PADDING);
+                        break;
+                case 'z':
+                        printf(Z_MORSE);
+                        printf(Z_PADDING);
+                        break;
+                case '.':
+                        printf(DOT_MORSE);
+                        printf(DOT_PADDING);
+                        break;
+                default:
+                        printf(PADDING_MORSE_0);
+                        break;
+        }
 }
 
 
 static void morse_print_char_label(void)
 {
-    printf("        ");
+        printf("        ");
 }
 
 
 static void morse_print_char_formatted(char character)
 {
-    printf("'%c'    ", character);
+        printf("'%c'    ", character);
 }
 
 
 static void morse_print_code_label(void)
 {
-    printf("MORSE:  ");
+        printf("MORSE:  ");
 }
 
 
 static void morse_print_code_formatted(char character)
 {
-    morse_print_char(character);
+        morse_print_char(character);
 }
 
 
@@ -233,11 +233,11 @@ static void morse_print_code_formatted(char character)
 
 void morse_print(char *p_text, unsigned short indent_length)
 {
-    pager_print(p_text,
-                indent_length,
-                PART_MAX_LENGTH,
-                &morse_print_char_label,
-                &morse_print_char_formatted,
-                &morse_print_code_label,
-                &morse_print_code_formatted);
+        pager_print(p_text,
+                    indent_length,
+                    PART_MAX_LENGTH,
+                    &morse_print_char_label,
+                    &morse_print_char_formatted,
+                    &morse_print_code_label,
+                    &morse_print_code_formatted);
 }

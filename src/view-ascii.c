@@ -20,26 +20,26 @@
 
 static void ascii_print_char_label(void)
 {
-    printf("       ");
+        printf("       ");
 }
 
 
 static void ascii_print_char_formatted(char character)
 {
-    printf("  '%c' ", character);
+        printf("  '%c' ", character);
 }
 
 
 static void ascii_print_code_label(void)
 {
-    printf("ASCII: ");
+        printf("ASCII: ");
 }
 
 
 static void ascii_print_code_formatted(char character)
 {
-    printf(" ");
-    debug_print_number_unsigned_limited((unsigned short) character, ASCII_MAX_VALUE);
+        printf(" ");
+        debug_print_number_unsigned_limited((unsigned short) character, ASCII_MAX_VALUE);
 }
 
 
@@ -47,11 +47,11 @@ static void ascii_print_code_formatted(char character)
 
 void ascii_print(char *p_text, unsigned short indent_length)
 {
-    pager_print(p_text,
-                indent_length,
-                PART_MAX_LENGTH,
-                &ascii_print_char_label,
-                &ascii_print_char_formatted,
-                &ascii_print_code_label,
-                &ascii_print_code_formatted);
+        pager_print(p_text,
+                    indent_length,
+                    PART_MAX_LENGTH,
+                    &ascii_print_char_label,
+                    &ascii_print_char_formatted,
+                    &ascii_print_code_label,
+                    &ascii_print_code_formatted);
 }
