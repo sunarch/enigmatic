@@ -7,7 +7,7 @@
 #ifndef ENIGMATIC_UTIL_DEBUG_H
 #define ENIGMATIC_UTIL_DEBUG_H
 
-extern void debug_print_number_unsigned_hundreds(unsigned short number);
+extern void debug_print_number_unsigned_limited(unsigned short number, unsigned long limit);
 
 #ifdef DEBUG
 
@@ -17,7 +17,6 @@ extern void debug_indent_decrement(void);
 
 extern void debug_print_prefix(void);
 
-extern void debug_print_number_unsigned_tens(unsigned short number);
 extern void debug_print_number_signed_tens(signed short number);
 
 #endif // def DEBUG

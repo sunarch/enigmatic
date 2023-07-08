@@ -13,7 +13,8 @@
 
 // CONSTANTS ///////////////////////////////////////////////////////////////////
 
-#define  PART_MAX_LENGTH  20
+#define  PART_MAX_LENGTH   20
+#define  ASCII_MAX_VALUE  255
 
 // PRIVATE /////////////////////////////////////////////////////////////////////
 
@@ -38,7 +39,7 @@ static void ascii_print_code_label(void)
 static void ascii_print_code_formatted(char character)
 {
     printf(" ");
-    debug_print_number_unsigned_hundreds((unsigned short) character);
+    debug_print_number_unsigned_limited((unsigned short) character, ASCII_MAX_VALUE);
 }
 
 

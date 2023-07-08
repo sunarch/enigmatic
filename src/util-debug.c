@@ -7,15 +7,24 @@
 #include <stdio.h>
 
 
+// PRIVATE /////////////////////////////////////////////////////////////////////
+
+static void debug_print_padding_unsigned_number(unsigned short number, unsigned long limit)
+{
+    unsigned long current_factor = 10;
+    while (current_factor < limit) {
+        if (number <  current_factor) { printf(" "); }
+        current_factor *= 10;
+    }
+}
+
+
 // GENERAL /////////////////////////////////////////////////////////////////////
 
-void debug_print_number_unsigned_hundreds(unsigned short number)
+void debug_print_number_unsigned_limited(unsigned short number, unsigned long limit)
 {
     printf("'");
-
-    if (number < 100) { printf(" "); }
-    if (number <  10) { printf(" "); }
-
+    debug_print_padding_unsigned_number(number, limit);
     printf("%u'", number);
 }
 
@@ -52,16 +61,6 @@ void debug_indent_decrement(void) {
 void debug_print_prefix(void)
 {
     printf("[DEBUG] ");
-}
-
-
-void debug_print_number_unsigned_tens(unsigned short number)
-{
-    printf("'");
-
-    if (number < 10) { printf(" "); }
-
-    printf("%u'", number);
 }
 
 

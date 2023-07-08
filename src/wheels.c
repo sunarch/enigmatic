@@ -17,6 +17,7 @@
 
 #ifdef DEBUG
     #include "util-debug.h"
+    #include "wheels-common.h"
 #endif
 
 
@@ -141,7 +142,7 @@ char get_wheel_output(unsigned short wheel_number,
     debug_indent_increment();
     debug_indent_print();
     printf("get_wheel_output (wheel ");
-    debug_print_number_unsigned_tens(wheel_number);
+    debug_print_number_unsigned_limited(wheel_number, WHEELS_COUNT_MAX_TOTAL);
     printf(") (mode '%u') ('%c' | ", mode, input_char);
 #endif
 
@@ -161,7 +162,7 @@ char get_wheel_output(unsigned short wheel_number,
     unsigned short offset_index = (unsigned short) ((input_index + wheel_offset) % ABC_LENGTH);
 
 #ifdef DEBUG
-    debug_print_number_unsigned_tens(offset_index);
+    debug_print_number_unsigned_limited(offset_index, ABC_LENGTH);
     printf(") ");
 #endif
 
@@ -169,7 +170,7 @@ char get_wheel_output(unsigned short wheel_number,
 
 #ifdef DEBUG
     printf(" -> (");
-    debug_print_number_unsigned_tens(wheel_offset);
+    debug_print_number_unsigned_limited(wheel_offset, WHEELS_COUNT_MAX_TOTAL);
     printf(") ");
     debug_print_number_signed_tens(wiring_rule);
 #endif
@@ -179,7 +180,7 @@ char get_wheel_output(unsigned short wheel_number,
 
 #ifdef DEBUG
     printf(" -> (");
-    debug_print_number_unsigned_tens(output_index);
+    debug_print_number_unsigned_limited(output_index, ABC_LENGTH);
 #endif
 
     // output char

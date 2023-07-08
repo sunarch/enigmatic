@@ -142,9 +142,9 @@ char * message_process(char *p_input_string,
     #ifdef DEBUG
         debug_print_prefix();
         printf("(");
-        debug_print_number_unsigned_hundreds((unsigned short) (n + 1));
+        debug_print_number_unsigned_limited((unsigned short) (n + 1), msg_len);
         printf("./");
-        debug_print_number_unsigned_hundreds((unsigned short) msg_len);
+        debug_print_number_unsigned_limited((unsigned short) msg_len, msg_len);
         printf(") ");
     #endif
 
