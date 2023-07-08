@@ -6,8 +6,8 @@
 
 #include <stdlib.h>
 
-#include "alphabet-common.h"
 #include "common.h"
+#include "util-abc-common.h"
 #include "wheels-common.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"

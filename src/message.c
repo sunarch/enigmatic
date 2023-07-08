@@ -7,8 +7,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "alphabet.h"
 #include "message.h"
+#include "util-abc.h"
 #include "wheels.h"
 #include "wheels-common.h"
 #include "wheels-offsets.h"

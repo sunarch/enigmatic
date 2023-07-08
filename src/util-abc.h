@@ -4,8 +4,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#ifndef ENIGMATIC_ALPHABET_H
-#define ENIGMATIC_ALPHABET_H
+#ifndef ENIGMATIC_UTIL_ABC_H
+#define ENIGMATIC_UTIL_ABC_H
 
 #include <stdbool.h>
 
@@ -25,4 +25,4 @@ extern bool is_alphabetic_upper(char character);
 extern bool is_alphabetic_lower(char character);
 extern bool is_alphabetic(char character);
 
-#endif // ndef ENIGMATIC_ALPHABET_H
+#endif // ndef ENIGMATIC_UTIL_ABC_H

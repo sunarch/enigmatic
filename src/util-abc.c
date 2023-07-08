@@ -9,9 +9,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "alphabet.h"
-#include "alphabet-common.h"
 #include "common.h"
+#include "util-abc.h"
+#include "util-abc-common.h"
 
 
 // PUBLIC CONSTANTS ////////////////////////////////////////////////////////////
