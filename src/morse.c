@@ -4,12 +4,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "common.h"
 #include "morse.h"
+#include "pager.h"
 
 // CONSTANTS ///////////////////////////////////////////////////////////////////
 
@@ -226,33 +226,6 @@ static void morse_item_print_formatted_code(char character)
 }
 
 
-static int morse_print_line(char *p_text, int starting_index, void (*pf_print_formatted)(char))
-{
-    int part_max_index = starting_index + PART_MAX_LENGTH;
-    int continue_index = part_max_index;
-
-    int index;
-    char current_character;
-
-    index = starting_index;
-    while(true) {
-        current_character = p_text[index];
-        if (current_character == '\0') {
-            continue_index = -1;
-            break;
-        }
-        if (index == part_max_index) {
-            break;
-        }
-        pf_print_formatted(current_character);
-        index++;
-    }
-    printf("\n");
-
-    return continue_index;
-}
-
-
 static int morse_print_part(char *p_text, unsigned short indent_length, int starting_index)
 {
     int continue_index_1;
@@ -260,11 +233,11 @@ static int morse_print_part(char *p_text, unsigned short indent_length, int star
 
     morse_line_match_indent(indent_length);
     printf("        ");
-    continue_index_1 = morse_print_line(p_text, starting_index, &morse_item_formatted_char);
+    continue_index_1 = pager_print_line(p_text, starting_index, PART_MAX_LENGTH, &morse_item_formatted_char);
 
     morse_line_match_indent(indent_length);
     printf("MORSE:  ");
-    continue_index_2 = morse_print_line(p_text, starting_index, &morse_item_print_formatted_code);
+    continue_index_2 = pager_print_line(p_text, starting_index, PART_MAX_LENGTH, &morse_item_print_formatted_code);
 
     if (continue_index_2 != continue_index_1) {
         printf("Morse print part counted chars (%d) and codes (%d) differently: \n", continue_index_1, continue_index_2);
