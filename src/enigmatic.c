@@ -11,8 +11,8 @@
 
 #include "common.h"
 #include "message.h"
-#include "morse.h"
 #include "util-debug.h"
+#include "util-morse.h"
 #include "wheels.h"
 #include "wheels-display.h"
 #include "wheels-offsets.h"
