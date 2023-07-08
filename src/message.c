@@ -29,7 +29,7 @@
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
-static char message_character_front_pass(char character, unsigned short wheel_count)
+static char message_process_char_front(char character, unsigned short wheel_count)
 {
 #ifdef DEBUG
         debug_print_prefix();
@@ -45,7 +45,7 @@ static char message_character_front_pass(char character, unsigned short wheel_co
 }
 
 
-static char message_character_ukw_pass(char character)
+static char message_process_char_ukw(char character)
 {
 #ifdef DEBUG
         debug_print_prefix();
@@ -59,7 +59,7 @@ static char message_character_ukw_pass(char character)
 }
 
 
-static char message_character_reverse_pass(char character, unsigned short wheel_count)
+static char message_process_char_reverse(char character, unsigned short wheel_count)
 {
 #ifdef DEBUG
         debug_print_prefix();
@@ -75,7 +75,7 @@ static char message_character_reverse_pass(char character, unsigned short wheel_
 }
 
 
-static char message_process_character(char character, unsigned short wheel_count)
+static char message_process_char(char character, unsigned short wheel_count)
 {
 #ifdef DEBUG
         printf("Process character '%c' over '%u' wheels\n", character, wheel_count);
@@ -107,9 +107,9 @@ static char message_process_character(char character, unsigned short wheel_count
         }
 
         if (letter_is_alphabetic) {
-                character = message_character_front_pass(character, wheel_count);
-                character = message_character_ukw_pass(character);
-                character = message_character_reverse_pass(character, wheel_count);
+                character = message_process_char_front(character, wheel_count);
+                character = message_process_char_ukw(character);
+                character = message_process_char_reverse(character, wheel_count);
         }
 
 #ifdef DEBUG
@@ -146,7 +146,7 @@ void message_process(char *p_input_string,
                 printf(") ");
 #endif
 
-                current_char = message_process_character(current_char, wheel_count);
+                current_char = message_process_char(current_char, wheel_count);
                 p_output_string[n] = current_char;
 
                 if (current_char != REPLACEMENT_CHARACTER) {
