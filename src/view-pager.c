@@ -14,7 +14,7 @@
 
 // PRIVATE /////////////////////////////////////////////////////////////////////
 
-static void pager_line_match_indent(unsigned short indent_length)
+static void pager_print_matching_indent(unsigned short indent_length)
 {
     for (unsigned short index = 0; index < indent_length; index++) {
         printf(" ");
@@ -66,11 +66,11 @@ static int pager_print_part(char *p_text,
     int continue_index_1;
     int continue_index_2;
 
-    pager_line_match_indent(indent_length);
+    pager_print_matching_indent(indent_length);
     pf_print_char_label();
     continue_index_1 = pager_print_line(p_text, starting_index, part_max_length, pf_print_char_formatted);
 
-    pager_line_match_indent(indent_length);
+    pager_print_matching_indent(indent_length);
     pf_print_code_label();
     continue_index_2 = pager_print_line(p_text, starting_index, part_max_length, pf_print_code_formatted);
 
