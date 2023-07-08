@@ -17,6 +17,9 @@
 
 // GENERAL - COMMON ////////////////////////////////////////////////////////////
 
+#ifndef DEBUG
+static
+#endif
 void debug_number_unsigned_hundred(unsigned short number)
 {
     printf("'");
