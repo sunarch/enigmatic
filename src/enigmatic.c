@@ -12,6 +12,7 @@
 #include "common.h"
 #include "message.h"
 #include "util-debug.h"
+#include "view-ascii.h"
 #include "view-morse.h"
 #include "wheels.h"
 #include "wheels-display.h"
@@ -71,9 +72,9 @@ static void command_message(void)
 static void command_ascii(void)
 {
     printf("MSG:  ");
-    debug_print_as_ascii(message, 6);
+    ascii_print(message, 6);
     printf("CMSG: ");
-    debug_print_as_ascii(crypto, 6);
+    ascii_print(crypto, 6);
 }
 
 static void command_morse(void)
