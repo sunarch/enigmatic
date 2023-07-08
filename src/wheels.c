@@ -118,7 +118,7 @@ void wheels_apply_prompt(void)
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
-unsigned short calculate_index_after_offset(unsigned short index_before,
+static unsigned short calculate_index_after_offset(unsigned short index_before,
                                             unsigned short offset)
 {
         return (unsigned short) ((index_before + offset) % ABC_LENGTH);
