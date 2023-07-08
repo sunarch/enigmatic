@@ -144,7 +144,7 @@ char get_wheel_output(unsigned short wheel_number,
         debug_indent_print();
         printf("get_wheel_output (wheel ");
         debug_print_number_unsigned_limited(wheel_number, WHEELS_COUNT_MAX_TOTAL);
-        printf(") (mode '%u') ('%c' | ", mode, input_char);
+        printf(") (mode '%u')", mode);
 #endif
 
         // validate wheel_number
@@ -158,37 +158,42 @@ char get_wheel_output(unsigned short wheel_number,
         }
         unsigned short input_index = (unsigned short) index_found;
 
+#ifdef DEBUG
+        printf(" ('%c'_", input_char);
+        debug_print_number_unsigned_limited(input_index, ABC_LENGTH);
+#endif
+
         // wiring rule from offset index
         unsigned short wheel_offset = offsets_get(wheel_number);
+
+#ifdef DEBUG
+        printf(" -> ~");
+        debug_print_number_unsigned_limited(wheel_offset, WHEELS_COUNT_MAX_TOTAL);
+#endif
+
         unsigned short offset_index = (unsigned short) ((input_index + wheel_offset) % ABC_LENGTH);
 
 #ifdef DEBUG
+        printf(" -> '%c'_", abc_char_lower_from_index(offset_index));
         debug_print_number_unsigned_limited(offset_index, ABC_LENGTH);
-        printf(") ");
+        printf(")");
 #endif
 
         signed short wiring_rule = get_wheel_wiring_rule(mode, wheel_number, offset_index);
 
 #ifdef DEBUG
-        printf(" -> (");
-        debug_print_number_unsigned_limited(wheel_offset, WHEELS_COUNT_MAX_TOTAL);
-        printf(") ");
+        printf(" -> (r: ");
         debug_print_number_signed_tens(wiring_rule);
+        printf(")");
 #endif
 
-        // index after wiring rule applied
         unsigned short output_index = calculate_index_after_wiring_rule(input_index, wiring_rule);
+        char output_char = abc_char_lower_from_index(output_index);
 
 #ifdef DEBUG
         printf(" -> (");
         debug_print_number_unsigned_limited(output_index, ABC_LENGTH);
-#endif
-
-        // output char
-        char output_char = abc_char_lower_from_index(output_index);
-
-#ifdef DEBUG
-        printf(" | '%c')\n", output_char);
+        printf("_'%c')\n", output_char);
         debug_indent_decrement();
 #endif
 
