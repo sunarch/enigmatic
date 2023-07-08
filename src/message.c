@@ -120,8 +120,8 @@ static char message_process_character(char character, unsigned short wheel_count
 }
 
 
-char *message_process(char *p_input_string,
-                      char *p_output_string)
+void message_process(char *p_input_string,
+                     char *p_output_string)
 {
 #ifdef DEBUG
         debug_print_prefix();
@@ -157,6 +157,4 @@ char *message_process(char *p_input_string,
 
         // add null terminator to output string
         p_output_string[msg_len] = '\0';
-
-        return p_output_string;
 }

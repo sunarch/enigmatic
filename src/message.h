@@ -9,7 +9,7 @@
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
-extern char *message_process(char *p_input_string,
-                             char *p_output_string);
+extern void message_process(char *p_input_string,
+                            char *p_output_string);
 
 #endif // ndef ENIGMATIC_MESSAGE_H
