@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #include "view-morse.h"
-#include "util-pager.h"
+#include "view-pager.h"
 
 
 // CONSTANTS ///////////////////////////////////////////////////////////////////

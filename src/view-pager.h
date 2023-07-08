@@ -4,8 +4,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#ifndef ENIGMATIC_UTIL_PAGER_H
-#define ENIGMATIC_UTIL_PAGER_H
+#ifndef ENIGMATIC_VIEW_PAGER_H
+#define ENIGMATIC_VIEW_PAGER_H
 
 extern void pager_print(char *p_text,
                         unsigned short indent_length,
@@ -15,4 +15,4 @@ extern void pager_print(char *p_text,
                         void (*pf_print_code_label)(void),
                         void (*pf_print_code_formatted)(char));
 
-#endif // ndef ENIGMATIC_UTIL_PAGER_H
+#endif // ndef ENIGMATIC_VIEW_PAGER_H
