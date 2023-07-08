@@ -41,7 +41,12 @@ static void offsets_set(unsigned short wheel_number,
 {
 #ifdef DEBUG
     debug_print_prefix();
-    printf("offsets_set (wheel '%u') '%u' -> '%u'", wheel_number, offsets_get(wheel_number), new_offset);
+    printf("offsets_set (wheel ");
+    debug_print_number_unsigned_limited(wheel_number, WHEELS_COUNT_MAX_TOTAL);
+    printf(") ");
+    debug_print_number_unsigned_limited(offsets_get(wheel_number), ABC_LENGTH);
+    printf(" -> ");
+    debug_print_number_unsigned_limited(new_offset, ABC_LENGTH);
 #endif
 
     validate_wheel_number(wheel_number);
@@ -49,7 +54,9 @@ static void offsets_set(unsigned short wheel_number,
     wheel_offsets[wheel_number] = new_offset % ABC_LENGTH;
 
 #ifdef DEBUG
-    printf(" | check: '%u'\n", offsets_get(wheel_number));
+    printf(" | check: ");
+    debug_print_number_unsigned_limited(offsets_get(wheel_number), ABC_LENGTH);
+    printf("\n");
 #endif
 }
 
@@ -57,9 +64,13 @@ static void offsets_set(unsigned short wheel_number,
 #ifdef DEBUG
 static void offsets_display(void)
 {
-    printf("offsets: | UKW: '%u'", offsets_get(UKW_INDEX));
+    printf("offsets: | UKW: ");
+    debug_print_number_unsigned_limited(offsets_get(UKW_INDEX), ABC_LENGTH);
     for (unsigned short i = 1; i <= get_used_wheel_count(); ++i) {
-        printf(" | '%u': '%u'", i, offsets_get(i));
+        printf(" | ");
+        debug_print_number_unsigned_limited(i, WHEELS_COUNT_MAX_TOTAL);
+        printf(": ");
+        debug_print_number_unsigned_limited(offsets_get(i), ABC_LENGTH);
     }
     printf("\n");
 }
@@ -93,7 +104,9 @@ static void offsets_advance_single(unsigned short wheel_number)
 {
 #ifdef DEBUG
     debug_print_prefix();
-    printf("offsets_advance_single (wheel '%u')\n", wheel_number);
+    printf("offsets_advance_single (wheel ");
+    debug_print_number_unsigned_limited(wheel_number, WHEELS_COUNT_MAX_TOTAL);
+    printf(")\n");
 #endif
 
     // validate wheel_number
