@@ -118,6 +118,13 @@ void wheels_apply_prompt(void)
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
+unsigned short calculate_index_after_offset(unsigned short index_before,
+                                            unsigned short offset)
+{
+        return (unsigned short) ((index_before + offset) % ABC_LENGTH);
+}
+
+
 unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
                                                  signed short wiring_rule)
 {
@@ -171,7 +178,7 @@ char get_wheel_output(unsigned short wheel_number,
         debug_print_number_unsigned_limited(wheel_offset, WHEELS_COUNT_MAX_TOTAL);
 #endif
 
-        unsigned short offset_index = (unsigned short) ((input_index + wheel_offset) % ABC_LENGTH);
+        unsigned short offset_index = calculate_index_after_offset(input_index, wheel_offset);
 
 #ifdef DEBUG
         printf(" -> '%c'_", abc_char_lower_from_index(offset_index));
