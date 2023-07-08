@@ -12,6 +12,7 @@
 #include "common.h"
 #include "debug.h"
 #include "message.h"
+#include "morse.h"
 #include "wheels.h"
 #include "wheels-display.h"
 #include "wheels-offsets.h"
@@ -39,7 +40,7 @@ static void command_empty(void)
 
 static void command_help(void)
 {
-    printf("Commands: help, msg/message, ascii, config, apply, reset, exit\n");
+    printf("Commands: help, msg/message, ascii, morse, config, apply, reset, exit\n");
 }
 
 
@@ -73,6 +74,13 @@ static void command_ascii(void)
     debug_print_as_ascii(message, 6);
     printf("CMSG: ");
     debug_print_as_ascii(crypto, 6);
+}
+
+static void command_morse(void)
+{
+    printf("MSG:  \"%s\"\n", message);
+    printf("CMSG: ");
+    morse_print(crypto, 6);
 }
 
 
@@ -140,6 +148,7 @@ int main (void)
         else if (strcmp(command, "message") == STRCMP_EQUAL) { command_message(); }
         else if (strcmp(command, "msg")     == STRCMP_EQUAL) { command_message(); }
         else if (strcmp(command, "ascii")   == STRCMP_EQUAL) { command_ascii();   }
+        else if (strcmp(command, "morse")   == STRCMP_EQUAL) { command_morse();   }
         else if (strcmp(command, "config")  == STRCMP_EQUAL) { command_config();  }
         else if (strcmp(command, "apply")   == STRCMP_EQUAL) { command_apply();   }
         else if (strcmp(command, "reset")   == STRCMP_EQUAL) { command_reset();   }
