@@ -23,8 +23,9 @@
 
 static unsigned short used_wheel_count;
 
-static signed short wheel_wiring_rules_front[WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
-static signed short wheel_wiring_rules_reverse[WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+static signed short wheel_wiring_rules_front   [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+static signed short wheel_wiring_rules_reverse [WHEELS_COUNT_MAX_TOTAL][ABC_LENGTH];
+
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 

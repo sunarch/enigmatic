@@ -149,7 +149,7 @@ char get_wheel_output(unsigned short wheel_number,
         debug_print_prefix();
         debug_indent_increment();
         debug_indent_print();
-        printf("get_wheel_output (wheel ");
+        printf("(wheel ");
         debug_print_number_unsigned_limited(wheel_number, WHEELS_COUNT_MAX_TOTAL);
         printf(") (mode '%u')", mode);
 #endif
@@ -165,31 +165,25 @@ char get_wheel_output(unsigned short wheel_number,
         }
         unsigned short input_index = (unsigned short) index_found;
 
-#ifdef DEBUG
-        printf(" ('%c'_", input_char);
-        debug_print_number_unsigned_limited(input_index, ABC_LENGTH);
-#endif
-
-        // wiring rule from offset index
         unsigned short wheel_offset = offsets_get(wheel_number);
 
 #ifdef DEBUG
-        printf(" -> ~");
+        printf(" (offset ");
         debug_print_number_unsigned_limited(wheel_offset, WHEELS_COUNT_MAX_TOTAL);
-#endif
-
-        unsigned short offset_index = calculate_index_after_offset(input_index, wheel_offset);
-
-#ifdef DEBUG
-        printf(" -> '%c'_", abc_char_lower_from_index(offset_index));
-        debug_print_number_unsigned_limited(offset_index, ABC_LENGTH);
         printf(")");
 #endif
 
+#ifdef DEBUG
+        printf(" (in '%c'_", input_char);
+        debug_print_number_unsigned_limited(input_index, ABC_LENGTH);
+        printf(")");
+#endif
+
+        unsigned short offset_index = calculate_index_after_offset(input_index, wheel_offset);
         signed short wiring_rule = get_wheel_wiring_rule(mode, wheel_number, offset_index);
 
 #ifdef DEBUG
-        printf(" -> (r: ");
+        printf(" (rule ");
         debug_print_number_signed_tens(wiring_rule);
         printf(")");
 #endif
@@ -198,7 +192,7 @@ char get_wheel_output(unsigned short wheel_number,
         char output_char = abc_char_lower_from_index(output_index);
 
 #ifdef DEBUG
-        printf(" -> (");
+        printf(" (out ");
         debug_print_number_unsigned_limited(output_index, ABC_LENGTH);
         printf("_'%c')\n", output_char);
         debug_indent_decrement();
