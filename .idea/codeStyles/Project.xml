@@ -2,6 +2,10 @@
   <code_scheme name="Project" version="173">
     <option name="SOFT_MARGINS" value="72,80,100,120" />
     <Objective-C>
+      <option name="INDENT_CLASS_MEMBERS" value="8" />
+      <option name="INDENT_VISIBILITY_KEYWORDS" value="4" />
+      <option name="INDENT_PREPROCESSOR_DIRECTIVE" value="4" />
+      <option name="INDENT_DIRECTIVE_AS_CODE" value="true" />
       <option name="NAMESPACE_BRACE_PLACEMENT" value="2" />
       <option name="FUNCTION_BRACE_PLACEMENT" value="2" />
       <option name="SPACE_BEFORE_INIT_LIST" value="true" />
