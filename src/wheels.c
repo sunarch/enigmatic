@@ -148,7 +148,7 @@ char get_wheel_output(unsigned short wheel_number,
     // validate wheel_number
     validate_wheel_number(wheel_number);
 
-    short index_found = abc_index_lower(input_char);
+    short index_found = abc_index_from_char_lower(input_char);
     if(index_found < 0) {
         printf("Char '%c' not found in alphabet\n", input_char);
         printf("Exiting...\n");
@@ -183,7 +183,7 @@ char get_wheel_output(unsigned short wheel_number,
 #endif
 
     // output char
-    char output_char = abc_lower(output_index);
+    char output_char = abc_char_lower_from_index(output_index);
 
 #ifdef DEBUG
     printf(" | '%c')\n", output_char);

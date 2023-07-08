@@ -53,7 +53,7 @@ static void display_cell_offset(unsigned short wheel_number, unsigned short offs
 
 static void display_cell_rule(unsigned short position, signed short rule)
 {
-    char representation = abc_lower(calculate_index_after_wiring_rule(position, rule));
+    char representation = abc_char_lower_from_index(calculate_index_after_wiring_rule(position, rule));
 
     if (rule < -9) {
         printf(" ");

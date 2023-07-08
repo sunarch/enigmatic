@@ -86,15 +86,15 @@ static char message_process_character(char character, unsigned short wheel_count
 
     bool letter_is_alphabetic = true;
 
-    if (!is_alphabetic_lower(character)) {
-        short index_upper = abc_index_upper(character);
+    if (!abc_is_valid_char_lower(character)) {
+        short index_upper = abc_index_from_char_upper(character);
 
         if (index_upper < 0) { // not uppercase letter
             letter_is_alphabetic = false;
         }
         else {
             letter_is_alphabetic = true;
-            character = abc_lower((unsigned short) index_upper);
+            character = abc_char_lower_from_index((unsigned short) index_upper);
         }
     }
 

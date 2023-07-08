@@ -21,7 +21,7 @@ static const char ABC_LOWER [ABC_LENGTH_STRING] = "abcdefghijklmnopqrstuvwxyz";
 
 // GETTERS /////////////////////////////////////////////////////////////////////
 
-char abc_upper(unsigned int index)
+char abc_char_upper_from_index(unsigned int index)
 {
     if (index > ABC_LENGTH) {
         printf("Tried to access index outside alphabet: '%d'\n", index);
@@ -32,7 +32,7 @@ char abc_upper(unsigned int index)
 }
 
 
-char abc_lower(unsigned int index)
+char abc_char_lower_from_index(unsigned int index)
 {
     if (index > ABC_LENGTH) {
         printf("Tried to access index outside alphabet: '%d'\n", index);
@@ -45,7 +45,7 @@ char abc_lower(unsigned int index)
 
 // SEARCH //////////////////////////////////////////////////////////////////////
 
-short abc_index_upper(char character)
+short abc_index_from_char_upper(char character)
 {
     char *p_occurrence = strchr(ABC_UPPER, character);
     if(p_occurrence == NULL) {
@@ -55,7 +55,7 @@ short abc_index_upper(char character)
 }
 
 
-short abc_index_lower(char character)
+short abc_index_from_char_lower(char character)
 {
     char *p_occurrence = strchr(ABC_LOWER, character);
     if(p_occurrence == NULL) {
@@ -67,21 +67,21 @@ short abc_index_lower(char character)
 
 // CHECK ///////////////////////////////////////////////////////////////////////
 
-bool is_alphabetic_upper(char character)
+bool abc_is_valid_char_upper(char character)
 {
-    if(abc_index_upper(character) < 0) { return false; }
+    if(abc_index_from_char_upper(character) < 0) { return false; }
     else { return true; }
 }
 
 
-bool is_alphabetic_lower(char character)
+bool abc_is_valid_char_lower(char character)
 {
-    if(abc_index_lower(character) < 0) { return false; }
+    if(abc_index_from_char_lower(character) < 0) { return false; }
     else { return true; }
 }
 
 
-bool is_alphabetic(char character)
+bool abc_is_valid_char(char character)
 {
-    return (is_alphabetic_upper(character) || is_alphabetic_lower(character));
+    return (abc_is_valid_char_upper(character) || abc_is_valid_char_lower(character));
 }

@@ -107,7 +107,7 @@ static void set_wheel_by_alphabet(unsigned short wheel_number,
     signed short wiring_rule;
 
     for (unsigned short n = 0; n < ABC_LENGTH; ++n) {
-        wiring_rule = (signed short) ((wiring_alphabet[n] - abc_lower(n)) % ABC_LENGTH);
+        wiring_rule = (signed short) ((wiring_alphabet[n] - abc_char_lower_from_index(n)) % ABC_LENGTH);
         wheel_wiring_rules_front[wheel_number][n] = wiring_rule;
         wheel_wiring_rules_reverse[wheel_number][(n + wiring_rule) % ABC_LENGTH] = (-1) * wiring_rule;
     }
