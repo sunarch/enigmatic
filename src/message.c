@@ -32,7 +32,7 @@
 static char message_character_front_pass(char character, unsigned short wheel_count)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     debug_indent_print();
     printf("first-to-last pass / front pass\n");
 #endif
@@ -48,7 +48,7 @@ static char message_character_front_pass(char character, unsigned short wheel_co
 static char message_character_ukw_pass(char character)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     debug_indent_print();
     printf("UKW pass (same front and reverse)\n");
 #endif
@@ -62,7 +62,7 @@ static char message_character_ukw_pass(char character)
 static char message_character_reverse_pass(char character, unsigned short wheel_count)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     debug_indent_print();
     printf("last-to-first pass / reverse pass\n");
 #endif
@@ -124,7 +124,7 @@ char * message_process(char *p_input_string,
                        char *p_output_string)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     printf("Process message\n");
 #endif
 
@@ -140,11 +140,11 @@ char * message_process(char *p_input_string,
 
         // start of character processing
     #ifdef DEBUG
-        debug_prefix();
+        debug_print_prefix();
         printf("(");
-        debug_number_unsigned_hundred((unsigned short) (n + 1));
+        debug_print_number_unsigned_hundreds((unsigned short) (n + 1));
         printf("./");
-        debug_number_unsigned_hundred((unsigned short) msg_len);
+        debug_print_number_unsigned_hundreds((unsigned short) msg_len);
         printf(") ");
     #endif
 

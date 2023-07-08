@@ -83,7 +83,7 @@ static void print_prefix_apply(void)
 static void set_used_wheel_count(unsigned short new_wheel_count)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     printf("set_used_wheel_count '%u' -> '%u'", get_used_wheel_count(), new_wheel_count);
 #endif
 
@@ -165,7 +165,7 @@ void settings_services_comment(void) {
 void settings_services_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_services_comment();
     printf("\n");
@@ -196,7 +196,7 @@ extern void settings_army_comment(void) {
 void settings_army_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_army_comment();
     printf("\n");
@@ -227,7 +227,7 @@ void settings_navy_comment(void) {
 void settings_navy_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_navy_comment();
     printf("\n");
@@ -269,7 +269,7 @@ void settings_commercial_comment(void) {
 void settings_commercial_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_commercial_comment();
     printf("\n");
@@ -309,7 +309,7 @@ void settings_swiss_comment(void) {
 void settings_swiss_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_swiss_comment();
     printf("\n");
@@ -353,7 +353,7 @@ void settings_norway_comment(void) {
 void settings_norway_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_norway_comment();
     printf("\n");
@@ -395,7 +395,7 @@ void settings_railway_comment(void) {
 void settings_railway_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_railway_comment();
     printf("\n");
@@ -442,7 +442,7 @@ void settings_tirpitz_comment(void) {
 void settings_tirpitz_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_tirpitz_comment();
     printf("\n");
@@ -486,7 +486,7 @@ void settings_zaehlwerk_comment(void) {
 void settings_zaehlwerk_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_zaehlwerk_comment();
     printf("\n");
@@ -526,7 +526,7 @@ void settings_hungary_comment(void) {
 void settings_hungary_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_hungary_comment();
     printf("\n");
@@ -566,7 +566,7 @@ void settings_argentina_comment(void) {
 void settings_argentina_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_argentina_comment();
     printf("\n");
@@ -606,7 +606,7 @@ void settings_bletchley_comment(void) {
 void settings_bletchley_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     settings_bletchley_comment();
     printf("\n");
@@ -637,7 +637,7 @@ void settings_default_comment(void) {
 void settings_default_apply(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     print_prefix_apply();
     printf("(default) ");
     settings_default_comment();

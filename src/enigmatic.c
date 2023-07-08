@@ -141,7 +141,7 @@ int main (void)
         }
 
         #ifdef DEBUG
-            debug_prefix();
+            debug_print_prefix();
             printf("Command: '%s'\n", command);
         #endif
 

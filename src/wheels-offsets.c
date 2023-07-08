@@ -40,7 +40,7 @@ static void offsets_set(unsigned short wheel_number,
                         unsigned short new_offset)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     printf("offsets_set (wheel '%u') '%u' -> '%u'", wheel_number, offsets_get(wheel_number), new_offset);
 #endif
 
@@ -69,10 +69,10 @@ static void offsets_display(void)
 void offsets_reset(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     printf("offsets_reset\n");
 
-    debug_prefix();
+    debug_print_prefix();
     printf("BEFORE: ");
     offsets_display();
 #endif
@@ -82,7 +82,7 @@ void offsets_reset(void)
     }
 
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     printf("AFTER:  ");
     offsets_display();
 #endif
@@ -92,7 +92,7 @@ void offsets_reset(void)
 static void offsets_advance_single(unsigned short wheel_number)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     printf("offsets_advance_single (wheel '%u')\n", wheel_number);
 #endif
 
@@ -108,7 +108,7 @@ static void offsets_advance_single(unsigned short wheel_number)
 void offsets_advance(void)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     printf("offsets_advance()\n");
 #endif
 

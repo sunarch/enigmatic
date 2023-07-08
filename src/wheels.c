@@ -137,11 +137,11 @@ char get_wheel_output(unsigned short wheel_number,
                       char input_char)
 {
 #ifdef DEBUG
-    debug_prefix();
+    debug_print_prefix();
     debug_indent_increment();
     debug_indent_print();
     printf("get_wheel_output (wheel ");
-    debug_number_unsigned(wheel_number);
+    debug_print_number_unsigned_tens(wheel_number);
     printf(") (mode '%u') ('%c' | ", mode, input_char);
 #endif
 
@@ -161,7 +161,7 @@ char get_wheel_output(unsigned short wheel_number,
     unsigned short offset_index = (unsigned short) ((input_index + wheel_offset) % ABC_LENGTH);
 
 #ifdef DEBUG
-    debug_number_unsigned(offset_index);
+    debug_print_number_unsigned_tens(offset_index);
     printf(") ");
 #endif
 
@@ -169,9 +169,9 @@ char get_wheel_output(unsigned short wheel_number,
 
 #ifdef DEBUG
     printf(" -> (");
-    debug_number_unsigned(wheel_offset);
+    debug_print_number_unsigned_tens(wheel_offset);
     printf(") ");
-    debug_number_signed(wiring_rule);
+    debug_print_number_signed_tens(wiring_rule);
 #endif
 
     // index after wiring rule applied
@@ -179,7 +179,7 @@ char get_wheel_output(unsigned short wheel_number,
 
 #ifdef DEBUG
     printf(" -> (");
-    debug_number_unsigned(output_index);
+    debug_print_number_unsigned_tens(output_index);
 #endif
 
     // output char

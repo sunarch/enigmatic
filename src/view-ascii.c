@@ -38,7 +38,7 @@ static void ascii_print_code_label(void)
 static void ascii_print_code_formatted(char character)
 {
     printf(" ");
-    debug_number_unsigned_hundred((unsigned short) character);
+    debug_print_number_unsigned_hundreds((unsigned short) character);
 }
 
 

@@ -9,7 +9,7 @@
 
 // GENERAL /////////////////////////////////////////////////////////////////////
 
-void debug_number_unsigned_hundred(unsigned short number)
+void debug_print_number_unsigned_hundreds(unsigned short number)
 {
     printf("'");
 
@@ -49,13 +49,13 @@ void debug_indent_decrement(void) {
 }
 
 
-void debug_prefix(void)
+void debug_print_prefix(void)
 {
     printf("[DEBUG] ");
 }
 
 
-void debug_number_unsigned(unsigned short number)
+void debug_print_number_unsigned_tens(unsigned short number)
 {
     printf("'");
 
@@ -65,7 +65,7 @@ void debug_number_unsigned(unsigned short number)
 }
 
 
-void debug_number_signed(signed short number)
+void debug_print_number_signed_tens(signed short number)
 {
     printf("'");
 
