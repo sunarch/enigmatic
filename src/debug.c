@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #include "debug.h"
-#include "pager.h"
+#include "util-pager.h"
 
 
 // CONSTANTS ///////////////////////////////////////////////////////////////////

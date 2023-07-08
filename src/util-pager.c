@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include "common.h"
-#include "pager.h"
+#include "util-pager.h"
 
 
 // PRIVATE /////////////////////////////////////////////////////////////////////
