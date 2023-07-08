@@ -7,12 +7,12 @@
 #ifndef ENIGMATIC_PAGER_H
 #define ENIGMATIC_PAGER_H
 
-void pager_print(char *p_text,
-                 unsigned short indent_length,
-                 int part_max_length,
-                 void (*pf_print_char_label)(void),
-                 void (*pf_print_char_formatted)(char),
-                 void (*pf_print_code_label)(void),
-                 void (*pf_print_code_formatted)(char));
+extern void pager_print(char *p_text,
+                        unsigned short indent_length,
+                        int part_max_length,
+                        void (*pf_print_char_label)(void),
+                        void (*pf_print_char_formatted)(char),
+                        void (*pf_print_code_label)(void),
+                        void (*pf_print_code_formatted)(char));
 
 #endif // ndef ENIGMATIC_PAGER_H
