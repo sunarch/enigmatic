@@ -5,11 +5,10 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
-#include "common.h"
 #include "morse.h"
 #include "pager.h"
+
 
 // CONSTANTS ///////////////////////////////////////////////////////////////////
 
@@ -206,46 +205,27 @@ static void morse_print_char(char character)
 }
 
 
-static void morse_line_match_indent(unsigned short indent_length)
+static void morse_item_char_label(void)
 {
-    for (unsigned short index = 0; index < indent_length; index++) {
-        printf(" ");
-    }
+    printf("        ");
 }
 
 
-static void morse_item_formatted_char(char character)
+static void morse_item_char_formatted(char character)
 {
     printf("'%c'    ", character);
 }
 
 
-static void morse_item_print_formatted_code(char character)
+static void morse_item_code_label(void)
 {
-    morse_print_char(character);
+    printf("MORSE:  ");
 }
 
 
-static int morse_print_part(char *p_text, unsigned short indent_length, int starting_index)
+static void morse_item_code_formatted(char character)
 {
-    int continue_index_1;
-    int continue_index_2;
-
-    morse_line_match_indent(indent_length);
-    printf("        ");
-    continue_index_1 = pager_print_line(p_text, starting_index, PART_MAX_LENGTH, &morse_item_formatted_char);
-
-    morse_line_match_indent(indent_length);
-    printf("MORSE:  ");
-    continue_index_2 = pager_print_line(p_text, starting_index, PART_MAX_LENGTH, &morse_item_print_formatted_code);
-
-    if (continue_index_2 != continue_index_1) {
-        printf("Morse print part counted chars (%d) and codes (%d) differently: \n", continue_index_1, continue_index_2);
-        printf("Exiting...\n");
-        exit(RETURN_CODE_ERROR);
-    }
-
-    return continue_index_2;
+    morse_print_char(character);
 }
 
 
@@ -253,11 +233,11 @@ static int morse_print_part(char *p_text, unsigned short indent_length, int star
 
 void morse_print(char *p_text, unsigned short indent_length)
 {
-    int current_index = 0;
-
-    while (current_index != -1) {
-        printf("\n");
-        current_index = morse_print_part(p_text, indent_length, current_index);
-    }
-
+    pager_print(p_text,
+                indent_length,
+                PART_MAX_LENGTH,
+                &morse_item_char_label,
+                &morse_item_char_formatted,
+                &morse_item_code_label,
+                &morse_item_code_formatted);
 }

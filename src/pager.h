@@ -7,6 +7,12 @@
 #ifndef ENIGMATIC_PAGER_H
 #define ENIGMATIC_PAGER_H
 
-int pager_print_line(char *p_text, int starting_index, int part_max_length, void (*pf_print_formatted)(char));
+void pager_print(char *p_text,
+                 unsigned short indent_length,
+                 int part_max_length,
+                 void (*pf_print_char_label)(void),
+                 void (*pf_print_char_formatted)(char),
+                 void (*pf_print_code_label)(void),
+                 void (*pf_print_code_formatted)(char));
 
 #endif // ndef ENIGMATIC_PAGER_H
