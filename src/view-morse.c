@@ -205,25 +205,25 @@ static void morse_print_char(char character)
 }
 
 
-static void morse_item_char_label(void)
+static void morse_print_char_label(void)
 {
     printf("        ");
 }
 
 
-static void morse_item_char_formatted(char character)
+static void morse_print_char_formatted(char character)
 {
     printf("'%c'    ", character);
 }
 
 
-static void morse_item_code_label(void)
+static void morse_print_code_label(void)
 {
     printf("MORSE:  ");
 }
 
 
-static void morse_item_code_formatted(char character)
+static void morse_print_code_formatted(char character)
 {
     morse_print_char(character);
 }
@@ -236,8 +236,8 @@ void morse_print(char *p_text, unsigned short indent_length)
     pager_print(p_text,
                 indent_length,
                 PART_MAX_LENGTH,
-                &morse_item_char_label,
-                &morse_item_char_formatted,
-                &morse_item_code_label,
-                &morse_item_code_formatted);
+                &morse_print_char_label,
+                &morse_print_char_formatted,
+                &morse_print_code_label,
+                &morse_print_code_formatted);
 }
