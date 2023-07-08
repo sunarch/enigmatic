@@ -7,7 +7,15 @@
 #include <stdio.h>
 
 #include "debug.h"
+#include "pager.h"
 
+
+// CONSTANTS ///////////////////////////////////////////////////////////////////
+
+#define  PART_MAX_LENGTH  20
+
+
+// GENERAL - COMMON ////////////////////////////////////////////////////////////
 
 void debug_number_unsigned_hundred(unsigned short number)
 {
@@ -20,29 +28,48 @@ void debug_number_unsigned_hundred(unsigned short number)
 }
 
 
-void debug_print_as_ascii(char *p_text, unsigned short indent_length)
+// PRIVATE /////////////////////////////////////////////////////////////////////
+
+static void ascii_item_char_label(void)
 {
-    int index = 0;
     printf("       ");
-    while(p_text[index] != '\0') {
-        printf(" '%c' ", p_text[index]);
-        index++;
-    }
-    printf("\n");
-
-    for (index = 0; index < indent_length; index++) {
-        printf(" ");
-    }
-
-    index = 0;
-    printf("ASCII: ");
-    while(p_text[index] != '\0') {
-        debug_number_unsigned_hundred((unsigned short) p_text[index]);
-        index++;
-    }
-    printf("\n");
 }
 
+
+static void ascii_item_char_formatted(char character)
+{
+    printf("  '%c' ", character);
+}
+
+
+static void ascii_item_code_label(void)
+{
+    printf("ASCII: ");
+}
+
+
+static void ascii_item_code_formatted(char character)
+{
+    printf(" ");
+    debug_number_unsigned_hundred((unsigned short) character);
+}
+
+
+// GENERAL /////////////////////////////////////////////////////////////////////
+
+void debug_print_as_ascii(char *p_text, unsigned short indent_length)
+{
+    pager_print(p_text,
+                indent_length,
+                PART_MAX_LENGTH,
+                &ascii_item_char_label,
+                &ascii_item_char_formatted,
+                &ascii_item_code_label,
+                &ascii_item_code_formatted);
+}
+
+
+// DEBUG-ONLY //////////////////////////////////////////////////////////////////
 
 #ifdef DEBUG
 
