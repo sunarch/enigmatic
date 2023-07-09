@@ -7,7 +7,6 @@
 #ifndef ENIGMATIC_CLI_PROMPT_H
 #define ENIGMATIC_CLI_PROMPT_H
 
-extern void prompt_command(char *buffer, unsigned short buffer_length);
-extern void prompt_message(char *buffer, unsigned short buffer_length);
+extern void input_get(char *buffer, unsigned short buffer_length);
 
 #endif // ndef ENIGMATIC_CLI_PROMPT_H

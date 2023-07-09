@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "cli-prompt.h"
+#include "cli-input.h"
 #include "common.h"
 #include "message.h"
 #include "view-ascii.h"
@@ -49,7 +49,12 @@ static const char COMMAND_MESSAGE       [COMMAND_LENGTH_STRING] = "message";
 static const char COMMAND_MESSAGE_SHORT [COMMAND_LENGTH_STRING] = "msg";
 static void command_message(void)
 {
-        prompt_message(message, BUFFER_LENGTH_MESSAGE);
+        printf("(max. message size is %d)\n", BUFFER_LENGTH_MESSAGE);
+
+        printf("Enter message: ");
+        input_get(message, BUFFER_LENGTH_MESSAGE);
+        printf("Message: \"%s\"\n", message);
+
         message_process(message, crypto);
         printf("Encrypted: \"%s\"\n", crypto);
 }
@@ -131,7 +136,13 @@ int main(void)
 
         while (true) {
 
-                prompt_command(command, BUFFER_LENGTH_COMMAND);
+                printf("Enigmatic $ ");
+                input_get(command, BUFFER_LENGTH_COMMAND);
+
+#ifdef DEBUG
+                debug_print_prefix();
+                printf("Command: '%s'\n", command);
+#endif
 
                 if (strlen(command) == 0) {
                         command_empty();

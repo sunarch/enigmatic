@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "cli-input.h"
 #include "common.h"
 #include "util-abc.h"
 #include "util-abc-common.h"
@@ -221,19 +222,8 @@ void wheels_apply_prompt(void)
 
         static char apply_option[BUFFER_LENGTH_APPLY_OPTION] = "-";
 
-        // get input
         printf("Apply option: ");
-        if (fgets(apply_option, BUFFER_LENGTH_APPLY_OPTION, stdin) == NULL) {
-                printf("Failed to get apply option\n");
-                printf("Exiting...\n");
-                exit(RETURN_CODE_ERROR);
-        }
-
-        /* Remove trailing newline, if there. */
-        unsigned short apply_option_length = (unsigned short) strlen(apply_option);
-        if ((apply_option_length > 0) && (apply_option[apply_option_length - 1] == '\n')) {
-                apply_option[apply_option_length - 1] = '\0';
-        }
+        input_get(apply_option, BUFFER_LENGTH_APPLY_OPTION);
 
              if (strcmp(apply_option, SETTINGS_DEFAULT)    == STRCMP_EQUAL) { settings_default_apply();    }
         else if (strcmp(apply_option, SETTINGS_ARGENTINA)  == STRCMP_EQUAL) { settings_argentina_apply();  }
