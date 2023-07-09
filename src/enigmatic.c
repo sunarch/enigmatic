@@ -137,6 +137,30 @@ static void command_help(void)
 }
 
 
+// INPUT ///////////////////////////////////////////////////////////////////////
+
+void command_prompt(char *command_buffer)
+{
+        printf("Enigmatic $ ");
+
+        if (fgets(command_buffer, BUFFER_LENGTH_COMMAND, stdin) == NULL) {
+                printf("Failed to get command input in buffer with length %i\n", BUFFER_LENGTH_COMMAND);
+                printf("Exiting...\n");
+                exit(RETURN_CODE_ERROR);
+        }
+
+        // remove trailing newline, if there
+        if ((strlen(command_buffer) > 0) && (command_buffer[strlen(command_buffer) - 1] == '\n')) {
+                command_buffer[strlen(command_buffer) - 1] = '\0';
+        }
+
+#ifdef DEBUG
+        debug_print_prefix();
+        printf("Command: '%s'\n", command_buffer);
+#endif
+}
+
+
 // ENTRY POINT /////////////////////////////////////////////////////////////////
 
 int main(void)
@@ -147,29 +171,12 @@ int main(void)
 
         while (true) {
 
-                printf("Enigmatic $ "); // command prompt
-
-                // get input
-                if (fgets(command, BUFFER_LENGTH_COMMAND, stdin) == NULL) {
-                        printf("Failed check with (fgets(command, %i, stdin) == NULL)\n", BUFFER_LENGTH_COMMAND);
-                        printf("Exiting...\n");
-                        exit(RETURN_CODE_ERROR);
-                }
-
-                /* Remove trailing newline, if there. */
-                if ((strlen(command) > 0) && (command[strlen(command) - 1] == '\n')) {
-                        command[strlen(command) - 1] = '\0';
-                }
+                command_prompt(command);
 
                 if (strlen(command) == 0) {
                         command_empty();
                         continue;
                 }
-
-#ifdef DEBUG
-                debug_print_prefix();
-                printf("Command: '%s'\n", command);
-#endif
 
                      if (strcmp(command, COMMAND_HELP)          == STRCMP_EQUAL) { command_help();    }
                 else if (strcmp(command, COMMAND_MESSAGE)       == STRCMP_EQUAL) { command_message(); }
