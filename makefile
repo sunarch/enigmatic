@@ -17,7 +17,9 @@ ASM_DIR_DEBUG = gen-asm-debug
 EXEC_DIR = gen-bin
 
 EXEC_NAME = enigmatic
+EXEC_NAME_STATIC = enigmatic-static
 EXEC_NAME_DEBUG = enigmatic-debug
+EXEC_NAME_DEBUG_STATIC = enigmatic-debug-static
 
 # compiler #####################################################################
 
@@ -89,6 +91,9 @@ C_FLAGS_EXEC_DEBUG = $(C_FLAG_PIE_NO)  $(C_FLAGS_DEBUG)
 # linker flags (only for executable target) #
 LD_FLAGS =
 
+# linker flags for static executables
+LD_FLAGS_STATIC = -static
+
 # file groups ##################################################################
 
 # determine the list of object files for the executable #
@@ -119,6 +124,16 @@ $(EXEC_DIR)/$(EXEC_NAME) : $(GEN_OBJS)
         $(C_FLAGS_EXEC_RELEASE) \
         $(LD_FLAGS) \
 
+# RULES - release - static #####
+
+$(EXEC_DIR)/$(EXEC_NAME_STATIC) : $(GEN_OBJS)
+>   $(C_COMPILER) -o $@ $^ \
+        $(C_FLAGS_STD) \
+        $(C_FLAGS_WARNING) \
+        $(C_FLAGS_EXEC_RELEASE) \
+        $(LD_FLAGS) \
+        $(LD_FLAGS_STATIC) \
+
 # RULES - debug ################################################################
 
 $(ASM_DIR_DEBUG)/%-debug.s : $(SOURCE_DIR)/%.c
@@ -139,6 +154,16 @@ $(EXEC_DIR)/$(EXEC_NAME_DEBUG) : $(GEN_OBJS_DEBUG)
         $(C_FLAGS_WARNING) \
         $(C_FLAGS_EXEC_DEBUG) \
         $(LD_FLAGS) \
+
+# RULES - debug - static #####
+
+$(EXEC_DIR)/$(EXEC_NAME_DEBUG_STATIC) : $(GEN_OBJS_DEBUG)
+>   $(C_COMPILER) -o $@ $^ \
+        $(C_FLAGS_STD) \
+        $(C_FLAGS_WARNING) \
+        $(C_FLAGS_EXEC_DEBUG) \
+        $(LD_FLAGS) \
+        $(LD_FLAGS_STATIC) \
 
 ################################################################################
 
@@ -165,6 +190,7 @@ linux-clean-release:
 >   rm $(OBJECT_DIR)/*.o
 >   rmdir $(OBJECT_DIR)
 >   rm $(EXEC_DIR)/$(EXEC_NAME)
+>   rm $(EXEC_DIR)/$(EXEC_NAME_STATIC)
 
 linux-clean-debug:
 >   rm $(ASM_DIR_DEBUG)/*.s
@@ -172,6 +198,7 @@ linux-clean-debug:
 >   rm $(OBJECT_DIR_DEBUG)/*.o
 >   rmdir $(OBJECT_DIR_DEBUG)
 >   rm $(EXEC_DIR)/$(EXEC_NAME_DEBUG)
+>   rm $(EXEC_DIR)/$(EXEC_NAME_DEBUG_STATIC)
 
 # action groups: Windows #######################################################
 
@@ -194,6 +221,7 @@ windows-clean-release:
 >   del $(OBJECT_DIR)\*.o
 >   rmdir $(OBJECT_DIR)
 >   del $(EXEC_DIR)\$(EXEC_NAME).exe
+>   del $(EXEC_DIR)\$(EXEC_NAME_STATIC).exe
 
 windows-clean-debug:
 >   del $(ASM_DIR_DEBUG)\*.s
@@ -201,19 +229,20 @@ windows-clean-debug:
 >   del $(OBJECT_DIR_DEBUG)\*.o
 >   rmdir $(OBJECT_DIR_DEBUG)
 >   del $(EXEC_DIR)\$(EXEC_NAME_DEBUG).exe
+>   del $(EXEC_DIR)\$(EXEC_NAME_DEBUG_STATIC).exe
 
 # targets ######################################################################
 
 windows: windows-release windows-debug
 
-windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
+windows-release : windows-setup $(EXEC_DIR)/$(EXEC_NAME) $(EXEC_DIR)/$(EXEC_NAME_STATIC) $(GEN_ASM)
 
-windows-debug: windows-setup-debug $(EXEC_DIR)/$(EXEC_NAME_DEBUG) $(GEN_ASM_DEBUG)
+windows-debug: windows-setup-debug $(EXEC_DIR)/$(EXEC_NAME_DEBUG) $(EXEC_DIR)/$(EXEC_NAME_DEBUG_STATIC) $(GEN_ASM_DEBUG)
 
 linux: linux-release linux-debug
 
-linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME) $(GEN_ASM)
+linux-release : linux-setup $(EXEC_DIR)/$(EXEC_NAME) $(EXEC_DIR)/$(EXEC_NAME_STATIC) $(GEN_ASM)
 
-linux-debug: linux-setup-debug $(EXEC_DIR)/$(EXEC_NAME_DEBUG) $(GEN_ASM_DEBUG)
+linux-debug: linux-setup-debug $(EXEC_DIR)/$(EXEC_NAME_DEBUG) $(EXEC_DIR)/$(EXEC_NAME_DEBUG_STATIC) $(GEN_ASM_DEBUG)
 
 # END ##########################################################################
