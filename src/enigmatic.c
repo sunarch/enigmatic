@@ -37,6 +37,47 @@ static char message [BUFFER_LENGTH_MESSAGE] = ".";
 static char crypto  [BUFFER_LENGTH_MESSAGE] = ".";
 
 
+// INPUT ///////////////////////////////////////////////////////////////////////
+
+static void prompt_input(char *buffer, unsigned short buffer_length)
+{
+        if (fgets(buffer, buffer_length, stdin) == NULL) {
+                printf("Failed to get input in buffer with length %i\n", buffer_length);
+                printf("Exiting...\n");
+                exit(RETURN_CODE_ERROR);
+        }
+
+        // remove trailing newline, if there
+        if ((strlen(buffer) > 0) && (buffer[strlen(buffer) - 1] == '\n')) {
+                buffer[strlen(buffer) - 1] = '\0';
+        }
+}
+
+
+static void prompt_command(char *buffer)
+{
+        printf("Enigmatic $ ");
+
+        prompt_input(buffer, BUFFER_LENGTH_COMMAND);
+
+#ifdef DEBUG
+        debug_print_prefix();
+        printf("Command: '%s'\n", buffer);
+#endif
+}
+
+
+static void prompt_message(char *buffer)
+{
+        printf("(max. message size is %d)\n", BUFFER_LENGTH_MESSAGE);
+        printf("Enter message: ");
+
+        prompt_input(buffer, BUFFER_LENGTH_MESSAGE);
+
+        printf("Message: \"%s\"\n", message);
+}
+
+
 // COMMAND NAMES and HANDLERS //////////////////////////////////////////////////
 
 static void command_empty(void)
@@ -49,25 +90,11 @@ static const char COMMAND_MESSAGE       [COMMAND_LENGTH_STRING] = "message";
 static const char COMMAND_MESSAGE_SHORT [COMMAND_LENGTH_STRING] = "msg";
 static void command_message(void)
 {
-        printf("(max. message size is 1 KiB)\n");
-        printf("Enter message: "); // argument prompt
-
-        // get input
-        if (fgets(message, BUFFER_LENGTH_MESSAGE, stdin) == NULL) {
-                printf("Failed check with (fgets(message, %i, stdin) == NULL)\n", BUFFER_LENGTH_MESSAGE);
-                printf("Exiting...\n");
-                exit(RETURN_CODE_ERROR);
-        }
-        /* Remove trailing newline, if there. */
-        if ((strlen(message) > 0) && (message[strlen(message) - 1] == '\n')) {
-                message[strlen(message) - 1] = '\0';
-        }
-
-        printf("MSG:  \"%s\"\n", message);
+        prompt_message(message);
 
         message_process(message, crypto);
 
-        printf("CMSG: \"%s\"\n", crypto);
+        printf("Encrypted: \"%s\"\n", crypto);
 }
 
 
@@ -137,30 +164,6 @@ static void command_help(void)
 }
 
 
-// INPUT ///////////////////////////////////////////////////////////////////////
-
-void command_prompt(char *command_buffer)
-{
-        printf("Enigmatic $ ");
-
-        if (fgets(command_buffer, BUFFER_LENGTH_COMMAND, stdin) == NULL) {
-                printf("Failed to get command input in buffer with length %i\n", BUFFER_LENGTH_COMMAND);
-                printf("Exiting...\n");
-                exit(RETURN_CODE_ERROR);
-        }
-
-        // remove trailing newline, if there
-        if ((strlen(command_buffer) > 0) && (command_buffer[strlen(command_buffer) - 1] == '\n')) {
-                command_buffer[strlen(command_buffer) - 1] = '\0';
-        }
-
-#ifdef DEBUG
-        debug_print_prefix();
-        printf("Command: '%s'\n", command_buffer);
-#endif
-}
-
-
 // ENTRY POINT /////////////////////////////////////////////////////////////////
 
 int main(void)
@@ -171,7 +174,7 @@ int main(void)
 
         while (true) {
 
-                command_prompt(command);
+                prompt_command(command);
 
                 if (strlen(command) == 0) {
                         command_empty();
