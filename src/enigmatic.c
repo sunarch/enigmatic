@@ -5,10 +5,10 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 
+#include "cli-prompt.h"
 #include "common.h"
 #include "message.h"
 #include "view-ascii.h"
@@ -37,47 +37,6 @@ static char message [BUFFER_LENGTH_MESSAGE] = ".";
 static char crypto  [BUFFER_LENGTH_MESSAGE] = ".";
 
 
-// INPUT ///////////////////////////////////////////////////////////////////////
-
-static void prompt_input(char *buffer, unsigned short buffer_length)
-{
-        if (fgets(buffer, buffer_length, stdin) == NULL) {
-                printf("Failed to get input in buffer with length %i\n", buffer_length);
-                printf("Exiting...\n");
-                exit(RETURN_CODE_ERROR);
-        }
-
-        // remove trailing newline, if there
-        if ((strlen(buffer) > 0) && (buffer[strlen(buffer) - 1] == '\n')) {
-                buffer[strlen(buffer) - 1] = '\0';
-        }
-}
-
-
-static void prompt_command(char *buffer)
-{
-        printf("Enigmatic $ ");
-
-        prompt_input(buffer, BUFFER_LENGTH_COMMAND);
-
-#ifdef DEBUG
-        debug_print_prefix();
-        printf("Command: '%s'\n", buffer);
-#endif
-}
-
-
-static void prompt_message(char *buffer)
-{
-        printf("(max. message size is %d)\n", BUFFER_LENGTH_MESSAGE);
-        printf("Enter message: ");
-
-        prompt_input(buffer, BUFFER_LENGTH_MESSAGE);
-
-        printf("Message: \"%s\"\n", message);
-}
-
-
 // COMMAND NAMES and HANDLERS //////////////////////////////////////////////////
 
 static void command_empty(void)
@@ -90,10 +49,8 @@ static const char COMMAND_MESSAGE       [COMMAND_LENGTH_STRING] = "message";
 static const char COMMAND_MESSAGE_SHORT [COMMAND_LENGTH_STRING] = "msg";
 static void command_message(void)
 {
-        prompt_message(message);
-
+        prompt_message(message, BUFFER_LENGTH_MESSAGE);
         message_process(message, crypto);
-
         printf("Encrypted: \"%s\"\n", crypto);
 }
 
@@ -174,7 +131,7 @@ int main(void)
 
         while (true) {
 
-                prompt_command(command);
+                prompt_command(command, BUFFER_LENGTH_COMMAND);
 
                 if (strlen(command) == 0) {
                         command_empty();
