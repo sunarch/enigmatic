@@ -6,202 +6,149 @@
 
 #include <stdio.h>
 
+#include "util-text.h"
 #include "view-morse.h"
 #include "view-pager.h"
 
 
+// MACROS //////////////////////////////////////////////////////////////////////
+
+#define  MORSE_CODE_MAX_LENGTH       6
+#define  MORSE_CODE_MAX_LENGTH_STR   7
+#define  PART_MAX_LENGTH            14
+
 // CONSTANTS ///////////////////////////////////////////////////////////////////
 
-#define  PART_MAX_LENGTH  14
+static const char A_MORSE [MORSE_CODE_MAX_LENGTH] = ".-";
+static const char B_MORSE [MORSE_CODE_MAX_LENGTH] = "-...";
+static const char C_MORSE [MORSE_CODE_MAX_LENGTH] = "-.-.";
+static const char D_MORSE [MORSE_CODE_MAX_LENGTH] = "-..";
+static const char E_MORSE [MORSE_CODE_MAX_LENGTH] = ".";
+static const char F_MORSE [MORSE_CODE_MAX_LENGTH] = "..-.";
+static const char G_MORSE [MORSE_CODE_MAX_LENGTH] = "--.";
+static const char H_MORSE [MORSE_CODE_MAX_LENGTH] = "....";
+static const char I_MORSE [MORSE_CODE_MAX_LENGTH] = "..";
+static const char J_MORSE [MORSE_CODE_MAX_LENGTH] = ".---";
+static const char K_MORSE [MORSE_CODE_MAX_LENGTH] = "-.-";
+static const char L_MORSE [MORSE_CODE_MAX_LENGTH] = ".-..";
+static const char M_MORSE [MORSE_CODE_MAX_LENGTH] = "--";
+static const char N_MORSE [MORSE_CODE_MAX_LENGTH] = "-.";
+static const char O_MORSE [MORSE_CODE_MAX_LENGTH] = "---";
+static const char P_MORSE [MORSE_CODE_MAX_LENGTH] = ".--.";
+static const char Q_MORSE [MORSE_CODE_MAX_LENGTH] = "--.-";
+static const char R_MORSE [MORSE_CODE_MAX_LENGTH] = ".-.";
+static const char S_MORSE [MORSE_CODE_MAX_LENGTH] = "...";
+static const char T_MORSE [MORSE_CODE_MAX_LENGTH] = "-";
+static const char U_MORSE [MORSE_CODE_MAX_LENGTH] = "..-";
+static const char V_MORSE [MORSE_CODE_MAX_LENGTH] = "...-";
+static const char W_MORSE [MORSE_CODE_MAX_LENGTH] = ".--";
+static const char X_MORSE [MORSE_CODE_MAX_LENGTH] = "-..-";
+static const char Y_MORSE [MORSE_CODE_MAX_LENGTH] = "-.--";
+static const char Z_MORSE [MORSE_CODE_MAX_LENGTH] = "--..";
 
-// Paddings by morse code length ///////////////////////////////////////////////
+// non-letters
 
-#define  PADDING_MORSE_0  "       "
-#define  PADDING_MORSE_1  "      "
-#define  PADDING_MORSE_2  "     "
-#define  PADDING_MORSE_3  "    "
-#define  PADDING_MORSE_4  "   "
-#define  PADDING_MORSE_5  "  "
-#define  PADDING_MORSE_6  " "
-
-// Morse codes and paddings for letters ////////////////////////////////////////
-
-#define  A_MORSE    ".-"
-#define  A_PADDING  PADDING_MORSE_2
-#define  B_MORSE    "-..."
-#define  B_PADDING  PADDING_MORSE_4
-#define  C_MORSE    "-.-."
-#define  C_PADDING  PADDING_MORSE_4
-#define  D_MORSE    "-.."
-#define  D_PADDING  PADDING_MORSE_3
-#define  E_MORSE    "."
-#define  E_PADDING  PADDING_MORSE_1
-#define  F_MORSE    "..-."
-#define  F_PADDING  PADDING_MORSE_4
-#define  G_MORSE    "--."
-#define  G_PADDING  PADDING_MORSE_3
-#define  H_MORSE    "...."
-#define  H_PADDING  PADDING_MORSE_4
-#define  I_MORSE    ".."
-#define  I_PADDING  PADDING_MORSE_2
-#define  J_MORSE    ".---"
-#define  J_PADDING  PADDING_MORSE_4
-#define  K_MORSE    "-.-"
-#define  K_PADDING  PADDING_MORSE_3
-#define  L_MORSE    ".-.."
-#define  L_PADDING  PADDING_MORSE_4
-#define  M_MORSE    "--"
-#define  M_PADDING  PADDING_MORSE_2
-#define  N_MORSE    "-."
-#define  N_PADDING  PADDING_MORSE_2
-#define  O_MORSE    "---"
-#define  O_PADDING  PADDING_MORSE_3
-#define  P_MORSE    ".--."
-#define  P_PADDING  PADDING_MORSE_4
-#define  Q_MORSE    "--.-"
-#define  Q_PADDING  PADDING_MORSE_4
-#define  R_MORSE    ".-."
-#define  R_PADDING  PADDING_MORSE_3
-#define  S_MORSE    "..."
-#define  S_PADDING  PADDING_MORSE_3
-#define  T_MORSE    "-"
-#define  T_PADDING  PADDING_MORSE_1
-#define  U_MORSE    "..-"
-#define  U_PADDING  PADDING_MORSE_3
-#define  V_MORSE    "...-"
-#define  V_PADDING  PADDING_MORSE_4
-#define  W_MORSE    ".--"
-#define  W_PADDING  PADDING_MORSE_3
-#define  X_MORSE    "-..-"
-#define  X_PADDING  PADDING_MORSE_4
-#define  Y_MORSE    "-.--"
-#define  Y_PADDING  PADDING_MORSE_4
-#define  Z_MORSE    "--.."
-#define  Z_PADDING  PADDING_MORSE_4
-
-// Morse codes and paddings for non-letters ////////////////////////////////////
-
-#define  DOT_MORSE    ".-.-.-"
-#define  DOT_PADDING  PADDING_MORSE_6
+static const char DOT_MORSE [MORSE_CODE_MAX_LENGTH] = ".-.-.-";
 
 
 // PRIVATE /////////////////////////////////////////////////////////////////////
+
+static void morse_print_char_padded(const char *code_text)
+{
+        printf("%s", code_text);
+        text_print_padding(code_text, MORSE_CODE_MAX_LENGTH);
+}
+
 
 static void morse_print_char(char character)
 {
         switch (character) {
                 case 'a':
-                        printf(A_MORSE);
-                        printf(A_PADDING);
+                        morse_print_char_padded(A_MORSE);
                         break;
                 case 'b':
-                        printf(B_MORSE);
-                        printf(B_PADDING);
+                        morse_print_char_padded(B_MORSE);
                         break;
                 case 'c':
-                        printf(C_MORSE);
-                        printf(C_PADDING);
+                        morse_print_char_padded(C_MORSE);
                         break;
                 case 'd':
-                        printf(D_MORSE);
-                        printf(D_PADDING);
+                        morse_print_char_padded(D_MORSE);
                         break;
                 case 'e':
-                        printf(E_MORSE);
-                        printf(E_PADDING);
+                        morse_print_char_padded(E_MORSE);
                         break;
                 case 'f':
-                        printf(F_MORSE);
-                        printf(F_PADDING);
+                        morse_print_char_padded(F_MORSE);
                         break;
                 case 'g':
-                        printf(G_MORSE);
-                        printf(G_PADDING);
+                        morse_print_char_padded(G_MORSE);
                         break;
                 case 'h':
-                        printf(H_MORSE);
-                        printf(H_PADDING);
+                        morse_print_char_padded(H_MORSE);
                         break;
                 case 'i':
-                        printf(I_MORSE);
-                        printf(I_PADDING);
+                        morse_print_char_padded(I_MORSE);
                         break;
                 case 'j':
-                        printf(J_MORSE);
-                        printf(J_PADDING);
+                        morse_print_char_padded(J_MORSE);
                         break;
                 case 'k':
-                        printf(K_MORSE);
-                        printf(K_PADDING);
+                        morse_print_char_padded(K_MORSE);
                         break;
                 case 'l':
-                        printf(L_MORSE);
-                        printf(L_PADDING);
+                        morse_print_char_padded(L_MORSE);
                         break;
                 case 'm':
-                        printf(M_MORSE);
-                        printf(M_PADDING);
+                        morse_print_char_padded(M_MORSE);
                         break;
                 case 'n':
-                        printf(N_MORSE);
-                        printf(N_PADDING);
+                        morse_print_char_padded(N_MORSE);
                         break;
                 case 'o':
-                        printf(O_MORSE);
-                        printf(O_PADDING);
+                        morse_print_char_padded(O_MORSE);
                         break;
                 case 'p':
-                        printf(P_MORSE);
-                        printf(P_PADDING);
+                        morse_print_char_padded(P_MORSE);
                         break;
                 case 'q':
-                        printf(Q_MORSE);
-                        printf(Q_PADDING);
+                        morse_print_char_padded(Q_MORSE);
                         break;
                 case 'r':
-                        printf(R_MORSE);
-                        printf(R_PADDING);
+                        morse_print_char_padded(R_MORSE);
                         break;
                 case 's':
-                        printf(S_MORSE);
-                        printf(S_PADDING);
+                        morse_print_char_padded(S_MORSE);
                         break;
                 case 't':
-                        printf(T_MORSE);
-                        printf(T_PADDING);
+                        morse_print_char_padded(T_MORSE);
                         break;
                 case 'u':
-                        printf(U_MORSE);
-                        printf(U_PADDING);
+                        morse_print_char_padded(U_MORSE);
                         break;
                 case 'v':
-                        printf(V_MORSE);
-                        printf(V_PADDING);
+                        morse_print_char_padded(V_MORSE);
                         break;
                 case 'w':
-                        printf(W_MORSE);
-                        printf(W_PADDING);
+                        morse_print_char_padded(W_MORSE);
                         break;
                 case 'x':
-                        printf(X_MORSE);
-                        printf(X_PADDING);
+                        morse_print_char_padded(X_MORSE);
                         break;
                 case 'y':
-                        printf(Y_MORSE);
-                        printf(Y_PADDING);
+                        morse_print_char_padded(Y_MORSE);
                         break;
                 case 'z':
-                        printf(Z_MORSE);
-                        printf(Z_PADDING);
+                        morse_print_char_padded(Z_MORSE);
                         break;
                 case '.':
-                        printf(DOT_MORSE);
-                        printf(DOT_PADDING);
+                        morse_print_char_padded(DOT_MORSE);
                         break;
                 default:
-                        printf(PADDING_MORSE_0);
+                        morse_print_char_padded("");
                         break;
         }
+        printf(" ");
 }
 
 
