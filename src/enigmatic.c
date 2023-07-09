@@ -4,13 +4,15 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "cli-input.h"
 #include "common.h"
 #include "message.h"
+#include "version.h"
 #include "view-ascii.h"
 #include "view-morse.h"
 #include "wheels.h"
@@ -29,6 +31,7 @@
 #define  BUFFER_LENGTH_MESSAGE   1024
 
 #define  COMMAND_LENGTH_STRING  8
+#define  FLAG_LENGTH_STRING     3
 
 
 // CONSTANTS ///////////////////////////////////////////////////////////////////
@@ -48,6 +51,14 @@ static char crypto  [BUFFER_LENGTH_MESSAGE] = ".";
 static void command_empty(void)
 {
         printf("No command provided.\n");
+}
+
+
+static const char FLAG_VERSION [FLAG_LENGTH_STRING] = "-v";
+static const char COMMAND_VERSION [COMMAND_LENGTH_STRING] = "version";
+static void command_version(void)
+{
+        printf("%s %s\n", PROGRAM_NAME, PROGRAM_VERSION);
 }
 
 
@@ -126,6 +137,7 @@ static void command_help(void)
         printf(", %s", COMMAND_CONFIG);
         printf(", %s", COMMAND_APPLY);
         printf(", %s", COMMAND_RESET);
+        printf(", %s", COMMAND_VERSION);
         printf(", %s", COMMAND_EXIT);
         printf("\n");
 }
@@ -133,9 +145,37 @@ static void command_help(void)
 
 // ENTRY POINT /////////////////////////////////////////////////////////////////
 
-int main(void)
+int main(int argc, char **argv)
 {
-        printf("Welcome to Enigmatic - an Enigma emulator\n");
+#ifdef DEBUG
+        debug_print_prefix();
+        printf("Invoked as: '%s'\n", argv[0]);
+        if (argc > 1) {
+                debug_print_prefix();
+                printf("Options (%d) :", argc - 1);
+                for (int i = 1; i < argc; i++) {
+                        printf(" '%s'", argv[i]);
+                }
+                printf("\n");
+        }
+#endif
+
+        if (argc == 2) {
+                if (strcmp(FLAG_VERSION, argv[1]) == STRCMP_EQUAL) {
+                        command_version();
+                        exit(RETURN_CODE_SUCCESS);
+                }
+                else {
+                        printf("Unrecognized command line argument (%s)\n", argv[1]);
+                        exit(RETURN_CODE_ERROR);
+                }
+        }
+        else if (argc > 2) {
+                printf("Too many command line arguments (%d)\n", argc - 1);
+                exit(RETURN_CODE_ERROR);
+        }
+
+        printf("Welcome to %s - an Enigma emulator\n", PROGRAM_NAME);
 
         wheels_apply_default();
 
@@ -161,6 +201,7 @@ int main(void)
                 else if (strcmp(command, COMMAND_CONFIG)        == STRCMP_EQUAL) { command_config();  }
                 else if (strcmp(command, COMMAND_APPLY)         == STRCMP_EQUAL) { command_apply();   }
                 else if (strcmp(command, COMMAND_RESET)         == STRCMP_EQUAL) { command_reset();   }
+                else if (strcmp(command, COMMAND_VERSION)       == STRCMP_EQUAL) { command_version(); }
                 else if (strcmp(command, COMMAND_EXIT)          == STRCMP_EQUAL) { break;             }
                 else                                                             { command_unknown(); }
         }
