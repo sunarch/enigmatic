@@ -7,6 +7,12 @@
 #ifndef ENIGMATIC_WHEELS_SETTINGS_H
 #define ENIGMATIC_WHEELS_SETTINGS_H
 
+
+// CONSTANTS ///////////////////////////////////////////////////////////////////
+
+#define  SETTINGS_NAME_MAX_LENGTH      10
+#define  SETTINGS_NAME_MAX_LENGTH_STR  11
+
 // GETTERS /////////////////////////////////////////////////////////////////////
 
 extern unsigned short settings_get_used_wheel_count(void);
@@ -21,69 +27,57 @@ extern void settings_validate_wheel_number(unsigned short wheel_number);
 
 // SETTERS /////////////////////////////////////////////////////////////////////
 
-#define  DEFAULT  "default"
+extern void settings_print_name_padding(const char *settings_name);
 
+extern const char SETTINGS_DEFAULT [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_default_comment(void);
 extern void settings_default_apply(void);
 
-#define  ARGENTINA           "argentina"
-#define  PADDING_ARGENTINA            "  "
-#define  ARMY                "army"
-#define  PADDING_ARMY            "       "
-#define  BLETCHLEY           "bletchley"
-#define  PADDING_BLETCHLEY            "  "
-#define  COMMERCIAL          "commercial"
-#define  PADDING_COMMERCIAL            " "
-#define  HUNGARY             "hungary"
-#define  PADDING_HUNGARY            "    "
-#define  NAVY                "navy"
-#define  PADDING_NAVY            "       "
-#define  NORWAY              "norway"
-#define  PADDING_NORWAY            "     "
-#define  RAILWAY             "railway"
-#define  PADDING_RAILWAY            "    "
-#define  SERVICES            "services"
-#define  PADDING_SERVICES            "   "
-#define  SWISS               "swiss"
-#define  PADDING_SWISS            "      "
-#define  TIRPITZ             "tirpitz"
-#define  PADDING_TIRPITZ            "    "
-#define  ZAEHLWERK           "zaehlwerk"
-#define  PADDING_ZAEHLWERK            "  "
-
+extern const char SETTINGS_ARGENTINA [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_argentina_comment(void);
 extern void settings_argentina_apply(void);
 
+extern const char SETTINGS_ARMY [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_army_comment(void);
 extern void settings_army_apply(void);
 
+extern const char SETTINGS_BLETCHLEY [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_bletchley_comment(void);
 extern void settings_bletchley_apply(void);
 
+extern const char SETTINGS_COMMERCIAL [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_commercial_comment(void);
 extern void settings_commercial_apply(void);
 
+extern const char SETTINGS_HUNGARY [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_hungary_comment(void);
 extern void settings_hungary_apply(void);
 
+extern const char SETTINGS_NAVY [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_navy_comment(void);
 extern void settings_navy_apply(void);
 
+extern const char SETTINGS_NORWAY [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_norway_comment(void);
 extern void settings_norway_apply(void);
 
+extern const char SETTINGS_RAILWAY [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_railway_comment(void);
 extern void settings_railway_apply(void);
 
+extern const char SETTINGS_SERVICES [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_services_comment(void);
 extern void settings_services_apply(void);
 
+extern const char SETTINGS_SWISS [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_swiss_comment(void);
 extern void settings_swiss_apply(void);
 
+extern const char SETTINGS_TIRPITZ [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_tirpitz_comment(void);
 extern void settings_tirpitz_apply(void);
 
+extern const char SETTINGS_ZAEHLWERK [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_zaehlwerk_comment(void);
 extern void settings_zaehlwerk_apply(void);
 

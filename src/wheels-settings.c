@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "common.h"
 #include "util-abc.h"
@@ -127,6 +128,17 @@ static void settings_set_wheel_blank(unsigned short wheel_number)
 
 // SETTERS /////////////////////////////////////////////////////////////////////
 
+void settings_print_name_padding(const char *settings_name)
+{
+        unsigned short name_length = (unsigned short) strlen(settings_name);
+        signed short padding_length = (signed short) (SETTINGS_NAME_MAX_LENGTH - name_length);
+        
+        for (unsigned short i = 0; i < padding_length; i++) {
+                printf(" ");
+        }
+}
+
+
 // Rotor wheels (wiring, turnover points, c-o info, name)
 // Reflectors (UKW)
 
@@ -159,6 +171,9 @@ static const char WALZE_BETA  [ABC_LENGTH_STRING] = "leyjvcnixwpbqmdrtakzgfuhos"
 static const char WALZE_GAMMA [ABC_LENGTH_STRING] = "fsokanuerhmbtiycwlqpzxvgjd";
 
 // -----------------------------------------------------------------------------
+
+const char SETTINGS_SERVICES [SETTINGS_NAME_MAX_LENGTH_STR] = "services";
+
 
 void settings_services_comment(void)
 {
@@ -193,6 +208,9 @@ void settings_services_apply(void)
 
 // -----------------------------------------------------------------------------
 
+const char SETTINGS_ARMY [SETTINGS_NAME_MAX_LENGTH_STR] = "army";
+
+
 extern void settings_army_comment(void)
 {
         printf("M3 (Army, Navy) -> Army");
@@ -225,6 +243,9 @@ void settings_army_apply(void)
 }
 
 // -----------------------------------------------------------------------------
+
+const char SETTINGS_NAVY [SETTINGS_NAME_MAX_LENGTH_STR] = "navy";
+
 
 void settings_navy_comment(void)
 {
@@ -270,6 +291,9 @@ static const char UKW_D [ABC_LENGTH_STRING] = "imetcgfraysqbzxwlhkdvupojn";
 
 // -----------------------------------------------------------------------------
 
+const char SETTINGS_COMMERCIAL [SETTINGS_NAME_MAX_LENGTH_STR] = "commercial";
+
+
 void settings_commercial_comment(void)
 {
         printf("D (commercial)");
@@ -311,6 +335,9 @@ static const char WALZE_2K [ABC_LENGTH_STRING] = "zouesydkfwpciqxhmvblgnjrat";  
 static const char WALZE_3K [ABC_LENGTH_STRING] = "ehrvxgaobqusimzflynwktpdjc";  //  'n', 'N|O', '3K')
 
 // -----------------------------------------------------------------------------
+
+const char SETTINGS_SWISS [SETTINGS_NAME_MAX_LENGTH_STR] = "swiss";
+
 
 void settings_swiss_comment(void)
 {
@@ -358,6 +385,9 @@ static const char UKW_N [ABC_LENGTH_STRING] = "mowjypuxndsraibfvlkzgqchet";
 
 // -----------------------------------------------------------------------------
 
+const char SETTINGS_NORWAY [SETTINGS_NAME_MAX_LENGTH_STR] = "norway";
+
+
 void settings_norway_comment(void)
 {
         printf("N \"Norenigma\" (Norway)");
@@ -401,6 +431,9 @@ static const char WALZE_3R [ABC_LENGTH_STRING] = "jviubhtcdyakeqzposgxnrmwfl";  
 static const char UKW_R [ABC_LENGTH_STRING] = "qyhognecvpuztfdjaxwmkisrbl";
 
 // -----------------------------------------------------------------------------
+
+const char SETTINGS_RAILWAY [SETTINGS_NAME_MAX_LENGTH_STR] = "railway";
+
 
 void settings_railway_comment(void)
 {
@@ -451,6 +484,9 @@ static const char UKW_T [ABC_LENGTH_STRING] = "gekpbtaumocniljdxzyfhwvqsr";
 
 // -----------------------------------------------------------------------------
 
+const char SETTINGS_TIRPITZ [SETTINGS_NAME_MAX_LENGTH_STR] = "tirpitz";
+
+
 void settings_tirpitz_comment(void)
 {
         printf("T \"Tirpitz\" (Japan)");
@@ -497,6 +533,9 @@ static const char UKW_G [ABC_LENGTH_STRING] = "rulqmzjsygocetkwdahnbxpvif";
 
 // -----------------------------------------------------------------------------
 
+const char SETTINGS_ZAEHLWERK [SETTINGS_NAME_MAX_LENGTH_STR] = "zaehlwerk";
+
+
 void settings_zaehlwerk_comment(void)
 {
         printf("A-865 \"Zählwerk\" (1928)");
@@ -538,6 +577,9 @@ static const char WALZE_2G1 [ABC_LENGTH_STRING] = "tfjqazwmhlcuixrdygoevbnskp"; 
 static const char WALZE_5G1 [ABC_LENGTH_STRING] = "qtpixwvdfrmusljohcanezkybg";  //  'swzfhmq', '7 notches (G-111)', '5G1')
 
 // -----------------------------------------------------------------------------
+
+const char SETTINGS_HUNGARY [SETTINGS_NAME_MAX_LENGTH_STR] = "hungary";
+
 
 void settings_hungary_comment(void)
 {
@@ -581,6 +623,9 @@ static const char WALZE_3G2 [ABC_LENGTH_STRING] = "fvdhzelsqmaxokyiwpgcbujtnr"; 
 
 // -----------------------------------------------------------------------------
 
+const char SETTINGS_ARGENTINA [SETTINGS_NAME_MAX_LENGTH_STR] = "argentina";
+
+
 void settings_argentina_comment(void)
 {
         printf("G-260 (Abwehr in Argentina)");
@@ -623,6 +668,9 @@ static const char WALZE_3G3 [ABC_LENGTH_STRING] = "uqntlszfmrehdpxkibvygjcwoa"; 
 
 // -----------------------------------------------------------------------------
 
+const char SETTINGS_BLETCHLEY [SETTINGS_NAME_MAX_LENGTH_STR] = "bletchley";
+
+
 void settings_bletchley_comment(void)
 {
         printf("G-312 (Abwehr / Bletchley Park)");
@@ -656,9 +704,12 @@ void settings_bletchley_apply(void)
 
 // =============================================================================
 
+const char SETTINGS_DEFAULT [SETTINGS_NAME_MAX_LENGTH_STR] = "default";
+
+
 void settings_default_comment(void)
 {
-        printf("'%s'", BLETCHLEY);
+        printf("'%s'", SETTINGS_BLETCHLEY);
 }
 
 
@@ -667,7 +718,7 @@ void settings_default_apply(void)
 #ifdef DEBUG
         debug_print_prefix();
         settings_print_prefix_apply();
-        printf("(default) ");
+        printf("(%s) ", SETTINGS_DEFAULT);
         settings_default_comment();
         printf("\n");
 #endif
