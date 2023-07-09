@@ -30,6 +30,11 @@
 #define  BUFFER_LENGTH_APPLY_OPTION  16
 
 
+// CONSTANTS ///////////////////////////////////////////////////////////////////
+
+static const char PROMPT_APPLY_OPTION[] = "Apply option:";
+
+
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
 static unsigned short wheels_calculate_index_after_offset(unsigned short index_before,
@@ -222,8 +227,7 @@ void wheels_apply_prompt(void)
 
         static char apply_option[BUFFER_LENGTH_APPLY_OPTION] = "-";
 
-        printf("Apply option: ");
-        input_get(apply_option, BUFFER_LENGTH_APPLY_OPTION);
+        input_get(apply_option, BUFFER_LENGTH_APPLY_OPTION, PROMPT_APPLY_OPTION);
 
              if (strcmp(apply_option, SETTINGS_DEFAULT)    == STRCMP_EQUAL) { settings_default_apply();    }
         else if (strcmp(apply_option, SETTINGS_ARGENTINA)  == STRCMP_EQUAL) { settings_argentina_apply();  }

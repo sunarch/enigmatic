@@ -30,6 +30,12 @@
 
 #define  COMMAND_LENGTH_STRING  8
 
+
+// CONSTANTS ///////////////////////////////////////////////////////////////////
+
+static const char PROMPT_COMMAND[] = "Enigmatic $";
+static const char PROMPT_MESSAGE[] = "Enter message:";
+
 // PRIVATE VARIABLES ///////////////////////////////////////////////////////////
 
 static char command [BUFFER_LENGTH_COMMAND] = "start";
@@ -51,8 +57,7 @@ static void command_message(void)
 {
         printf("(max. message size is %d)\n", BUFFER_LENGTH_MESSAGE);
 
-        printf("Enter message: ");
-        input_get(message, BUFFER_LENGTH_MESSAGE);
+        input_get(message, BUFFER_LENGTH_MESSAGE, PROMPT_MESSAGE);
         printf("Message: \"%s\"\n", message);
 
         message_process(message, crypto);
@@ -136,8 +141,7 @@ int main(void)
 
         while (true) {
 
-                printf("Enigmatic $ ");
-                input_get(command, BUFFER_LENGTH_COMMAND);
+                input_get(command, BUFFER_LENGTH_COMMAND, PROMPT_COMMAND);
 
 #ifdef DEBUG
                 debug_print_prefix();

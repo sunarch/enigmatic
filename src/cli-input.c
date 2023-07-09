@@ -19,8 +19,10 @@
 
 // PUBLIC //////////////////////////////////////////////////////////////////////
 
-void input_get(char *buffer, unsigned short buffer_length)
+void input_get(char *buffer, unsigned short buffer_length, const char *prompt)
 {
+        printf("%s ", prompt);
+
         if (fgets(buffer, buffer_length, stdin) == NULL) {
                 printf("Failed to get input in buffer with length %d\n", buffer_length);
                 printf("Exiting...\n");
