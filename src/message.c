@@ -10,7 +10,6 @@
 #include "message.h"
 #include "util-abc.h"
 #include "wheels.h"
-#include "wheels-offsets.h"
 
 
 #ifdef DEBUG
@@ -95,13 +94,7 @@ void message_process(char *p_input_string,
                 printf(") ");
 #endif
 
-                current_char = message_process_char(current_char);
-                p_output_string[n] = current_char;
-
-                if (current_char != REPLACEMENT_CHARACTER) {
-                        // advance wheels only after processed chars
-                        offsets_advance();
-                }
+                p_output_string[n] = message_process_char(current_char);
         }
 
         // add null terminator to output string

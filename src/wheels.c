@@ -142,6 +142,8 @@ unsigned short wheels_calculate_index_after_wiring_rule(unsigned short index_bef
 }
 
 
+// GETTERS /////////////////////////////////////////////////////////////////////
+
 char wheels_get_output_single(unsigned short wheel_number,
                               unsigned short mode,
                               char input_char)
@@ -255,6 +257,8 @@ char wheels_get_output(char character)
         character = wheels_get_output_pass_front(character, wheel_count);
         character = wheels_get_output_pass_ukw(character);
         character = wheels_get_output_pass_reverse(character, wheel_count);
+
+        offsets_advance();
 
         return character;
 }
