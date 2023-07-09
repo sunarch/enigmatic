@@ -12,6 +12,7 @@
 #include "util-abc.h"
 #include "util-abc-common.h"
 #include "wheels.h"
+#include "wheels-common.h"
 #include "wheels-offsets.h"
 #include "wheels-settings.h"
 
@@ -154,7 +155,6 @@ char wheels_get_output_single(unsigned short wheel_number,
         printf(") (mode '%u')", mode);
 #endif
 
-        // validate wheel_number
         settings_validate_wheel_number(wheel_number);
 
         short index_found = abc_index_from_char_lower(input_char);
@@ -199,4 +199,62 @@ char wheels_get_output_single(unsigned short wheel_number,
 #endif
 
         return output_char;
+}
+
+
+static char wheels_get_output_pass_front(char character, unsigned short wheel_count)
+{
+#ifdef DEBUG
+        debug_print_prefix();
+        debug_indent_print();
+        printf("first-to-last pass / front pass\n");
+#endif
+
+        for (unsigned short i = 1; i <= wheel_count; ++i) {
+                character = wheels_get_output_single(i, WHEEL_MODE_FRONT, character);
+        }
+
+        return character;
+}
+
+
+static char wheels_get_output_pass_ukw(char character)
+{
+#ifdef DEBUG
+        debug_print_prefix();
+        debug_indent_print();
+        printf("UKW pass (same front and reverse)\n");
+#endif
+
+        character = wheels_get_output_single(UKW_INDEX, WHEEL_MODE_UKW, character);
+
+        return character;
+}
+
+
+static char wheels_get_output_pass_reverse(char character, unsigned short wheel_count)
+{
+#ifdef DEBUG
+        debug_print_prefix();
+        debug_indent_print();
+        printf("last-to-first pass / reverse pass\n");
+#endif
+
+        for (unsigned short i = wheel_count; i >= 1; --i) {
+                character = wheels_get_output_single(i, WHEEL_MODE_REVERSE, character);
+        }
+
+        return character;
+}
+
+
+char wheels_get_output(char character)
+{
+        unsigned short wheel_count = settings_get_used_wheel_count();
+
+        character = wheels_get_output_pass_front(character, wheel_count);
+        character = wheels_get_output_pass_ukw(character);
+        character = wheels_get_output_pass_reverse(character, wheel_count);
+
+        return character;
 }

@@ -17,8 +17,6 @@ extern void wheels_apply_prompt(void);
 extern unsigned short wheels_calculate_index_after_wiring_rule(unsigned short index_before,
                                                                signed short wiring_rule);
 
-extern char wheels_get_output_single(unsigned short wheel_number,
-                                     unsigned short mode,
-                                     char input_char);
+extern char wheels_get_output(char character);
 
 #endif // ndef ENIGMATIC_WHEELS_H

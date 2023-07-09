@@ -10,9 +10,7 @@
 #include "message.h"
 #include "util-abc.h"
 #include "wheels.h"
-#include "wheels-common.h"
 #include "wheels-offsets.h"
-#include "wheels-settings.h"
 
 
 #ifdef DEBUG
@@ -29,56 +27,10 @@
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
-static char message_process_char_front(char character, unsigned short wheel_count)
+static char message_process_char(char character)
 {
 #ifdef DEBUG
-        debug_print_prefix();
-        debug_indent_print();
-        printf("first-to-last pass / front pass\n");
-#endif
-
-        for (unsigned short i = 1; i <= wheel_count; ++i) {
-                character = wheels_get_output_single(i, WHEEL_MODE_FRONT, character);
-        }
-
-        return character;
-}
-
-
-static char message_process_char_ukw(char character)
-{
-#ifdef DEBUG
-        debug_print_prefix();
-        debug_indent_print();
-        printf("UKW pass (same front and reverse)\n");
-#endif
-
-        character = wheels_get_output_single(UKW_INDEX, WHEEL_MODE_UKW, character);
-
-        return character;
-}
-
-
-static char message_process_char_reverse(char character, unsigned short wheel_count)
-{
-#ifdef DEBUG
-        debug_print_prefix();
-        debug_indent_print();
-        printf("last-to-first pass / reverse pass\n");
-#endif
-
-        for (unsigned short i = wheel_count; i >= 1; --i) {
-                character = wheels_get_output_single(i, WHEEL_MODE_REVERSE, character);
-        }
-
-        return character;
-}
-
-
-static char message_process_char(char character, unsigned short wheel_count)
-{
-#ifdef DEBUG
-        printf("Process character '%c' over '%u' wheels\n", character, wheel_count);
+        printf("Process character '%c'\n", character);
         debug_indent_increment();
 #endif
 
@@ -107,9 +59,7 @@ static char message_process_char(char character, unsigned short wheel_count)
         }
 
         if (letter_is_alphabetic) {
-                character = message_process_char_front(character, wheel_count);
-                character = message_process_char_ukw(character);
-                character = message_process_char_reverse(character, wheel_count);
+                character = wheels_get_output(character);
         }
 
 #ifdef DEBUG
@@ -129,7 +79,6 @@ void message_process(char *p_input_string,
 #endif
 
         unsigned long msg_len = strlen(p_input_string);
-        unsigned short wheel_count = settings_get_used_wheel_count();
 
         char current_char;
 
@@ -146,7 +95,7 @@ void message_process(char *p_input_string,
                 printf(") ");
 #endif
 
-                current_char = message_process_char(current_char, wheel_count);
+                current_char = message_process_char(current_char);
                 p_output_string[n] = current_char;
 
                 if (current_char != REPLACEMENT_CHARACTER) {
