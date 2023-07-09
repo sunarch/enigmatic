@@ -8,6 +8,6 @@
 #define ENIGMATIC_VERSION_H
 
 #define  PROGRAM_NAME     "Enigmatic"
-#define  PROGRAM_VERSION  "v0.3.0"
+#define  PROGRAM_VERSION  "v0.4.0"
 
 #endif // ndef ENIGMATIC_VERSION_H
