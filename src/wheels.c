@@ -218,45 +218,19 @@ void wheels_apply_prompt(void)
                 apply_option[apply_option_length - 1] = '\0';
         }
 
-        if (strcmp(apply_option, DEFAULT) == STRCMP_EQUAL) {
-                settings_default_apply();
-        }
-        else if (strcmp(apply_option, ARGENTINA) == STRCMP_EQUAL) {
-                settings_argentina_apply();
-        }
-        else if (strcmp(apply_option, ARMY) == STRCMP_EQUAL) {
-                settings_army_apply();
-        }
-        else if (strcmp(apply_option, BLETCHLEY) == STRCMP_EQUAL) {
-                settings_bletchley_apply();
-        }
-        else if (strcmp(apply_option, COMMERCIAL) == STRCMP_EQUAL) {
-                settings_commercial_apply();
-        }
-        else if (strcmp(apply_option, HUNGARY) == STRCMP_EQUAL) {
-                settings_hungary_apply();
-        }
-        else if (strcmp(apply_option, NAVY) == STRCMP_EQUAL) {
-                settings_navy_apply();
-        }
-        else if (strcmp(apply_option, NORWAY) == STRCMP_EQUAL) {
-                settings_norway_apply();
-        }
-        else if (strcmp(apply_option, RAILWAY) == STRCMP_EQUAL) {
-                settings_railway_apply();
-        }
-        else if (strcmp(apply_option, SERVICES) == STRCMP_EQUAL) {
-                settings_services_apply();
-        }
-        else if (strcmp(apply_option, SWISS) == STRCMP_EQUAL) {
-                settings_swiss_apply();
-        }
-        else if (strcmp(apply_option, TIRPITZ) == STRCMP_EQUAL) {
-                settings_tirpitz_apply();
-        }
-        else if (strcmp(apply_option, ZAEHLWERK) == STRCMP_EQUAL) {
-                settings_zaehlwerk_apply();
-        }
+             if (strcmp(apply_option, DEFAULT)    == STRCMP_EQUAL) { settings_default_apply();    }
+        else if (strcmp(apply_option, ARGENTINA)  == STRCMP_EQUAL) { settings_argentina_apply();  }
+        else if (strcmp(apply_option, ARMY)       == STRCMP_EQUAL) { settings_army_apply();       }
+        else if (strcmp(apply_option, BLETCHLEY)  == STRCMP_EQUAL) { settings_bletchley_apply();  }
+        else if (strcmp(apply_option, COMMERCIAL) == STRCMP_EQUAL) { settings_commercial_apply(); }
+        else if (strcmp(apply_option, HUNGARY)    == STRCMP_EQUAL) { settings_hungary_apply();    }
+        else if (strcmp(apply_option, NAVY)       == STRCMP_EQUAL) { settings_navy_apply();       }
+        else if (strcmp(apply_option, NORWAY)     == STRCMP_EQUAL) { settings_norway_apply();     }
+        else if (strcmp(apply_option, RAILWAY)    == STRCMP_EQUAL) { settings_railway_apply();    }
+        else if (strcmp(apply_option, SERVICES)   == STRCMP_EQUAL) { settings_services_apply();   }
+        else if (strcmp(apply_option, SWISS)      == STRCMP_EQUAL) { settings_swiss_apply();      }
+        else if (strcmp(apply_option, TIRPITZ)    == STRCMP_EQUAL) { settings_tirpitz_apply();    }
+        else if (strcmp(apply_option, ZAEHLWERK)  == STRCMP_EQUAL) { settings_zaehlwerk_apply();  }
         else {
                 printf("Setting option not recognized: '%s'\n", apply_option);
                 settings_default_apply();
