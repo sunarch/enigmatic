@@ -38,7 +38,7 @@ static char message_process_char_front(char character, unsigned short wheel_coun
 #endif
 
         for (unsigned short i = 1; i <= wheel_count; ++i) {
-                character = get_wheel_output(i, WHEEL_MODE_FRONT, character);
+                character = wheels_get_output_single(i, WHEEL_MODE_FRONT, character);
         }
 
         return character;
@@ -53,7 +53,7 @@ static char message_process_char_ukw(char character)
         printf("UKW pass (same front and reverse)\n");
 #endif
 
-        character = get_wheel_output(UKW_INDEX, WHEEL_MODE_UKW, character);
+        character = wheels_get_output_single(UKW_INDEX, WHEEL_MODE_UKW, character);
 
         return character;
 }
@@ -68,7 +68,7 @@ static char message_process_char_reverse(char character, unsigned short wheel_co
 #endif
 
         for (unsigned short i = wheel_count; i >= 1; --i) {
-                character = get_wheel_output(i, WHEEL_MODE_REVERSE, character);
+                character = wheels_get_output_single(i, WHEEL_MODE_REVERSE, character);
         }
 
         return character;

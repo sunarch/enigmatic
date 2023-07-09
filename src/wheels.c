@@ -118,15 +118,15 @@ void wheels_apply_prompt(void)
 
 // CALCULATORS /////////////////////////////////////////////////////////////////
 
-static unsigned short calculate_index_after_offset(unsigned short index_before,
-                                            unsigned short offset)
+static unsigned short wheels_calculate_index_after_offset(unsigned short index_before,
+                                                          unsigned short offset)
 {
         return (unsigned short) ((index_before + offset) % ABC_LENGTH);
 }
 
 
-unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
-                                                 signed short wiring_rule)
+unsigned short wheels_calculate_index_after_wiring_rule(unsigned short index_before,
+                                                        signed short wiring_rule)
 {
         signed short index_plus_rule = ((signed short) index_before) + wiring_rule;
 
@@ -141,9 +141,9 @@ unsigned short calculate_index_after_wiring_rule(unsigned short index_before,
 }
 
 
-char get_wheel_output(unsigned short wheel_number,
-                      unsigned short mode,
-                      char input_char)
+char wheels_get_output_single(unsigned short wheel_number,
+                              unsigned short mode,
+                              char input_char)
 {
 #ifdef DEBUG
         debug_print_prefix();
@@ -179,7 +179,7 @@ char get_wheel_output(unsigned short wheel_number,
         printf(")");
 #endif
 
-        unsigned short offset_index = calculate_index_after_offset(input_index, wheel_offset);
+        unsigned short offset_index = wheels_calculate_index_after_offset(input_index, wheel_offset);
         signed short wiring_rule = settings_get_wheel_wiring_rule(mode, wheel_number, offset_index);
 
 #ifdef DEBUG
@@ -188,7 +188,7 @@ char get_wheel_output(unsigned short wheel_number,
         printf(")");
 #endif
 
-        unsigned short output_index = calculate_index_after_wiring_rule(input_index, wiring_rule);
+        unsigned short output_index = wheels_calculate_index_after_wiring_rule(input_index, wiring_rule);
         char output_char = abc_char_lower_from_index(output_index);
 
 #ifdef DEBUG
