@@ -132,10 +132,8 @@ void settings_print_name_padding(const char *settings_name)
 {
         unsigned short name_length = (unsigned short) strlen(settings_name);
         signed short padding_length = (signed short) (SETTINGS_NAME_MAX_LENGTH - name_length);
-        
-        for (unsigned short i = 0; i < padding_length; i++) {
-                printf(" ");
-        }
+
+        printf("%*s", padding_length, "");
 }
 
 
