@@ -104,7 +104,7 @@ static void settings_set_used_wheel_count(unsigned short new_wheel_count)
 
 
 static void settings_set_wheel_by_alphabet(unsigned short wheel_number,
-                                           const char *const wiring_alphabet)
+                                           const char *wiring_alphabet)
 {
         signed short wiring_rule;
 
