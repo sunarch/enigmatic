@@ -11,6 +11,7 @@
 #include "common.h"
 #include "util-abc.h"
 #include "util-abc-common.h"
+#include "util-text.h"
 #include "wheels.h"
 #include "wheels-common.h"
 #include "wheels-offsets.h"
@@ -180,7 +181,7 @@ char wheels_get_output(char character)
 static void wheels_print_prompt_option(const char *settings_name, void (*pf_print_settings_comment)(void))
 {
         printf("|-> '%s'", settings_name);
-        settings_print_name_padding(settings_name);
+        text_print_padding(settings_name, SETTINGS_NAME_MAX_LENGTH);
         printf(" - ");
         pf_print_settings_comment();
         printf("\n");

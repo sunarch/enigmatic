@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "common.h"
 #include "util-abc.h"
@@ -127,15 +126,6 @@ static void settings_set_wheel_blank(unsigned short wheel_number)
 
 
 // SETTERS /////////////////////////////////////////////////////////////////////
-
-void settings_print_name_padding(const char *settings_name)
-{
-        unsigned short name_length = (unsigned short) strlen(settings_name);
-        signed short padding_length = (signed short) (SETTINGS_NAME_MAX_LENGTH - name_length);
-
-        printf("%*s", padding_length, "");
-}
-
 
 // Rotor wheels (wiring, turnover points, c-o info, name)
 // Reflectors (UKW)

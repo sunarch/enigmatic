@@ -27,8 +27,6 @@ extern void settings_validate_wheel_number(unsigned short wheel_number);
 
 // SETTERS /////////////////////////////////////////////////////////////////////
 
-extern void settings_print_name_padding(const char *settings_name);
-
 extern const char SETTINGS_DEFAULT [SETTINGS_NAME_MAX_LENGTH_STR];
 extern void settings_default_comment(void);
 extern void settings_default_apply(void);
